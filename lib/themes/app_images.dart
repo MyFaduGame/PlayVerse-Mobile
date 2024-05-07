@@ -2,6 +2,13 @@ class SplashScreenImages {
   static String splashScreen = 'assets/images/gif/splash.gif';
 }
 
+class AuthScreenImages {
+  static String controllerImage = "assets/images/images/controller.png";
+  static String backgrounImage = "assets/images/images/Background.png";
+  static String logoImage = "assets/images/icon/icon.png";
+  static String controllerSmallImage = "assets/images/images/controller_small.png";
+}
+
 class LoadingImages {
   static String loading0 = "assets/images/loadingGifs/loading0.gif";
   static String loading1 = "assets/images/loadingGifs/loading1.gif";

@@ -26,6 +26,14 @@ TextStyle uglyByteFonts = const TextStyle(
   fontFamily: "UglyByte",
 );
 
+TextStyle poppinsFonts = GoogleFonts.poppins(
+    textStyle: const TextStyle(
+  color: Colors.black,
+  fontSize: 15,
+  letterSpacing: 0,
+  fontWeight: FontWeight.normal,
+));
+
 TextStyle pixelGamingFonts = const TextStyle(
   color: Colors.white,
   fontSize: 100,

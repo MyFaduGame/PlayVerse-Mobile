@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "639691401983",
+    "project_id": "trail1-86ba8",
+    "storage_bucket": "trail1-86ba8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:639691401983:android:c6b4e40deb2aa6d5743aca",
+        "android_client_info": {
+          "package_name": "com.example.genos"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCExQHqfs37yvYcCEiiwsMJsrmhTMpIFs4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

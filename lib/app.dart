@@ -149,7 +149,7 @@ class _AppState extends State<App>
                 ]
               ),
               0.0
-            )
+            ),
           ),
           child: Scaffold(
             appBar: PreferredSize(

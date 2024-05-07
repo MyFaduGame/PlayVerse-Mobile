@@ -1,125 +1,122 @@
+//Fastapi Imports
+import 'dart:developer';
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:provider/provider.dart';
+import 'firebase_options.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/services.dart';
 
-void main() {
+//Local Imports
+import 'package:playverse/provider/article_provider.dart';
+import 'package:playverse/provider/tournaments_provider.dart';
+import 'package:playverse/provider/notifications_provider.dart';
+import 'package:playverse/provider/achievements_provider.dart';
+import 'package:playverse/provider/user_status_provider.dart';
+import 'package:playverse/provider/friends_provider.dart';
+import 'package:playverse/provider/games_provider.dart';
+import 'package:playverse/provider/user_profile_provider.dart';
+import 'package:playverse/provider/auth_provider.dart';
+import 'package:playverse/screens/basic/splash_screen.dart';
+import 'package:playverse/utils/push_notification.dart';
+import 'package:playverse/utils/tab_manager.dart';
+
+final messengerKey = GlobalKey<ScaffoldMessengerState>();
+late TabManager tabManager;
+
+@pragma('vm:entry-point')
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  PushNotification.initialize();
+
+  PushNotification.showNotification(message, false);
+  log("Handling a background message: ${message.messageId}");
+  log('Message data: ${message.data}');
+  if (message.notification != null) {
+    log(
+      'Message also contained a notification: ${message.notification?.body}',
+    );
+  }
+}
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  final fcmToken = await FirebaseMessaging.instance.getToken();
+  await FirebaseMessaging.instance.setAutoInitEnabled(true);
+
+  /// FCM service starts from here
+  FirebaseMessaging messaging = FirebaseMessaging.instance;
+  PushNotification.initialize();
+
+  /// Permission request specially for ios devices and FCM token generation
+  await messaging.requestPermission().then((value) {
+    log(
+      'requestPermission ${value.authorizationStatus.name} ${value.alert.name}',
+    );
+  });
+  // await messaging.getToken().then((token) {
+  //   log('FCM Token: $token');
+  // });
+  await messaging.setForegroundNotificationPresentationOptions(
+    alert: true,
+    badge: true,
+    sound: true,
+  );
+
+  /// Listens notification in background and terminated state
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+
+  /// Listens notification in foreground state
+  FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+    PushNotification.showNotification(message, true);
+    log('Got a message while the app is running!');
+    log('Message data: ${message.data}');
+    if (message.notification != null) {
+      log(
+        'Message also contained a notification: ${message.notification?.body}',
+      );
+    }
+  });
+
+  log("FCMToken $fcmToken");
+  SystemChrome.setPreferredOrientations(
+      [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // TRY THIS: Try running your application with "flutter run". You'll see
-        // the application has a purple toolbar. Then, without quitting the app,
-        // try changing the seedColor in the colorScheme below to Colors.green
-        // and then invoke "hot reload" (save your changes or press the "hot
-        // reload" button in a Flutter-supported IDE, or press "r" if you used
-        // the command line to start the app).
-        //
-        // Notice that the counter didn't reset back to zero; the application
-        // state is not lost during the reload. To reset the state, use hot
-        // restart instead.
-        //
-        // This works for code too, not just values: Most code changes can be
-        // tested with just a hot reload.
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
-    );
-  }
-}
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
-    return Scaffold(
-      appBar: AppBar(
-        // TRY THIS: Try changing the color here to a specific color (to
-        // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
-        // change color while the other colors stay the same.
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
-      ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          //
-          // TRY THIS: Invoke "debug painting" (choose the "Toggle Debug Paint"
-          // action in the IDE, or press "p" in the console), to see the
-          // wireframe for each widget.
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => UserAuthProvider()),
+        ChangeNotifierProvider(create: (context) => UserProfileProvider()),
+        ChangeNotifierProvider(create: (context) => GamesListProvider()),
+        ChangeNotifierProvider(create: (context) => FriendListProvider()),
+        ChangeNotifierProvider(create: (context) => UserStatusProvider()),
+        ChangeNotifierProvider(create: (context) => AchievementsProvider()),
+        ChangeNotifierProvider(create: (context) => NotificationProvider()),
+        ChangeNotifierProvider(create: (context) => ArticlesProvider()),
+        ChangeNotifierProvider(create: (context) => TournamentsProvider()),
+        ChangeNotifierProvider(create: (context) => GamesListProvider()),
+      ],
+      child: MaterialApp(
+        title: "GeNoS",
+        scaffoldMessengerKey: messengerKey,
+        home: const SplashScreen(),
+        theme: ThemeData(
+          useMaterial3: false,
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }

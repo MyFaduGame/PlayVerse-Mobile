@@ -12,7 +12,28 @@
           "package_name": "com.example.genos"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "639691401983-700mgo0fn9b128hth0dfa7q8f1bpp3kt.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.genos",
+            "certificate_hash": "267841dd524ae86f5eb79c4463eecdd8d23d3d96"
+          }
+        },
+        {
+          "client_id": "639691401983-plbv4pdqasi9701aam5533eslpg4lubq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.genos",
+            "certificate_hash": "40f29f0fbfff456c8455f7e94eb0a81913b09182"
+          }
+        },
+        {
+          "client_id": "639691401983-hnd4ptstt7pahf60bvt31ij5rc9v5phb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyCExQHqfs37yvYcCEiiwsMJsrmhTMpIFs4"
@@ -20,7 +41,55 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "639691401983-hnd4ptstt7pahf60bvt31ij5rc9v5phb.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "639691401983-06onag87egislp0laefi7d6e4ree7hpn.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.genos.RunnerTests"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:639691401983:android:bb1c76c1fee86019743aca",
+        "android_client_info": {
+          "package_name": "com.example.playverse"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "639691401983-hnd4ptstt7pahf60bvt31ij5rc9v5phb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCExQHqfs37yvYcCEiiwsMJsrmhTMpIFs4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "639691401983-hnd4ptstt7pahf60bvt31ij5rc9v5phb.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "639691401983-06onag87egislp0laefi7d6e4ree7hpn.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.genos.RunnerTests"
+              }
+            }
+          ]
         }
       }
     }

@@ -4,8 +4,9 @@ import 'package:flutter/services.dart';
 import 'package:neopop/neopop.dart';
 
 //Local Imports
+import 'package:playverse/screens/auth/signup_screen.dart';
 import 'package:playverse/themes/app_color_theme.dart';
-import 'package:playverse/screens/auth/login_scree.n.dart';
+import 'package:playverse/screens/auth/login_screen.dart';
 import 'package:playverse/themes/app_images.dart';
 
 class AuthScreen extends StatefulWidget {
@@ -35,94 +36,144 @@ class _AuthScreenState extends State<AuthScreen> {
             ],
           ),
         ),
-        child: Center(
-          child: SingleChildScrollView(
-            child: Column(
-              children: <Widget>[
-                Image.asset(
-                  AuthScreenImages.logoImage,
-                  height: 200,
-                  width: 200,
-                ),
-                SizedBox(
-                  height: screenHeight / 5,
-                ),
-                SizedBox(
-                  width: screenWidth / 1.5,
-                  child: NeoPopButton(
-                    color: GeneralColors.neopopButtonMainColor,
-                    bottomShadowColor: GeneralColors.neopopShadowColor,
-                    onTapUp: () => {
-                      HapticFeedback.vibrate(),
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const LoginScreen(),
-                        ),
-                      )
-                    },
-                    onTapDown: () => HapticFeedback.vibrate(),
-                    child: NeoPopShimmer(
-                      shimmerColor: Colors.white,
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 20, vertical: 15),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Image.asset(AuthScreenImages.controllerSmallImage),
-                            const SizedBox(width: 5),
-                            const Text(
-                              "Login To PlayVerse",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 15,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
+        child: Stack(
+          children: [
+            Positioned(
+              top: -80,
+              left: -80,
+              child: Container(
+                width: 200,
+                height: 200,
+                decoration: BoxDecoration(
+                  boxShadow: [
+                    BoxShadow(
+                      color: const Color(0xFF7F00FF).withOpacity(0.3),
+                      spreadRadius: screenWidth * 0.20,
+                      blurRadius: screenWidth * 0.145,
                     ),
-                  ),
+                  ],
+                  borderRadius:
+                      const BorderRadius.all(Radius.elliptical(200, 200)),
                 ),
-                const SizedBox(
-                  height: 16,
-                ),
-                SizedBox(
-                  width: screenWidth / 1.5,
-                  child: NeoPopButton(
-                    color: GeneralColors.neopopButtonMainColor,
-                    bottomShadowColor: GeneralColors.neopopShadowColor,
-                    onTapUp: () => HapticFeedback.vibrate(),
-                    onTapDown: () => HapticFeedback.vibrate(),
-                    child: NeoPopShimmer(
-                      shimmerColor: Colors.white,
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 20, vertical: 15),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Image.asset(AuthScreenImages.controllerSmallImage),
-                            const SizedBox(width: 5),
-                            const Text(
-                              "New to PlayVerse",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 15,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
+              ),
             ),
-          ),
+            Positioned(
+              top: screenHeight - 100,
+              left: screenWidth - 100,
+              child: Container(
+                width: 200,
+                height: 200,
+                decoration: BoxDecoration(
+                  boxShadow: [
+                    BoxShadow(
+                      color: const Color(0xFF7F00FF).withOpacity(0.3),
+                      spreadRadius: screenWidth * 0.20,
+                      blurRadius: screenWidth * 0.145,
+                    ),
+                  ],
+                  borderRadius:
+                      const BorderRadius.all(Radius.elliptical(200, 200)),
+                ),
+              ),
+            ),
+            Center(
+              child: SingleChildScrollView(
+                child: Column(
+                  children: <Widget>[
+                    Image.asset(
+                      AuthScreenImages.logoImage,
+                      height: 200,
+                      width: 200,
+                    ),
+                    SizedBox(
+                      height: screenHeight / 5,
+                    ),
+                    SizedBox(
+                      width: screenWidth / 1.5,
+                      child: NeoPopButton(
+                        color: GeneralColors.neopopButtonMainColor,
+                        bottomShadowColor: GeneralColors.neopopShadowColor,
+                        onTapUp: () => {
+                          HapticFeedback.vibrate(),
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const LoginScreen(),
+                            ),
+                          )
+                        },
+                        child: NeoPopShimmer(
+                          shimmerColor: Colors.white,
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 20, vertical: 15),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Image.asset(
+                                    AuthScreenImages.controllerSmallImage),
+                                const SizedBox(width: 5),
+                                const Text(
+                                  "Login To PlayVerse",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    SizedBox(
+                      width: screenWidth / 1.5,
+                      child: NeoPopButton(
+                        color: GeneralColors.neopopButtonMainColor,
+                        bottomShadowColor: GeneralColors.neopopShadowColor,
+                        onTapUp: () => {
+                          HapticFeedback.vibrate(),
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const SignUpScreen(),
+                            ),
+                          )
+                        },
+                        child: NeoPopShimmer(
+                          shimmerColor: Colors.white,
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 20, vertical: 15),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Image.asset(
+                                    AuthScreenImages.controllerSmallImage),
+                                const SizedBox(width: 5),
+                                const Text(
+                                  "New to PlayVerse",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );

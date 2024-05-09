@@ -55,7 +55,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyCExQHqfs37yvYcCEiiwsMJsrmhTMpIFs4',
-    appId: '1:639691401983:android:c6b4e40deb2aa6d5743aca',
+    appId: '1:639691401983:android:bb1c76c1fee86019743aca',
     messagingSenderId: '639691401983',
     projectId: 'trail1-86ba8',
     storageBucket: 'trail1-86ba8.appspot.com',
@@ -63,19 +63,23 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyAkjMElE9f99QzRajKA9Q7_mPvXGblwp7Y',
-    appId: '1:639691401983:ios:b1e1404daf69acba743aca',
+    appId: '1:639691401983:ios:283aaf92717f1bf8743aca',
     messagingSenderId: '639691401983',
     projectId: 'trail1-86ba8',
     storageBucket: 'trail1-86ba8.appspot.com',
-    iosBundleId: 'com.example.genos',
+    androidClientId: '639691401983-700mgo0fn9b128hth0dfa7q8f1bpp3kt.apps.googleusercontent.com',
+    iosClientId: '639691401983-kjmceltjef82ig3afrsolrujv8bk60id.apps.googleusercontent.com',
+    iosBundleId: 'com.example.playverse',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
     apiKey: 'AIzaSyAkjMElE9f99QzRajKA9Q7_mPvXGblwp7Y',
-    appId: '1:639691401983:ios:071e0e7b9bcda7a5743aca',
+    appId: '1:639691401983:ios:c60f36a47b0750e8743aca',
     messagingSenderId: '639691401983',
     projectId: 'trail1-86ba8',
     storageBucket: 'trail1-86ba8.appspot.com',
-    iosBundleId: 'com.example.genos.RunnerTests',
+    androidClientId: '639691401983-700mgo0fn9b128hth0dfa7q8f1bpp3kt.apps.googleusercontent.com',
+    iosClientId: '639691401983-8odjogoegmvqpa3i9ga4nbsre7djd55e.apps.googleusercontent.com',
+    iosBundleId: 'com.example.playverse.RunnerTests',
   );
 }

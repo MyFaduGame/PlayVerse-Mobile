@@ -2,11 +2,16 @@ class SplashScreenImages {
   static String splashScreen = 'assets/images/gif/splash.gif';
 }
 
+class UpdateScrollerWidgetImages {
+  static String giveawayPhoto = "assets/images/images/Giveawayphoto.png";
+}
+
 class AuthScreenImages {
   static String controllerImage = "assets/images/images/controller.png";
   static String backgrounImage = "assets/images/images/Background.png";
   static String logoImage = "assets/images/icon/icon.png";
-  static String controllerSmallImage = "assets/images/images/controller_small.png";
+  static String controllerSmallImage =
+      "assets/images/images/controller_small.png";
 }
 
 class LoadingImages {
@@ -30,27 +35,32 @@ class ProfileScreenImages {
 }
 
 class ProfileImages {
-  static String girlProfile = 'assets/images/IconsSVG/girl_profile.svg';
-  static String boyProfile = 'assets/images/IconsSVG/boy_profile.svg';
+  static String girlProfile = 'assets/images/svg/girl_profile.svg';
+  static String boyProfile = 'assets/images/svg/boy_profile.svg';
 }
 
 class SvgIcons {
-  static String homeScreenUnSelected =
-      'assets/images/IconsSVG/home_unselect.svg';
-  static String homeScreenSelected = 'assets/images/IconsSVG/home_select.svg';
+  static String xoButton = "assets/images/svg/xo_button.svg";
+  static String menuIcon = "assets/images/svg/menuicon.svg";
+  static String vector1 = "assets/images/svg/line_gradient.svg";
+  static String homeIcon = "assets/images/svg/Home.svg";
+  static String tournamentIcon = "assets/images/svg/Tournament.svg";
+  static String articleIcon = "assets/images/svg/Article.svg";
+  static String streamIcon = "assets/images/svg/Stream.svg";
+
+  static String homeScreenUnSelected = 'assets/images/svg/home_unselect.svg';
+  static String homeScreenSelected = 'assets/images/svg/home_select.svg';
 
   static String trophyScreenUnSelected =
-      'assets/images/IconsSVG/trophy_unselect.svg';
-  static String trophyScreenSelected =
-      'assets/images/IconsSVG/trophy_select.svg';
+      'assets/images/svg/trophy_unselect.svg';
+  static String trophyScreenSelected = 'assets/images/svg/trophy_select.svg';
 
-  static String firnedsIcon = 'assets/images/IconsSVG/friends.svg';
-  static String editProfile = 'assets/images/IconsSVG/edit_profile.svg';
-  static String createTournament =
-      'assets/images/IconsSVG/create_tournament.svg';
-  static String achievementIcon = 'assets/images/IconsSVG/achievement.svg';
-  static String teamIcon = 'assets/images/IconsSVG/team.svg';
-  static String tournamentIcon = 'assets/images/IconsSVG/tournament.svg';
+  static String firnedsIcon = 'assets/images/svg/friends.svg';
+  static String editProfile = 'assets/images/svg/edit_profile.svg';
+  static String createTournament = 'assets/images/svg/create_tournament.svg';
+  static String achievementIcon = 'assets/images/svg/achievement.svg';
+  static String teamIcon = 'assets/images/svg/team.svg';
+  // static String tournamentIcon = 'assets/images/svg/tournament.svg';
 }
 
 class AchievementsImages {

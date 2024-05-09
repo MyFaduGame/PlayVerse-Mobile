@@ -44,11 +44,66 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
-      backgroundColor: GeneralColors.gradientBackgrounColor0,
-      body: Center(
-        child: Image.asset(
-          SplashScreenImages.splashScreen,
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              GeneralColors.gradientBackgrounColor0,
+              GeneralColors.gradientBackgrounColor1
+            ],
+          ),
+        ),
+        child: Stack(
+          children: [
+            Positioned(
+              top: -80,
+              left: -80,
+              child: Container(
+                width: 200,
+                height: 200,
+                decoration: BoxDecoration(
+                  boxShadow: [
+                    BoxShadow(
+                      color: const Color(0xFF7F00FF).withOpacity(0.3),
+                      spreadRadius: screenWidth * 0.20,
+                      blurRadius: screenWidth * 0.145,
+                    ),
+                  ],
+                  borderRadius:
+                      const BorderRadius.all(Radius.elliptical(200, 200)),
+                ),
+              ),
+            ),
+            Positioned(
+              top: screenHeight - 100,
+              left: screenWidth - 100,
+              child: Container(
+                width: 200,
+                height: 200,
+                decoration: BoxDecoration(
+                  boxShadow: [
+                    BoxShadow(
+                      color: const Color(0xFF7F00FF).withOpacity(0.3),
+                      spreadRadius: screenWidth * 0.20,
+                      blurRadius: screenWidth * 0.145,
+                    ),
+                  ],
+                  borderRadius:
+                      const BorderRadius.all(Radius.elliptical(200, 200)),
+                ),
+              ),
+            ),
+            Center(
+              child: Image.asset(
+                SplashScreenImages.splashScreen,
+              ),
+            ),
+          ],
         ),
       ),
     );

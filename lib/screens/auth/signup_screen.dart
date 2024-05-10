@@ -2,11 +2,14 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:neopop/widgets/buttons/neopop_button/neopop_button.dart';
 import 'package:neopop/widgets/shimmer/neopop_shimmer.dart';
 import 'package:provider/provider.dart';
 
 //Local Imports
+import 'package:playverse/themes/app_font.dart';
+import 'package:playverse/screens/auth/login_screen.dart';
 import 'package:playverse/app.dart';
 import 'package:playverse/provider/auth_provider.dart';
 import 'package:playverse/repository/firebase_api.dart';
@@ -112,14 +115,6 @@ class SignUpScreenState extends State<SignUpScreen> {
               child: SingleChildScrollView(
                 child: Column(
                   children: <Widget>[
-                    const SizedBox(
-                      height: 32,
-                    ),
-                    Image.asset(
-                      AuthScreenImages.logoImage,
-                      height: 200,
-                      width: 200,
-                    ),
                     const SizedBox(
                       height: 32,
                     ),
@@ -406,11 +401,10 @@ class SignUpScreenState extends State<SignUpScreen> {
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 20, vertical: 15),
                             child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
-                                Image.asset(
-                                    AuthScreenImages.controllerSmallImage),
-                                const SizedBox(width: 5),
+                                SvgPicture.asset(
+                                    AuthScreenImages.registerImage),
                                 const Text(
                                   "Sign Up to PlayVerse",
                                   style: TextStyle(
@@ -426,6 +420,34 @@ class SignUpScreenState extends State<SignUpScreen> {
                       ),
                     ),
                     const SizedBox(height: 20),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text(
+                          "Already Have Account?",
+                          style: poppinsFonts.copyWith(
+                            color: GeneralColors.colorStyle0,
+                          ),
+                        ),
+                        TextButton(
+                          onPressed: () => {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const LoginScreen(),
+                              ),
+                            )
+                          },
+                          child: Text(
+                            'Login',
+                            style: poppinsFonts.copyWith(
+                              color: Colors.white,
+                              decoration: TextDecoration.underline,
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
                   ],
                 ),
               ),

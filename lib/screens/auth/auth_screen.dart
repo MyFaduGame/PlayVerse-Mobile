@@ -1,6 +1,7 @@
 //Third Party Imports
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:neopop/neopop.dart';
 
 //Local Imports
@@ -48,8 +49,8 @@ class _AuthScreenState extends State<AuthScreen> {
                   boxShadow: [
                     BoxShadow(
                       color: const Color(0xFF7F00FF).withOpacity(0.3),
-                      spreadRadius: screenWidth * 0.20,
-                      blurRadius: screenWidth * 0.145,
+                      spreadRadius: screenWidth * 0.40,
+                      blurRadius: screenWidth * 0.300,
                     ),
                   ],
                   borderRadius:
@@ -108,11 +109,9 @@ class _AuthScreenState extends State<AuthScreen> {
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 20, vertical: 15),
                             child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
-                                Image.asset(
-                                    AuthScreenImages.controllerSmallImage),
-                                const SizedBox(width: 5),
+                                SvgPicture.asset(AuthScreenImages.loginIcon),
                                 const Text(
                                   "Login To PlayVerse",
                                   style: TextStyle(
@@ -128,7 +127,7 @@ class _AuthScreenState extends State<AuthScreen> {
                       ),
                     ),
                     const SizedBox(
-                      height: 16,
+                      height: 64,
                     ),
                     SizedBox(
                       width: screenWidth / 1.5,
@@ -142,7 +141,7 @@ class _AuthScreenState extends State<AuthScreen> {
                             MaterialPageRoute(
                               builder: (context) => const SignUpScreen(),
                             ),
-                          )
+                          ),
                         },
                         child: NeoPopShimmer(
                           shimmerColor: Colors.white,
@@ -150,11 +149,10 @@ class _AuthScreenState extends State<AuthScreen> {
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 20, vertical: 15),
                             child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
-                                Image.asset(
-                                    AuthScreenImages.controllerSmallImage),
-                                const SizedBox(width: 5),
+                                SvgPicture.asset(
+                                    AuthScreenImages.registerImage),
                                 const Text(
                                   "New to PlayVerse",
                                   style: TextStyle(

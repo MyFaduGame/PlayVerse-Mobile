@@ -2,8 +2,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:neopop/widgets/buttons/neopop_button/neopop_button.dart';
 import 'package:neopop/widgets/shimmer/neopop_shimmer.dart';
+import 'package:playverse/screens/auth/signup_screen.dart';
+import 'package:playverse/themes/app_font.dart';
 import 'package:provider/provider.dart';
 
 //Local Imports
@@ -184,21 +187,45 @@ class LoginScreenState extends State<LoginScreen> {
                               },
                               keyboardType: TextInputType.name,
                               decoration: const InputDecoration(
-                                  border: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                  hintText: 'Enter your Passkey',
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                  hintStyle: TextStyle(
+                                border: OutlineInputBorder(
+                                  borderSide: BorderSide(
                                     color: Colors.white,
-                                  )),
+                                  ),
+                                ),
+                                hintText: 'Enter your Passkey',
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                hintStyle: TextStyle(
+                                  color: Colors.white,
+                                ),
+                              ),
                             ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                TextButton(
+                                  onPressed: () => {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            const SignUpScreen(), //TODO have to change to forget password
+                                      ),
+                                    )
+                                  },
+                                  child: Text(
+                                    'Forget Password?',
+                                    style: poppinsFonts.copyWith(
+                                      color: GeneralColors.colorStyle0,
+                                      decoration: TextDecoration.underline,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            )
                           ],
                         ),
                       ),
@@ -213,15 +240,15 @@ class LoginScreenState extends State<LoginScreen> {
                         bottomShadowColor: GeneralColors.neopopShadowColor,
                         onTapUp: () => {
                           HapticFeedback.vibrate(),
-                          // if (_formKey.currentState!.validate()) {login()}
-                          Navigator.pushAndRemoveUntil(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const App(),
-                              settings: const RouteSettings(name: '/app'),
-                            ),
-                            (route) => false,
-                          ),
+                          if (_formKey.currentState!.validate()) {login()}
+                          // Navigator.pushAndRemoveUntil(
+                          //   context,
+                          //   MaterialPageRoute(
+                          //     builder: (context) => const App(),
+                          //     settings: const RouteSettings(name: '/app'),
+                          //   ),
+                          //   (route) => false,
+                          // ),
                         },
                         child: NeoPopShimmer(
                           shimmerColor: Colors.white,
@@ -231,8 +258,7 @@ class LoginScreenState extends State<LoginScreen> {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Image.asset(
-                                    AuthScreenImages.controllerSmallImage),
+                                SvgPicture.asset(AuthScreenImages.loginIcon),
                                 const SizedBox(width: 5),
                                 const Text(
                                   "Login to PlayVerse",
@@ -241,13 +267,41 @@ class LoginScreenState extends State<LoginScreen> {
                                     fontSize: 15,
                                     fontWeight: FontWeight.bold,
                                   ),
-                                )
+                                ),
                               ],
                             ),
                           ),
                         ),
                       ),
                     ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text(
+                          "New to PlayVerse?",
+                          style: poppinsFonts.copyWith(
+                            color: GeneralColors.colorStyle0,
+                          ),
+                        ),
+                        TextButton(
+                          onPressed: () => {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const SignUpScreen(),
+                              ),
+                            )
+                          },
+                          child: Text(
+                            'Register',
+                            style: poppinsFonts.copyWith(
+                              color: Colors.white,
+                              decoration: TextDecoration.underline,
+                            ),
+                          ),
+                        )
+                      ],
+                    )
                   ],
                 ),
               ),

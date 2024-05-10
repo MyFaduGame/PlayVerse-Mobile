@@ -75,17 +75,13 @@ class _CustomAppBarState extends State<CustomAppBar> {
                   ),
           ),
           SizedBox(
-            // width: screenWidth / 3,
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: <Widget>[
-                SvgPicture.string(SvgIcons.xoButton),
-                SvgPicture.asset(
-                  SvgIcons.xoButton,
-                  allowDrawingOutsideViewBox: true,
-                  theme: const SvgTheme(currentColor: Colors.white),
-                  height: 20,
-                  width: 20,
-                  // color: Colors.white,
+                Image.asset(
+                  AppFileScreenImages.xoImage,
+                  height: 25,
+                  width: 25,
                 ),
                 const SizedBox(width: 5),
                 Text(

@@ -178,8 +178,8 @@ class _AppState extends State<App>
                       boxShadow: [
                         BoxShadow(
                           color: const Color(0xFF7F00FF).withOpacity(0.3),
-                          spreadRadius: screenWidth * 0.20,
-                          blurRadius: screenWidth * 0.145,
+                          spreadRadius: screenWidth * 0.40,
+                          blurRadius: screenWidth * 0.300,
                         ),
                       ],
                       borderRadius:
@@ -220,23 +220,42 @@ class _AppState extends State<App>
             notchBottomBarController: barController,
             bottomBarItems: [
               BottomBarItem(
-                inActiveItem: SvgPicture.asset(SvgIcons.homeIcon),
-                activeItem: SvgPicture.asset(SvgIcons.homeIcon),
+                inActiveItem: SvgPicture.asset(
+                  SvgIcons.homeIcon,
+                  color: const Color(0xFF929292),
+                ),
+                activeItem: SvgPicture.asset(
+                  SvgIcons.homeIcon,
+                  color: Colors.white,
+                ),
                 itemLabel: '',
               ),
               BottomBarItem(
-                inActiveItem: SvgPicture.asset(SvgIcons.tournamentIcon),
-                activeItem: SvgPicture.asset(SvgIcons.tournamentIcon),
+                inActiveItem: SvgPicture.asset(
+                  SvgIcons.tournamentIcon,
+                  color: const Color(0xFF929292),
+                ),
+                activeItem: SvgPicture.asset(
+                  SvgIcons.tournamentIcon,
+                  color: Colors.white,
+                ),
                 itemLabel: '',
               ),
               BottomBarItem(
-                inActiveItem: SvgPicture.asset(SvgIcons.articleIcon),
-                activeItem: SvgPicture.asset(SvgIcons.articleIcon),
+                inActiveItem: Image.asset(
+                  BottomAppBarImages.streamImage,
+                  color: const Color(0xFF929292),
+                ),
+                activeItem: Image.asset(
+                  BottomAppBarImages.streamSelectedImage,
+                  color: Colors.white,
+                ),
                 itemLabel: '',
               ),
               BottomBarItem(
-                inActiveItem: SvgPicture.asset(SvgIcons.streamIcon),
-                activeItem: SvgPicture.asset(SvgIcons.streamIcon),
+                inActiveItem: Image.asset(BottomAppBarImages.articleImage),
+                activeItem:
+                    Image.asset(BottomAppBarImages.articleSelectedImage),
                 itemLabel: '',
               ),
             ],

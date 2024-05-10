@@ -16,20 +16,22 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return const SingleChildScrollView(
-      child: Column(
-        children: <Widget>[
-          Padding(padding: EdgeInsets.only(top: 120)),
-          // SizedBox(
-          //   height: 300,
-          //   child: UpdateCarsouleWidget(),
-          // ),
-          SizedBox(
-            height: 300,
-            child: TournamentListWidget(
-              type: "",
+      child: Padding(
+        padding: EdgeInsets.fromLTRB(10, 120, 10, 0),
+        child: Column(
+          children: <Widget>[
+            // SizedBox(
+            //   height: 300,
+            //   child: UpdateCarsouleWidget(),
+            // ),
+            SizedBox(
+              height: 600,
+              child: TournamentListWidget(
+                type: "Solo",
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

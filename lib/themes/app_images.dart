@@ -2,6 +2,22 @@ class SplashScreenImages {
   static String splashScreen = 'assets/images/gif/splash.gif';
 }
 
+class AppFileScreenImages {
+  static String xoImage = "assets/images/images/XO button.png";
+}
+
+class BottomAppBarImages {
+  static String articleImage = "assets/images/images/article.png";
+  static String articleSelectedImage =
+      "assets/images/images/articleSelected.png";
+  static String streamImage = "assets/images/images/live.png";
+  static String streamSelectedImage = "assets/images/images/liveSelected.png";
+}
+
+class TournamentWidgetImages {
+  static String winTrophyImage = "assets/images/images/winTrophy.png";
+}
+
 class UpdateScrollerWidgetImages {
   static String giveawayPhoto = "assets/images/images/Giveawayphoto.png";
 }
@@ -10,6 +26,8 @@ class AuthScreenImages {
   static String controllerImage = "assets/images/images/controller.png";
   static String backgrounImage = "assets/images/images/Background.png";
   static String logoImage = "assets/images/icon/icon.png";
+  static String registerImage = "assets/images/svg/register.svg";
+  static String loginIcon = "assets/images/svg/login.svg";
   static String controllerSmallImage =
       "assets/images/images/controller_small.png";
 }

@@ -1,6 +1,12 @@
 //Thrid Party Imports
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:intl/intl.dart';
+import 'package:playverse/themes/app_color_theme.dart';
+import 'package:playverse/themes/app_images.dart';
 import 'package:provider/provider.dart';
 
 //Local Imports
@@ -55,6 +61,8 @@ class _TournamentListWidgetState extends State<TournamentListWidget> {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
     return isLoading
         ? const Center(
             child: CircularProgressIndicator(),
@@ -68,8 +76,9 @@ class _TournamentListWidgetState extends State<TournamentListWidget> {
                 child: GridView.builder(
                   scrollDirection: Axis.horizontal,
                   clipBehavior: Clip.none,
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
+                    childAspectRatio: screenWidth / screenHeight * 3,
                     crossAxisSpacing: 15.0,
                     mainAxisSpacing: 15.0,
                   ),
@@ -87,66 +96,207 @@ class _TournamentListWidgetState extends State<TournamentListWidget> {
                       ),
                       child: Container(
                         decoration: BoxDecoration(
-                          color: Colors.grey.shade500,
+                          // color: Colors.grey.shade500,
                           borderRadius: BorderRadius.circular(15),
                           border: Border.all(
-                            color: Colors.pink,
+                            color: Colors.grey.shade500,
                           ),
                         ),
-                        child: Stack(
-                          children: [
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(15),
-                              child: CachedNetworkImage(
-                                imageUrl: value?[index].logo ?? "",
-                                fit: BoxFit.cover,
-                                height: 400,
-                                width: 1000,
-                                placeholder: (context, url) =>
-                                    const CircularProgressIndicator(),
-                                errorWidget: (context, url, error) =>
-                                    const Icon(Icons.error),
-                              ),
-                            ),
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                Container(
-                                  decoration: const BoxDecoration(
-                                    borderRadius: BorderRadius.only(
-                                      bottomLeft: Radius.circular(15),
-                                      bottomRight: Radius.circular(15),
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Stack(
+                            children: [
+                              Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: <Widget>[
+                                  ClipRRect(
+                                    borderRadius: BorderRadius.circular(15),
+                                    child: CachedNetworkImage(
+                                      imageUrl: value?[index].logo ?? "",
+                                      fit: BoxFit.cover,
+                                      height: 80,
+                                      width: double.infinity,
+                                      placeholder: (context, url) =>
+                                          const CircularProgressIndicator(),
+                                      errorWidget: (context, url, error) =>
+                                          const Icon(Icons.error),
                                     ),
-                                    color: Colors.black45,
                                   ),
-                                  height: 20,
-                                  width: double.infinity,
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        value?[index].title ??
-                                            "Tournament Title",
+                                        DateFormat('dd-MMMM-yyyy').format(
+                                            value?[index].tournamentDate ??
+                                                DateTime.now()),
                                         style: poppinsFonts.copyWith(
-                                          fontSize: 10,
-                                          fontWeight: FontWeight.bold,
                                           color: Colors.white,
                                         ),
-                                        maxLines: 1,
+                                      ),
+                                      Text(
+                                        value?[index].title ?? "",
+                                        style: poppinsFonts.copyWith(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 20,
+                                        ),
+                                      ),
+                                      Text(
+                                        "Register Now Limited Slots Available",
+                                        maxLines: 2,
                                         overflow: TextOverflow.ellipsis,
+                                        style: poppinsFonts.copyWith(
+                                          color: Colors.white,
+                                          fontSize: 15,
+                                        ),
                                       ),
                                     ],
                                   ),
+                                  const Divider(
+                                    color: Colors.white70,
+                                    height: 2,
+                                  ),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    children: <Widget>[
+                                      Column(
+                                        children: <Widget>[
+                                          Text(
+                                            "Win Prize",
+                                            style: poppinsFonts.copyWith(
+                                              color: Colors.grey.shade100,
+                                              fontSize: 10,
+                                            ),
+                                          ),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: <Widget>[
+                                              Image.asset(
+                                                TournamentWidgetImages
+                                                    .winTrophyImage,
+                                                height: 15,
+                                                width: 15,
+                                              ),
+                                              Text(
+                                                value?[index]
+                                                        .prizePool
+                                                        ?.the1St
+                                                        .toString() ??
+                                                    "",
+                                                style: poppinsFonts.copyWith(
+                                                  color: Colors.white38,
+                                                  fontSize: 10,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                      Column(
+                                        children: <Widget>[
+                                          Text(
+                                            "Player Slots",
+                                            style: poppinsFonts.copyWith(
+                                              color: Colors.grey.shade100,
+                                              fontSize: 10,
+                                            ),
+                                          ),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: <Widget>[
+                                              const Icon(
+                                                FontAwesomeIcons.userGroup,
+                                                color: Colors.white,
+                                                size: 10,
+                                              ),
+                                              const SizedBox(
+                                                width: 5,
+                                              ),
+                                              Text(
+                                                value?[index]
+                                                        .prizePool
+                                                        ?.the1St
+                                                        .toString() ??
+                                                    "",
+                                                style: poppinsFonts.copyWith(
+                                                  color: Colors.white38,
+                                                  fontSize: 10,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                      Container(
+                                        width: 40,
+                                        height: 40,
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(50),
+                                          color: TournamentWidgetColors
+                                              .tournamentDetailCircleColor,
+                                        ),
+                                        child: const Icon(
+                                          FontAwesomeIcons.arrowRight,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                    ],
+                                  )
+                                ],
+                              ),
+                              Positioned(
+                                top: 70,
+                                left: 10,
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    color: Colors.black,
+                                    borderRadius: BorderRadius.circular(15),
+                                    border: Border.all(
+                                      color: Colors.grey.shade500,
+                                    ),
+                                  ),
+                                  child: Row(
+                                    children: <Widget>[
+                                      ClipRRect(
+                                        borderRadius: BorderRadius.circular(15),
+                                        child: CachedNetworkImage(
+                                          imageUrl: value?[index].logo ?? "",
+                                          fit: BoxFit.cover,
+                                          height: 30,
+                                          width: 30,
+                                          placeholder: (context, url) =>
+                                              const CircularProgressIndicator(),
+                                          errorWidget: (context, url, error) =>
+                                              const Icon(Icons.error),
+                                        ),
+                                      ),
+                                      Text(
+                                        value?[index].gameName ?? "",
+                                        style: poppinsFonts.copyWith(
+                                          color: Colors.white,
+                                          fontSize: 10,
+                                        ),
+                                      )
+                                    ],
+                                  ),
                                 ),
-                              ],
-                            ),
-                          ],
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     );
                   },
                 ),
               );
-            });
+            },
+          );
   }
 }

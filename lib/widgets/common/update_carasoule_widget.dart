@@ -1,5 +1,4 @@
 //Third Party Imports
-import 'dart:math' as math;
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -18,7 +17,7 @@ class _UpdateCarsouleWidgetState extends State<UpdateCarsouleWidget> {
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
-    double screenHeight = MediaQuery.of(context).size.height;
+    // double screenHeight = MediaQuery.of(context).size.height;
     return CarouselSlider(
       items: [
         SizedBox(

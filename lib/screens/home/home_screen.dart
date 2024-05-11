@@ -1,6 +1,6 @@
 //Third Party Imports
 import 'package:flutter/material.dart';
-import 'package:playverse/widgets/common/update_carasoule_widget.dart';
+// import 'package:playverse/widgets/common/update_carasoule_widget.dart';
 import 'package:playverse/widgets/tournaments/tournament_list_widget.dart';
 
 //Local Imports

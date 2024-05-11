@@ -1,8 +1,6 @@
 //Thrid Party Imports
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:playverse/themes/app_color_theme.dart';
@@ -67,7 +65,7 @@ class _TournamentListWidgetState extends State<TournamentListWidget> {
         ? const Center(
             child: CircularProgressIndicator(),
           )
-        : Selector<TournamentsProvider, List<Tournaments>?>(
+        : Selector<TournamentsProvider, List<TournamentDetail>?>(
             selector: (p0, p1) => p1.tournamentList,
             builder: (context, value, child) {
               return NotificationListener(
@@ -89,14 +87,12 @@ class _TournamentListWidgetState extends State<TournamentListWidget> {
                         context,
                         MaterialPageRoute(
                           builder: ((context) => TournamentDetailScreen(
-                                tournamentID: value?[index].tournamentId ??
-                                    "TournamentID",
+                                tournamentDetail: value?[index]??TournamentDetail(),
                               )),
                         ),
                       ),
                       child: Container(
                         decoration: BoxDecoration(
-                          // color: Colors.grey.shade500,
                           borderRadius: BorderRadius.circular(15),
                           border: Border.all(
                             color: Colors.grey.shade500,
@@ -114,7 +110,7 @@ class _TournamentListWidgetState extends State<TournamentListWidget> {
                                   ClipRRect(
                                     borderRadius: BorderRadius.circular(15),
                                     child: CachedNetworkImage(
-                                      imageUrl: value?[index].logo ?? "",
+                                      imageUrl: value?[index].thumbnail ?? "",
                                       fit: BoxFit.cover,
                                       height: 80,
                                       width: double.infinity,

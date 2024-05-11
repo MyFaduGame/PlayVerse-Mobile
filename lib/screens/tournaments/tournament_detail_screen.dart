@@ -1,18 +1,17 @@
 //Third Party Imports
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:playverse/models/tournaments_model.dart';
-import 'package:playverse/provider/tournaments_provider.dart';
-import 'package:playverse/themes/app_font.dart';
 
 //Local Imports
+import 'package:playverse/models/tournaments_model.dart';
+import 'package:playverse/provider/tournaments_provider.dart'; 
+import 'package:playverse/themes/app_font.dart';
 import 'package:playverse/widgets/common/back_app_bar_widget.dart';
 import 'package:playverse/themes/app_color_theme.dart';
-import 'package:provider/provider.dart';
 
 class TournamentDetailScreen extends StatefulWidget {
-  final String tournamentID;
-  const TournamentDetailScreen({super.key, required this.tournamentID});
+  final TournamentDetail tournamentDetail;
+  const TournamentDetailScreen({super.key, required this.tournamentDetail});
 
   @override
   State<TournamentDetailScreen> createState() => TournamentDetailScreenState();
@@ -27,13 +26,13 @@ class TournamentDetailScreenState extends State<TournamentDetailScreen> {
   @override
   void initState() {
     super.initState();
-    provider = Provider.of<TournamentsProvider>(context, listen: false);
-    provider.getTournamentsDetail(widget.tournamentID).then((value) {
-      setState(() {
-        isLoading = false;
-      });
-    });
-    prizePool = tournamentDetail?.prizePool ?? PrizePool();
+    // provider = Provider.of<TournamentsProvider>(context, listen: false);
+    // provider.getTournamentsDetail(widget.tournamentID).then((value) {
+    //   setState(() {
+    //     isLoading = false;
+    //   });
+    // });
+    prizePool = widget.tournamentDetail.prizePool ?? PrizePool();
   }
 
   @override
@@ -43,8 +42,8 @@ class TournamentDetailScreenState extends State<TournamentDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
-    tournamentDetail =
-        context.select((TournamentsProvider value) => value.tournamentDetail);
+    // tournamentDetail =
+    //     context.select((TournamentsProvider value) => value.tournamentDetail);
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
@@ -114,7 +113,7 @@ class TournamentDetailScreenState extends State<TournamentDetailScreen> {
                     Column(
                       children: <Widget>[
                         CachedNetworkImage(
-                          imageUrl: tournamentDetail?.logo ?? "",
+                          imageUrl: widget.tournamentDetail.logo ?? "",
                           fit: BoxFit.cover,
                           height: 200,
                           width: double.infinity,
@@ -140,8 +139,8 @@ class TournamentDetailScreenState extends State<TournamentDetailScreen> {
                                     MainAxisAlignment.spaceEvenly,
                                 children: <Widget>[
                                   Text(
-                                    tournamentDetail?.maxPlayers.toString() ??
-                                        "",
+                                    widget.tournamentDetail.maxPlayers
+                                        .toString(),
                                     style: poppinsFonts.copyWith(
                                       color: Colors.white,
                                       fontSize: 20,
@@ -171,8 +170,8 @@ class TournamentDetailScreenState extends State<TournamentDetailScreen> {
                                     MainAxisAlignment.spaceEvenly,
                                 children: <Widget>[
                                   Text(
-                                    tournamentDetail?.maxPlayers.toString() ??
-                                        "",
+                                    widget.tournamentDetail.maxPlayers
+                                        .toString(),
                                     style: poppinsFonts.copyWith(
                                       color: Colors.white,
                                       fontSize: 20,
@@ -202,8 +201,8 @@ class TournamentDetailScreenState extends State<TournamentDetailScreen> {
                                     MainAxisAlignment.spaceEvenly,
                                 children: <Widget>[
                                   Text(
-                                    tournamentDetail?.maxPlayers.toString() ??
-                                        "",
+                                    widget.tournamentDetail.maxPlayers
+                                        .toString(),
                                     style: poppinsFonts.copyWith(
                                       color: Colors.white,
                                       fontSize: 20,
@@ -228,7 +227,7 @@ class TournamentDetailScreenState extends State<TournamentDetailScreen> {
                         Row(
                           children: <Widget>[
                             Text(
-                              "\$${tournamentDetail?.prizePool?.the1St ?? 0}",
+                              "\$${widget.tournamentDetail.prizePool?.the1St}",
                               style: poppinsFonts.copyWith(
                                 color: Colors.white,
                                 fontSize: 25,

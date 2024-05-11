@@ -8,10 +8,9 @@ import 'package:playverse/repository/tournaments_repo.dart';
 import 'package:playverse/utils/toast_bar.dart';
 
 class TournamentsProvider extends ChangeNotifier {
-
   final repo = TournamentsRepo();
-  List<Tournaments> tournamentList = [];
-  List<Tournaments> userTournamentList = [];
+  List<TournamentDetail> tournamentList = [];
+  List<TournamentDetail> userTournamentList = [];
   TournamentDetail? tournamentDetail;
   bool isLoading = false;
 
@@ -21,8 +20,8 @@ class TournamentsProvider extends ChangeNotifier {
       Map<String, dynamic> responseData =
           await repo.getTournamentList(offset, type);
       if (responseData['status_code'] == 200) {
-        List<Tournaments> tempList = List<Tournaments>.from(
-            responseData["data"]!.map((x) => Tournaments.fromJson(x)));
+        List<TournamentDetail> tempList = List<TournamentDetail>.from(
+            responseData["data"]!.map((x) => TournamentDetail.fromJson(x)));
         offset == 1 ? tournamentList = tempList : tournamentList += tempList;
         isLoading = false;
         notifyListeners();
@@ -75,9 +74,11 @@ class TournamentsProvider extends ChangeNotifier {
       isLoading = true;
       Map<String, dynamic> responseData = await repo.getUserTournaments(offset);
       if (responseData['status_code'] == 200) {
-        List<Tournaments> tempList = List<Tournaments>.from(
-            responseData["data"]!.map((x) => Tournaments.fromJson(x)));
-        offset == 1 ? userTournamentList = tempList : userTournamentList += tempList;
+        List<TournamentDetail> tempList = List<TournamentDetail>.from(
+            responseData["data"]!.map((x) => TournamentDetail.fromJson(x)));
+        offset == 1
+            ? userTournamentList = tempList
+            : userTournamentList += tempList;
         isLoading = false;
         notifyListeners();
         return tempList.length;
@@ -88,5 +89,4 @@ class TournamentsProvider extends ChangeNotifier {
       log("$e", name: "User Tournaments Detail List Error");
     }
   }
-  
 }

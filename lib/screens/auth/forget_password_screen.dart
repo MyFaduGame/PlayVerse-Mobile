@@ -1,59 +1,37 @@
 //Third Party Imports
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:neopop/widgets/buttons/neopop_button/neopop_button.dart';
 import 'package:neopop/widgets/shimmer/neopop_shimmer.dart';
-import 'package:playverse/screens/auth/forget_password_screen.dart';
-import 'package:playverse/screens/auth/signup_screen.dart';
-import 'package:playverse/themes/app_font.dart';
-import 'package:provider/provider.dart';
 
 //Local Imports
-import 'package:playverse/app.dart';
-import 'package:playverse/provider/auth_provider.dart';
 import 'package:playverse/repository/firebase_api.dart';
+import 'package:playverse/screens/auth/login_screen.dart';
+import 'package:playverse/screens/auth/signup_screen.dart';
 import 'package:playverse/themes/app_color_theme.dart';
+import 'package:playverse/themes/app_font.dart';
 import 'package:playverse/themes/app_images.dart';
 import 'package:playverse/utils/loader_dialouge.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class ForgetPasswordScreen extends StatefulWidget {
+  const ForgetPasswordScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => LoginScreenState();
+  State<ForgetPasswordScreen> createState() => _ForgetPasswordScreenState();
 }
 
-class LoginScreenState extends State<LoginScreen> {
-  late UserAuthProvider provider;
+class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
   final _formKey = GlobalKey<FormState>();
   TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
-  String? emailError, passwordError;
-
-  @override
-  void initState() {
-    provider = Provider.of<UserAuthProvider>(context, listen: false);
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    emailController.dispose();
-    passwordController.dispose();
-    super.dispose();
-  }
+  String? emailError;
 
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
-      extendBodyBehindAppBar: true,
       body: Container(
-        width: double.infinity,
-        height: double.infinity,
         decoration: BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topCenter,
@@ -76,8 +54,8 @@ class LoginScreenState extends State<LoginScreen> {
                   boxShadow: [
                     BoxShadow(
                       color: const Color(0xFF7F00FF).withOpacity(0.3),
-                      spreadRadius: screenWidth * 0.20,
-                      blurRadius: screenWidth * 0.145,
+                      spreadRadius: screenWidth * 0.40,
+                      blurRadius: screenWidth * 0.300,
                     ),
                   ],
                   borderRadius:
@@ -163,47 +141,6 @@ class LoginScreenState extends State<LoginScreen> {
                                   )),
                             ),
                             const SizedBox(height: 20),
-                            const Text(
-                              'Password',
-                              style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white),
-                            ),
-                            const SizedBox(height: 8),
-                            TextFormField(
-                              style: const TextStyle(color: Colors.white),
-                              onChanged: (value) {
-                                if (passwordError != null) {
-                                  setState(() => passwordError = null);
-                                }
-                              },
-                              controller: passwordController,
-                              obscureText: true,
-                              validator: (value) {
-                                if (value!.isEmpty) {
-                                  return "Enter your PassKey";
-                                }
-                                return passwordError;
-                              },
-                              keyboardType: TextInputType.name,
-                              decoration: const InputDecoration(
-                                border: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Colors.white,
-                                  ),
-                                ),
-                                hintText: 'Enter your Passkey',
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Colors.white,
-                                  ),
-                                ),
-                                hintStyle: TextStyle(
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
@@ -213,12 +150,12 @@ class LoginScreenState extends State<LoginScreen> {
                                       context,
                                       MaterialPageRoute(
                                         builder: (context) =>
-                                            const ForgetPasswordScreen(),
+                                            const LoginScreen(),
                                       ),
                                     )
                                   },
                                   child: Text(
-                                    'Forget Password?',
+                                    'Login?',
                                     style: poppinsFonts.copyWith(
                                       color: GeneralColors.colorStyle0,
                                       decoration: TextDecoration.underline,
@@ -241,7 +178,7 @@ class LoginScreenState extends State<LoginScreen> {
                         bottomShadowColor: GeneralColors.neopopShadowColor,
                         onTapUp: () => {
                           HapticFeedback.vibrate(),
-                          if (_formKey.currentState!.validate()) {login()}
+                          if (_formKey.currentState!.validate()) {reset()}
                           // Navigator.pushAndRemoveUntil(
                           //   context,
                           //   MaterialPageRoute(
@@ -262,7 +199,7 @@ class LoginScreenState extends State<LoginScreen> {
                                 SvgPicture.asset(AuthScreenImages.loginIcon),
                                 const SizedBox(width: 5),
                                 const Text(
-                                  "Login to PlayVerse",
+                                  "Request an Reset",
                                   style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 15,
@@ -314,7 +251,7 @@ class LoginScreenState extends State<LoginScreen> {
   }
 
   BuildContext? loaderCTX;
-  Future<void> login() async {
+  Future<void> reset() async {
     showDialog(
       barrierDismissible: false,
       context: context,
@@ -328,34 +265,14 @@ class LoginScreenState extends State<LoginScreen> {
       },
     ).then((value) => loaderCTX = null);
 
-    signInWithEmailPassword(emailController.text, passwordController.text)
-        .then((value) {
-      if ([value.email, value.password].contains('success')) {
-        provider
-            .login(emailController.text,
-                FirebaseAuth.instance.currentUser?.uid ?? "")
-            .then(
-          (values) {
-            if (values == true) {
-              if (loaderCTX != null) Navigator.pop(loaderCTX!);
-              Navigator.pushAndRemoveUntil(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const App(),
-                  settings: const RouteSettings(name: '/app'),
-                ),
-                (route) => false,
-              );
-            } else {
-              if (loaderCTX != null) Navigator.pop(loaderCTX!);
-            }
-          },
-        );
+    resetPassword(emailController.text).then((value) {
+      if ([value.email].contains('success')) {
+        if (loaderCTX != null) Navigator.pop(loaderCTX!);
+        Navigator.pop(context);
       } else {
         if (loaderCTX != null) Navigator.pop(loaderCTX!);
         setState(() {
           emailError = value.email;
-          passwordError = value.password;
         });
       }
     });

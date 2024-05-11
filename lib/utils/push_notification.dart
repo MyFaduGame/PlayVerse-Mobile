@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:playverse/screens/notification/notification_screen.dart';
 
 //Local Imports
 import 'package:playverse/utils/keys.dart';
@@ -24,7 +25,7 @@ class PushNotification {
         log('Initialize payload ${details.payload}');
         log('navigatorKey.currentState ${Keys.navigatorKey.currentState?.mounted}');
         Keys.navigatorKey.currentState?.push(
-          MaterialPageRoute(builder: (context) => const SizedBox()), //TODO chagne to notification screen
+          MaterialPageRoute(builder: (context) => const NotificationScreen()),
         );
       },
     );
@@ -82,7 +83,7 @@ class PushNotification {
     log('_handleMessage ${message.data}');
     log('navigatorKey.currentState ${Keys.navigatorKey.currentState?.mounted}');
     Keys.navigatorKey.currentState?.push(
-      MaterialPageRoute(builder: (context) => const SizedBox()), //TODO change the notification screen later on
+      MaterialPageRoute(builder: (context) => const NotificationScreen()),
     );
     // Do any task after receiving data
   }

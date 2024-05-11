@@ -1,9 +1,10 @@
 //Third Party Imports
 import 'package:flutter/material.dart';
-// import 'package:playverse/widgets/common/update_carasoule_widget.dart';
-import 'package:playverse/widgets/tournaments/tournament_list_widget.dart';
 
 //Local Imports
+// import 'package:playverse/widgets/common/update_carasoule_widget.dart';
+import 'package:playverse/widgets/common/header_widget.dart';
+import 'package:playverse/widgets/tournaments/tournament_list_widget.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -24,6 +25,7 @@ class _HomeScreenState extends State<HomeScreen> {
             //   height: 300,
             //   child: UpdateCarsouleWidget(),
             // ),
+            HeaderWidget(title: "Trending", subTitle: "Upcomming Matches"),
             SizedBox(
               height: 600,
               child: TournamentListWidget(

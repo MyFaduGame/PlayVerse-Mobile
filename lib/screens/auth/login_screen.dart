@@ -5,12 +5,12 @@ import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:neopop/widgets/buttons/neopop_button/neopop_button.dart';
 import 'package:neopop/widgets/shimmer/neopop_shimmer.dart';
-import 'package:playverse/screens/auth/forget_password_screen.dart';
-import 'package:playverse/screens/auth/signup_screen.dart';
-import 'package:playverse/themes/app_font.dart';
 import 'package:provider/provider.dart';
 
 //Local Imports
+import 'package:playverse/screens/auth/forget_password_screen.dart';
+import 'package:playverse/screens/auth/signup_screen.dart';
+import 'package:playverse/themes/app_font.dart';
 import 'package:playverse/app.dart';
 import 'package:playverse/provider/auth_provider.dart';
 import 'package:playverse/repository/firebase_api.dart';

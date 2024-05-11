@@ -3,9 +3,9 @@ import 'dart:developer';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:playverse/screens/notification/notification_screen.dart';
 
 //Local Imports
+import 'package:playverse/screens/notification/notification_screen.dart';
 import 'package:playverse/utils/keys.dart';
 
 class PushNotification {

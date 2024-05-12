@@ -7,10 +7,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:playverse/themes/app_images.dart';
+import 'package:playverse/screens/games/game_screen.dart';
 import 'package:provider/provider.dart';
 
 //Local Imports
+import 'package:playverse/themes/app_images.dart';
+import 'package:playverse/screens/streams/streams_screen.dart';
 import 'package:playverse/screens/articles/articles_screen.dart';
 import 'package:playverse/screens/home/home_screen.dart';
 import 'package:playverse/screens/tournaments/tournament_screen.dart';
@@ -65,9 +67,9 @@ class _AppState extends State<App>
     textList = [
       "Games", //0
       "Matches", //1
-      "Articles", //2
-      "MVP's", //3
-      "Live", //4
+      "Live", //2
+      "Articles", //3
+      "MVP's", //4
       "Friends", //5
       "Profile", //6
       "Teams", //7
@@ -77,11 +79,11 @@ class _AppState extends State<App>
       "Visit", //ll
     ];
     screensList = [
-      const HomeScreen(),
-      const TournamentScreen(),
-      const ArticleScreen(),
-      const HomeScreen(),
-      const HomeScreen(),
+      const HomeScreen(), //0
+      const TournamentScreen(), //1
+      const StreamsScreen(), //2
+      const ArticleScreen(), //3
+      const GamesScreen(), //4
     ];
   }
 
@@ -145,14 +147,6 @@ class _AppState extends State<App>
         controller: controller,
         childBody: Scaffold(
           extendBodyBehindAppBar: true,
-          appBar: PreferredSize(
-            preferredSize: const Size.fromHeight(120),
-            child: CustomAppBar(
-              userProfile: userModel ?? UserProfile(),
-              textToDisplay: textList[index],
-              controller: controller,
-            ),
-          ),
           body: Container(
             height: screenHeight,
             width: screenWidth,
@@ -206,7 +200,22 @@ class _AppState extends State<App>
                     ),
                   ),
                 ),
-                screensList[index],
+                SingleChildScrollView(
+                  child: Column(
+                    children: <Widget>[
+                      SizedBox(
+                        height: 120,
+                        // preferredSize: const Size.fromHeight(120),
+                        child: CustomAppBar(
+                          userProfile: userModel ?? UserProfile(),
+                          textToDisplay: textList[index],
+                          controller: controller,
+                        ),
+                      ),
+                      screensList[index],
+                    ],
+                  ),
+                )
               ],
             ),
           ),

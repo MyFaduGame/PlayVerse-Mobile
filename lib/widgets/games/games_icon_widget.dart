@@ -1,6 +1,7 @@
 //Third Party Imports
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:playverse/themes/app_font.dart';
 import 'package:provider/provider.dart';
 
 //Local Imports
@@ -29,7 +30,7 @@ class _GamesIconWidgetState extends State<GamesIconWidget> {
       loader = true;
       isLoading = false;
     });
-    await provider.userGames(offsetUpcoming).then((value) {
+    await provider.getGamesList(offsetUpcoming).then((value) {
       if (value < 10) paginateUpcoming = false;
       loader = false;
       offsetUpcoming += 10;
@@ -53,39 +54,58 @@ class _GamesIconWidgetState extends State<GamesIconWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Selector<GamesListProvider, List<Games>?>(
-      selector: (p0, p1) => p1.gameList,
-      builder: (context, value, child) {
-        return NotificationListener(
-          onNotification: (notification) =>
-              Utils.scrollNotifier(notification, paginationGames),
-          child: ListView.builder(
-            clipBehavior: Clip.none,
-            scrollDirection: Axis.horizontal,
-            itemCount: value?.length,
-            itemBuilder: (context, index) {
-              return Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                ),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(15),
-                  child: CachedNetworkImage(
-                    imageUrl: value?[index].logo ?? "",
-                    fit: BoxFit.cover,
-                    height: 200,
-                    width: double.infinity,
-                    placeholder: (context, url) =>
-                        const CircularProgressIndicator(),
-                    errorWidget: (context, url, error) =>
-                        const Icon(Icons.error),
+    return isLoading
+        ? const Center(child: CircularProgressIndicator())
+        : Selector<GamesListProvider, List<Games>?>(
+            selector: (p0, p1) => p1.gameList,
+            builder: (context, value, child) {
+              return NotificationListener(
+                onNotification: (notification) =>
+                    Utils.scrollNotifier(notification, paginationGames),
+                child: GestureDetector(
+                  onTap: () => {}, //TODO tournament serach by games
+                  child: ListView.builder(
+                    clipBehavior: Clip.none,
+                    scrollDirection: Axis.horizontal,
+                    itemCount: value?.length ?? 0,
+                    itemBuilder: (context, index) {
+                      return Column(
+                        children: [
+                          Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(15),
+                            ),
+                            padding: const EdgeInsets.symmetric(horizontal: 16),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(15),
+                              child: CachedNetworkImage(
+                                imageUrl: value?[index].logo ?? "",
+                                fit: BoxFit.cover,
+                                height: 100,
+                                width: 100,
+                                placeholder: (context, url) =>
+                                    const CircularProgressIndicator(),
+                                errorWidget: (context, url, error) =>
+                                    const Icon(Icons.error),
+                              ),
+                            ),
+                          ),
+                          Text(
+                            value?[index].name ?? "",
+                            style: poppinsFonts.copyWith(
+                              color: Colors.white,
+                              fontSize: 15,
+                            ),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          )
+                        ],
+                      );
+                    },
                   ),
                 ),
               );
             },
-          ),
-        );
-      },
-    );
+          );
   }
 }

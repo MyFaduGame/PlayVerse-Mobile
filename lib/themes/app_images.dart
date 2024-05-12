@@ -14,6 +14,11 @@ class BottomAppBarImages {
   static String streamSelectedImage = "assets/images/images/liveSelected.png";
 }
 
+class CarasouleSliderImages {
+  static String giveAwayImage1 = "assets/images/images/Giveaway_Photo.png";
+  static String giveAwayImage2 = "assets/images/images/design.png";
+}
+
 class TournamentWidgetImages {
   static String winTrophyImage = "assets/images/images/winTrophy.png";
 }
@@ -33,9 +38,9 @@ class AuthScreenImages {
 }
 
 class LoadingImages {
-  static String loading0 = "assets/images/loadingGifs/loading0.gif";
-  static String loading1 = "assets/images/loadingGifs/loading1.gif";
-  static String loading2 = "assets/images/loadingGifs/loading2.gif";
+  static String loading0 = "assets/images/gif/loading0.gif";
+  static String loading1 = "assets/images/gif/loading1.gif";
+  static String loading2 = "assets/images/gif/loading2.gif";
   static String loading3 = 'assets/images/gif/dino_2d.gif';
   static String loading4 = "assets/images/gif/splash.gif";
   static String dino2d = 'assets/images/gif/dino_2d.gif';

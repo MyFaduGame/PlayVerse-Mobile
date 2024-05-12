@@ -7,7 +7,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:playverse/screens/achievements/achievements_screen.dart';
 import 'package:playverse/screens/games/game_screen.dart';
+import 'package:playverse/screens/profile/my_profile.dart';
+import 'package:playverse/screens/tournaments/my_tournement_screen.dart';
 import 'package:provider/provider.dart';
 
 //Local Imports
@@ -84,6 +87,9 @@ class _AppState extends State<App>
       const StreamsScreen(), //2
       const ArticleScreen(), //3
       const GamesScreen(), //4
+      const MyProfileScreen(), //5
+      const MyTournementsScreen(), //6
+      const AchievementsScreen(), //7
     ];
   }
 

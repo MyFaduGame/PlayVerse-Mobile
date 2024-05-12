@@ -50,7 +50,7 @@ class _ArticleScreenState extends State<ArticleScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return isLoading
+    return loading
         ? const Center(
             child: CircularProgressIndicator(),
           )
@@ -60,100 +60,114 @@ class _ArticleScreenState extends State<ArticleScreen> {
               return NotificationListener(
                 onNotification: (notification) =>
                     Utils.scrollNotifier(notification, paginationArticles),
-                child: ListView.builder(
-                  itemCount: value?.length ?? 0,
-                  itemBuilder: (BuildContext context, int index) {
-                    return GestureDetector(
-                      onTap: () => Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => ArticleDetialScreen(
-                            articleDetail: value![index],
-                          ),
-                        ),
-                      ),
-                      child: Container(
-                        height: 250,
-                        color: const Color(0xFF252849),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            SizedBox(
-                              // decoration: BoxDecoration(
-                              //   borderRadius: BorderRadius.circular(15),
-                              // ),
-                              // width: double.infinity,
-                              height: 150,
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(15),
-                                child: CachedNetworkImage(
-                                  imageUrl: value?[index].image ?? "",
-                                  fit: BoxFit.cover,
-                                  // width: 1000,
-                                  placeholder: (context, url) =>
-                                      const CircularProgressIndicator(),
-                                  errorWidget: (context, url, error) =>
-                                      const Icon(Icons.error),
-                                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ListView.builder(
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: value?.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return index == 0
+                          ? Center(
+                              child: Text(
+                                "No Articles to Display",
+                                style:
+                                    poppinsFonts.copyWith(color: Colors.white),
                               ),
-                            ),
-                            Text(
-                              value?[index].title ?? "Article Title",
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: poppinsFonts.copyWith(
-                                fontSize: 20,
-                                color: Colors.white,
-                              ),
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: <Widget>[
-                                Expanded(
-                                  child: Text(
-                                    value?[index].description ??
-                                        "Article Description",
-                                    maxLines: 2,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: openSansFonts.copyWith(
-                                      fontSize: 15,
-                                      color: Colors.white,
-                                    ),
+                            )
+                          : GestureDetector(
+                              onTap: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => ArticleDetialScreen(
+                                    articleDetail: value![index],
                                   ),
                                 ),
-                                const SizedBox(
-                                  width: 50,
-                                ),
-                                Container(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(
-                                      15,
-                                    ),
-                                    color: Colors.pink[200],
-                                  ),
-                                  child: IconButton(
-                                    onPressed: () => Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) =>
-                                            ArticleDetialScreen(
-                                          articleDetail: value![index],
+                              ),
+                              child: Container(
+                                height: 250,
+                                color: const Color(0xFF252849),
+                                child: Column(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    SizedBox(
+                                      // decoration: BoxDecoration(
+                                      //   borderRadius: BorderRadius.circular(15),
+                                      // ),
+                                      // width: double.infinity,
+                                      height: 150,
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(15),
+                                        child: CachedNetworkImage(
+                                          imageUrl: value?[index].image ?? "",
+                                          fit: BoxFit.cover,
+                                          // width: 1000,
+                                          placeholder: (context, url) =>
+                                              const CircularProgressIndicator(),
+                                          errorWidget: (context, url, error) =>
+                                              const Icon(Icons.error),
                                         ),
                                       ),
                                     ),
-                                    color: Colors.white,
-                                    icon: const Icon(
-                                      FontAwesomeIcons.arrowRightLong,
+                                    Text(
+                                      value?[index].title ?? "Article Title",
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: poppinsFonts.copyWith(
+                                        fontSize: 20,
+                                        color: Colors.white,
+                                      ),
                                     ),
-                                  ),
-                                )
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                    );
-                  },
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      children: <Widget>[
+                                        Expanded(
+                                          child: Text(
+                                            value?[index].description ??
+                                                "Article Description",
+                                            maxLines: 2,
+                                            overflow: TextOverflow.ellipsis,
+                                            style: openSansFonts.copyWith(
+                                              fontSize: 15,
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                        ),
+                                        const SizedBox(
+                                          width: 50,
+                                        ),
+                                        Container(
+                                          decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.circular(
+                                              15,
+                                            ),
+                                            color: Colors.pink[200],
+                                          ),
+                                          child: IconButton(
+                                            onPressed: () => Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    ArticleDetialScreen(
+                                                  articleDetail: value![index],
+                                                ),
+                                              ),
+                                            ),
+                                            color: Colors.white,
+                                            icon: const Icon(
+                                              FontAwesomeIcons.arrowRightLong,
+                                            ),
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            );
+                    },
+                  ),
                 ),
               );
             },

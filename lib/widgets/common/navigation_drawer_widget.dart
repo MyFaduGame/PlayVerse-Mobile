@@ -15,7 +15,6 @@ import 'package:playverse/themes/app_font.dart';
 import 'package:playverse/themes/app_images.dart';
 
 class NavigationBarWidget extends StatefulWidget {
-
   final AdvancedDrawerController controller;
   final int index;
   final UserProfile userProfile;
@@ -44,7 +43,7 @@ class _NavigationBarWidgetState extends State<NavigationBarWidget> {
               GestureDetector(
                 onTap: () {
                   widget.controller.hideDrawer();
-                  tabManager.onTabChanged(6);
+                  tabManager.onTabChanged(5);
                 },
                 child: Column(
                   children: [
@@ -57,7 +56,7 @@ class _NavigationBarWidgetState extends State<NavigationBarWidget> {
                       ),
                       clipBehavior: Clip.antiAlias,
                       decoration: const BoxDecoration(
-                        color: Colors.black26,
+                        color: Colors.white24,
                         shape: BoxShape.circle,
                       ),
                       child: widget.userProfile.profileImage == "" ||
@@ -172,43 +171,6 @@ class _NavigationBarWidgetState extends State<NavigationBarWidget> {
                             ),
                           ),
                         ),
-                  widget.index == 2
-                      ? Container(
-                          width: 250,
-                          decoration: BoxDecoration(
-                            color: Colors.black,
-                            borderRadius: BorderRadius.circular(15),
-                            border: Border.all(
-                              color: Colors.purple,
-                            ),
-                          ),
-                          child: TextButton(
-                            onPressed: () {
-                              widget.controller.hideDrawer();
-                              tabManager.onTabChanged(2);
-                            },
-                            child: Text(
-                              "Articles",
-                              style: dmSansFonts.copyWith(
-                                fontSize: screenWidth / 20,
-                                color: GeneralColors.generalTextColor,
-                              ),
-                            ),
-                          ),
-                        )
-                      : TextButton(
-                          onPressed: () {
-                            widget.controller.hideDrawer();
-                            tabManager.onTabChanged(2);
-                          },
-                          child: Text(
-                            "Articles",
-                            style: dmSansFonts.copyWith(
-                              fontSize: screenWidth / 20,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
                   widget.index == 3
                       ? Container(
                           width: 250,
@@ -225,7 +187,7 @@ class _NavigationBarWidgetState extends State<NavigationBarWidget> {
                               tabManager.onTabChanged(3);
                             },
                             child: Text(
-                              "History",
+                              "Articles",
                               style: dmSansFonts.copyWith(
                                 fontSize: screenWidth / 20,
                                 color: GeneralColors.generalTextColor,
@@ -239,14 +201,14 @@ class _NavigationBarWidgetState extends State<NavigationBarWidget> {
                             tabManager.onTabChanged(3);
                           },
                           child: Text(
-                            "History",
+                            "Articles",
                             style: dmSansFonts.copyWith(
                               fontSize: screenWidth / 20,
                               color: Colors.white,
                             ),
                           ),
                         ),
-                  widget.index == 4
+                  widget.index == 6
                       ? Container(
                           width: 250,
                           decoration: BoxDecoration(
@@ -259,7 +221,44 @@ class _NavigationBarWidgetState extends State<NavigationBarWidget> {
                           child: TextButton(
                             onPressed: () {
                               widget.controller.hideDrawer();
-                              tabManager.onTabChanged(4);
+                              tabManager.onTabChanged(6);
+                            },
+                            child: Text(
+                              "History",
+                              style: dmSansFonts.copyWith(
+                                fontSize: screenWidth / 20,
+                                color: GeneralColors.generalTextColor,
+                              ),
+                            ),
+                          ),
+                        )
+                      : TextButton(
+                          onPressed: () {
+                            widget.controller.hideDrawer();
+                            tabManager.onTabChanged(6);
+                          },
+                          child: Text(
+                            "History",
+                            style: dmSansFonts.copyWith(
+                              fontSize: screenWidth / 20,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                  widget.index == 7
+                      ? Container(
+                          width: 250,
+                          decoration: BoxDecoration(
+                            color: Colors.black,
+                            borderRadius: BorderRadius.circular(15),
+                            border: Border.all(
+                              color: Colors.purple,
+                            ),
+                          ),
+                          child: TextButton(
+                            onPressed: () {
+                              widget.controller.hideDrawer();
+                              tabManager.onTabChanged(7);
                             },
                             child: Text(
                               "Achievement",
@@ -273,7 +272,7 @@ class _NavigationBarWidgetState extends State<NavigationBarWidget> {
                       : TextButton(
                           onPressed: () {
                             widget.controller.hideDrawer();
-                            tabManager.onTabChanged(4);
+                            tabManager.onTabChanged(7);
                           },
                           child: Text(
                             "Achievement",
@@ -283,7 +282,7 @@ class _NavigationBarWidgetState extends State<NavigationBarWidget> {
                             ),
                           ),
                         ),
-                  widget.index == 5
+                  widget.index == 5 //TODO No Friends Screen
                       ? Container(
                           width: 250,
                           decoration: BoxDecoration(
@@ -320,7 +319,7 @@ class _NavigationBarWidgetState extends State<NavigationBarWidget> {
                             ),
                           ),
                         ),
-                  widget.index == 7
+                  widget.index == 0 //TODO have to make it
                       ? Container(
                           width: 250,
                           decoration: BoxDecoration(
@@ -333,44 +332,7 @@ class _NavigationBarWidgetState extends State<NavigationBarWidget> {
                           child: TextButton(
                             onPressed: () {
                               widget.controller.hideDrawer();
-                              tabManager.onTabChanged(7);
-                            },
-                            child: Text(
-                              "Team",
-                              style: dmSansFonts.copyWith(
-                                fontSize: screenWidth / 20,
-                                color: GeneralColors.generalTextColor,
-                              ),
-                            ),
-                          ),
-                        )
-                      : TextButton(
-                          onPressed: () {
-                            widget.controller.hideDrawer();
-                            tabManager.onTabChanged(7);
-                          },
-                          child: Text(
-                            "Team",
-                            style: dmSansFonts.copyWith(
-                              fontSize: screenWidth / 20,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
-                  widget.index == 10
-                      ? Container(
-                          width: 250,
-                          decoration: BoxDecoration(
-                            color: Colors.black,
-                            borderRadius: BorderRadius.circular(15),
-                            border: Border.all(
-                              color: Colors.purple,
-                            ),
-                          ),
-                          child: TextButton(
-                            onPressed: () {
-                              widget.controller.hideDrawer();
-                              tabManager.onTabChanged(10);
+                              tabManager.onTabChanged(0);
                             },
                             child: Text(
                               "Course",
@@ -384,7 +346,7 @@ class _NavigationBarWidgetState extends State<NavigationBarWidget> {
                       : TextButton(
                           onPressed: () {
                             widget.controller.hideDrawer();
-                            tabManager.onTabChanged(10);
+                            tabManager.onTabChanged(0);
                           },
                           child: Text(
                             "Course",

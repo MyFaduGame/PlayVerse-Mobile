@@ -5,6 +5,7 @@ import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
 import 'package:flutter_svg/svg.dart';
 
 //Local Imports
+import 'package:playverse/app.dart';
 import 'package:playverse/models/user_profile_model.dart';
 import 'package:playverse/themes/app_font.dart';
 import 'package:playverse/themes/app_images.dart';
@@ -40,39 +41,42 @@ class _CustomAppBarState extends State<CustomAppBar> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
-          Container(
-            width: 45.0,
-            height: 45.0,
-            clipBehavior: Clip.antiAlias,
-            decoration: const BoxDecoration(
-              color: Colors.black26,
-              shape: BoxShape.circle,
+          GestureDetector(
+            onTap: () => tabManager.onTabChanged(5),
+            child: Container(
+              width: 45.0,
+              height: 45.0,
+              clipBehavior: Clip.antiAlias,
+              decoration: const BoxDecoration(
+                color: Colors.black26,
+                shape: BoxShape.circle,
+              ),
+              child: widget.userProfile.profileImage == "" ||
+                      widget.userProfile.profileImage == null
+                  ? widget.userProfile.gender == 'Male'
+                      ? SvgPicture.asset(
+                          ProfileImages.boyProfile,
+                          width: 45,
+                          height: 45,
+                          fit: BoxFit.cover,
+                        )
+                      : SvgPicture.asset(
+                          ProfileImages.girlProfile,
+                          width: 45,
+                          height: 45,
+                          fit: BoxFit.cover,
+                        )
+                  : CachedNetworkImage(
+                      imageUrl: widget.userProfile.profileImage ?? "",
+                      fit: BoxFit.cover,
+                      height: 45,
+                      width: 45,
+                      placeholder: (context, url) =>
+                          const CircularProgressIndicator(),
+                      errorWidget: (context, url, error) =>
+                          const Icon(Icons.error),
+                    ),
             ),
-            child: widget.userProfile.profileImage == "" ||
-                    widget.userProfile.profileImage == null
-                ? widget.userProfile.gender == 'Male'
-                    ? SvgPicture.asset(
-                        ProfileImages.boyProfile,
-                        width: 45,
-                        height: 45,
-                        fit: BoxFit.cover,
-                      )
-                    : SvgPicture.asset(
-                        ProfileImages.girlProfile,
-                        width: 45,
-                        height: 45,
-                        fit: BoxFit.cover,
-                      )
-                : CachedNetworkImage(
-                    imageUrl: widget.userProfile.profileImage ?? "",
-                    fit: BoxFit.cover,
-                    height: 45,
-                    width: 45,
-                    placeholder: (context, url) =>
-                        const CircularProgressIndicator(),
-                    errorWidget: (context, url, error) =>
-                        const Icon(Icons.error),
-                  ),
           ),
           SizedBox(
             child: Row(

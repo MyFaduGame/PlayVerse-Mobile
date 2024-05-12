@@ -47,13 +47,15 @@ class LoadingImages {
 }
 
 class ProfileScreenImages {
-  static String instagram = "assets/images/instagram.png";
-  static String facebook = "assets/images/facebook_profile.png";
+  static String profileBanner = "assets/images/images/profile_banner.png";
+  static String instagram = "assets/images/images/instagram.png";
+  static String facebook = "assets/images/images/facebook_profile.png";
+  static String twitch = "assets/images/images/twitch.png";
+  static String youtube = "assets/images/images/youtube.png";
+
   static String gamePad = "assets/images/IconsSVG/controller.svg";
   static String history = "assets/images/IconsSVG/history.svg";
   static String live = "assets/images/IconsSVG/live.svg";
-  static String twitch = "assets/images/twitch.png";
-  static String youtube = "assets/images/youtube.png";
   static String trophy = "assets/images/IconsSVG/trophy.svg";
 }
 

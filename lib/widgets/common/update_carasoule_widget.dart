@@ -1,11 +1,9 @@
 //Third Party Imports
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:playverse/themes/app_font.dart';
 
 //Local Imports
+import 'package:playverse/themes/app_font.dart';
 import 'package:playverse/themes/app_images.dart';
 
 class UpdateCarsouleWidget extends StatefulWidget {

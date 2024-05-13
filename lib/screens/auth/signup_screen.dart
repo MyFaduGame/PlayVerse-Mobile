@@ -341,26 +341,15 @@ class SignUpScreenState extends State<SignUpScreen> {
                             const SizedBox(height: 8),
                             TextFormField(
                               style: const TextStyle(color: Colors.white),
-                              onChanged: (value) {
-                                if (emailError != null) {
-                                  setState(() => emailError = null);
-                                }
-                              },
-                              controller: emailController,
-                              keyboardType: TextInputType.emailAddress,
-                              validator: (value) {
-                                if (value!.isEmpty) {
-                                  return "Please Enter Your First Name";
-                                }
-                                return emailError;
-                              },
+                              controller: referCodeController,
+                              keyboardType: TextInputType.name,
                               decoration: const InputDecoration(
                                   border: OutlineInputBorder(
                                     borderSide: BorderSide(
                                       color: Colors.white,
                                     ),
                                   ),
-                                  hintText: 'Enter your First Name',
+                                  hintText: 'Enter your ReferCode',
                                   enabledBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
                                       color: Colors.white,
@@ -385,15 +374,15 @@ class SignUpScreenState extends State<SignUpScreen> {
                         bottomShadowColor: GeneralColors.neopopShadowColor,
                         onTapUp: () => {
                           HapticFeedback.vibrate(),
-                          // if (_formKey.currentState!.validate()) {register()}
-                          Navigator.pushAndRemoveUntil(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const App(),
-                              settings: const RouteSettings(name: '/app'),
-                            ),
-                            (route) => false,
-                          ),
+                          if (_formKey.currentState!.validate()) {register()}
+                          // Navigator.pushAndRemoveUntil(
+                          //   context,
+                          //   MaterialPageRoute(
+                          //     builder: (context) => const App(),
+                          //     settings: const RouteSettings(name: '/app'),
+                          //   ),
+                          //   (route) => false,
+                          // ),
                         },
                         child: NeoPopShimmer(
                           shimmerColor: Colors.white,

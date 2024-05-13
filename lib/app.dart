@@ -153,6 +153,14 @@ class _AppState extends State<App>
         controller: controller,
         childBody: Scaffold(
           extendBodyBehindAppBar: true,
+          appBar: PreferredSize(
+            preferredSize: const Size.fromHeight(120),
+            child: CustomAppBar(
+              userProfile: userModel ?? UserProfile(),
+              textToDisplay: textList[index],
+              controller: controller,
+            ),
+          ),
           body: Container(
             height: screenHeight,
             width: screenWidth,
@@ -206,22 +214,7 @@ class _AppState extends State<App>
                     ),
                   ),
                 ),
-                SingleChildScrollView(
-                  child: Column(
-                    children: <Widget>[
-                      SizedBox(
-                        height: 120,
-                        // preferredSize: const Size.fromHeight(120),
-                        child: CustomAppBar(
-                          userProfile: userModel ?? UserProfile(),
-                          textToDisplay: textList[index],
-                          controller: controller,
-                        ),
-                      ),
-                      screensList[index],
-                    ],
-                  ),
-                )
+                screensList[index]
               ],
             ),
           ),

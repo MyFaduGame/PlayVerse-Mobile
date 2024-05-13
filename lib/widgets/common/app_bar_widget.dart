@@ -33,9 +33,9 @@ class _CustomAppBarState extends State<CustomAppBar> {
     // double screenHeight = MediaQuery.of(context).size.height;
     return Container(
       decoration: const BoxDecoration(
-        color: Colors.transparent,
+        color: Colors.black,
       ),
-      margin: const EdgeInsets.fromLTRB(10, 30, 10, 0),
+      margin: const EdgeInsets.fromLTRB(0, 30, 0, 0),
       width: screenWidth,
       height: 60,
       child: Row(

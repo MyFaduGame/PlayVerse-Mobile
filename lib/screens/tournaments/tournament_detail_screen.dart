@@ -1,10 +1,12 @@
 //Third Party Imports
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 //Local Imports
 import 'package:playverse/models/tournaments_model.dart';
-import 'package:playverse/provider/tournaments_provider.dart'; 
+import 'package:playverse/provider/tournaments_provider.dart';
 import 'package:playverse/themes/app_font.dart';
 import 'package:playverse/widgets/common/back_app_bar_widget.dart';
 import 'package:playverse/themes/app_color_theme.dart';
@@ -112,15 +114,43 @@ class TournamentDetailScreenState extends State<TournamentDetailScreen> {
                   children: <Widget>[
                     Column(
                       children: <Widget>[
-                        CachedNetworkImage(
-                          imageUrl: widget.tournamentDetail.logo ?? "",
-                          fit: BoxFit.cover,
+                        Stack(
+                          children: [
+                            // CachedNetworkImage(
+                            //   imageUrl: widget.tournamentDetail.thumbnail ?? "",
+                            //   fit: BoxFit.cover,
+                            //   height: 200,
+                            //   width: double.infinity,
+                            //   placeholder: (context, url) =>
+                            //       const CircularProgressIndicator(),
+                            //   errorWidget: (context, url, error) =>
+                            //       const Icon(Icons.error),
+                            // ),
+                            Positioned(
+                              top: 200,
+                              child: Row(
+                                children: <Widget>[
+                                  ClipRRect(
+                                    borderRadius: BorderRadius.circular(15),
+                                    child: CachedNetworkImage(
+                                      imageUrl:
+                                          widget.tournamentDetail.logo ?? "",
+                                      fit: BoxFit.cover,
+                                      height: 50,
+                                      width: double.infinity,
+                                      placeholder: (context, url) =>
+                                          const CircularProgressIndicator(),
+                                      errorWidget: (context, url, error) =>
+                                          const Icon(Icons.error),
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
                           height: 200,
-                          width: double.infinity,
-                          placeholder: (context, url) =>
-                              const CircularProgressIndicator(),
-                          errorWidget: (context, url, error) =>
-                              const Icon(Icons.error),
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,

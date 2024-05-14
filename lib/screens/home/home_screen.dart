@@ -1,5 +1,7 @@
 //Third Party Imports
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:playverse/screens/streams/stream_watch_screen.dart';
 
 //Local Imports
 import 'package:playverse/widgets/common/update_carasoule_widget.dart';
@@ -18,44 +20,53 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
-    return const SingleChildScrollView(
+    return SingleChildScrollView(
       child: Padding(
-        padding: EdgeInsets.fromLTRB(10, 0, 10, 120),
+        padding: const EdgeInsets.fromLTRB(10, 0, 10, 120),
         child: Column(
           children: <Widget>[
-            SizedBox(
+            const SizedBox(
               height: 120,
             ),
-            SizedBox(
+            const SizedBox(
               height: 200,
               child: UpdateCarsouleWidget(),
             ),
-            SizedBox(height: 16),
-            HeaderWidget(
+            IconButton(
+                onPressed: () => {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const StreamApp(),
+                          )),
+                    },
+                icon: const Icon(FontAwesomeIcons.a)),
+            const SizedBox(height: 16),
+            const HeaderWidget(
                 title: "Trending", subTitle: "Upcomming Matches", index: 1),
-            SizedBox(
+            const SizedBox(
               height: 600,
               child: TournamentListWidget(
                 type: "Solo",
               ),
             ),
-            SizedBox(height: 16),
-            HeaderWidget(title: "Search by", subTitle: "Games", index: 4),
-            SizedBox(
+            const SizedBox(height: 16),
+            const HeaderWidget(title: "Search by", subTitle: "Games", index: 4),
+            const SizedBox(
               height: 150,
               child: GamesIconWidget(),
             ),
-            SizedBox(height: 16),
-            HeaderWidget(
+            const SizedBox(height: 16),
+            const HeaderWidget(
               title: "Find Some",
               subTitle: "Articles",
               index: 3,
             ),
-            SizedBox(
+            const SizedBox(
               height: 200,
               child: ArticleWidget(),
             ),
-            HeaderWidget(
+            const HeaderWidget(
               title: "Dont Left",
               subTitle: "Streams",
               index: 2,

@@ -77,18 +77,17 @@ class _GamesScreenState extends State<GamesScreen> {
                   itemBuilder: (context, index) {
                     return GestureDetector(
                       onTap: () => {
-                        popUpMenu(
+                        addGameInfo(
                           context,
-                          value?[index].added ?? false,
                           value?[index] ?? Games(),
-                        )
+                        ),
                       },
                       child: Padding(
                         padding: const EdgeInsets.symmetric(
                             horizontal: 5, vertical: 10),
                         child: Container(
                           decoration: BoxDecoration(
-                            color: const Color(0XFF252849),
+                            // color: const Color(0XFF252849),
                             borderRadius: BorderRadius.circular(15),
                           ),
                           child: Column(
@@ -98,9 +97,9 @@ class _GamesScreenState extends State<GamesScreen> {
                                 borderRadius: BorderRadius.circular(15),
                                 child: CachedNetworkImage(
                                   imageUrl: value?[index].logo ?? "",
-                                  // fit: BoxFit.cover,
-                                  height: 100,
-                                  width: double.infinity,
+                                  fit: BoxFit.cover,
+                                  height: 80,
+                                  width: 80,
                                   placeholder: (context, url) =>
                                       const CircularProgressIndicator(),
                                   errorWidget: (context, url, error) =>
@@ -280,6 +279,94 @@ class _GamesScreenState extends State<GamesScreen> {
         });
   }
 
+  Future<void> addGameInfo(BuildContext context, Games gameData) async {
+    double screenHeight = MediaQuery.of(context).size.height;
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          backgroundColor: Colors.black54,
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+          title: const Text('Here is the Game Inforamtion'),
+          content: SizedBox(
+            height: screenHeight / 2,
+            child: Column(
+              children: <Widget>[
+                Text(
+                  gameData.name ?? "Game Name",
+                  style: poppinsFonts.copyWith(
+                    color: Colors.white,
+                    fontSize: 24,
+                  ),
+                ),
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(15),
+                  child: CachedNetworkImage(
+                    imageUrl: gameData.thumbnail ?? "",
+                    fit: BoxFit.cover,
+                    height: 150,
+                    width: 200,
+                    placeholder: (context, url) =>
+                        const CircularProgressIndicator(),
+                    errorWidget: (context, url, error) =>
+                        const Icon(Icons.error),
+                  ),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                Text(
+                  gameData.gameType ?? "Game Type",
+                  style: poppinsFonts.copyWith(
+                    color: Colors.white,
+                    fontSize: 24,
+                  ),
+                ),
+                Text(
+                  gameData.genre ?? "Game Type",
+                  style: poppinsFonts.copyWith(
+                    color: Colors.white,
+                    fontSize: 24,
+                  ),
+                ),
+                gameData.added == true
+                    ? Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          IconButton(
+                            onPressed: () => addGame(
+                                context, gameData.gameId ?? "Game ID", true),
+                            icon: const Icon(
+                              FontAwesomeIcons.pen,
+                              color: Colors.white,
+                            ),
+                          ),
+                          IconButton(
+                            onPressed: () => deleteGames(
+                                context, gameData.gameId ?? "Game ID"),
+                            icon: const Icon(
+                              FontAwesomeIcons.trash,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ],
+                      )
+                    : IconButton(
+                        onPressed: () =>
+                            addGame(context, gameData.gameId ?? "Game ID"),
+                        icon: const Icon(
+                          FontAwesomeIcons.plus,
+                          color: Colors.white,
+                        ))
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
   Future<void> addGame(BuildContext context, String gamesId,
       [bool? update]) async {
     showDialog(
@@ -287,7 +374,7 @@ class _GamesScreenState extends State<GamesScreen> {
       builder: (context) {
         TextEditingController textEditingController = TextEditingController();
         return AlertDialog(
-          backgroundColor: const Color(0XFF252849),
+          backgroundColor: Colors.blueAccent,
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
           shadowColor: Colors.pink,
@@ -295,7 +382,8 @@ class _GamesScreenState extends State<GamesScreen> {
           content: TextField(
             controller: textEditingController,
             decoration: const InputDecoration(
-                hintText: 'Enter your in Game Name Here!'),
+              hintText: 'Enter your in Game Name Here!',
+            ),
           ),
           actions: <Widget>[
             TextButton(

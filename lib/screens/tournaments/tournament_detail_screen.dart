@@ -2,12 +2,17 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:neopop/widgets/buttons/neopop_button/neopop_button.dart';
+import 'package:neopop/widgets/shimmer/neopop_shimmer.dart';
 
 //Local Imports
 import 'package:playverse/models/tournaments_model.dart';
 import 'package:playverse/provider/tournaments_provider.dart';
 import 'package:playverse/themes/app_font.dart';
+import 'package:playverse/themes/app_images.dart';
 import 'package:playverse/widgets/common/back_app_bar_widget.dart';
 import 'package:playverse/themes/app_color_theme.dart';
 
@@ -107,174 +112,255 @@ class TournamentDetailScreenState extends State<TournamentDetailScreen> {
                 ),
               ),
             ),
-            SingleChildScrollView(
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(10, 120, 10, 0),
-                child: Column(
-                  children: <Widget>[
-                    Column(
-                      children: <Widget>[
-                        Stack(
-                          children: [
-                            // CachedNetworkImage(
-                            //   imageUrl: widget.tournamentDetail.thumbnail ?? "",
-                            //   fit: BoxFit.cover,
-                            //   height: 200,
-                            //   width: double.infinity,
-                            //   placeholder: (context, url) =>
-                            //       const CircularProgressIndicator(),
-                            //   errorWidget: (context, url, error) =>
-                            //       const Icon(Icons.error),
-                            // ),
-                            Positioned(
-                              top: 200,
-                              child: Row(
-                                children: <Widget>[
-                                  ClipRRect(
-                                    borderRadius: BorderRadius.circular(15),
-                                    child: CachedNetworkImage(
-                                      imageUrl:
-                                          widget.tournamentDetail.logo ?? "",
-                                      fit: BoxFit.cover,
-                                      height: 50,
-                                      width: double.infinity,
-                                      placeholder: (context, url) =>
-                                          const CircularProgressIndicator(),
-                                      errorWidget: (context, url, error) =>
-                                          const Icon(Icons.error),
-                                    ),
-                                  )
-                                ],
-                              ),
+            // SingleChildScrollView(
+            // physics: const NeverScrollableScrollPhysics(),
+            // child: Padding(
+            Padding(
+              padding: const EdgeInsets.fromLTRB(10, 120, 10, 0),
+              child: Column(
+                children: <Widget>[
+                  Column(
+                    children: <Widget>[
+                      CachedNetworkImage(
+                        imageUrl: widget.tournamentDetail.thumbnail ?? "",
+                        fit: BoxFit.cover,
+                        height: 200,
+                        width: double.infinity,
+                        placeholder: (context, url) =>
+                            const CircularProgressIndicator(),
+                        errorWidget: (context, url, error) =>
+                            const Icon(Icons.error),
+                      ),
+                      const SizedBox(
+                        height: 16,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(15),
+                            child: CachedNetworkImage(
+                              imageUrl: widget.tournamentDetail.logo ?? "",
+                              fit: BoxFit.cover,
+                              height: 150,
+                              width: 100,
+                              placeholder: (context, url) =>
+                                  const CircularProgressIndicator(),
+                              errorWidget: (context, url, error) =>
+                                  const Icon(Icons.error),
                             ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 200,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: <Widget>[
-                            Container(
-                              height: 80,
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 5),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(15),
-                                color: TournamentDetialScreenColors
-                                    .tournamentContainerColor,
+                          ),
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: <Widget>[
+                              Text(
+                                widget.tournamentDetail.title ?? "Game Name",
+                                style: poppinsFonts.copyWith(
+                                  color: Colors.white,
+                                  fontSize: 20,
+                                ),
                               ),
-                              child: Column(
+                              const SizedBox(height: 16),
+                              Row(
                                 mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
+                                    MainAxisAlignment.spaceBetween,
                                 children: <Widget>[
-                                  Text(
-                                    widget.tournamentDetail.maxPlayers
-                                        .toString(),
-                                    style: poppinsFonts.copyWith(
-                                      color: Colors.white,
-                                      fontSize: 20,
+                                  Container(
+                                    width: 80,
+                                    height: 30,
+                                    decoration: BoxDecoration(
+                                        color: Colors.purpleAccent.shade100,
+                                        borderRadius:
+                                            BorderRadius.circular(15)),
+                                    child: Text(
+                                      textAlign: TextAlign.center,
+                                      widget.tournamentDetail.gener ?? "genre",
+                                      style: poppinsFonts.copyWith(
+                                        color: Colors.white,
+                                        fontSize: 15,
+                                      ),
                                     ),
                                   ),
-                                  Text(
-                                    "Total Players",
-                                    style: poppinsFonts.copyWith(
-                                      color: Colors.white,
-                                      fontSize: 15,
+                                  Container(
+                                    width: 80,
+                                    height: 30,
+                                    decoration: BoxDecoration(
+                                        color: Colors.purpleAccent.shade100,
+                                        borderRadius:
+                                            BorderRadius.circular(15)),
+                                    child: Text(
+                                      textAlign: TextAlign.center,
+                                      widget.tournamentDetail.invitationCode ??
+                                          "Code",
+                                      style: poppinsFonts.copyWith(
+                                        color: Colors.white,
+                                        fontSize: 15,
+                                      ),
                                     ),
                                   ),
                                 ],
                               ),
+                              SizedBox(
+                                width: screenWidth / 2,
+                                child: NeoPopButton(
+                                  color: GeneralColors.neopopButtonMainColor,
+                                  bottomShadowColor:
+                                      GeneralColors.neopopShadowColor,
+                                  onTapUp: () => {
+                                    HapticFeedback.vibrate(),
+                                    // Navigator.pushAndRemoveUntil(
+                                    //   context,
+                                    //   MaterialPageRoute(
+                                    //     builder: (context) => const App(),
+                                    //     settings: const RouteSettings(name: '/app'),
+                                    //   ),
+                                    //   (route) => false,
+                                    // ),
+                                  },
+                                  child: const NeoPopShimmer(
+                                    shimmerColor: Colors.white,
+                                    child: Padding(
+                                      padding: EdgeInsets.symmetric(
+                                          horizontal: 20, vertical: 15),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            "Join Tournament!",
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 15,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          )
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 200,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: <Widget>[
+                          Container(
+                            height: 80,
+                            padding: const EdgeInsets.symmetric(horizontal: 5),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(15),
+                              color: TournamentDetialScreenColors
+                                  .tournamentContainerColor,
                             ),
-                            Container(
-                              height: 80,
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 5),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(15),
-                                color: TournamentDetialScreenColors
-                                    .tournamentContainerColor,
-                              ),
-                              child: Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: <Widget>[
-                                  Text(
-                                    widget.tournamentDetail.maxPlayers
-                                        .toString(),
-                                    style: poppinsFonts.copyWith(
-                                      color: Colors.white,
-                                      fontSize: 20,
-                                    ),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: <Widget>[
+                                Text(
+                                  widget.tournamentDetail.maxPlayers.toString(),
+                                  style: poppinsFonts.copyWith(
+                                    color: Colors.white,
+                                    fontSize: 20,
                                   ),
-                                  Text(
-                                    "Total Players",
-                                    style: poppinsFonts.copyWith(
-                                      color: Colors.white,
-                                      fontSize: 15,
-                                    ),
+                                ),
+                                Text(
+                                  "Total Players",
+                                  style: poppinsFonts.copyWith(
+                                    color: Colors.white,
+                                    fontSize: 15,
                                   ),
-                                ],
-                              ),
+                                ),
+                              ],
                             ),
-                            Container(
-                              height: 80,
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 5),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(15),
-                                color: TournamentDetialScreenColors
-                                    .tournamentContainerColor,
-                              ),
-                              child: Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: <Widget>[
-                                  Text(
-                                    widget.tournamentDetail.maxPlayers
-                                        .toString(),
-                                    style: poppinsFonts.copyWith(
-                                      color: Colors.white,
-                                      fontSize: 20,
-                                    ),
-                                  ),
-                                  Text(
-                                    "Total Players",
-                                    style: poppinsFonts.copyWith(
-                                      color: Colors.white,
-                                      fontSize: 15,
-                                    ),
-                                  ),
-                                ],
-                              ),
+                          ),
+                          Container(
+                            height: 80,
+                            padding: const EdgeInsets.symmetric(horizontal: 5),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(15),
+                              color: TournamentDetialScreenColors
+                                  .tournamentContainerColor,
                             ),
-                          ],
-                        ),
-                        Divider(
-                          color: TournamentDetialScreenColors.dividerColor,
-                          thickness: 2,
-                        ),
-                        Row(
-                          children: <Widget>[
-                            Text(
-                              "\$${widget.tournamentDetail.prizePool?.the1St}",
-                              style: poppinsFonts.copyWith(
-                                color: Colors.white,
-                                fontSize: 25,
-                              ),
-                            )
-                          ],
-                        ),
-                        Divider(
-                          color: TournamentDetialScreenColors.dividerColor,
-                          thickness: 2,
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: <Widget>[
+                                Text(
+                                  widget.tournamentDetail.maxPlayers.toString(),
+                                  style: poppinsFonts.copyWith(
+                                    color: Colors.white,
+                                    fontSize: 20,
+                                  ),
+                                ),
+                                Text(
+                                  "Total Players",
+                                  style: poppinsFonts.copyWith(
+                                    color: Colors.white,
+                                    fontSize: 15,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Container(
+                            height: 80,
+                            padding: const EdgeInsets.symmetric(horizontal: 5),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(15),
+                              color: TournamentDetialScreenColors
+                                  .tournamentContainerColor,
+                            ),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: <Widget>[
+                                Text(
+                                  widget.tournamentDetail.maxPlayers.toString(),
+                                  style: poppinsFonts.copyWith(
+                                    color: Colors.white,
+                                    fontSize: 20,
+                                  ),
+                                ),
+                                Text(
+                                  "Total Players",
+                                  style: poppinsFonts.copyWith(
+                                    color: Colors.white,
+                                    fontSize: 15,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                      // Divider(
+                      //   color: TournamentDetialScreenColors.dividerColor,
+                      //   thickness: 2,
+                      // ),
+                      Row(
+                        children: <Widget>[
+                          Text(
+                            "\$${widget.tournamentDetail.prizePool?.the1St}",
+                            style: poppinsFonts.copyWith(
+                              color: Colors.white,
+                              fontSize: 25,
+                            ),
+                          )
+                        ],
+                      ),
+                      // Divider(
+                      //   color: TournamentDetialScreenColors.dividerColor,
+                      //   thickness: 2,
+                      // ),
+                    ],
+                  ),
+                ],
               ),
-            )
+            ),
+            // )
           ],
         ),
       ),

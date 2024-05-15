@@ -81,8 +81,8 @@ class _GamesIconWidgetState extends State<GamesIconWidget> {
                               child: CachedNetworkImage(
                                 imageUrl: value?[index].logo ?? "",
                                 fit: BoxFit.cover,
-                                height: 100,
-                                width: 100,
+                                height: 70,
+                                width: 70,
                                 placeholder: (context, url) =>
                                     const CircularProgressIndicator(),
                                 errorWidget: (context, url, error) =>

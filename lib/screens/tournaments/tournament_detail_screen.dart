@@ -1,6 +1,4 @@
 //Third Party Imports
-import 'dart:developer';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -18,8 +16,8 @@ import 'package:playverse/themes/app_color_theme.dart';
 import 'package:provider/provider.dart';
 
 class TournamentDetailScreen extends StatefulWidget {
-  final String tournamentID;
-  const TournamentDetailScreen({super.key, required this.tournamentID});
+  final TournamentDetail tournamentDetail;
+  const TournamentDetailScreen({super.key, required this.tournamentDetail});
 
   @override
   State<TournamentDetailScreen> createState() => TournamentDetailScreenState();
@@ -34,13 +32,13 @@ class TournamentDetailScreenState extends State<TournamentDetailScreen> {
   @override
   void initState() {
     super.initState();
-    provider = Provider.of<TournamentsProvider>(context, listen: false);
-    provider.getTournamentsDetail(widget.tournamentID).then((value) {
-      setState(() {
-        isLoading = false;
-      });
-    });
-    prizePool = tournamentDetail?.prizePool ?? PrizePool();
+    // provider = Provider.of<TournamentsProvider>(context, listen: false);
+    // provider.getTournamentsDetail(widget.tournamentID).then((value) {
+    //   setState(() {
+    //     isLoading = false;
+    //   });
+    // });
+    prizePool = widget.tournamentDetail.prizePool ?? PrizePool();
   }
 
   @override
@@ -50,8 +48,8 @@ class TournamentDetailScreenState extends State<TournamentDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
-    tournamentDetail =
-        context.select((TournamentsProvider value) => value.tournamentDetail);
+    // tournamentDetail =
+    //     context.select((TournamentsProvider value) => value.tournamentDetail);
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
@@ -121,7 +119,7 @@ class TournamentDetailScreenState extends State<TournamentDetailScreen> {
                     Column(
                       children: <Widget>[
                         CachedNetworkImage(
-                          imageUrl: tournamentDetail?.thumbnail ?? "",
+                          imageUrl: widget.tournamentDetail.thumbnail ?? "",
                           fit: BoxFit.cover,
                           height: 200,
                           width: double.infinity,
@@ -139,7 +137,7 @@ class TournamentDetailScreenState extends State<TournamentDetailScreen> {
                             ClipRRect(
                               borderRadius: BorderRadius.circular(15),
                               child: CachedNetworkImage(
-                                imageUrl: tournamentDetail?.logo ?? "",
+                                imageUrl: widget.tournamentDetail.logo ?? "",
                                 fit: BoxFit.cover,
                                 height: 170,
                                 width: 100,
@@ -153,7 +151,7 @@ class TournamentDetailScreenState extends State<TournamentDetailScreen> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: <Widget>[
                                 Text(
-                                  tournamentDetail?.title ?? "Game Name",
+                                  widget.tournamentDetail.title ?? "Game Name",
                                   style: poppinsFonts.copyWith(
                                     color: Colors.white,
                                     fontSize: 20,
@@ -173,7 +171,8 @@ class TournamentDetailScreenState extends State<TournamentDetailScreen> {
                                               BorderRadius.circular(15)),
                                       child: Text(
                                         textAlign: TextAlign.center,
-                                        tournamentDetail?.gener ?? "genre",
+                                        widget.tournamentDetail.gener ??
+                                            "genre",
                                         style: poppinsFonts.copyWith(
                                           color: const Color(0xFFBF99FF),
                                           fontSize: 15,
@@ -190,7 +189,7 @@ class TournamentDetailScreenState extends State<TournamentDetailScreen> {
                                               BorderRadius.circular(15)),
                                       child: Text(
                                         textAlign: TextAlign.center,
-                                        "${tournamentDetail?.registrationFee.toString()} Gems",
+                                        "${widget.tournamentDetail.registrationFee.toString()} Gems",
                                         style: poppinsFonts.copyWith(
                                           color: const Color(0xFFBF99FF),
                                           fontSize: 15,
@@ -203,7 +202,8 @@ class TournamentDetailScreenState extends State<TournamentDetailScreen> {
                                 SizedBox(
                                   width: screenWidth / 2,
                                   child: NeoPopButton(
-                                    color: tournamentDetail?.registrationId ==
+                                    color: widget.tournamentDetail
+                                                .registrationId ==
                                             null
                                         ? GeneralColors.neopopButtonMainColor
                                         : Colors.grey,
@@ -212,8 +212,11 @@ class TournamentDetailScreenState extends State<TournamentDetailScreen> {
                                     onTapUp: () => {
                                       HapticFeedback.vibrate(),
                                       checkRegistration(
-                                          tournamentDetail?.tournamentId ?? "",
-                                          tournamentDetail?.registrationId ??
+                                          widget.tournamentDetail
+                                                  .tournamentId ??
+                                              "",
+                                          widget.tournamentDetail
+                                                  .registrationId ??
                                               "null")
                                     },
                                     child: const NeoPopShimmer(
@@ -261,8 +264,8 @@ class TournamentDetailScreenState extends State<TournamentDetailScreen> {
                                     MainAxisAlignment.spaceEvenly,
                                 children: <Widget>[
                                   Text(
-                                    tournamentDetail?.maxPlayers.toString() ??
-                                        "0",
+                                    widget.tournamentDetail.maxPlayers
+                                        .toString(),
                                     style: poppinsFonts.copyWith(
                                       color: Colors.white,
                                       fontSize: 20,
@@ -292,12 +295,12 @@ class TournamentDetailScreenState extends State<TournamentDetailScreen> {
                                     MainAxisAlignment.spaceEvenly,
                                 children: <Widget>[
                                   Text(
-                                    tournamentDetail?.playerLeft.toString() ==
+                                    widget.tournamentDetail.playerLeft
+                                                .toString() ==
                                             "null"
                                         ? "All"
-                                        : tournamentDetail?.playerLeft
-                                                .toString() ??
-                                            "0",
+                                        : widget.tournamentDetail.playerLeft
+                                            .toString(),
                                     style: poppinsFonts.copyWith(
                                       color: Colors.white,
                                       fontSize: 20,
@@ -327,7 +330,7 @@ class TournamentDetailScreenState extends State<TournamentDetailScreen> {
                                     MainAxisAlignment.spaceEvenly,
                                 children: <Widget>[
                                   Text(
-                                    "${tournamentDetail?.prizePool?.the1St ?? "0"} Gems",
+                                    "${widget.tournamentDetail.prizePool?.the1St ?? "0"} Gems",
                                     style: poppinsFonts.copyWith(
                                       color: Colors.white,
                                       fontSize: 20,
@@ -365,7 +368,7 @@ class TournamentDetailScreenState extends State<TournamentDetailScreen> {
                             Column(
                               children: [
                                 Text(
-                                  "G ${tournamentDetail?.prizePool?.the1St}",
+                                  "G ${widget.tournamentDetail.prizePool?.the1St}",
                                   style: poppinsFonts.copyWith(
                                     color: Colors.white,
                                     fontSize: 25,
@@ -383,7 +386,7 @@ class TournamentDetailScreenState extends State<TournamentDetailScreen> {
                             Column(
                               children: [
                                 Text(
-                                  "G ${tournamentDetail?.prizePool?.the2nd}",
+                                  "G ${widget.tournamentDetail.prizePool?.the2nd}",
                                   style: poppinsFonts.copyWith(
                                     color: Colors.white,
                                     fontSize: 25,
@@ -401,7 +404,7 @@ class TournamentDetailScreenState extends State<TournamentDetailScreen> {
                             Column(
                               children: [
                                 Text(
-                                  "G ${tournamentDetail?.prizePool?.the3rd}",
+                                  "G ${widget.tournamentDetail.prizePool?.the3rd}",
                                   style: poppinsFonts.copyWith(
                                     color: Colors.white,
                                     fontSize: 25,

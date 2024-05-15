@@ -66,7 +66,7 @@ class _ArticleScreenState extends State<ArticleScreen> {
                     physics: const NeverScrollableScrollPhysics(),
                     itemCount: value?.length,
                     itemBuilder: (BuildContext context, int index) {
-                      return index == 0
+                      return value?.length == 0
                           ? Center(
                               child: Text(
                                 "No Articles to Display",

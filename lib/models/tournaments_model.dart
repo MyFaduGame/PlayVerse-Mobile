@@ -60,6 +60,7 @@ class TournamentDetail {
   final String? logo;
   final String? invitationCode;
   final String? isRegistrationOpen;
+  final String? registrationId;
 
   TournamentDetail({
     this.tournamentId,
@@ -79,6 +80,7 @@ class TournamentDetail {
     this.logo,
     this.invitationCode,
     this.isRegistrationOpen,
+    this.registrationId,
   });
 
   factory TournamentDetail.fromJson(Map<String, dynamic> json) =>
@@ -110,6 +112,7 @@ class TournamentDetail {
         logo: json["logo"],
         invitationCode: json["invitation_code"],
         isRegistrationOpen: json["is_registration_open"],
+        registrationId: json["registration_id"],
       );
 }
 

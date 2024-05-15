@@ -90,8 +90,8 @@ class _TournamentScreenState extends State<TournamentScreen> {
                           context,
                           MaterialPageRoute(
                             builder: ((context) => TournamentDetailScreen(
-                                  tournamentDetail:
-                                      value?[index] ?? TournamentDetail(),
+                                  tournamentID:
+                                      value?[index].tournamentId ?? "",
                                 )),
                           ),
                         ),

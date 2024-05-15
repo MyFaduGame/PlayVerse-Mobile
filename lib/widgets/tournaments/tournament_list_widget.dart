@@ -23,7 +23,6 @@ class TournamentListWidget extends StatefulWidget {
 }
 
 class _TournamentListWidgetState extends State<TournamentListWidget> {
-  
   late TournamentsProvider provider;
   List<Tournaments>? tournamentList;
   bool isLoading = true;
@@ -88,7 +87,7 @@ class _TournamentListWidgetState extends State<TournamentListWidget> {
                         context,
                         MaterialPageRoute(
                           builder: ((context) => TournamentDetailScreen(
-                                tournamentDetail: value?[index]??TournamentDetail(),
+                                tournamentID: value?[index].tournamentId ?? "",
                               )),
                         ),
                       ),

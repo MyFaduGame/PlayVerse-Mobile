@@ -47,6 +47,6 @@ class ArticlesUrl {
 class TournamentsUrl {
   static String getTournamentsList = "tournaments";
   static String getTournamentDetail = "tournaments";
-  static String soloTournamentRegistrtation = "tournaments/users";
-  static String userTournaments = "tournaments/users";
+  static String soloTournamentRegistrtation = "tournaments/user";
+  static String userTournaments = "tournaments/user";
 }

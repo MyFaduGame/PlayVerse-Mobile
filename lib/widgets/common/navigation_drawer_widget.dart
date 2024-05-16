@@ -1,6 +1,7 @@
 //Third Party Imports
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -8,6 +9,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:playverse/app.dart';
 import 'package:playverse/models/user_profile_model.dart';
 import 'package:playverse/screens/auth/auth_screen.dart';
+import 'package:playverse/screens/gems/gems_screen.dart';
 import 'package:playverse/utils/loader_dialouge.dart';
 import 'package:playverse/repository/firebase_api.dart';
 import 'package:playverse/themes/app_color_theme.dart';
@@ -88,6 +90,40 @@ class _NavigationBarWidgetState extends State<NavigationBarWidget> {
                     Text(
                       widget.userProfile.userName ?? "",
                       style: dmSansFonts,
+                    ),
+                    const SizedBox(height: 16),
+                    GestureDetector(
+                      onTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: ((context) => const GemsScreen()),
+                        ),
+                      ),
+                      child: Container(
+                        width: 100,
+                        height: 40,
+                        decoration: BoxDecoration(
+                            color: const Color(0xFF231750),
+                            borderRadius: BorderRadius.circular(15)),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Image.asset(
+                              BottomAppBarImages.coinImage,
+                              height: 40,
+                              width: 40,
+                            ),
+                            Text(
+                              textAlign: TextAlign.center,
+                              widget.userProfile.gems.toString(),
+                              style: poppinsFonts.copyWith(
+                                color: const Color(0xFFBF99FF),
+                                fontSize: 15,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
                   ],
                 ),
@@ -319,7 +355,7 @@ class _NavigationBarWidgetState extends State<NavigationBarWidget> {
                             ),
                           ),
                         ),
-                  widget.index == 0 //TODO have to make it
+                  widget.index == 8
                       ? Container(
                           width: 250,
                           decoration: BoxDecoration(
@@ -332,7 +368,7 @@ class _NavigationBarWidgetState extends State<NavigationBarWidget> {
                           child: TextButton(
                             onPressed: () {
                               widget.controller.hideDrawer();
-                              tabManager.onTabChanged(0);
+                              tabManager.onTabChanged(8);
                             },
                             child: Text(
                               "Course",
@@ -346,7 +382,7 @@ class _NavigationBarWidgetState extends State<NavigationBarWidget> {
                       : TextButton(
                           onPressed: () {
                             widget.controller.hideDrawer();
-                            tabManager.onTabChanged(0);
+                            tabManager.onTabChanged(8);
                           },
                           child: Text(
                             "Course",

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:neopop/widgets/buttons/neopop_button/neopop_button.dart';
 import 'package:neopop/widgets/shimmer/neopop_shimmer.dart';
+import 'package:provider/provider.dart';
 
 //Local Imports
 import 'package:playverse/models/tournaments_model.dart';
@@ -13,7 +14,6 @@ import 'package:playverse/utils/loader_dialouge.dart';
 import 'package:playverse/utils/toast_bar.dart';
 import 'package:playverse/widgets/common/back_app_bar_widget.dart';
 import 'package:playverse/themes/app_color_theme.dart';
-import 'package:provider/provider.dart';
 
 class TournamentDetailScreen extends StatefulWidget {
   final TournamentDetail tournamentDetail;
@@ -32,7 +32,7 @@ class TournamentDetailScreenState extends State<TournamentDetailScreen> {
   @override
   void initState() {
     super.initState();
-    // provider = Provider.of<TournamentsProvider>(context, listen: false);
+    provider = Provider.of<TournamentsProvider>(context, listen: false);
     // provider.getTournamentsDetail(widget.tournamentID).then((value) {
     //   setState(() {
     //     isLoading = false;
@@ -440,22 +440,23 @@ class TournamentDetailScreenState extends State<TournamentDetailScreen> {
   }
 
   void checkRegistration(String tournamentId, String registrationId) {
+    provider = Provider.of<TournamentsProvider>(context, listen: false);
     bool isRegistered = false;
-    String message = "";
     if (registrationId != "null") {
       isRegistered = true;
     }
 
     if (isRegistered) {
-      message = "Already Registered";
+      return showCustomToast("Already Registered");
     } else {
       provider.soloRegistration(tournamentId, "Solo").then(
         (value) {
           Navigator.of(context).pop();
+          if (value) {
+            return showCustomToast("Registered Successfully!");
+          }
         },
       );
-      message = "Registered Successfully";
     }
-    return showCustomToast(message);
   }
 }

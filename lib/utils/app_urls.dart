@@ -50,3 +50,11 @@ class TournamentsUrl {
   static String soloTournamentRegistrtation = "tournaments/user";
   static String userTournaments = "tournaments/user";
 }
+
+class GemsUrl {
+  static String getGemsList = "user/gems";
+}
+
+class CourseUrl {
+  static String courseInfo = "/v1/courses";
+}

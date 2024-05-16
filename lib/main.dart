@@ -9,6 +9,7 @@ import 'package:flutter/services.dart';
 
 //Local Imports
 import 'package:playverse/provider/article_provider.dart';
+import 'package:playverse/provider/gems_provider.dart';
 import 'package:playverse/provider/tournaments_provider.dart';
 import 'package:playverse/provider/notifications_provider.dart';
 import 'package:playverse/provider/achievements_provider.dart';
@@ -108,6 +109,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => ArticlesProvider()),
         ChangeNotifierProvider(create: (context) => TournamentsProvider()),
         ChangeNotifierProvider(create: (context) => GamesListProvider()),
+        ChangeNotifierProvider(create: (context) => GemsProvider()),
       ],
       child: MaterialApp(
         title: "GeNoS",

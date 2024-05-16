@@ -63,7 +63,6 @@ class _ArticleScreenState extends State<ArticleScreen> {
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: ListView.builder(
-                    physics: const NeverScrollableScrollPhysics(),
                     itemCount: value?.length,
                     itemBuilder: (BuildContext context, int index) {
                       return value?.length == 0
@@ -83,18 +82,13 @@ class _ArticleScreenState extends State<ArticleScreen> {
                                   ),
                                 ),
                               ),
-                              child: Container(
+                              child: SizedBox(
                                 height: 250,
-                                color: const Color(0xFF252849),
                                 child: Column(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     SizedBox(
-                                      // decoration: BoxDecoration(
-                                      //   borderRadius: BorderRadius.circular(15),
-                                      // ),
-                                      // width: double.infinity,
                                       height: 150,
                                       child: ClipRRect(
                                         borderRadius: BorderRadius.circular(15),
@@ -162,6 +156,9 @@ class _ArticleScreenState extends State<ArticleScreen> {
                                         )
                                       ],
                                     ),
+                                    const SizedBox(
+                                      height: 5,
+                                    )
                                   ],
                                 ),
                               ),

@@ -67,9 +67,8 @@ class _AchievementsScreenState extends State<AchievementsScreen> {
                 onNotification: (notification) =>
                     Utils.scrollNotifier(notification, pagination),
                 child: GridView.builder(
-                  physics: const NeverScrollableScrollPhysics(),
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
+                    crossAxisCount: 3,
                     crossAxisSpacing: 5.0,
                     mainAxisSpacing: 5.0,
                     childAspectRatio: 9 / 16,
@@ -78,15 +77,8 @@ class _AchievementsScreenState extends State<AchievementsScreen> {
                   itemBuilder: (context, index) {
                     return GestureDetector(
                       onTap: () => _showInforamtion(context, value[index]),
-                      child: Container(
-                        height: 100,
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: Colors.purple,
-                          ),
-                          color: const Color(0xFF212838),
-                          borderRadius: BorderRadius.circular(15),
-                        ),
+                      child: SizedBox(
+                        height: 80,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: <Widget>[
@@ -165,8 +157,7 @@ class _AchievementsScreenState extends State<AchievementsScreen> {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(15),
           ),
-          shadowColor: Colors.pink,
-          backgroundColor: Colors.white,
+          backgroundColor: Colors.black87,
           child: Padding(
               padding: const EdgeInsets.all(10.0),
               child: SizedBox(
@@ -176,7 +167,8 @@ class _AchievementsScreenState extends State<AchievementsScreen> {
                     Text(
                       data.achievementsTitle ?? "",
                       style: poppinsFonts.copyWith(
-                        fontSize: 70,
+                        fontSize: 24,
+                        color: Colors.blue[200],
                       ),
                     ),
                     SpacingUtils().horizontalSpacing(10),

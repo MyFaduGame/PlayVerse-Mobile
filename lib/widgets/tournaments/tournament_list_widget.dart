@@ -87,7 +87,8 @@ class _TournamentListWidgetState extends State<TournamentListWidget> {
                         context,
                         MaterialPageRoute(
                           builder: ((context) => TournamentDetailScreen(
-                                tournamentDetail: value?[index] ?? TournamentDetail(),
+                                tournamentDetail:
+                                    value?[index] ?? TournamentDetail(),
                               )),
                         ),
                       ),
@@ -215,11 +216,12 @@ class _TournamentListWidgetState extends State<TournamentListWidget> {
                                                 width: 5,
                                               ),
                                               Text(
-                                                value?[index]
-                                                        .prizePool
-                                                        ?.the1St
-                                                        .toString() ??
-                                                    "",
+                                                value?[index].playerLeft == null
+                                                    ? "All"
+                                                    : value?[index]
+                                                            .playerLeft
+                                                            .toString() ??
+                                                        "",
                                                 style: poppinsFonts.copyWith(
                                                   color: Colors.white38,
                                                   fontSize: 10,

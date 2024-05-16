@@ -18,7 +18,7 @@ class UserProfile {
   final String? ytURL;
   final String? twURL;
   final int? expirence;
-  final int? coins;
+  final int? gems;
   final double? xp;
   final String? referCode;
 
@@ -41,7 +41,7 @@ class UserProfile {
       this.state,
       this.country,
       this.pinCode,
-      this.coins,
+      this.gems,
       this.expirence,
       this.referCode,
       this.xp});
@@ -67,7 +67,7 @@ class UserProfile {
       instaURL: json['insta_link'],
       twURL: json['twitch_link'],
       ytURL: json['yt_link'],
-      coins: json['coins'],
+      gems: json['gems'],
       expirence: json['expirence'],
       referCode: json['refer_code'],
       xp: json['xp']);

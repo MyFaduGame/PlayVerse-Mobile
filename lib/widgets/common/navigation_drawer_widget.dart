@@ -1,7 +1,6 @@
 //Third Party Imports
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -164,6 +163,43 @@ class _NavigationBarWidgetState extends State<NavigationBarWidget> {
                           },
                           child: Text(
                             "Games",
+                            style: dmSansFonts.copyWith(
+                              fontSize: screenWidth / 20,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                  widget.index == 2
+                      ? Container(
+                          width: 250,
+                          decoration: BoxDecoration(
+                            color: Colors.black,
+                            borderRadius: BorderRadius.circular(15),
+                            border: Border.all(
+                              color: Colors.purple,
+                            ),
+                          ),
+                          child: TextButton(
+                            onPressed: () {
+                              widget.controller.hideDrawer();
+                              tabManager.onTabChanged(2);
+                            },
+                            child: Text(
+                              "Streams",
+                              style: dmSansFonts.copyWith(
+                                fontSize: screenWidth / 20,
+                                color: GeneralColors.generalTextColor,
+                              ),
+                            ),
+                          ),
+                        )
+                      : TextButton(
+                          onPressed: () {
+                            widget.controller.hideDrawer();
+                            tabManager.onTabChanged(2);
+                          },
+                          child: Text(
+                            "Streams",
                             style: dmSansFonts.copyWith(
                               fontSize: screenWidth / 20,
                               color: Colors.white,

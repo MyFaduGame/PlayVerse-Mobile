@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:playverse/repository/course_repo.dart';
 
 //Local Imports
-import 'package:playverse/utils/my_sharedprefrence.dart';
 import 'package:playverse/utils/toast_bar.dart';
 
 class CourserProvider extends ChangeNotifier {

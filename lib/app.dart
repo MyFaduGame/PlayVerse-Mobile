@@ -7,19 +7,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:playverse/screens/achievements/achievements_screen.dart';
-import 'package:playverse/screens/courses/courser_screen.dart';
-import 'package:playverse/screens/games/game_screen.dart';
-import 'package:playverse/screens/profile/my_profile.dart';
-import 'package:playverse/screens/tournaments/my_tournement_screen.dart';
 import 'package:provider/provider.dart';
 
 //Local Imports
+import 'package:playverse/screens/achievements/achievements_screen.dart';
+import 'package:playverse/screens/courses/course_screen.dart';
+import 'package:playverse/screens/games/game_screen.dart';
+import 'package:playverse/screens/profile/my_profile.dart';
+import 'package:playverse/screens/tournaments/my_tournement_screen.dart';
 import 'package:playverse/themes/app_images.dart';
-import 'package:playverse/screens/streams/streams_screen.dart';
 import 'package:playverse/screens/articles/articles_screen.dart';
 import 'package:playverse/screens/home/home_screen.dart';
 import 'package:playverse/screens/tournaments/tournament_screen.dart';
+import 'package:playverse/screens/streams/streams_screen.dart';
 import 'package:playverse/themes/app_color_theme.dart';
 import 'package:playverse/models/user_profile_model.dart';
 import 'package:playverse/provider/user_profile_provider.dart';

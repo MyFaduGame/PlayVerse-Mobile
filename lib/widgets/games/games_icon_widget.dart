@@ -63,7 +63,7 @@ class _GamesIconWidgetState extends State<GamesIconWidget> {
                 onNotification: (notification) =>
                     Utils.scrollNotifier(notification, paginationGames),
                 child: GestureDetector(
-                  onTap: () => {}, //TODO tournament serach by games
+                  onTap: () => {},
                   child: ListView.builder(
                     clipBehavior: Clip.none,
                     scrollDirection: Axis.horizontal,

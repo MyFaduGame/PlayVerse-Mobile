@@ -1,4 +1,6 @@
 //Third Party Imports
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:lecle_yoyo_player/lecle_yoyo_player.dart';
 
@@ -28,16 +30,16 @@ class _StreamAppState extends State<StreamApp> {
           //"https://sfux-ext.sfux.info/hls/chapter/105/1588724110/1588724110.m3u8",
           allowCacheFile: true,
           onCacheFileCompleted: (files) {
-            print('Cached file length ::: ${files?.length}');
+            log('Cached file length ::: ${files?.length}');
 
             if (files != null && files.isNotEmpty) {
               for (var file in files) {
-                print('File path ::: ${file.path}');
+                log('File path ::: ${file.path}');
               }
             }
           },
           onCacheFileFailed: (error) {
-            print('Cache file error ::: $error');
+            log('Cache file error ::: $error');
           },
           videoStyle: const VideoStyle(
             qualityStyle: TextStyle(

@@ -1,19 +1,15 @@
 //Third Party Imports
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:playverse/models/gems_model.dart';
+import 'package:provider/provider.dart';
 
 //Local Imports
+import 'package:playverse/models/gems_model.dart';
 import 'package:playverse/provider/gems_provider.dart';
 import 'package:playverse/themes/app_color_theme.dart';
 import 'package:playverse/themes/app_font.dart';
 import 'package:playverse/themes/app_images.dart';
 import 'package:playverse/utils/helper_utils.dart';
 import 'package:playverse/widgets/common/back_app_bar_widget.dart';
-import 'package:provider/provider.dart';
 
 class GemsScreen extends StatefulWidget {
   const GemsScreen({super.key});

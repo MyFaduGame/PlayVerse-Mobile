@@ -68,6 +68,10 @@ class _UpdateCarsouleWidgetState extends State<UpdateCarsouleWidget> {
             ],
           ),
         ),
+        // Container(
+        //   color: const Color(0XFF8000FF),
+        //   child: Text('Subscribe'),
+        // ),
       ],
       options: CarouselOptions(
         height: 400,

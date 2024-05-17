@@ -451,7 +451,6 @@ class TournamentDetailScreenState extends State<TournamentDetailScreen> {
     } else {
       provider.soloRegistration(tournamentId, "Solo").then(
         (value) {
-          Navigator.of(context).pop();
           if (value) {
             return showCustomToast("Registered Successfully!");
           }

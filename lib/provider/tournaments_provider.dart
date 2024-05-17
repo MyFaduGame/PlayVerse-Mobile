@@ -11,6 +11,7 @@ class TournamentsProvider extends ChangeNotifier {
   final repo = TournamentsRepo();
   List<TournamentDetail> tournamentList = [];
   List<TournamentDetail> userTournamentList = [];
+  List<TournamentDetail> gamesTournamentList = [];
   TournamentDetail? tournamentDetail;
   bool isLoading = false;
 
@@ -49,6 +50,28 @@ class TournamentsProvider extends ChangeNotifier {
       }
     } catch (e) {
       log("$e", name: "Tournaments Detail List Error");
+    }
+  }
+
+  Future<dynamic> getGamesTournaments(int offset, String gameUUID) async {
+    try {
+      isLoading = true;
+      Map<String, dynamic> responseData =
+          await repo.getGamesTournamentList(offset, gameUUID);
+      if (responseData['status_code'] == 200) {
+        List<TournamentDetail> tempList = List<TournamentDetail>.from(
+            responseData["data"]!.map((x) => TournamentDetail.fromJson(x)));
+        offset == 1
+            ? gamesTournamentList = tempList
+            : gamesTournamentList += tempList;
+        isLoading = false;
+        notifyListeners();
+        return tempList.length;
+      } else {
+        log(responseData.toString(), name: 'Tournaments Error Log');
+      }
+    } catch (e) {
+      log("$e", name: "Tournaments List Error");
     }
   }
 

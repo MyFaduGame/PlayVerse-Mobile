@@ -1,6 +1,6 @@
 class ApiUrls {
-  static String baseUrl = "http://13.201.229.138/v1/";
-  // static String baseUrl = "http://192.168.0.113:8000/v1/";
+  // static String baseUrl = "http://13.201.229.138/v1/";
+  static String baseUrl = "http://192.168.0.113:8000/v1/";
 }
 
 class UserUrls {

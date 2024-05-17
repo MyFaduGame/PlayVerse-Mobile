@@ -33,19 +33,19 @@ class _CustomAppBarState extends State<CustomAppBar> {
     // double screenHeight = MediaQuery.of(context).size.height;
     return Container(
       decoration: const BoxDecoration(
-        color: Colors.black,
+        color: Colors.black45,
       ),
-      margin: const EdgeInsets.fromLTRB(0, 30, 0, 0),
+      padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
       width: screenWidth,
-      height: 60,
+      height: 100,
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
           GestureDetector(
             onTap: () => tabManager.onTabChanged(5),
             child: Container(
-              width: 45.0,
-              height: 45.0,
+              width: 60.0,
+              height: 60.0,
               clipBehavior: Clip.antiAlias,
               decoration: const BoxDecoration(
                 color: Colors.black26,
@@ -56,21 +56,21 @@ class _CustomAppBarState extends State<CustomAppBar> {
                   ? widget.userProfile.gender == 'Male'
                       ? SvgPicture.asset(
                           ProfileImages.boyProfile,
-                          width: 45,
-                          height: 45,
+                          width: 60,
+                          height: 60,
                           fit: BoxFit.cover,
                         )
                       : SvgPicture.asset(
                           ProfileImages.girlProfile,
-                          width: 45,
-                          height: 45,
+                          width: 60,
+                          height: 60,
                           fit: BoxFit.cover,
                         )
                   : CachedNetworkImage(
                       imageUrl: widget.userProfile.profileImage ?? "",
                       fit: BoxFit.cover,
-                      height: 45,
-                      width: 45,
+                      height: 60,
+                      width: 60,
                       placeholder: (context, url) =>
                           const CircularProgressIndicator(),
                       errorWidget: (context, url, error) =>
@@ -78,6 +78,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
                     ),
             ),
           ),
+          const SizedBox(width: 5),
           SizedBox(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -99,6 +100,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
               ],
             ),
           ),
+          const SizedBox(width: 5),
           GestureDetector(
             onTap: _handleMenuButtonPressed,
             child: SvgPicture.asset(

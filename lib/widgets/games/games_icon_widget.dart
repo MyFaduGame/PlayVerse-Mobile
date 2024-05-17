@@ -1,11 +1,12 @@
 //Third Party Imports
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:playverse/themes/app_font.dart';
 import 'package:provider/provider.dart';
 
 //Local Imports
+import 'package:playverse/screens/tournaments/game_tournament_screen.dart';
 import 'package:playverse/utils/helper_utils.dart';
+import 'package:playverse/themes/app_font.dart';
 import 'package:playverse/models/games_model.dart';
 import 'package:playverse/provider/games_provider.dart';
 
@@ -62,14 +63,20 @@ class _GamesIconWidgetState extends State<GamesIconWidget> {
               return NotificationListener(
                 onNotification: (notification) =>
                     Utils.scrollNotifier(notification, paginationGames),
-                child: GestureDetector(
-                  onTap: () => {},
-                  child: ListView.builder(
-                    clipBehavior: Clip.none,
-                    scrollDirection: Axis.horizontal,
-                    itemCount: value?.length ?? 0,
-                    itemBuilder: (context, index) {
-                      return Column(
+                child: ListView.builder(
+                  clipBehavior: Clip.none,
+                  scrollDirection: Axis.horizontal,
+                  itemCount: value?.length ?? 0,
+                  itemBuilder: (context, index) {
+                    return GestureDetector(
+                      onTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: ((context) => GamesTournamentScreen(
+                              gameUUID: value?[index].gameId ?? "GameId")),
+                        ),
+                      ),
+                      child: Column(
                         children: [
                           Container(
                             decoration: BoxDecoration(
@@ -100,9 +107,9 @@ class _GamesIconWidgetState extends State<GamesIconWidget> {
                             overflow: TextOverflow.ellipsis,
                           )
                         ],
-                      );
-                    },
-                  ),
+                      ),
+                    );
+                  },
                 ),
               );
             },

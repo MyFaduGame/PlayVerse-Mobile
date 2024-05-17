@@ -23,7 +23,7 @@ class _StreamAppState extends State<StreamApp> {
         child: YoYoPlayer(
           aspectRatio: 16 / 9,
           url:
-              'https://stream.mux.com/H6os00cQXOeb9sM5G4YuKiRXo02j1pvBe02kGcWv5ULLys.m3u8',
+              'https://stream.mux.com/HS1gaJEohKn00GO00JhL8b5uvSj7JRVLrwodxQ9IhcUCI.m3u8',
           // 'https://dsqqu7oxq6o1v.cloudfront.net/preview-9650dW8x3YLoZ8.webm',
           // "https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4",
           //  "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8",

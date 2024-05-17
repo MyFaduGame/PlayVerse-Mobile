@@ -253,6 +253,7 @@ class _TournamentListWidgetState extends State<TournamentListWidget> {
                                 top: 70,
                                 left: 10,
                                 child: Container(
+                                  width: 100,
                                   decoration: BoxDecoration(
                                     color: Colors.black,
                                     borderRadius: BorderRadius.circular(15),
@@ -261,6 +262,8 @@ class _TournamentListWidgetState extends State<TournamentListWidget> {
                                     ),
                                   ),
                                   child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
                                     children: <Widget>[
                                       ClipRRect(
                                         borderRadius: BorderRadius.circular(15),

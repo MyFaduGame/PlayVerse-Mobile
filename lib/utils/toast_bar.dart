@@ -5,8 +5,8 @@ import 'package:fluttertoast/fluttertoast.dart';
 void showCustomToast(String message) {
   Fluttertoast.showToast(
     msg: message,
-    toastLength: Toast.LENGTH_SHORT,
-    gravity: ToastGravity.BOTTOM,
+    toastLength: Toast.LENGTH_LONG,
+    gravity: ToastGravity.CENTER,
     timeInSecForIosWeb: 1,
     backgroundColor: Colors.black,
     textColor: Colors.white,

@@ -1,5 +1,6 @@
 class Friend {
   final String? userId;
+  final String? friendId;
   final String? userName;
   final String? firstName;
   final String? lastName;
@@ -19,6 +20,7 @@ class Friend {
 
   Friend({
     this.fbURL,
+    this.friendId,
     this.instaURL,
     this.twURL,
     this.ytURL,
@@ -39,6 +41,7 @@ class Friend {
 
   factory Friend.fromJson(Map<String, dynamic> json) => Friend(
         userId: json["user_id"],
+        friendId: json["user_friend_id"],
         userName: json["user_name"],
         firstName: json["first_name"],
         lastName: json["last_name"],
@@ -61,25 +64,25 @@ class Friend {
 }
 
 class FriendRequest {
-    final String? friendsId;
-    final String? userId;
-    final String? userFriendId;
-    final bool? accepted;
-    final String? userName;
-    final String? profileImage;
-    final String? gender;
+  final String? friendsId;
+  final String? userId;
+  final String? userFriendId;
+  final bool? accepted;
+  final String? userName;
+  final String? profileImage;
+  final String? gender;
 
-    FriendRequest({
-        this.friendsId,
-        this.userId,
-        this.userFriendId,
-        this.accepted,
-        this.userName,
-        this.profileImage,
-        this.gender,
-    });
+  FriendRequest({
+    this.friendsId,
+    this.userId,
+    this.userFriendId,
+    this.accepted,
+    this.userName,
+    this.profileImage,
+    this.gender,
+  });
 
-    factory FriendRequest.fromJson(Map<String, dynamic> json) => FriendRequest(
+  factory FriendRequest.fromJson(Map<String, dynamic> json) => FriendRequest(
         friendsId: json["friends_id"],
         userId: json["user_id"],
         userFriendId: json["user_friend_id"],
@@ -87,8 +90,7 @@ class FriendRequest {
         userName: json["user_name"],
         profileImage: json["profile_image"],
         gender: json["gender"],
-    );
-
+      );
 }
 
 class UserTeam {

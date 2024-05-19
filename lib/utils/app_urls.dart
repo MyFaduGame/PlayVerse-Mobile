@@ -58,3 +58,13 @@ class GemsUrl {
 class CourseUrl {
   static String courseInfo = "/v1/courses";
 }
+
+class LocationUrl {
+  static String country = "v1/user/country";
+  static String state = "v1/user/state";
+  static String city = "v1/user/city";
+}
+
+class StreamsUrl {
+  static String getStream = "v1/streams";
+}

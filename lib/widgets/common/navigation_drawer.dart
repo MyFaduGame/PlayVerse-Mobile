@@ -55,7 +55,7 @@ class _NavigationBarCustomState extends State<NavigationBarCustom>
       controller: widget.controller,
       animationCurve: Curves.easeInOut,
       animationDuration: const Duration(
-        milliseconds: 800,
+        milliseconds: 300,
       ),
       animateChildDecoration: true,
       rtlOpening: true,

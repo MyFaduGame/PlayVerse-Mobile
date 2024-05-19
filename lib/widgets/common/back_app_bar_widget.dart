@@ -23,7 +23,7 @@ class _BackAppBarState extends State<BackAppBar> {
     // double screenHeight = MediaQuery.of(context).size.height;
     return Container(
       decoration: const BoxDecoration(
-        color: Colors.transparent,
+        color: Colors.black38,
       ),
       margin: const EdgeInsets.fromLTRB(10, 30, 10, 0),
       width: screenWidth,

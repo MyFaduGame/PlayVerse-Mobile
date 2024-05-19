@@ -65,6 +65,7 @@ class _ArticleScreenState extends State<ArticleScreen> {
                   child: ListView.builder(
                     itemCount: value?.length,
                     itemBuilder: (BuildContext context, int index) {
+                      // ignore: prefer_is_empty
                       return value?.length == 0
                           ? Center(
                               child: Text(

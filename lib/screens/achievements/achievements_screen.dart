@@ -108,7 +108,8 @@ class _AchievementsScreenState extends State<AchievementsScreen> {
                                       ? SvgPicture.asset(
                                           SvgIcons.achievementIcon,
                                           fit: BoxFit.fill,
-                                          color: Colors.red,
+                                          colorFilter: const ColorFilter.mode(
+                                              Colors.red, BlendMode.colorDodge),
                                           height: 100,
                                         )
                                       : CachedNetworkImage(
@@ -228,6 +229,16 @@ class _AchievementsScreenState extends State<AchievementsScreen> {
                           color: Colors.blue[100],
                           fontSize: 20,
                         ),
+                      ),
+                    ),
+                    FittedBox(
+                      child: Text(
+                        "${data.achievementDescription}",
+                        style: openSansFonts.copyWith(
+                          color: Colors.blue[100],
+                          fontSize: 20,
+                        ),
+                        maxLines: 3,
                       ),
                     ),
                   ],

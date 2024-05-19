@@ -1,8 +1,10 @@
 //Third Party Imports
-import 'dart:developer';
-
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:lecle_yoyo_player/lecle_yoyo_player.dart';
+
+//Local Imports
+import 'package:playverse/models/video_model.dart';
+import 'package:playverse/screens/streams/stream_watch_screen.dart';
 
 class StreamsScreen extends StatefulWidget {
   const StreamsScreen({super.key});
@@ -12,115 +14,61 @@ class StreamsScreen extends StatefulWidget {
 }
 
 class _StreamsScreenState extends State<StreamsScreen> {
-  final List<String> youtubeLinks = [
-    'https://www.youtube.com/watch?v=YVkUvmDQ3HY&pp=ygUGZW1pbmVt',
-    'https://www.youtube.com/watch?v=YVkUvmDQ3HY&pp=ygUGZW1pbmVt',
-    'https://www.youtube.com/watch?v=YVkUvmDQ3HY&pp=ygUGZW1pbmVt',
+  bool fullscreen = false;
+
+  final List<VideoData> youtubeLinks = [
+    VideoData(
+        thumbnail:
+            "https://image.mux.com/7dPImcsEC28yyAgrpYJCA01bjRFBLRzGED019oKkqv1dw/thumbnail.png",
+        id: "7dPImcsEC28yyAgrpYJCA01bjRFBLRzGED019oKkqv1dw"),
+    VideoData(
+        thumbnail:
+            "https://image.mux.com/7dPImcsEC28yyAgrpYJCA01bjRFBLRzGED019oKkqv1dw/thumbnail.png",
+        id: "7dPImcsEC28yyAgrpYJCA01bjRFBLRzGED019oKkqv1dw"),
+    VideoData(
+        thumbnail:
+            "https://image.mux.com/7dPImcsEC28yyAgrpYJCA01bjRFBLRzGED019oKkqv1dw/thumbnail.png",
+        id: "7dPImcsEC28yyAgrpYJCA01bjRFBLRzGED019oKkqv1dw"),
   ];
 
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
+      clipBehavior: Clip.none,
       itemCount: youtubeLinks.length,
       itemBuilder: (context, index) {
-        return ListTile(
-          title: Text('Video ${index + 1}'),
-          onTap: () {
-            Navigator.push(
+        return Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: GestureDetector(
+            onTap: () => Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) =>
-                    YouTubePlayerScreen(url: youtubeLinks[index]),
+                builder: ((context) => StreamWatch(
+                      url: index,
+                    )),
               ),
-            );
-          },
-        );
-      },
-    );
-  }
-}
-
-class YouTubePlayerScreen extends StatefulWidget {
-  final String url;
-
-  const YouTubePlayerScreen({super.key, required this.url});
-
-  @override
-  State<YouTubePlayerScreen> createState() => _YouTubePlayerScreenState();
-}
-
-class _YouTubePlayerScreenState extends State<YouTubePlayerScreen> {
-  bool fullscreen = false;
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('YouTube Player'),
-      ),
-      body: YoYoPlayer(
-        aspectRatio: 16 / 9,
-        url: widget.url,
-        allowCacheFile: true,
-        onCacheFileCompleted: (files) {
-          log('Cached file length ::: ${files?.length}');
-
-          if (files != null && files.isNotEmpty) {
-            for (var file in files) {
-              log('File path ::: ${file.path}');
-            }
-          }
-        },
-        onCacheFileFailed: (error) {
-          log('Cache file error ::: $error');
-        },
-        videoStyle: const VideoStyle(
-          qualityStyle: TextStyle(
-            fontSize: 16.0,
-            fontWeight: FontWeight.w500,
-            color: Colors.white,
-          ),
-          forwardAndBackwardBtSize: 30.0,
-          playButtonIconSize: 40.0,
-          playIcon: Icon(
-            Icons.add_circle_outline_outlined,
-            size: 40.0,
-            color: Colors.white,
-          ),
-          pauseIcon: Icon(
-            Icons.remove_circle_outline_outlined,
-            size: 40.0,
-            color: Colors.white,
-          ),
-          videoQualityPadding: EdgeInsets.all(5.0),
-          // showLiveDirectButton: true,
-          // enableSystemOrientationsOverride: false,
-        ),
-        videoLoadingStyle: const VideoLoadingStyle(
-          loading: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Image(
-                  image: AssetImage('image/yoyo_logo.png'),
-                  fit: BoxFit.fitHeight,
-                  height: 50,
+            ),
+            child: Container(
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.white, width: 2.0),
+                borderRadius: BorderRadius.circular(15),
+              ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(15),
+                child: CachedNetworkImage(
+                  imageUrl: youtubeLinks[index].thumbnail ?? "",
+                  fit: BoxFit.cover,
+                  // height: 125,
+                  // width: 125,
+                  placeholder: (context, url) =>
+                      const CircularProgressIndicator(),
+                  errorWidget: (context, url, error) => const Icon(Icons.error),
                 ),
-                SizedBox(height: 16.0),
-                Text("Loading video..."),
-              ],
+              ),
             ),
           ),
-        ),
-        onFullScreen: (value) {
-          setState(() {
-            if (fullscreen != value) {
-              fullscreen = value;
-            }
-          });
-        },
-      ),
+        );
+      },
     );
   }
 }

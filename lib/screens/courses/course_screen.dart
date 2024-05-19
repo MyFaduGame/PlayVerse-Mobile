@@ -17,8 +17,8 @@ class CourseScreenState extends State<CourseScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           TextFormField(
-            style: TextStyle(color: Colors.white),
-            decoration: InputDecoration(
+            style: const TextStyle(color: Colors.white),
+            decoration: const InputDecoration(
               labelText: 'Email',
             ),
             validator: (value) {
@@ -30,7 +30,7 @@ class CourseScreenState extends State<CourseScreen> {
             },
           ),
           TextFormField(
-            decoration: InputDecoration(labelText: 'Name'),
+            decoration: const InputDecoration(labelText: 'Name'),
             validator: (value) {
               // if (value.isEmpty) {
               //   return 'Please enter your name';
@@ -39,7 +39,7 @@ class CourseScreenState extends State<CourseScreen> {
             },
           ),
           TextFormField(
-            decoration: InputDecoration(labelText: 'Mobile'),
+            decoration: const InputDecoration(labelText: 'Mobile'),
             validator: (value) {
               // if (value.isEmpty) {
               //   return 'Please enter your mobile number';
@@ -49,13 +49,13 @@ class CourseScreenState extends State<CourseScreen> {
             },
           ),
           TextFormField(
-            decoration: InputDecoration(labelText: 'Game Name'),
+            decoration: const InputDecoration(labelText: 'Game Name'),
           ),
           TextFormField(
-            decoration: InputDecoration(labelText: 'Description'),
+            decoration: const InputDecoration(labelText: 'Description'),
             maxLines: 3,
           ),
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
           ElevatedButton(
             onPressed: () => {
               // if (_formKey.currentState.validate()) {
@@ -64,7 +64,7 @@ class CourseScreenState extends State<CourseScreen> {
               //     SnackBar(content: Text('Form submitted successfully')),
               //   );
             },
-            child: Text('Submit'),
+            child: const Text('Submit'),
           ),
         ],
       ),

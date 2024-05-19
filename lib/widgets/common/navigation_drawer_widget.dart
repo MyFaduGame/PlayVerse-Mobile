@@ -354,7 +354,7 @@ class _NavigationBarWidgetState extends State<NavigationBarWidget> {
                             ),
                           ),
                         ),
-                  widget.index == 5 //TODO No Friends Screen
+                  widget.index == 9
                       ? Container(
                           width: 250,
                           decoration: BoxDecoration(
@@ -367,7 +367,7 @@ class _NavigationBarWidgetState extends State<NavigationBarWidget> {
                           child: TextButton(
                             onPressed: () {
                               widget.controller.hideDrawer();
-                              tabManager.onTabChanged(5);
+                              tabManager.onTabChanged(9);
                             },
                             child: Text(
                               "Friends",
@@ -381,7 +381,7 @@ class _NavigationBarWidgetState extends State<NavigationBarWidget> {
                       : TextButton(
                           onPressed: () {
                             widget.controller.hideDrawer();
-                            tabManager.onTabChanged(5);
+                            tabManager.onTabChanged(9);
                           },
                           child: Text(
                             "Friends",

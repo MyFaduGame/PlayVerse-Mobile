@@ -10,6 +10,6 @@ class CourseWidget extends StatefulWidget {
 class _CourseWidgetState extends State<CourseWidget> {
   @override
   Widget build(BuildContext context) {
-    return ;
+    return Container();
   }
 }

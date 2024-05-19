@@ -119,7 +119,8 @@ class _GamesProfileWidgetState extends State<GamesProfileWidget> {
                                           value?[index].achievementsLogo == null
                                       ? SvgPicture.asset(
                                           SvgIcons.achievementIcon,
-                                          color: Colors.red,
+                                          colorFilter: const ColorFilter.mode(
+                                              Colors.red, BlendMode.color),
                                           height: 100,
                                         )
                                       : CachedNetworkImage(

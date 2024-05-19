@@ -13,10 +13,8 @@ import 'package:playverse/themes/app_images.dart';
 class CustomAppBar extends StatefulWidget {
   final AdvancedDrawerController controller;
   final UserProfile userProfile;
-  final String textToDisplay;
   const CustomAppBar({
     super.key,
-    required this.textToDisplay,
     required this.controller,
     required this.userProfile,
   });

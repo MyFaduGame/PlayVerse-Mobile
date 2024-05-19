@@ -10,6 +10,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 
 //Local Imports
+import 'package:playverse/screens/profile/friend_screen.dart';
 import 'package:playverse/screens/achievements/achievements_screen.dart';
 import 'package:playverse/screens/courses/course_screen.dart';
 import 'package:playverse/screens/games/game_screen.dart';
@@ -68,20 +69,6 @@ class _AppState extends State<App>
     });
     myIndex = 0;
     tabManager = TabManager(this);
-    textList = [
-      "Games", //0
-      "Matches", //1
-      "Live", //2
-      "Articles", //3
-      "MVP's", //4
-      "Friends", //5
-      "Profile", //6
-      "Teams", //7
-      "Dare", //8
-      "Dare", //9
-      "Learn", //10
-      "Visit", //ll
-    ];
     screensList = [
       const HomeScreen(), //0
       const TournamentScreen(), //1
@@ -92,6 +79,7 @@ class _AppState extends State<App>
       const MyTournementsScreen(), //6
       const AchievementsScreen(), //7
       const CourseScreen(), //8
+      const FriendScreen(), //9
     ];
   }
 
@@ -105,7 +93,6 @@ class _AppState extends State<App>
   int myIndex = 0;
   int barIndex = 0;
   late List<Widget> screensList;
-  late List<String> textList;
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
@@ -159,7 +146,6 @@ class _AppState extends State<App>
             preferredSize: const Size.fromHeight(120),
             child: CustomAppBar(
               userProfile: userModel ?? UserProfile(),
-              textToDisplay: textList[index],
               controller: controller,
             ),
           ),

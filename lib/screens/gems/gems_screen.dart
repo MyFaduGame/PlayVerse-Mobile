@@ -19,7 +19,6 @@ class GemsScreen extends StatefulWidget {
 }
 
 class _GemsScreenState extends State<GemsScreen> {
-  int _selectedIndex = 0;
   late GemsProvider provider;
   bool loading = true, loader = false, paginate = true;
   int limit = 12;
@@ -28,19 +27,12 @@ class _GemsScreenState extends State<GemsScreen> {
 
   Future<void> pagination() async {
     String type = "";
-    if (_selectedIndex == 0) {
-      type = "all";
-    } else if (_selectedIndex == 1) {
-      type = "Spent";
-    } else {
-      type = "Earn";
-    }
 
     if (!paginate) return;
     setState(() {
       loader = true;
     });
-    await provider.getuserGems(offset, type).then((value) {
+    await provider.getuserGems(offset, 'all').then((value) {
       if (value < 12) paginate = false;
       loader = false;
       offset += limit;
@@ -68,9 +60,120 @@ class _GemsScreenState extends State<GemsScreen> {
     double screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      appBar: const PreferredSize(
-        preferredSize: Size.fromHeight(120),
-        child: BackAppBar(),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(260),
+        child: Column(
+          children: [
+            const BackAppBar(),
+            Container(
+              margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+              height: 150,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15),
+                  color: const Color(0xFF141326)),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      Image.asset(
+                        BottomAppBarImages.coinImage,
+                        height: 50,
+                        width: 50,
+                      ),
+                      Column(
+                        children: <Widget>[
+                          Text(
+                            'Earned',
+                            style: poppinsFonts.copyWith(
+                              color: Colors.white,
+                              fontSize: 15,
+                            ),
+                          ),
+                          Text(
+                            "900",
+                            style: poppinsFonts.copyWith(
+                              color: Colors.white,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
+                      Container(
+                        height: 30,
+                        width: 1,
+                        color: Colors.white,
+                      ),
+                      Column(
+                        children: <Widget>[
+                          Text(
+                            'Available',
+                            style: poppinsFonts.copyWith(
+                              color: Colors.white,
+                              fontSize: 15,
+                            ),
+                          ),
+                          Text(
+                            "1847",
+                            style: poppinsFonts.copyWith(
+                              color: Colors.white,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
+                      Container(
+                        height: 30,
+                        width: 1,
+                        color: Colors.white,
+                      ),
+                      Column(
+                        children: <Widget>[
+                          Text(
+                            'Spent',
+                            style: poppinsFonts.copyWith(
+                              color: Colors.white,
+                              fontSize: 15,
+                            ),
+                          ),
+                          Text(
+                            "900",
+                            style: poppinsFonts.copyWith(
+                              color: Colors.white,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
+                  Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 10),
+                    width: double.infinity,
+                    height: 30,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15),
+                      color: const Color(0xFF6E17FF),
+                    ),
+                    child: Center(
+                      child: Text(
+                        'Spend Earned Gems Now!',
+                        style: poppinsFonts.copyWith(
+                          color: Colors.white,
+                          fontSize: 15,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
       extendBodyBehindAppBar: true,
       body: Container(

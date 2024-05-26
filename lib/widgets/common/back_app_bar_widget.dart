@@ -25,7 +25,7 @@ class _BackAppBarState extends State<BackAppBar> {
       decoration: const BoxDecoration(
         color: Colors.black38,
       ),
-      margin: const EdgeInsets.fromLTRB(10, 30, 10, 0),
+      margin: const EdgeInsets.fromLTRB(0, 30, 0, 0),
       width: screenWidth,
       height: 60,
       child: Row(

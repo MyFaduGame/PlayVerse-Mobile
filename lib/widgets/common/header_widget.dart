@@ -54,21 +54,20 @@ class _HeaderWidgetState extends State<HeaderWidget> {
           ],
         ),
         IconButton(
-            onPressed: () => {
-              HapticFeedback.vibrate(),
-              tabManager.onTabChanged(widget.index)
-            },
-            // onPressed: () => Navigator.push(
-            //       context,
-            //       MaterialPageRoute(
-            //         builder: ((context) => widget.screenName),
-            //       ),
-            //     ),
-            icon: const Icon(
-              FontAwesomeIcons.arrowRight,
-              color: Colors.white,
-              size: 30,
-            ))
+          onPressed: () =>
+              {HapticFeedback.vibrate(), tabManager.onTabChanged(widget.index)},
+          // onPressed: () => Navigator.push(
+          //       context,
+          //       MaterialPageRoute(
+          //         builder: ((context) => widget.screenName),
+          //       ),
+          //     ),
+          icon: const Icon(
+            FontAwesomeIcons.arrowRight,
+            color: Colors.white,
+            size: 30,
+          ),
+        ),
       ],
     );
   }

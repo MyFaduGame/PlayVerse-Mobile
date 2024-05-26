@@ -26,7 +26,6 @@ class _GemsScreenState extends State<GemsScreen> {
   int page = 1;
 
   Future<void> pagination() async {
-    String type = "";
 
     if (!paginate) return;
     setState(() {

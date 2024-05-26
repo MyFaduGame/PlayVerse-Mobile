@@ -9,6 +9,7 @@ import 'package:playverse/utils/toast_bar.dart';
 
 class TournamentsProvider extends ChangeNotifier {
   final repo = TournamentsRepo();
+  List<TournamentWinner>? tournamentWinner;
   List<TournamentDetail> tournamentList = [];
   List<TournamentDetail> userTournamentList = [];
   List<TournamentDetail> gamesTournamentList = [];
@@ -50,6 +51,26 @@ class TournamentsProvider extends ChangeNotifier {
       }
     } catch (e) {
       log("$e", name: "Tournaments Detail List Error");
+    }
+  }
+
+  Future<dynamic> getTournamentWinner(String tournamentId) async {
+    try {
+      isLoading = true;
+      Map<String, dynamic> responseData =
+          await repo.getTournamentWinner(tournamentId);
+      if (responseData['status_code'] == 200) {
+        tournamentWinner = List<TournamentWinner>.from(
+            responseData["data"]!.map((x) => TournamentWinner.fromJson(x)));
+        isLoading = false;
+        notifyListeners();
+        return tournamentWinner;
+      } else {
+        log(responseData.toString(),
+            name: 'Tournaments Winner Detail Error Log');
+      }
+    } catch (e) {
+      log("$e", name: "Tournaments Winner Detail List Error");
     }
   }
 

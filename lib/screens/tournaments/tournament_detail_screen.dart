@@ -8,6 +8,7 @@ import 'package:provider/provider.dart';
 
 //Local Imports
 import 'package:playverse/models/tournaments_model.dart';
+import 'package:playverse/screens/tournaments/leaderboard_screen.dart';
 import 'package:playverse/provider/tournaments_provider.dart';
 import 'package:playverse/themes/app_font.dart';
 import 'package:playverse/utils/loader_dialouge.dart';
@@ -199,49 +200,98 @@ class TournamentDetailScreenState extends State<TournamentDetailScreen> {
                                   ],
                                 ),
                                 const SizedBox(height: 16),
-                                SizedBox(
-                                  width: screenWidth / 2,
-                                  child: NeoPopButton(
-                                    color: widget.tournamentDetail
-                                                .registrationId ==
-                                            null
-                                        ? GeneralColors.neopopButtonMainColor
-                                        : Colors.grey,
-                                    bottomShadowColor:
-                                        GeneralColors.neopopShadowColor,
-                                    onTapUp: () => {
-                                      HapticFeedback.vibrate(),
-                                      checkRegistration(
-                                          widget.tournamentDetail
-                                                  .tournamentId ??
-                                              "",
-                                          widget.tournamentDetail
-                                                  .registrationId ??
-                                              "null")
-                                    },
-                                    child: const NeoPopShimmer(
-                                      shimmerColor: Colors.white,
-                                      child: Padding(
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 20, vertical: 15),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            Text(
-                                              "Join Tournament!",
-                                              style: TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold,
+                                widget.tournamentDetail.tournamentDate!
+                                        .isBefore(DateTime.now())
+                                    ? SizedBox(
+                                        width: screenWidth / 2,
+                                        child: NeoPopButton(
+                                          color: GeneralColors
+                                              .neopopButtonMainColor,
+                                          bottomShadowColor:
+                                              GeneralColors.neopopShadowColor,
+                                          onTapUp: () => {
+                                            HapticFeedback.vibrate(),
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: ((context) =>
+                                                    LeaderBoardScreen(
+                                                        tournamentID: widget
+                                                                .tournamentDetail
+                                                                .tournamentId ??
+                                                            "")),
                                               ),
                                             ),
-                                          ],
+                                          },
+                                          child: const NeoPopShimmer(
+                                            shimmerColor: Colors.white,
+                                            child: Padding(
+                                              padding: EdgeInsets.symmetric(
+                                                  horizontal: 20, vertical: 15),
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  Text(
+                                                    "Show Leadberboard!",
+                                                    style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontSize: 15,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      )
+                                    : SizedBox(
+                                        width: screenWidth / 2,
+                                        child: NeoPopButton(
+                                          color: widget.tournamentDetail
+                                                      .registrationId ==
+                                                  null
+                                              ? GeneralColors
+                                                  .neopopButtonMainColor
+                                              : Colors.grey,
+                                          bottomShadowColor:
+                                              GeneralColors.neopopShadowColor,
+                                          onTapUp: () => {
+                                            HapticFeedback.vibrate(),
+                                            checkRegistration(
+                                                widget.tournamentDetail
+                                                        .tournamentId ??
+                                                    "",
+                                                widget.tournamentDetail
+                                                        .registrationId ??
+                                                    "null")
+                                          },
+                                          child: const NeoPopShimmer(
+                                            shimmerColor: Colors.white,
+                                            child: Padding(
+                                              padding: EdgeInsets.symmetric(
+                                                  horizontal: 20, vertical: 15),
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  Text(
+                                                    "Join Tournament!",
+                                                    style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontSize: 15,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                  ),
-                                ),
                               ],
                             )
                           ],

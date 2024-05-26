@@ -8,6 +8,7 @@ import 'package:playverse/repository/gems_repo.dart';
 
 class GemsProvider extends ChangeNotifier {
   final repo = GemsRepo();
+  GemsData? userGemsData;
   List<Gems> userGems = [];
   bool isLoading = false;
 
@@ -29,4 +30,22 @@ class GemsProvider extends ChangeNotifier {
       log("$e", name: "Gems List Error");
     }
   }
+
+  Future<dynamic> getUserGemsData() async {
+    try {
+      isLoading = true;
+      Map<String, dynamic> responseData = await repo.getUserGemsData();
+      if (responseData['status_code'] == 200) {
+        userGemsData = GemsData.fromJson(responseData['data']);
+        isLoading = false;
+        notifyListeners();
+        return userGemsData;
+      } else {
+        log(responseData.toString(), name: 'User Gems Error Log');
+      }
+    } catch (e) {
+      log("$e", name: "User Gems Data Error");
+    }
+  }
+
 }

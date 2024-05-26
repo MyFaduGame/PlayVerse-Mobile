@@ -14,14 +14,14 @@ import 'package:playverse/utils/helper_utils.dart';
 import 'package:playverse/models/games_model.dart';
 import 'package:playverse/provider/games_provider.dart';
 
-class CourseScreen extends StatefulWidget {
-  const CourseScreen({super.key});
+class CourseWidget extends StatefulWidget {
+  const CourseWidget({super.key});
 
   @override
-  State<CourseScreen> createState() => CourseScreenState();
+  State<CourseWidget> createState() => CourseWidgetState();
 }
 
-class CourseScreenState extends State<CourseScreen> {
+class CourseWidgetState extends State<CourseWidget> {
   late GamesListProvider provider;
   late CourseProvider courseProvider;
   late UserProfileProvider profileProvider;
@@ -79,13 +79,8 @@ class CourseScreenState extends State<CourseScreen> {
               return NotificationListener(
                 onNotification: (notification) =>
                     Utils.scrollNotifier(notification, paginationGames),
-                child: GridView.builder(
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    crossAxisSpacing: 2.0,
-                    mainAxisSpacing: 2.0,
-                    childAspectRatio: 9 / 16,
-                  ),
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
                   clipBehavior: Clip.none,
                   itemCount: value?.length,
                   itemBuilder: (context, index) {
@@ -102,6 +97,7 @@ class CourseScreenState extends State<CourseScreen> {
                       child: Container(
                         decoration: BoxDecoration(
                           // color: const Color(0xFF853CFF).withOpacity(0.5),
+                          // color: Colors.white30,
                           border: Border.all(
                             color: Colors.black,
                           ),
@@ -117,8 +113,9 @@ class CourseScreenState extends State<CourseScreen> {
                                 child: CachedNetworkImage(
                                   imageUrl: value?[index].thumbnail ?? "",
                                   fit: BoxFit.cover,
-                                  height: 150,
-                                  width: double.infinity,
+                                  height: 100,
+                                  width: 100,
+                                  // width: double.infinity,
                                   placeholder: (context, url) =>
                                       const CircularProgressIndicator(),
                                   errorWidget: (context, url, error) =>
@@ -150,14 +147,16 @@ class CourseScreenState extends State<CourseScreen> {
                                   color: TournamentWidgetColors
                                       .tournamentDetailCircleColor,
                                 ),
-                                child: Text(
-                                  "Get Info",
-                                  style: poppinsFonts.copyWith(
-                                    color: Colors.white,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
+                                child: Center(
+                                  child: Text(
+                                    "Get Info",
+                                    style: poppinsFonts.copyWith(
+                                      color: Colors.white,
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                    textAlign: TextAlign.center,
                                   ),
-                                  textAlign: TextAlign.center,
                                 ),
                               ),
                               // FittedBox(

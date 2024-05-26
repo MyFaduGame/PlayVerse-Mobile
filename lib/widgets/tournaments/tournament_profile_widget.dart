@@ -1,12 +1,10 @@
 //Third Party Imports
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
 //Local Imports
-import 'package:playverse/app.dart';
 import 'package:playverse/themes/app_color_theme.dart';
 import 'package:playverse/utils/helper_utils.dart';
 import 'package:playverse/models/tournaments_model.dart';

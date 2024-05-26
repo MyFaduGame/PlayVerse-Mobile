@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:playverse/widgets/common/update_carasoule_widget.dart';
 import 'package:playverse/widgets/articles/article_list_widget.dart';
 import 'package:playverse/widgets/common/header_widget.dart';
+import 'package:playverse/widgets/courses/course_widget.dart';
 import 'package:playverse/widgets/games/games_icon_widget.dart';
 import 'package:playverse/widgets/tournaments/tournament_list_widget.dart';
 
@@ -45,7 +46,12 @@ class _HomeScreenState extends State<HomeScreen> {
               height: 150,
               child: GamesIconWidget(),
             ),
-            SizedBox(height: 16),
+            HeaderWidget(
+                title: "Get Trained", subTitle: "Latest Courses", index: 8),
+            SizedBox(
+              height: 250,
+              child: CourseWidget(),
+            ),
             HeaderWidget(
               title: "Find Some",
               subTitle: "Articles",

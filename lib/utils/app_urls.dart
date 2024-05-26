@@ -49,22 +49,24 @@ class TournamentsUrl {
   static String getTournamentDetail = "tournaments";
   static String soloTournamentRegistrtation = "tournaments/user";
   static String userTournaments = "tournaments/user";
+  static String tournamentWinner = "tournaments/winner";
 }
 
 class GemsUrl {
   static String getGemsList = "user/gems";
+  static String getUserGemsData = "user/gems_data";
 }
 
 class CourseUrl {
-  static String courseInfo = "/v1/courses";
+  static String courseInfo = "courses/";
 }
 
 class LocationUrl {
-  static String country = "v1/user/country";
-  static String state = "v1/user/state";
-  static String city = "v1/user/city";
+  static String country = "user/country";
+  static String state = "user/state";
+  static String city = "user/city";
 }
 
 class StreamsUrl {
-  static String getStream = "v1/streams";
+  static String getStream = "streams";
 }

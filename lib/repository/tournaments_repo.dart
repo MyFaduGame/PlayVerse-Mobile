@@ -24,6 +24,14 @@ class TournamentsRepo extends BaseRepository {
     return json.decode(response.body);
   }
 
+  Future getTournamentWinner(String tournamentId) async {
+    final param = "?tournament_id=$tournamentId";
+    final response = await getHttp(
+        api: TournamentsUrl.tournamentWinner + param, token: true);
+    log(response.body, name: 'response getTournamentWinner');
+    return json.decode(response.body);
+  }
+
   Future getTournamentDetail(String tournamentId) async {
     final param = "?tournament_id=$tournamentId";
     final response = await getHttp(

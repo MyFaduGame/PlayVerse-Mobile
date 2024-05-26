@@ -6,7 +6,7 @@ import 'package:playverse/repository/course_repo.dart';
 //Local Imports
 import 'package:playverse/utils/toast_bar.dart';
 
-class CourserProvider extends ChangeNotifier {
+class CourseProvider extends ChangeNotifier {
   CourseRepo courseRepo = CourseRepo();
 
   Future<bool> register(
@@ -14,11 +14,13 @@ class CourserProvider extends ChangeNotifier {
     try {
       Map<String, dynamic> data = {
         "email": email,
-        'mobile': mobile,
-        'game': gameName,
+        "mobile": mobile,
+        "game": gameName,
         "description": description
       };
+      log("data is correct",name: "data correct");
       final response = await courseRepo.courseInfo(data);
+      log("response",name: "response");
       log(response.toString(), name: 'Response Register api');
       if (response['status_code'] == 200) {
         showCustomToast(response['message']);

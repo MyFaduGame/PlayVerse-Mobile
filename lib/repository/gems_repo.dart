@@ -16,4 +16,11 @@ class GemsRepo extends BaseRepository {
     return json.decode(response.body);
   }
 
+  Future getUserGemsData() async {
+    final response = await getHttp(
+        api: GemsUrl.getUserGemsData, token: true);
+    log(response.body, name: 'response getUserGemsData');
+    return json.decode(response.body);
+  }
+
 }

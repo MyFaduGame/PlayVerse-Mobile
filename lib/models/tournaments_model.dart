@@ -137,3 +137,47 @@ class ExtraPrize {
   factory ExtraPrize.fromJson(Map<String, dynamic> json) =>
       ExtraPrize(the1St: json["1st"], the2nd: json["2nd"], the3rd: json["3rd"]);
 }
+
+class TournamentWinner {
+    final int? winRank;
+    final int? totalScore;
+    final String? title;
+    final String? tournamentId;
+    final String? thumbnail;
+    final dynamic profileImage;
+    final String? userId;
+    final String? userName;
+
+    TournamentWinner({
+        this.winRank,
+        this.totalScore,
+        this.title,
+        this.tournamentId,
+        this.thumbnail,
+        this.profileImage,
+        this.userId,
+        this.userName,
+    });
+
+    factory TournamentWinner.fromJson(Map<String, dynamic> json) => TournamentWinner(
+        winRank: json["win_rank"],
+        totalScore: json["total_score"],
+        title: json["title"],
+        tournamentId: json["tournament_id"],
+        thumbnail: json["thumbnail"],
+        profileImage: json["profile_image"],
+        userId: json["user_id"],
+        userName: json["user_name"],
+    );
+
+    Map<String, dynamic> toJson() => {
+        "win_rank": winRank,
+        "total_score": totalScore,
+        "title": title,
+        "tournament_id": tournamentId,
+        "thumbnail": thumbnail,
+        "profile_image": profileImage,
+        "user_id": userId,
+        "user_name": userName,
+    };
+}

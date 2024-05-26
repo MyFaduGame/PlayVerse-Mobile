@@ -8,6 +8,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/services.dart';
 
 //Local Imports
+import 'package:playverse/provider/course_provider.dart';
 import 'package:playverse/provider/article_provider.dart';
 import 'package:playverse/provider/gems_provider.dart';
 import 'package:playverse/provider/tournaments_provider.dart';
@@ -110,6 +111,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => TournamentsProvider()),
         ChangeNotifierProvider(create: (context) => GamesListProvider()),
         ChangeNotifierProvider(create: (context) => GemsProvider()),
+        ChangeNotifierProvider(create: (context) => CourseProvider()),
       ],
       child: MaterialApp(
         title: "GeNoS",

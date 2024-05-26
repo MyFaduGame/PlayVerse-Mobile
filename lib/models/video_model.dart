@@ -17,3 +17,31 @@ class VideoData {
         "id": id,
     };
 }
+
+class Streams {
+    final String? streamLink;
+    final String? title;
+    final DateTime? tournamentDate;
+    final String? thumbnail;
+
+    Streams({
+        this.streamLink,
+        this.title,
+        this.tournamentDate,
+        this.thumbnail,
+    });
+
+    factory Streams.fromJson(Map<String, dynamic> json) => Streams(
+        streamLink: json["stream_link"],
+        title: json["title"],
+        tournamentDate: json["tournament_date"] == null ? null : DateTime.parse(json["tournament_date"]),
+        thumbnail: json["thumbnail"],
+    );
+
+    Map<String, dynamic> toJson() => {
+        "stream_link": streamLink,
+        "title": title,
+        "tournament_date": tournamentDate?.toIso8601String(),
+        "thumbnail": thumbnail,
+    };
+}

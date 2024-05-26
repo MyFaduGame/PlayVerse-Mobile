@@ -18,3 +18,27 @@ class Gems {
         gemsId: json["gems_id"],
       );
 }
+
+class GemsData {
+    final int? earned;
+    final int? spent;
+    final int? total;
+
+    GemsData({
+        this.earned,
+        this.spent,
+        this.total,
+    });
+
+    factory GemsData.fromJson(Map<String, dynamic> json) => GemsData(
+        earned: json["Earned"],
+        spent: json["Spent"],
+        total: json["Total"],
+    );
+
+    Map<String, dynamic> toJson() => {
+        "Earned": earned,
+        "Spent": spent,
+        "Total": total,
+    };
+}

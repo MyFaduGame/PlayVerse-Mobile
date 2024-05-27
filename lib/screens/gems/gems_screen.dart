@@ -1,5 +1,6 @@
 //Third Party Imports
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 
 //Local Imports
@@ -20,13 +21,14 @@ class GemsScreen extends StatefulWidget {
 
 class _GemsScreenState extends State<GemsScreen> {
   late GemsProvider provider;
+  GemsData? gemsData;
   bool loading = true, loader = false, paginate = true;
   int limit = 12;
   int offset = 1;
   int page = 1;
+  bool isLoading = true;
 
   Future<void> pagination() async {
-
     if (!paginate) return;
     setState(() {
       loader = true;
@@ -44,6 +46,11 @@ class _GemsScreenState extends State<GemsScreen> {
   void initState() {
     super.initState();
     provider = Provider.of<GemsProvider>(context, listen: false);
+    provider.getUserGemsData().then((value) {
+      setState(() {
+        isLoading = false;
+      });
+    });
     pagination();
   }
 
@@ -55,6 +62,8 @@ class _GemsScreenState extends State<GemsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    gemsData = context.select((GemsProvider value) => value.userGemsData);
+
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
 
@@ -91,7 +100,7 @@ class _GemsScreenState extends State<GemsScreen> {
                             ),
                           ),
                           Text(
-                            "900",
+                            gemsData?.earned.toString() ?? "0",
                             style: poppinsFonts.copyWith(
                               color: Colors.white,
                               fontSize: 20,
@@ -115,7 +124,7 @@ class _GemsScreenState extends State<GemsScreen> {
                             ),
                           ),
                           Text(
-                            "1847",
+                            gemsData?.total.toString() ?? "0",
                             style: poppinsFonts.copyWith(
                               color: Colors.white,
                               fontSize: 20,
@@ -139,7 +148,7 @@ class _GemsScreenState extends State<GemsScreen> {
                             ),
                           ),
                           Text(
-                            "900",
+                            gemsData?.spent.toString() ?? "0",
                             style: poppinsFonts.copyWith(
                               color: Colors.white,
                               fontSize: 20,
@@ -150,20 +159,23 @@ class _GemsScreenState extends State<GemsScreen> {
                       )
                     ],
                   ),
-                  Container(
-                    margin: const EdgeInsets.symmetric(horizontal: 10),
-                    width: double.infinity,
-                    height: 30,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      color: const Color(0xFF6E17FF),
-                    ),
-                    child: Center(
-                      child: Text(
-                        'Spend Earned Gems Now!',
-                        style: poppinsFonts.copyWith(
-                          color: Colors.white,
-                          fontSize: 15,
+                  GestureDetector(
+                    onTap: () => {},
+                    child: Container(
+                      margin: const EdgeInsets.symmetric(horizontal: 10),
+                      width: double.infinity,
+                      height: 30,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15),
+                        color: const Color(0xFF6E17FF),
+                      ),
+                      child: Center(
+                        child: Text(
+                          'Want to Buy More Gems?',
+                          style: poppinsFonts.copyWith(
+                            color: Colors.white,
+                            fontSize: 15,
+                          ),
                         ),
                       ),
                     ),

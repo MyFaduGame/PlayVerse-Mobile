@@ -1,6 +1,11 @@
 //Third Party Imports
+import 'dart:developer';
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:playverse/app.dart';
+import 'package:playverse/themes/app_color_theme.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 //Local Imports
 import 'package:playverse/themes/app_font.dart';
@@ -14,6 +19,16 @@ class UpdateCarsouleWidget extends StatefulWidget {
 }
 
 class _UpdateCarsouleWidgetState extends State<UpdateCarsouleWidget> {
+  Future<void> _openUrl(urlLink) async {
+    Uri userUrl = Uri.parse(urlLink);
+
+    try {
+      launchUrl(userUrl);
+    } on Exception catch (e) {
+      log(e.toString(), name: 'Url Exception');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
@@ -68,10 +83,93 @@ class _UpdateCarsouleWidgetState extends State<UpdateCarsouleWidget> {
             ],
           ),
         ),
-        // Container(
-        //   color: const Color(0XFF8000FF),
-        //   child: Text('Subscribe'),
-        // ),
+        GestureDetector(
+          onTap: () => _openUrl("https://www.youtube.com/@gamenoshame/"),
+          child: Container(
+            padding: const EdgeInsets.all(20.0),
+            decoration: BoxDecoration(
+              gradient: const LinearGradient(
+                colors: [Colors.red, Colors.orange],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+              ),
+              borderRadius: BorderRadius.circular(15.0),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.5),
+                  spreadRadius: 5,
+                  blurRadius: 10,
+                  offset: const Offset(0, 3),
+                ),
+              ],
+            ),
+            child: const Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Icon(
+                  Icons.play_circle_fill,
+                  color: Colors.white,
+                  size: 50.0,
+                ),
+                SizedBox(height: 10.0),
+                Text(
+                  'Subscribe to our YouTube Channel',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 18.0,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+        GestureDetector(
+          onTap: () => tabManager.onTabChanged(2),
+          child: Container(
+            padding: const EdgeInsets.all(20.0),
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [
+                  GeneralColors.sideEclipseColor,
+                  GeneralColors.neopopButtonMainColor
+                ],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+              ),
+              borderRadius: BorderRadius.circular(15.0),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.5),
+                  spreadRadius: 5,
+                  blurRadius: 10,
+                  offset: const Offset(0, 3),
+                ),
+              ],
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Image.asset(
+                  BottomAppBarImages.gameWall,
+                  height: 125,
+                  width: double.infinity,
+                ),
+                const SizedBox(height: 10.0),
+                const Text(
+                  'Watch Latest Streams',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 18.0,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
       ],
       options: CarouselOptions(
         height: 400,

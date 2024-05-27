@@ -8,19 +8,20 @@ import 'package:playverse/repository/video_repo.dart';
 
 class VideoProvider extends ChangeNotifier {
   final repo = VideoRepo();
-  List<Streams>? videoData;
+  List<Streams> videoData = [];
   bool isLoading = false;
 
-  Future<dynamic> getStreams() async {
+  Future<dynamic> getStreams(int offset) async {
     try {
       isLoading = true;
-      Map<String, dynamic> responseData = await repo.getStreams();
+      Map<String, dynamic> responseData = await repo.getStreams(offset);
       if (responseData['status_code'] == 200) {
-        videoData = List<Streams>.from(
+        List<Streams> tempList = List<Streams>.from(
             responseData["data"]!.map((x) => Streams.fromJson(x)));
+          offset==1 ? videoData = tempList: videoData += tempList;
         isLoading = false;
         notifyListeners();
-        return videoData;
+        return tempList.length;
       } else {
         log(responseData.toString(), name: 'Logging for Get Streams');
       }

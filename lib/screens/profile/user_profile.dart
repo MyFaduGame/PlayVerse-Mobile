@@ -231,8 +231,8 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                                   Text(
                                     userModel?.instaURL ==
                                             "https://www.instagram.com/myfadugame"
-                                        ? "Connect"
-                                        : "DisConnnect",
+                                        ? "Connected"
+                                        : "DisConnnected",
                                     style: poppinsFonts.copyWith(
                                         color: Colors.black,
                                         fontSize: 10,
@@ -259,8 +259,8 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                                   Text(
                                     userModel?.fbURL ==
                                             "https://www.facebook.com/myfadugame"
-                                        ? "Connect"
-                                        : "DisConnnect",
+                                        ? "Connected"
+                                        : "DisConnnected",
                                     style: poppinsFonts.copyWith(
                                         color: Colors.black,
                                         fontSize: 10,
@@ -298,15 +298,19 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                           children: [
                             Text(
                               //add or remove friend button
-                              'Edit',
+                              'Nationality',
+                              style: poppinsFonts.copyWith(
+                                color: Colors.white,
+                                fontSize: 15,
+                              ),
+                            ),
+                            Text(
+                              userModel?.country ?? "",
                               style: poppinsFonts.copyWith(
                                 color: Colors.white,
                                 fontSize: 20,
+                                fontWeight: FontWeight.bold,
                               ),
-                            ),
-                            const Icon(
-                              FontAwesomeIcons.pen,
-                              color: Colors.white,
                             ),
                           ],
                         ),

@@ -22,13 +22,14 @@ class _FriendScreenState extends State<FriendScreen> {
     return DefaultTabController(
       length: 3,
       child: NestedScrollView(
+        clipBehavior: Clip.none,
         headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
           return <Widget>[
             const SliverToBoxAdapter(
               child: Column(
                 children: [
                   SizedBox(height: 120),
-                  FriendsStatusWidget(),
+                  SizedBox(height: 100, child: FriendsStatusWidget()),
                 ],
               ),
             ),
@@ -38,28 +39,34 @@ class _FriendScreenState extends State<FriendScreen> {
               pinned: true,
               toolbarHeight: 0,
               backgroundColor: Colors.transparent,
-              bottom: TabBar(
-                  indicator: BoxIndicator(),
-                  isScrollable: true,
-                  unselectedLabelStyle: poppinsFonts.copyWith(
-                    fontSize: 20,
-                    color: Colors.white,
+              flexibleSpace: PreferredSize(
+                preferredSize: const Size.fromHeight(120),
+                child: Center(
+                  child: TabBar(
+                    indicator: BoxIndicator(),
+                    isScrollable: true,
+                    unselectedLabelStyle: poppinsFonts.copyWith(
+                      fontSize: 20,
+                      color: Colors.white,
+                    ),
+                    labelStyle: poppinsFonts.copyWith(
+                      fontSize: 20,
+                      color: Colors.yellow,
+                    ),
+                    tabs: const [
+                      Tab(
+                        text: 'Friends',
+                      ),
+                      Tab(
+                        text: 'Requests',
+                      ),
+                      Tab(
+                        text: 'AddNew',
+                      ),
+                    ],
                   ),
-                  labelStyle: poppinsFonts.copyWith(
-                    fontSize: 20,
-                    color: Colors.yellow,
-                  ),
-                  tabs: const [
-                    Tab(
-                      text: 'Friends',
-                    ),
-                    Tab(
-                      text: 'Requests',
-                    ),
-                    Tab(
-                      text: 'AddNew',
-                    ),
-                  ]),
+                ),
+              ),
             ),
           ];
         },

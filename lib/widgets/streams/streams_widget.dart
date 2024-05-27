@@ -4,23 +4,20 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 //Local Imports
-import 'package:playverse/models/video_model.dart';
-import 'package:playverse/screens/streams/stream_watch_screen.dart';
 import 'package:playverse/screens/streams/stream_watch_screen.dart';
 import 'package:playverse/utils/helper_utils.dart';
 import 'package:playverse/models/video_model.dart';
 import 'package:playverse/themes/app_font.dart';
 import 'package:playverse/provider/video_provider.dart';
 
-class StreamsScreen extends StatefulWidget {
-  const StreamsScreen({super.key});
+class StreamsWidget extends StatefulWidget {
+  const StreamsWidget({super.key});
 
   @override
-  State<StreamsScreen> createState() => _StreamsScreenState();
+  State<StreamsWidget> createState() => _StreamsWidgetState();
 }
 
-class _StreamsScreenState extends State<StreamsScreen> {
-  bool fullscreen = false;
+class _StreamsWidgetState extends State<StreamsWidget> {
   late VideoProvider provider;
   bool loading = true, loader = false, paginate = true;
   int limit = 12;
@@ -69,6 +66,7 @@ class _StreamsScreenState extends State<StreamsScreen> {
                 onNotification: (notification) =>
                     Utils.scrollNotifier(notification, pagination),
                 child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
                   itemCount: value.length,
                   itemBuilder: (context, index) {
                     return GestureDetector(

@@ -25,7 +25,7 @@ final List<VideoData> youtubeLinks = [
 ];
 
 class StreamWatch extends StatefulWidget {
-  final int url;
+  final String url;
   const StreamWatch({super.key, required this.url});
 
   @override
@@ -50,9 +50,9 @@ class _StreamWatchState extends State<StreamWatch> {
             fullscreen ? EdgeInsets.zero : const EdgeInsets.only(top: 32.0),
         child: YoYoPlayer(
           aspectRatio: 16 / 9,
-          // url: youtubeLinks[widget.url].id??"",
-          url:
-              'https://stream.mux.com/7dPImcsEC28yyAgrpYJCA01bjRFBLRzGED019oKkqv1dw.m3u8',
+          url: widget.url,
+          // url:
+          //     'https://stream.mux.com/7dPImcsEC28yyAgrpYJCA01bjRFBLRzGED019oKkqv1dw.m3u8',
           // 'https://dsqqu7oxq6o1v.cloudfront.net/preview-9650dW8x3YLoZ8.webm',
           // "https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4",
           //  "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8",

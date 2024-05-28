@@ -92,12 +92,15 @@ class _NavigationBarWidgetState extends State<NavigationBarWidget> {
                     ),
                     const SizedBox(height: 16),
                     GestureDetector(
-                      onTap: () => Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: ((context) => const GemsScreen()),
-                        ),
-                      ),
+                      onTap: () {
+                        widget.controller.hideDrawer();
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: ((context) => const GemsScreen()),
+                          ),
+                        );
+                      },
                       child: Container(
                         width: 100,
                         height: 40,

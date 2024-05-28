@@ -20,6 +20,9 @@ class FriendListProvider extends ChangeNotifier {
       isLoading = true;
       Map<String, dynamic> responseData = await repo.friendsRecomendApi(offset);
       if (responseData['status_code'] == 200) {
+        if(responseData['data']==null){
+          return recommendFriend;
+        }
         List<Friend> tempList = List<Friend>.from(
             responseData["data"]!.map((x) => Friend.fromJson(x)));
         offset == 1 ? recommendFriend = tempList : recommendFriend += tempList;
@@ -39,6 +42,9 @@ class FriendListProvider extends ChangeNotifier {
       isLoading = true;
       Map<String, dynamic> responseData = await repo.ownFriendsApi(offset);
       if (responseData['status_code'] == 200) {
+        if(responseData['data']==null){
+          return ownFriend;
+        }
         List<Friend> tempList = List<Friend>.from(
             responseData["data"]!.map((x) => Friend.fromJson(x))).toList();
         offset == 1 ? ownFriend = tempList : ownFriend += tempList;
@@ -76,6 +82,9 @@ class FriendListProvider extends ChangeNotifier {
       isLoading = true;
       Map<String, dynamic> responseData = await repo.getFriendRequests(offset);
       if (responseData['status_code'] == 200) {
+        if(responseData['data']==null){
+          return friendRequests;
+        }
         List<FriendRequest> tempList = List<FriendRequest>.from(
             responseData["data"]!.map((x) => FriendRequest.fromJson(x)));
         offset == 1 ? friendRequests = tempList : friendRequests += tempList;

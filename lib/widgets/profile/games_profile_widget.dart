@@ -4,9 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:neopop/widgets/buttons/neopop_button/neopop_button.dart';
+import 'package:neopop/widgets/shimmer/neopop_shimmer.dart';
 import 'package:provider/provider.dart';
 
 //Local Imports
+import 'package:playverse/themes/app_color_theme.dart';
 import 'package:playverse/app.dart';
 import 'package:playverse/provider/friends_provider.dart';
 import 'package:playverse/models/friends_model.dart';
@@ -68,7 +71,8 @@ class _GamesProfileWidgetState extends State<GamesProfileWidget> {
   Future<void> paginationFriends() async {
     if (!paginateUpcomingFriend) return;
     setState(() {
-      loader = true;
+      loaderFriend = true;
+      isLoadingFriend = false;
     });
     await providerFriend
         .getOwnFriendsProvider(offsetUpcomingFriend)
@@ -166,21 +170,31 @@ class _GamesProfileWidgetState extends State<GamesProfileWidget> {
                     builder: (context, value, child) {
                       return value?.isEmpty ?? true
                           ? Center(
-                              child: Container(
-                                width: screenWidth / 2,
-                                height: 80,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(
-                                    10,
-                                  ),
-                                  color: Colors.pink[200],
-                                ),
-                                child: Text(
-                                  "Go Add Some Games!",
-                                  style: openSansFonts.copyWith(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 20,
+                              child: SizedBox(
+                                width: screenWidth / 1.5,
+                                child: NeoPopButton(
+                                  color: GeneralColors.neopopButtonMainColor,
+                                  bottomShadowColor:
+                                      GeneralColors.neopopShadowColor,
+                                  onTapUp: () => {
+                                    HapticFeedback.vibrate(),
+                                    tabManager.onTabChanged(4),
+                                  },
+                                  child: const NeoPopShimmer(
+                                    shimmerColor: Colors.white,
+                                    child: Padding(
+                                      padding: EdgeInsets.symmetric(
+                                          horizontal: 20, vertical: 15),
+                                      child: Text(
+                                        "Add Some Games",
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ),
                                   ),
                                 ),
                               ),
@@ -256,21 +270,31 @@ class _GamesProfileWidgetState extends State<GamesProfileWidget> {
                     builder: (context, value, child) {
                       return value?.isEmpty ?? true
                           ? Center(
-                              child: Container(
-                                width: screenWidth / 2,
-                                height: 80,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(
-                                    10,
-                                  ),
-                                  color: Colors.pink[200],
-                                ),
-                                child: Text(
-                                  "You Might get Achievements!",
-                                  style: openSansFonts.copyWith(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 20,
+                              child: SizedBox(
+                                width: screenWidth / 1.5,
+                                child: NeoPopButton(
+                                  color: GeneralColors.neopopButtonMainColor,
+                                  bottomShadowColor:
+                                      GeneralColors.neopopShadowColor,
+                                  onTapUp: () => {
+                                    HapticFeedback.vibrate(),
+                                    tabManager.onTabChanged(7),
+                                  },
+                                  child: const NeoPopShimmer(
+                                    shimmerColor: Colors.white,
+                                    child: Padding(
+                                      padding: EdgeInsets.symmetric(
+                                          horizontal: 20, vertical: 15),
+                                      child: Text(
+                                        "You have Achievements!",
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ),
                                   ),
                                 ),
                               ),
@@ -350,21 +374,31 @@ class _GamesProfileWidgetState extends State<GamesProfileWidget> {
                     builder: (context, value, child) {
                       return value?.isEmpty ?? true
                           ? Center(
-                              child: Container(
-                                width: screenWidth / 2,
-                                height: 80,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(
-                                    10,
-                                  ),
-                                  color: Colors.pink[200],
-                                ),
-                                child: Text(
-                                  "Add Some Friends!",
-                                  style: openSansFonts.copyWith(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 20,
+                              child: SizedBox(
+                                width: screenWidth / 1.5,
+                                child: NeoPopButton(
+                                  color: GeneralColors.neopopButtonMainColor,
+                                  bottomShadowColor:
+                                      GeneralColors.neopopShadowColor,
+                                  onTapUp: () => {
+                                    HapticFeedback.vibrate(),
+                                    tabManager.onTabChanged(9),
+                                  },
+                                  child: const NeoPopShimmer(
+                                    shimmerColor: Colors.white,
+                                    child: Padding(
+                                      padding: EdgeInsets.symmetric(
+                                          horizontal: 20, vertical: 15),
+                                      child: Text(
+                                        "Get Socialized!",
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ),
                                   ),
                                 ),
                               ),

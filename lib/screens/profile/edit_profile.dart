@@ -10,11 +10,11 @@ import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:neopop/widgets/buttons/neopop_button/neopop_button.dart';
 import 'package:neopop/widgets/shimmer/neopop_shimmer.dart';
-import 'package:playverse/utils/toast_bar.dart';
 import 'package:provider/provider.dart';
 
 //Local Imports
 import 'package:playverse/widgets/common/back_app_bar_widget.dart';
+import 'package:playverse/utils/toast_bar.dart';
 import 'package:playverse/themes/app_images.dart';
 import 'package:playverse/models/user_profile_model.dart';
 import 'package:playverse/provider/user_profile_provider.dart';

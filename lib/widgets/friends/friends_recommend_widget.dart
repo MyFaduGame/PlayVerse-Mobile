@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter/services.dart';
+import 'package:neopop/widgets/buttons/neopop_button/neopop_button.dart';
+import 'package:neopop/widgets/shimmer/neopop_shimmer.dart';
 
 //Local Imports
 import 'package:playverse/screens/profile/user_profile.dart';
@@ -11,6 +14,8 @@ import 'package:playverse/themes/app_font.dart';
 import 'package:playverse/themes/app_images.dart';
 import 'package:playverse/models/friends_model.dart';
 import 'package:playverse/provider/friends_provider.dart';
+import 'package:playverse/themes/app_color_theme.dart';
+
 
 class FriendsRecommendWidget extends StatefulWidget {
   const FriendsRecommendWidget({super.key});
@@ -62,22 +67,28 @@ class _FriendsRecommendWidgetState extends State<FriendsRecommendWidget> {
       builder: (context, value, child) {
         return value?.isEmpty ?? true
             ? Center(
-                child: Container(
+                child: SizedBox(
                   width: screenWidth / 1.5,
-                  height: 80,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(
-                      10,
-                    ),
-                    color: Colors.purpleAccent[200],
-                  ),
-                  child: Center(
-                    child: Text(
-                      "Too much Socialized!",
-                      style: poppinsFonts.copyWith(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20,
+                  child: NeoPopButton(
+                    color: GeneralColors.neopopButtonMainColor,
+                    bottomShadowColor: GeneralColors.neopopShadowColor,
+                    onTapUp: () => {
+                      HapticFeedback.vibrate(),
+                    },
+                    child: const NeoPopShimmer(
+                      shimmerColor: Colors.white,
+                      child: Padding(
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+                        child: Text(
+                          "Too Much Socialized!",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
                       ),
                     ),
                   ),

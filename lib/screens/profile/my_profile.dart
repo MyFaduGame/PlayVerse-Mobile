@@ -350,7 +350,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                           text: 'History',
                         ),
                         Tab(
-                          text: 'About',
+                          text: 'Friends',
                         ),
                       ],
                     ),

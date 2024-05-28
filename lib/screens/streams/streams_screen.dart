@@ -6,9 +6,7 @@ import 'package:provider/provider.dart';
 //Local Imports
 import 'package:playverse/models/video_model.dart';
 import 'package:playverse/screens/streams/stream_watch_screen.dart';
-import 'package:playverse/screens/streams/stream_watch_screen.dart';
 import 'package:playverse/utils/helper_utils.dart';
-import 'package:playverse/models/video_model.dart';
 import 'package:playverse/themes/app_font.dart';
 import 'package:playverse/provider/video_provider.dart';
 

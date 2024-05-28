@@ -1,11 +1,13 @@
 //Third Party Imports
 import 'dart:math';
+import 'dart:developer' as developer;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:neopop/widgets/buttons/neopop_button/neopop_button.dart';
 import 'package:neopop/widgets/shimmer/neopop_shimmer.dart';
+import 'package:playverse/screens/streams/stream_watch_screen.dart';
 import 'package:provider/provider.dart';
 
 //Local Imports
@@ -60,6 +62,7 @@ class _LeaderBoardScreenState extends State<LeaderBoardScreen> {
         context.select((TournamentsProvider value) => value.tournamentDetail);
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
+    developer.log(tournamentWinner?.length.toString() ?? "", name: "Data");
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: const PreferredSize(
@@ -130,12 +133,23 @@ class _LeaderBoardScreenState extends State<LeaderBoardScreen> {
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
                           //Have to apply design
-                          _buildWinnerWidget(
-                              tournamentWinner?[1] ?? TournamentWinner(), 2),
-                          _buildWinnerWidget(
-                              tournamentWinner?[0] ?? TournamentWinner(), 1),
-                          _buildWinnerWidget(
-                              tournamentWinner?[2] ?? TournamentWinner(), 3),
+                          if (tournamentWinner?.length == 1)
+                            _buildWinnerWidget(
+                                tournamentWinner?[0] ?? TournamentWinner(), 1),
+                          if (tournamentWinner?.length == 2) ...[
+                            _buildWinnerWidget(
+                                tournamentWinner?[1] ?? TournamentWinner(), 2),
+                            _buildWinnerWidget(
+                                tournamentWinner?[0] ?? TournamentWinner(), 1),
+                          ],
+                          if (tournamentWinner?.length == 3) ...[
+                            _buildWinnerWidget(
+                                tournamentWinner?[1] ?? TournamentWinner(), 2),
+                            _buildWinnerWidget(
+                                tournamentWinner?[0] ?? TournamentWinner(), 1),
+                            _buildWinnerWidget(
+                                tournamentWinner?[2] ?? TournamentWinner(), 3),
+                          ]
                         ],
                       ),
                     ),
@@ -212,6 +226,14 @@ class _LeaderBoardScreenState extends State<LeaderBoardScreen> {
                                     GeneralColors.neopopShadowColor,
                                 onTapUp: () => {
                                   HapticFeedback.vibrate(),
+                                   Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: ((context) => const StreamWatch(
+                                url: "https://stream.mux.com/7dPImcsEC28yyAgrpYJCA01bjRFBLRzGED019oKkqv1dw.m3u8",
+                              )),
+                        ),
+                      ),
                                 },
                                 child: const NeoPopShimmer(
                                   shimmerColor: Colors.white,

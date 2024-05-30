@@ -42,8 +42,8 @@ class _CustomAppBarState extends State<CustomAppBar> {
           GestureDetector(
             onTap: () => tabManager.onTabChanged(5),
             child: Container(
-              width: 60.0,
-              height: 60.0,
+              width: 50.0,
+              height: 50.0,
               clipBehavior: Clip.antiAlias,
               decoration: const BoxDecoration(
                 color: Colors.black26,
@@ -54,21 +54,21 @@ class _CustomAppBarState extends State<CustomAppBar> {
                   ? widget.userProfile.gender == 'Male'
                       ? SvgPicture.asset(
                           ProfileImages.boyProfile,
-                          width: 60,
-                          height: 60,
+                          width: 50,
+                          height: 50,
                           fit: BoxFit.cover,
                         )
                       : SvgPicture.asset(
                           ProfileImages.girlProfile,
-                          width: 60,
-                          height: 60,
+                          width: 50,
+                          height: 50,
                           fit: BoxFit.cover,
                         )
                   : CachedNetworkImage(
                       imageUrl: widget.userProfile.profileImage ?? "",
                       fit: BoxFit.cover,
-                      height: 60,
-                      width: 60,
+                      height: 50,
+                      width: 50,
                       placeholder: (context, url) =>
                           const CircularProgressIndicator(),
                       errorWidget: (context, url, error) =>

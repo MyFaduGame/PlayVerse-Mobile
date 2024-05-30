@@ -1,5 +1,6 @@
 //Third Party Imports
 import 'dart:async';
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -21,7 +22,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     Timer(
-      const Duration(seconds: 2),
+      const Duration(seconds: 5),
       () => Navigator.pushReplacement(
         context,
         MaterialPageRoute(
@@ -99,8 +100,34 @@ class _SplashScreenState extends State<SplashScreen> {
               ),
             ),
             Center(
-              child: Image.asset(
-                SplashScreenImages.splashScreen,
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  const SizedBox(width: 20.0, height: 100.0),
+                  const Text(
+                    'Play',
+                    style: TextStyle(
+                      fontSize: 43.0,
+                      color: Colors.white,
+                    ),
+                  ),
+                  const SizedBox(width: 20.0, height: 100.0),
+                  DefaultTextStyle(
+                    style: const TextStyle(
+                      fontSize: 40.0,
+                      fontFamily: 'Agne',
+                    ),
+                    child: AnimatedTextKit(
+                      animatedTexts: [
+                        TypewriterAnimatedText('Verse'),
+                        TypewriterAnimatedText('Compete'),
+                        TypewriterAnimatedText('Spectator'),
+                        TypewriterAnimatedText('Gear'),
+                        TypewriterAnimatedText('Group'),
+                      ],
+                    ),
+                  ),
+                ],
               ),
             ),
           ],

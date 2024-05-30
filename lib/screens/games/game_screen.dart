@@ -1,7 +1,12 @@
 //Third Party Imports
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:neopop/widgets/buttons/neopop_button/neopop_button.dart';
+import 'package:neopop/widgets/shimmer/neopop_shimmer.dart';
+import 'package:playverse/themes/app_color_theme.dart';
 import 'package:provider/provider.dart';
 
 //Local Imports
@@ -85,63 +90,47 @@ class _GamesScreenState extends State<GamesScreen> {
                       child: Padding(
                         padding: const EdgeInsets.symmetric(
                             horizontal: 5, vertical: 10),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            // color: const Color(0XFF252849),
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              ClipRRect(
+                        child: Column(
+                          children: [
+                            Container(
+                              decoration: BoxDecoration(
+                                  border: Border.all(
+                                      width: 5,
+                                      color: value?[index].added ?? true
+                                          ? GeneralColors.neopopButtonMainColor
+                                          : Colors.transparent)),
+                              child: ClipRRect(
                                 borderRadius: BorderRadius.circular(15),
                                 child: CachedNetworkImage(
                                   imageUrl: value?[index].logo ?? "",
                                   fit: BoxFit.cover,
-                                  height: 80,
-                                  width: 80,
+                                  height: 150,
+                                  width: 100,
                                   placeholder: (context, url) =>
                                       const CircularProgressIndicator(),
                                   errorWidget: (context, url, error) =>
                                       const Icon(Icons.error),
                                 ),
                               ),
-                              Column(
-                                children: [
-                                  FittedBox(
-                                    child: Text(
-                                      "${value?[index].name}",
-                                      style: openSansFonts.copyWith(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 20,
-                                      ),
-                                    ),
+                            ),
+                            Container(
+                              color: value?[index].added ?? false
+                                  ? GeneralColors.neopopShadowColor
+                                  : Colors.transparent,
+                              width: 150,
+                              height: 20,
+                              child: FittedBox(
+                                child: Text(
+                                  "${value?[index].name}",
+                                  style: openSansFonts.copyWith(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 20,
                                   ),
-                                ],
+                                ),
                               ),
-                              SpacingUtils().horizontalSpacing(5),
-                              // FittedBox(
-                              //   child: Text(
-                              //     "${value?[index].name}",
-                              //     style: openSansFonts.copyWith(
-                              //       color: Colors.black,
-                              //       fontWeight: FontWeight.bold,
-                              //     ),
-                              //   ),
-                              // ),
-                              // FittedBox(
-                              //   child: Text(
-                              //     "${value?[index].genre}",
-                              //   ),
-                              // ),
-                              // FittedBox(
-                              //   child: Text(
-                              //     "${value?[index].gameType} Game",
-                              //   ),
-                              // ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
                       ),
                     );
@@ -281,6 +270,7 @@ class _GamesScreenState extends State<GamesScreen> {
 
   Future<void> addGameInfo(BuildContext context, Games gameData) async {
     double screenHeight = MediaQuery.of(context).size.height;
+    double screenWidth = MediaQuery.of(context).size.width;
     showDialog(
       context: context,
       builder: (context) {
@@ -334,31 +324,93 @@ class _GamesScreenState extends State<GamesScreen> {
                     ? Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          IconButton(
-                            onPressed: () => addGame(
-                                context, gameData.gameId ?? "Game ID", true),
-                            icon: const Icon(
-                              FontAwesomeIcons.pen,
-                              color: Colors.white,
+                          SizedBox(
+                            width: screenWidth / 4,
+                            child: NeoPopButton(
+                              color: GeneralColors.neopopButtonMainColor,
+                              bottomShadowColor:
+                                  GeneralColors.neopopShadowColor,
+                              onTapUp: () => {
+                                HapticFeedback.vibrate(),
+                                addGame(context, gameData.gameId ?? "Game ID",
+                                    true),
+                              },
+                              child: const NeoPopShimmer(
+                                shimmerColor: Colors.white,
+                                child: Padding(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 20, vertical: 15),
+                                  child: Text(
+                                    "Edit Name",
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+                              ),
                             ),
                           ),
-                          IconButton(
-                            onPressed: () => deleteGames(
-                                context, gameData.gameId ?? "Game ID"),
-                            icon: const Icon(
-                              FontAwesomeIcons.trash,
-                              color: Colors.white,
+                          SizedBox(
+                            width: screenWidth / 4,
+                            child: NeoPopButton(
+                              color: GeneralColors.neopopButtonMainColor,
+                              bottomShadowColor:
+                                  GeneralColors.neopopShadowColor,
+                              onTapUp: () => {
+                                HapticFeedback.vibrate(),
+                                deleteGames(
+                                    context, gameData.gameId ?? "Game ID"),
+                              },
+                              child: const NeoPopShimmer(
+                                shimmerColor: Colors.white,
+                                child: Padding(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 20, vertical: 15),
+                                  child: Text(
+                                    "Remove From Profile",
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+                              ),
                             ),
                           ),
                         ],
                       )
-                    : IconButton(
-                        onPressed: () =>
+                    : SizedBox(
+                        width: screenWidth / 1.5,
+                        child: NeoPopButton(
+                          color: GeneralColors.neopopButtonMainColor,
+                          bottomShadowColor: GeneralColors.neopopShadowColor,
+                          onTapUp: () => {
+                            HapticFeedback.vibrate(),
                             addGame(context, gameData.gameId ?? "Game ID"),
-                        icon: const Icon(
-                          FontAwesomeIcons.plus,
-                          color: Colors.white,
-                        ))
+                          },
+                          child: const NeoPopShimmer(
+                            shimmerColor: Colors.white,
+                            child: Padding(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 20, vertical: 15),
+                              child: Text(
+                                "Add to Profile",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
               ],
             ),
           ),
@@ -374,7 +426,7 @@ class _GamesScreenState extends State<GamesScreen> {
       builder: (context) {
         TextEditingController textEditingController = TextEditingController();
         return AlertDialog(
-          backgroundColor: Colors.blueAccent,
+          backgroundColor: Colors.purple,
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
           shadowColor: Colors.pink,

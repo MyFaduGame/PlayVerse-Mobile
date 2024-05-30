@@ -78,8 +78,8 @@ class _TournamentScreenState extends State<TournamentScreen> {
                   child: GridView.builder(
                     clipBehavior: Clip.none,
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 1,
-                      childAspectRatio: screenWidth / screenHeight * 3,
+                      crossAxisCount: 2,
+                      childAspectRatio: screenWidth / screenHeight * 1.2,
                       crossAxisSpacing: 15.0,
                       mainAxisSpacing: 15.0,
                     ),

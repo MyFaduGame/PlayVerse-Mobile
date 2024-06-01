@@ -14,6 +14,7 @@ class BottomAppBarImages {
   static String streamSelectedImage = "assets/images/images/liveSelected.png";
   static String coinImage = "assets/images/images/Gem.png";
   static String gameWall = "assets/images/images/games.jpg";
+  static String cartImage = "assets/images/images/cart.png";
 }
 
 class CarasouleSliderImages {

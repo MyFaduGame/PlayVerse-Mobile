@@ -139,9 +139,9 @@ class TournamentDetailScreenState extends State<TournamentDetailScreen> {
                               borderRadius: BorderRadius.circular(15),
                               child: CachedNetworkImage(
                                 imageUrl: widget.tournamentDetail.logo ?? "",
-                                fit: BoxFit.cover,
+                                fit: BoxFit.fill,
                                 height: 170,
-                                width: 100,
+                                width: 125,
                                 placeholder: (context, url) =>
                                     const CircularProgressIndicator(),
                                 errorWidget: (context, url, error) =>

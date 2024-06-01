@@ -2,14 +2,13 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:neopop/widgets/buttons/neopop_button/neopop_button.dart';
 import 'package:neopop/widgets/shimmer/neopop_shimmer.dart';
-import 'package:playverse/themes/app_color_theme.dart';
 import 'package:provider/provider.dart';
 
 //Local Imports
+import 'package:playverse/themes/app_color_theme.dart';
 import 'package:playverse/themes/app_font.dart';
 import 'package:playverse/utils/helper_utils.dart';
 import 'package:playverse/models/games_model.dart';
@@ -426,7 +425,7 @@ class _GamesScreenState extends State<GamesScreen> {
       builder: (context) {
         TextEditingController textEditingController = TextEditingController();
         return AlertDialog(
-          backgroundColor: Colors.purple,
+          backgroundColor: Colors.deepPurpleAccent[400],
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
           shadowColor: Colors.pink,
@@ -445,7 +444,7 @@ class _GamesScreenState extends State<GamesScreen> {
               child: Text(
                 'Decline!',
                 style: gamePausedFonts.copyWith(
-                  color: Colors.black,
+                  color: Colors.white,
                   fontSize: 20,
                 ),
               ),

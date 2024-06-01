@@ -12,14 +12,14 @@ import 'package:playverse/utils/helper_utils.dart';
 import 'package:playverse/models/stores_model.dart';
 import 'package:playverse/provider/store_provider.dart';
 
-class StoreScreen extends StatefulWidget {
-  const StoreScreen({super.key});
+class StoreWidget extends StatefulWidget {
+  const StoreWidget({super.key});
 
   @override
-  State<StoreScreen> createState() => _StoreScreenState();
+  State<StoreWidget> createState() => _StoreWidgetState();
 }
 
-class _StoreScreenState extends State<StoreScreen> {
+class _StoreWidgetState extends State<StoreWidget> {
   late StoreProvider provider;
   List<Products>? articlesList;
   bool isLoading = true;
@@ -59,7 +59,6 @@ class _StoreScreenState extends State<StoreScreen> {
   Widget build(BuildContext context) {
     // double screenWidth = MediaQuery.of(context).size.width;
     // double screenHeight = MediaQuery.of(context).size.height;
-    // Cart is Pending.
     return isLoading
         ? const Center(
             child: CircularProgressIndicator(),
@@ -71,12 +70,12 @@ class _StoreScreenState extends State<StoreScreen> {
                 onNotification: (notification) =>
                     Utils.scrollNotifier(notification, paginationArticles),
                 child: GridView.builder(
+                  scrollDirection: Axis.horizontal,
                   clipBehavior: Clip.none,
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
                     mainAxisSpacing: 8.0,
-                    crossAxisSpacing: 8.0,
-                    childAspectRatio: 9 / 10,
+                    childAspectRatio: 16 / 9,
                   ),
                   itemCount: value?.length,
                   itemBuilder: (BuildContext context, int index) {
@@ -98,19 +97,51 @@ class _StoreScreenState extends State<StoreScreen> {
                           borderRadius: BorderRadius.circular(15),
                         ),
                         child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          // mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(15),
-                              child: CachedNetworkImage(
-                                imageUrl: value?[index].images?[0] ?? "",
-                                fit: BoxFit.cover,
+                            CarouselSlider(
+                              items: [
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(15),
+                                  child: CachedNetworkImage(
+                                    imageUrl: value?[index].images?[0] ?? "",
+                                    // fit: BoxFit.cover,
+                                    height: 100,
+                                    width: 100,
+                                    placeholder: (context, url) =>
+                                        const CircularProgressIndicator(),
+                                    errorWidget: (context, url, error) =>
+                                        const Icon(Icons.error),
+                                  ),
+                                ),
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(15),
+                                  child: CachedNetworkImage(
+                                    imageUrl: value?[index].images?[1] ?? "",
+                                    // fit: BoxFit.cover,
+                                    height: 100,
+                                    width: 100,
+                                    placeholder: (context, url) =>
+                                        const CircularProgressIndicator(),
+                                    errorWidget: (context, url, error) =>
+                                        const Icon(Icons.error),
+                                  ),
+                                ),
+                              ],
+                              options: CarouselOptions(
                                 height: 100,
-                                width: 150,
-                                placeholder: (context, url) =>
-                                    const CircularProgressIndicator(),
-                                errorWidget: (context, url, error) =>
-                                    const Icon(Icons.error),
+                                aspectRatio: 16 / 9,
+                                viewportFraction: 1,
+                                initialPage: 0,
+                                enableInfiniteScroll: true,
+                                clipBehavior: Clip.none,
+                                autoPlay: false,
+                                autoPlayInterval: const Duration(seconds: 2),
+                                // autoPlayAnimationDuration:
+                                // const Duration(milliseconds: 800),
+                                autoPlayCurve: Curves.easeIn.flipped,
+                                enlargeCenterPage: true,
+                                scrollDirection: Axis.horizontal,
                               ),
                             ),
                             Text(

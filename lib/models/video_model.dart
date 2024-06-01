@@ -23,12 +23,16 @@ class Streams {
     final String? title;
     final DateTime? tournamentDate;
     final String? thumbnail;
+    final String? logo;
+    final String? gameName;
 
     Streams({
         this.streamLink,
         this.title,
         this.tournamentDate,
         this.thumbnail,
+        this.gameName,
+        this.logo
     });
 
     factory Streams.fromJson(Map<String, dynamic> json) => Streams(
@@ -36,12 +40,8 @@ class Streams {
         title: json["title"],
         tournamentDate: json["tournament_date"] == null ? null : DateTime.parse(json["tournament_date"]),
         thumbnail: json["thumbnail"],
+        gameName: json["game_name"],
+        logo: json["logo"],
     );
 
-    Map<String, dynamic> toJson() => {
-        "stream_link": streamLink,
-        "title": title,
-        "tournament_date": tournamentDate?.toIso8601String(),
-        "thumbnail": thumbnail,
-    };
 }

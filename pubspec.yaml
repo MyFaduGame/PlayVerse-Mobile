@@ -79,6 +79,9 @@ flutter:
     - family: GameOver
       fonts:
         - asset: assets/fonts/game_over.ttf
+    - family: Horizon
+      fonts:
+        - asset: assets/fonts/horizon.otf
     - family: GamePaused
       fonts:
         - asset: assets/fonts/GamePaused.otf

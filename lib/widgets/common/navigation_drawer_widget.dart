@@ -209,6 +209,43 @@ class _NavigationBarWidgetState extends State<NavigationBarWidget> {
                             ),
                           ),
                         ),
+                  widget.index == 10
+                      ? Container(
+                          width: 250,
+                          decoration: BoxDecoration(
+                            color: Colors.black,
+                            borderRadius: BorderRadius.circular(15),
+                            border: Border.all(
+                              color: Colors.purple,
+                            ),
+                          ),
+                          child: TextButton(
+                            onPressed: () {
+                              widget.controller.hideDrawer();
+                              tabManager.onTabChanged(10);
+                            },
+                            child: Text(
+                              "Store",
+                              style: dmSansFonts.copyWith(
+                                fontSize: screenWidth / 20,
+                                color: GeneralColors.generalTextColor,
+                              ),
+                            ),
+                          ),
+                        )
+                      : TextButton(
+                          onPressed: () {
+                            widget.controller.hideDrawer();
+                            tabManager.onTabChanged(10);
+                          },
+                          child: Text(
+                            "Store",
+                            style: dmSansFonts.copyWith(
+                              fontSize: screenWidth / 20,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
                   widget.index == 1
                       ? Container(
                           width: 250,

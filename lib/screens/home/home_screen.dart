@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 
 //Local Imports
+import 'package:playverse/widgets/common/store_widget.dart';
 import 'package:playverse/widgets/common/update_carasoule_widget.dart';
 import 'package:playverse/widgets/articles/article_list_widget.dart';
 import 'package:playverse/widgets/common/header_widget.dart';
@@ -48,19 +49,24 @@ class _HomeScreenState extends State<HomeScreen> {
               child: GamesIconWidget(),
             ),
             HeaderWidget(
-                title: "Get Trained", subTitle: "Latest Courses", index: 8),
-            SizedBox(
-              height: 250,
-              child: CourseWidget(),
-            ),
-            HeaderWidget(
               title: "Dont Left",
               subTitle: "Streams",
               index: 2,
             ),
             SizedBox(
-              height: 200,
+              height: 250,
               child: StreamsWidget(),
+            ),
+            HeaderWidget(title: "REEDEME", subTitle: "Store", index: 10),
+            SizedBox(
+              height: 400,
+              child: StoreWidget(),
+            ),
+            HeaderWidget(
+                title: "Get Trained", subTitle: "Latest Courses", index: 8),
+            SizedBox(
+              height: 250,
+              child: CourseWidget(),
             ),
             HeaderWidget(
               title: "Find Some",

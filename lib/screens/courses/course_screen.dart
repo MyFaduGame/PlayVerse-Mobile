@@ -101,10 +101,10 @@ class CourseScreenState extends State<CourseScreen> {
                       },
                       child: Container(
                         decoration: BoxDecoration(
-                          // color: const Color(0xFF853CFF).withOpacity(0.5),
-                          border: Border.all(
-                            color: Colors.black,
-                          ),
+                          gradient: const LinearGradient(
+                              begin: Alignment.topCenter,
+                              end: Alignment.bottomCenter,
+                              colors: [Color(0xFF7F00FF), Color(0xFF000000)]),
                           borderRadius: BorderRadius.circular(15),
                         ),
                         child: Padding(

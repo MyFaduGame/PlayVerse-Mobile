@@ -26,6 +26,14 @@ TextStyle uglyByteFonts = const TextStyle(
   fontFamily: "UglyByte",
 );
 
+TextStyle horizonFonts = const TextStyle(
+  color: Colors.white,
+  fontSize: 100,
+  letterSpacing: 2,
+  fontWeight: FontWeight.normal,
+  fontFamily: "Horizon",
+);
+
 TextStyle poppinsFonts = GoogleFonts.poppins(
     textStyle: const TextStyle(
   color: Colors.black,

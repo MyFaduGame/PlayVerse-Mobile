@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:playverse/app.dart';
 import 'package:playverse/screens/auth/auth_screen.dart';
 import 'package:playverse/themes/app_color_theme.dart';
-import 'package:playverse/themes/app_images.dart';
+import 'package:playverse/themes/app_font.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -104,26 +104,53 @@ class _SplashScreenState extends State<SplashScreen> {
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
                   const SizedBox(width: 20.0, height: 100.0),
-                  const Text(
+                  Text(
                     'Play',
-                    style: TextStyle(
-                      fontSize: 43.0,
-                      color: Colors.white,
+                    style: horizonFonts.copyWith(
+                      fontSize: 25.0,
                     ),
                   ),
-                  const SizedBox(width: 20.0, height: 100.0),
                   DefaultTextStyle(
-                    style: const TextStyle(
-                      fontSize: 40.0,
-                      fontFamily: 'Agne',
+                    style: horizonFonts.copyWith(
+                      fontSize: 20.0,
                     ),
                     child: AnimatedTextKit(
                       animatedTexts: [
-                        TypewriterAnimatedText('Verse'),
-                        TypewriterAnimatedText('Compete'),
-                        TypewriterAnimatedText('Spectator'),
-                        TypewriterAnimatedText('Gear'),
-                        TypewriterAnimatedText('Group'),
+                        TypewriterAnimatedText(
+                          ' Verse',
+                          textStyle: horizonFonts.copyWith(
+                            color: Colors.white,
+                            fontSize: 25,
+                          ),
+                        ),
+                        TypewriterAnimatedText(
+                          ' Compete',
+                          textStyle: horizonFonts.copyWith(
+                            color: Colors.blue,
+                            fontSize: 20,
+                          ),
+                        ),
+                        TypewriterAnimatedText(
+                          ' Spectator',
+                          textStyle: horizonFonts.copyWith(
+                            color: Colors.purple,
+                            fontSize: 20,
+                          ),
+                        ),
+                        TypewriterAnimatedText(
+                          ' Gear',
+                          textStyle: horizonFonts.copyWith(
+                            color: Colors.purpleAccent,
+                            fontSize: 20,
+                          ),
+                        ),
+                        TypewriterAnimatedText(
+                          ' Group',
+                          textStyle: horizonFonts.copyWith(
+                            color: Colors.deepPurple,
+                            fontSize: 20,
+                          ),
+                        ),
                       ],
                     ),
                   ),

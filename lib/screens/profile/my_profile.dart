@@ -130,6 +130,36 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                                       ),
                               ),
                             ),
+                          ),
+                          Positioned(
+                            top: 225,
+                            right: 20,
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(55),
+                                  ),
+                                  height: 20,
+                                  width: screenWidth - 200,
+                                  child: LinearProgressIndicator(
+                                    value: 0.45,
+                                    borderRadius: BorderRadius.circular(55),
+                                    backgroundColor: Colors.grey[300],
+                                    color: Colors.green,
+                                  ),
+                                ),
+                                const SizedBox(height: 10),
+                                Text(
+                                  "Progress",
+                                  style: poppinsFonts.copyWith(
+                                    fontSize: 20,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ],
+                            ),
                           )
                         ],
                       ),

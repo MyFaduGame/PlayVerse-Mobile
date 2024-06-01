@@ -191,6 +191,7 @@ class _ArticleWidgetState extends State<ArticleWidget> {
                   },
                 ),
               );
-            });
+            },
+          );
   }
 }

@@ -82,29 +82,28 @@ class CourseWidgetState extends State<CourseWidget> {
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
                   clipBehavior: Clip.none,
-                  itemCount: value?.length??0,
+                  itemCount: value?.length ?? 0,
                   itemBuilder: (context, index) {
-                    return GestureDetector(
-                      onTap: () => {
-                        HapticFeedback.vibrate(),
-                        courseProvider.register(
-                          userModel?.email ?? "",
-                          "I want to buy this course!",
-                          value?[index].name ?? "",
-                          userModel?.mobile ?? null.toString(),
-                        )
-                      },
-                      child: Container(
-                        decoration: BoxDecoration(
-                          // color: const Color(0xFF853CFF).withOpacity(0.5),
-                          // color: Colors.white30,
-                          border: Border.all(
-                            color: Colors.black,
+                    return Padding(
+                      padding: const EdgeInsets.only(left: 8.0),
+                      child: GestureDetector(
+                        onTap: () => {
+                          HapticFeedback.vibrate(),
+                          courseProvider.register(
+                            userModel?.email ?? "",
+                            "I want to buy this course!",
+                            value?[index].name ?? "",
+                            userModel?.mobile ?? null.toString(),
+                          )
+                        },
+                        child: Container(
+                          decoration: BoxDecoration(
+                            gradient: const LinearGradient(
+                                begin: Alignment.topCenter,
+                                end: Alignment.bottomCenter,
+                                colors: [Color(0xFF7F00FF), Color(0xFF000000)]),
+                            borderRadius: BorderRadius.circular(15),
                           ),
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [

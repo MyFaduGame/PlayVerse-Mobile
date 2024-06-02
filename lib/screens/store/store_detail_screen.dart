@@ -8,6 +8,7 @@ import 'package:neopop/widgets/shimmer/neopop_shimmer.dart';
 
 //Local Imports
 import 'package:playverse/models/stores_model.dart';
+import 'package:playverse/screens/store/cart_screen.dart';
 import 'package:playverse/themes/app_color_theme.dart';
 import 'package:playverse/themes/app_font.dart';
 import 'package:playverse/themes/app_images.dart';
@@ -26,6 +27,7 @@ class StoreDetailScreen extends StatefulWidget {
 }
 
 class _StoreDetailScreenState extends State<StoreDetailScreen> {
+  TextEditingController serachText = TextEditingController();
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
@@ -46,32 +48,47 @@ class _StoreDetailScreenState extends State<StoreDetailScreen> {
                     color: const Color(0xFF7F00FF),
                     borderRadius: BorderRadius.circular(5),
                   ),
-                  child: Row(
-                    children: [
-                      const Icon(
-                        Icons.search_sharp,
-                        size: 35,
-                        color: Colors.white,
-                      ),
-                      Text(
-                        'Serach Products',
-                        style: poppinsFonts.copyWith(
-                          color: Colors.white,
-                          fontSize: 20,
-                        ),
-                      )
-                    ],
-                  ),
+                  //TODO add serach bar
+                  // child: SearchBar(
+                  //   controller: serachText,
+                  //   hintText: "Serach Products",
+
+                  //   // backgroundColor: MaterialStateProperty.all(Colors.white)),
+                  // ),
+                  // child: Row(
+                  //   children: [
+                  //     const Icon(
+                  //       Icons.search_sharp,
+                  //       size: 35,
+                  //       color: Colors.white,
+                  //     ),
+                  //     Text(
+                  //       'Serach Products',
+                  //       style: poppinsFonts.copyWith(
+                  //         color: Colors.white,
+                  //         fontSize: 20,
+                  //       ),
+                  //     )
+                  //   ],
+                  // ),
                 ),
-                Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(5),
-                    color: const Color(0xFF7F00FF),
+                GestureDetector(
+                  onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const CartScreen(),
+                    ),
                   ),
-                  child: Image.asset(
-                    BottomAppBarImages.cartImage,
-                    height: 35,
-                    width: 35,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(5),
+                      color: const Color(0xFF7F00FF),
+                    ),
+                    child: Image.asset(
+                      BottomAppBarImages.cartImage,
+                      height: 40,
+                      width: 45,
+                    ),
                   ),
                 )
               ],
@@ -195,11 +212,16 @@ class _StoreDetailScreenState extends State<StoreDetailScreen> {
                       Column(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
-                          Text(
-                            widget.productDetail.name ?? "Product Name",
-                            style: poppinsFonts.copyWith(
-                              color: Colors.white,
-                              fontSize: 20,
+                          SizedBox(
+                            width: (screenWidth / 2) - 10,
+                            child: FittedBox(
+                              child: Text(
+                                widget.productDetail.name ?? "Product Name",
+                                style: poppinsFonts.copyWith(
+                                  color: Colors.white,
+                                  fontSize: 20,
+                                ),
+                              ),
                             ),
                           ),
                           const SizedBox(height: 16),

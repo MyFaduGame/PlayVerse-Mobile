@@ -2,10 +2,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:playverse/screens/store/store_detail_screen.dart';
 import 'package:provider/provider.dart';
 
 //Local Imports
+import 'package:playverse/screens/store/store_detail_screen.dart';
 import 'package:playverse/themes/app_font.dart';
 import 'package:playverse/themes/app_images.dart';
 import 'package:playverse/utils/helper_utils.dart';
@@ -97,7 +97,7 @@ class _StoreWidgetState extends State<StoreWidget> {
                           borderRadius: BorderRadius.circular(15),
                         ),
                         child: Column(
-                          // mainAxisAlignment: MainAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: <Widget>[
                             CarouselSlider(
                               items: [

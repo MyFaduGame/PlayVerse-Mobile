@@ -1,5 +1,6 @@
 //Third Party Imports
 import 'package:flutter/material.dart';
+import 'package:playverse/screens/gems/gems_buy_screen.dart';
 import 'package:provider/provider.dart';
 
 //Local Imports
@@ -159,7 +160,12 @@ class _GemsScreenState extends State<GemsScreen> {
                     ],
                   ),
                   GestureDetector(
-                    onTap: () => {},
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const BuyGemsScreen(),
+                      ),
+                    ),
                     child: Container(
                       margin: const EdgeInsets.symmetric(horizontal: 10),
                       width: double.infinity,

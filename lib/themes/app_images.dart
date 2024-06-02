@@ -40,6 +40,11 @@ class AuthScreenImages {
       "assets/images/images/controller_small.png";
 }
 
+class BundleImages {
+  static String bundle1 = "assets/images/images/bundle1.png";
+  static String bundle2 = "assets/images/images/bundle2.png";
+}
+
 class LoadingImages {
   static String loading0 = "assets/images/gif/loading0.gif";
   static String loading1 = "assets/images/gif/loading1.gif";

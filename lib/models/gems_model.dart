@@ -42,3 +42,14 @@ class GemsData {
         "Total": total,
     };
 }
+
+class GemsInfo {
+  final int? gemsAmount;
+  final int? gemsPrize;
+
+  GemsInfo({
+    this.gemsAmount,
+    this.gemsPrize,
+  });
+
+}

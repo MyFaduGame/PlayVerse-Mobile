@@ -5,9 +5,9 @@ import 'package:flutter/material.dart';
 //Local Imports
 import 'package:playverse/models/user_profile_model.dart';
 import 'package:playverse/repository/user_profile_repo.dart';
+import 'package:playverse/utils/toast_bar.dart';
 
 class UserProfileProvider extends ChangeNotifier {
-  
   final repo = UserProfileRepo();
   UserProfile? userModel;
   UserProfileVisit? userProfileVisit;
@@ -53,15 +53,17 @@ class UserProfileProvider extends ChangeNotifier {
       isLoading = true;
       Map<String, dynamic> responseData = await repo.updateProfileApi(data);
       if (responseData['status_code'] == 200) {
-        userModel = UserProfile.fromJson(responseData['data']);
-        isLoading = false;
-        notifyListeners();
-        return userModel;
+        showCustomToast("Profile Updated Successfully.");
+        return true;
       } else {
         log(responseData.toString(), name: 'User Profile Logs');
+        showCustomToast("Profile Didn't Update");
+        return false;
       }
     } catch (e) {
       log("$e", name: "Error in User Profile Get");
+      showCustomToast("Profile Didn't Update");
+      return false;
     }
   }
 }

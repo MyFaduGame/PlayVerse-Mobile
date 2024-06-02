@@ -144,7 +144,9 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                                   height: 20,
                                   width: screenWidth - 200,
                                   child: LinearProgressIndicator(
-                                    value: 0.45,
+                                    value: ((userModel?.expirence?.toDouble() ??
+                                            10 * 100) /
+                                        100),
                                     borderRadius: BorderRadius.circular(55),
                                     backgroundColor: Colors.grey[300],
                                     color: Colors.green,
@@ -392,7 +394,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
           body: const TabBarView(
             children: <Widget>[
               GamesProfileWidget(),
-              SizedBox(child: TournamentProfileWidget()),
+              TournamentProfileWidget(),
               FriendsWidget(),
             ],
           ),

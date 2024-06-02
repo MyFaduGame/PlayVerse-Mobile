@@ -21,7 +21,7 @@ class _ArticleDetialScreenState extends State<ArticleDetialScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0XFF252849),
+      backgroundColor: Colors.black,
       appBar: const PreferredSize(
         preferredSize: Size.fromHeight(120),
         child: BackAppBar(),

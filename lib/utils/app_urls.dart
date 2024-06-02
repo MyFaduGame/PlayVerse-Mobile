@@ -1,6 +1,6 @@
 class ApiUrls {
-  static String baseUrl = "http://api.myfadugame.com/v1/";
-  // static String baseUrl = "http://192.168.0.113:8000/v1/";
+  // static String baseUrl = "http://api.myfadugame.com/v1/";
+  static String baseUrl = "http://192.168.0.113:8000/v1/";
 }
 
 class UserUrls {
@@ -73,4 +73,5 @@ class StreamsUrl {
 
 class StoreUrl {
   static String getProducts = "stores/products";
+  static String getCart = "cart";
 }

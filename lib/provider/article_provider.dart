@@ -24,10 +24,10 @@ class ArticlesProvider extends ChangeNotifier {
         notifyListeners();
         return tempList.length;
       } else {
-        log(responseData.toString(), name: 'Articles Error Log');
+        log(responseData.toString(), name: 'Get All Articles Error Log');
       }
     } catch (e) {
-      log("$e", name: "Articles List Error");
+      log("$e", name: "Get All Articles List Error");
     }
   }
 }

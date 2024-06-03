@@ -16,7 +16,6 @@ import 'package:playverse/models/friends_model.dart';
 import 'package:playverse/provider/friends_provider.dart';
 import 'package:playverse/themes/app_color_theme.dart';
 
-
 class FriendsRecommendWidget extends StatefulWidget {
   const FriendsRecommendWidget({super.key});
 
@@ -98,6 +97,7 @@ class _FriendsRecommendWidgetState extends State<FriendsRecommendWidget> {
                 onNotification: (notification) =>
                     Utils.scrollNotifier(notification, paginationFriends),
                 child: ListView.builder(
+                  padding: EdgeInsets.zero,
                   clipBehavior: Clip.none,
                   itemCount: value?.length,
                   itemBuilder: (context, index) {

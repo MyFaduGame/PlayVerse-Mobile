@@ -7,10 +7,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:playverse/screens/store/store_screen.dart';
 import 'package:provider/provider.dart';
 
 //Local Imports
+import 'package:playverse/screens/store/store_screen.dart';
 import 'package:playverse/screens/profile/friend_screen.dart';
 import 'package:playverse/screens/achievements/achievements_screen.dart';
 import 'package:playverse/screens/courses/course_screen.dart';

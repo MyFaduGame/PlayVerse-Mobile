@@ -7,7 +7,6 @@ import 'package:neopop/widgets/shimmer/neopop_shimmer.dart';
 import 'package:provider/provider.dart';
 
 //Local Imports
-import 'package:playverse/utils/helper_utils.dart';
 import 'package:playverse/themes/app_images.dart';
 import 'package:playverse/themes/app_font.dart';
 import 'package:playverse/models/stores_model.dart';
@@ -125,7 +124,7 @@ class _CartScreenState extends State<CartScreen> {
                       ),
                       itemCount: cartList?.length ?? 0,
                       itemBuilder: (BuildContext context, int index) {
-                        return cartList?.length == 0
+                        return cartList?.isEmpty ?? true
                             ? Center(
                                 child: SizedBox(
                                   width: screenWidth / 1.5,

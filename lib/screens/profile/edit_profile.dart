@@ -1,4 +1,5 @@
 //Third Party Imports
+// ignore_for_file: deprecated_member_use
 import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
@@ -43,11 +44,14 @@ class EditProfileScreenState extends State<EditProfileScreen> {
   bool isLoading = true;
 
   String? countryID;
-  TextEditingController countryName = TextEditingController();
+  // TextEditingController countryName = TextEditingController();
+  String? countryName;
   String? stateID;
-  TextEditingController stateName = TextEditingController();
+  // TextEditingController stateName = TextEditingController();
+  String? stateName;
   String? cityID;
-  TextEditingController cityName = TextEditingController();
+  // TextEditingController cityName = TextEditingController();
+  String? cityName;
 
   TextEditingController firstNameController = TextEditingController();
   TextEditingController lastNameController = TextEditingController();
@@ -97,9 +101,9 @@ class EditProfileScreenState extends State<EditProfileScreen> {
         isLoading = false;
       });
     });
-    countryName.text = userProfile?.country ?? "";
-    cityName.text = userProfile?.city ?? "";
-    stateName.text = userProfile?.state ?? "";
+    // countryName.text = userProfile?.country ?? "";
+    // cityName.text = userProfile?.city ?? "";
+    // stateName.text = userProfile?.state ?? "";
   }
 
   @override
@@ -107,6 +111,9 @@ class EditProfileScreenState extends State<EditProfileScreen> {
     userProfile =
         context.select((UserProfileProvider value) => value.userModel);
     // selectedGender = userProfile?.gender ?? 'Male';
+    // countryName = userProfile?.country ?? "";
+    // cityName = userProfile?.city ?? "";
+    // stateName = userProfile?.state ?? "";
     country = context.select((LocationProvider value) => value.countryData);
     state = context.select((LocationProvider value) => value.stateData);
     city = context.select((LocationProvider value) => value.cityData);
@@ -355,6 +362,7 @@ class EditProfileScreenState extends State<EditProfileScreen> {
                             SizedBox(
                               width: screenWidth / 2.5,
                               child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
                                     "Country",
@@ -380,7 +388,7 @@ class EditProfileScreenState extends State<EditProfileScreen> {
                                                       countryID =
                                                           country?[index]
                                                               .countryId;
-                                                      countryName.text =
+                                                      countryName =
                                                           country?[index]
                                                                   .country ??
                                                               "Country Name";
@@ -429,15 +437,13 @@ class EditProfileScreenState extends State<EditProfileScreen> {
                                         borderRadius: BorderRadius.circular(15),
                                       ),
                                       child: Center(
-                                        child: FittedBox(
-                                          child: TextField(
-                                            controller: countryName,
-                                            style: poppinsFonts.copyWith(
-                                              color: Colors.white,
-                                              fontSize: 25,
-                                            ),
-                                            textAlign: TextAlign.center,
+                                        child: Text(
+                                          countryName ?? "",
+                                          style: poppinsFonts.copyWith(
+                                            color: Colors.white,
+                                            fontSize: 25,
                                           ),
+                                          textAlign: TextAlign.center,
                                         ),
                                       ),
                                     ),
@@ -478,9 +484,9 @@ class EditProfileScreenState extends State<EditProfileScreen> {
                                                     setState(() {
                                                       stateID =
                                                           state?[index].stateId;
-                                                      stateName.text =
+                                                      stateName =
                                                           state?[index].state ??
-                                                              "Country Name";
+                                                              "State Name";
                                                       locProvider
                                                           .getCity(stateID ??
                                                               "31cdcc3f-48ae-4734-a2dd-7c86dd9e4c53")
@@ -526,13 +532,11 @@ class EditProfileScreenState extends State<EditProfileScreen> {
                                         borderRadius: BorderRadius.circular(15),
                                       ),
                                       child: Center(
-                                        child: FittedBox(
-                                          child: TextField(
-                                            controller: stateName,
-                                            style: poppinsFonts.copyWith(
-                                              color: Colors.white,
-                                              fontSize: 25,
-                                            ),
+                                        child: Text(
+                                          stateName ?? "",
+                                          style: poppinsFonts.copyWith(
+                                            color: Colors.white,
+                                            fontSize: 25,
                                           ),
                                         ),
                                       ),
@@ -568,7 +572,7 @@ class EditProfileScreenState extends State<EditProfileScreen> {
                                                     setState(() {
                                                       cityID =
                                                           city?[index].cityId;
-                                                      cityName.text =
+                                                      cityName =
                                                           city?[index].city ??
                                                               "city Name";
                                                     }),
@@ -603,13 +607,11 @@ class EditProfileScreenState extends State<EditProfileScreen> {
                                         borderRadius: BorderRadius.circular(15),
                                       ),
                                       child: Center(
-                                        child: FittedBox(
-                                          child: TextField(
-                                            controller: cityName,
-                                            style: poppinsFonts.copyWith(
-                                              color: Colors.white,
-                                              fontSize: 25,
-                                            ),
+                                        child: Text(
+                                          cityName ?? "",
+                                          style: poppinsFonts.copyWith(
+                                            color: Colors.white,
+                                            fontSize: 25,
                                           ),
                                         ),
                                       ),

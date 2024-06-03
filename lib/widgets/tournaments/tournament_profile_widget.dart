@@ -1,7 +1,6 @@
 //Third Party Imports
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
@@ -71,6 +70,7 @@ class TournamentProfileWidgetState extends State<TournamentProfileWidget> {
                 onNotification: (notification) =>
                     Utils.scrollNotifier(notification, paginationTournaments),
                 child: ListView.builder(
+                  padding: EdgeInsets.zero,
                   clipBehavior: Clip.hardEdge,
                   itemCount: value?.length ?? 0,
                   itemBuilder: (context, index) {

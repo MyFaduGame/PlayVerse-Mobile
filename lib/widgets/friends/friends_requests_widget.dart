@@ -10,7 +10,6 @@ import 'package:neopop/widgets/shimmer/neopop_shimmer.dart';
 //Local Imports
 import 'package:playverse/screens/profile/user_profile.dart';
 import 'package:playverse/themes/app_color_theme.dart';
-
 import 'package:playverse/themes/app_images.dart';
 import 'package:playverse/themes/app_font.dart';
 import 'package:playverse/models/friends_model.dart';
@@ -70,34 +69,35 @@ class _FriendRequestScreenState extends State<FriendRequestScreen> {
             builder: (context, value, child) {
               return value?.isEmpty ?? true
                   ? Center(
-                child: SizedBox(
-                  width: screenWidth / 1.5,
-                  child: NeoPopButton(
-                    color: GeneralColors.neopopButtonMainColor,
-                    bottomShadowColor: GeneralColors.neopopShadowColor,
-                    onTapUp: () => {
-                      HapticFeedback.vibrate(),
-                    },
-                    child: const NeoPopShimmer(
-                      shimmerColor: Colors.white,
-                      child: Padding(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-                        child: Text(
-                          "All Set!",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
+                      child: SizedBox(
+                        width: screenWidth / 1.5,
+                        child: NeoPopButton(
+                          color: GeneralColors.neopopButtonMainColor,
+                          bottomShadowColor: GeneralColors.neopopShadowColor,
+                          onTapUp: () => {
+                            HapticFeedback.vibrate(),
+                          },
+                          child: const NeoPopShimmer(
+                            shimmerColor: Colors.white,
+                            child: Padding(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 20, vertical: 15),
+                              child: Text(
+                                "All Set!",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                  ),
-                ),
-              )
+                    )
                   : ListView.builder(
+                      padding: EdgeInsets.zero,
                       clipBehavior: Clip.none,
                       itemCount: value?.length,
                       itemBuilder: (context, index) {

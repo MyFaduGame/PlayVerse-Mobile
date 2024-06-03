@@ -1,16 +1,16 @@
-//Fastapi Imports
+//Third Party Imports
 import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:playverse/provider/location_provider.dart';
-import 'package:playverse/provider/store_provider.dart';
 import 'package:provider/provider.dart';
 import 'firebase_options.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/services.dart';
 
 //Local Imports
+import 'package:playverse/provider/location_provider.dart';
 import 'package:playverse/provider/video_provider.dart';
+import 'package:playverse/provider/store_provider.dart';
 import 'package:playverse/provider/course_provider.dart';
 import 'package:playverse/provider/article_provider.dart';
 import 'package:playverse/provider/gems_provider.dart';

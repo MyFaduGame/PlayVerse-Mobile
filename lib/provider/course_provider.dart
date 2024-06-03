@@ -1,10 +1,10 @@
 //Third Party Imports
 import 'dart:developer';
 import 'package:flutter/material.dart';
-import 'package:playverse/repository/course_repo.dart';
 
 //Local Imports
 import 'package:playverse/utils/toast_bar.dart';
+import 'package:playverse/repository/course_repo.dart';
 
 class CourseProvider extends ChangeNotifier {
   CourseRepo courseRepo = CourseRepo();

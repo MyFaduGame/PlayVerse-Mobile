@@ -99,6 +99,7 @@ class _FriendsWidgetState extends State<FriendsWidget> {
                 onNotification: (notification) =>
                     Utils.scrollNotifier(notification, paginationFriends),
                 child: ListView.builder(
+                  padding: EdgeInsets.zero,
                   clipBehavior: Clip.none,
                   itemCount: value?.length,
                   itemBuilder: (context, index) {

@@ -7,7 +7,6 @@ import 'package:playverse/models/achievements_model.dart';
 import 'package:playverse/repository/achievements_repo.dart';
 
 class AchievementsProvider extends ChangeNotifier {
-  
   final repo = AcheivementsRepo();
   List<Achievements> userAchievements = [];
   List<Achievements> allAchievements = [];
@@ -20,15 +19,17 @@ class AchievementsProvider extends ChangeNotifier {
       if (responseData['status_code'] == 200) {
         List<Achievements> tempList = List<Achievements>.from(
             responseData["data"]!.map((x) => Achievements.fromJson(x)));
-        offset==1 ? userAchievements = tempList: userAchievements += tempList;
+        offset == 1
+            ? userAchievements = tempList
+            : userAchievements += tempList;
         isLoading = false;
         notifyListeners();
         return tempList.length;
       } else {
-        log(responseData.toString(), name: 'Achievements Error Log');
+        log(responseData.toString(), name: 'Get User Achievements Error Log');
       }
     } catch (e) {
-      log("$e", name: "Achievement List Error");
+      log("$e", name: "Get User Achievement Error");
     }
   }
 
@@ -39,16 +40,15 @@ class AchievementsProvider extends ChangeNotifier {
       if (responseData['status_code'] == 200) {
         List<Achievements> tempList = List<Achievements>.from(
             responseData["data"]!.map((x) => Achievements.fromJson(x)));
-        offset==1 ? allAchievements = tempList: allAchievements += tempList;
+        offset == 1 ? allAchievements = tempList : allAchievements += tempList;
         isLoading = false;
         notifyListeners();
         return tempList.length;
       } else {
-        log(responseData.toString(), name: 'Achievements Error Log');
+        log(responseData.toString(), name: 'Get All Achievements Error Log');
       }
     } catch (e) {
-      log("$e", name: "Achievement List Error");
+      log("$e", name: "Get All Achievement List Error");
     }
   }
-
 }

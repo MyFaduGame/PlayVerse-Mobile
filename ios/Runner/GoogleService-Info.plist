@@ -15,7 +15,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.example.playverse</string>
+	<string>com.app.playverse</string>
 	<key>PROJECT_ID</key>
 	<string>trail1-86ba8</string>
 	<key>STORAGE_BUCKET</key>

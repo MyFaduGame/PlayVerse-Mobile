@@ -1,4 +1,4 @@
-package com.example.playverse
+package com.app.playverse
 
 import io.flutter.embedding.android.FlutterActivity
 

@@ -120,7 +120,8 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => LocationProvider()),
       ],
       child: MaterialApp(
-        title: "GeNoS",
+        debugShowCheckedModeBanner: false,
+        title: "PlayVerse",
         scaffoldMessengerKey: messengerKey,
         home: const SplashScreen(),
         theme: ThemeData(

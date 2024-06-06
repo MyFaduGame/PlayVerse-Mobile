@@ -56,6 +56,8 @@ Future<({String? email, String? password})> signInWithEmailPassword(
   try {
     final credential = await FirebaseAuth.instance
         .signInWithEmailAndPassword(email: email, password: password);
+    developer.log("app is comming here also", name: "sample new");
+    developer.log('comming here', name: "smaple");
     returnText = '';
     if (credential.user != null) {
       developer.log(credential.toString(), name: 'credentials');
@@ -70,7 +72,7 @@ Future<({String? email, String? password})> signInWithEmailPassword(
       return (email: null, password: returnText);
     } else if (e.code == 'INVALID_LOGIN_CREDENTIALS') {
       returnText = 'Invalid Login Credentials';
-      return (email: returnText, password: returnText); 
+      return (email: returnText, password: returnText);
     } else {
       showCustomToast(e.code);
     }
@@ -169,21 +171,17 @@ Future signOut() async {
   // await googleSignIn.disconnect();
   // await FirebaseAuth.instance.signOut();
 
-  developer.log("SignOut and cleaned Prefrences",name: "SignOut");
+  developer.log("SignOut and cleaned Prefrences", name: "SignOut");
 }
 
-String emailText='';
+String emailText = '';
 Future<({String? email})> resetPassword(String email) async {
-    await _auth
-        .sendPasswordResetEmail(email: email)
-        .then((value) {
-          showCustomToast("Email Sent to your mail");
-          emailText = 'success';
-        })
-        .catchError((e){
-          showCustomToast(e.toString());
-          emailText='Error';
-        });
-    return (email:emailText);
-  }
-
+  await _auth.sendPasswordResetEmail(email: email).then((value) {
+    showCustomToast("Email Sent to your mail");
+    emailText = 'success';
+  }).catchError((e) {
+    showCustomToast(e.toString());
+    emailText = 'Error';
+  });
+  return (email: emailText);
+}

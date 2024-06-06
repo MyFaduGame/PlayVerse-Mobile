@@ -37,7 +37,7 @@ class _NavigationBarWidgetState extends State<NavigationBarWidget> {
     return SafeArea(
       child: SingleChildScrollView(
         child: SizedBox(
-          height: screenHeight - 100,
+          // height: screenHeight - 100,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -103,7 +103,7 @@ class _NavigationBarWidgetState extends State<NavigationBarWidget> {
                       },
                       child: Container(
                         width: 100,
-                        height: 40,
+                        height: screenWidth / 10,
                         decoration: BoxDecoration(
                             color: const Color(0xFF231750),
                             borderRadius: BorderRadius.circular(15)),
@@ -112,15 +112,15 @@ class _NavigationBarWidgetState extends State<NavigationBarWidget> {
                           children: [
                             Image.asset(
                               BottomAppBarImages.coinImage,
-                              height: 40,
-                              width: 40,
+                              height: screenWidth / 15,
+                              width: screenWidth / 15,
                             ),
                             Text(
                               textAlign: TextAlign.center,
                               widget.userProfile.gems.toString(),
                               style: poppinsFonts.copyWith(
                                 color: const Color(0xFFBF99FF),
-                                fontSize: 15,
+                                fontSize: screenWidth / 25,
                               ),
                             ),
                           ],
@@ -484,7 +484,28 @@ class _NavigationBarWidgetState extends State<NavigationBarWidget> {
                   ),
                   child: Center(
                     child: Text(
-                      "LogOut",
+                      "Log Out",
+                      style: dmSansFonts.copyWith(
+                          color: Colors.white, fontSize: 10),
+                    ),
+                  ),
+                ),
+              ),
+              const Padding(padding: EdgeInsets.only(bottom: 10)),
+              GestureDetector(
+                onTap: () {
+                  logout(context);
+                },
+                child: Container(
+                  width: 100,
+                  height: 50,
+                  decoration: BoxDecoration(
+                    color: GeneralColors.gradientBackgrounColor0,
+                    borderRadius: BorderRadius.circular(30),
+                  ),
+                  child: Center(
+                    child: Text(
+                      "Deactivate",
                       style: dmSansFonts.copyWith(
                           color: Colors.white, fontSize: 10),
                     ),

@@ -1,9 +1,5 @@
 //Third Party Imports
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:neopop/widgets/buttons/neopop_button/neopop_button.dart';
-import 'package:neopop/widgets/shimmer/neopop_shimmer.dart';
 
 //Local Imports
 import 'package:playverse/repository/firebase_api.dart';
@@ -13,6 +9,7 @@ import 'package:playverse/themes/app_color_theme.dart';
 import 'package:playverse/themes/app_font.dart';
 import 'package:playverse/themes/app_images.dart';
 import 'package:playverse/utils/loader_dialouge.dart';
+import 'package:playverse/widgets/common/neo_pop_widget.dart';
 
 class ForgetPasswordScreen extends StatefulWidget {
   const ForgetPasswordScreen({super.key});
@@ -140,7 +137,6 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                                     color: Colors.white,
                                   )),
                             ),
-                            const SizedBox(height: 20),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
@@ -171,46 +167,12 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                     const SizedBox(
                       height: 32,
                     ),
-                    SizedBox(
-                      width: screenWidth / 1.5,
-                      child: NeoPopButton(
-                        color: GeneralColors.neopopButtonMainColor,
-                        bottomShadowColor: GeneralColors.neopopShadowColor,
-                        onTapUp: () => {
-                          HapticFeedback.vibrate(),
-                          if (_formKey.currentState!.validate()) {reset()}
-                          // Navigator.pushAndRemoveUntil(
-                          //   context,
-                          //   MaterialPageRoute(
-                          //     builder: (context) => const App(),
-                          //     settings: const RouteSettings(name: '/app'),
-                          //   ),
-                          //   (route) => false,
-                          // ),
-                        },
-                        child: NeoPopShimmer(
-                          shimmerColor: Colors.white,
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 20, vertical: 15),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                SvgPicture.asset(AuthScreenImages.loginIcon),
-                                const SizedBox(width: 5),
-                                const Text(
-                                  "Request an Reset",
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
+                    NeoPopButtonWidget(
+                      text: "Request an Reset",
+                      navigation: () => {
+                        if (_formKey.currentState!.validate()) {reset()}
+                      },
+                      textImage: AuthScreenImages.loginIcon,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,

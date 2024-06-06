@@ -6,6 +6,8 @@
 	<true/>
 	<key>UIRequiresFullScreen</key>
 	<true/>
+	<key>FirebaseAppDelegateProxyEnabled</key>
+	<true/>
 	<key>NSContactsUsageDescription</key>
 	<string>We need Contact for app</string>
 	<key>NSPhotoLibraryUsageDescription</key>

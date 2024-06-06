@@ -1,13 +1,10 @@
 //Third Party Imports
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:neopop/widgets/buttons/neopop_button/neopop_button.dart';
-import 'package:neopop/widgets/shimmer/neopop_shimmer.dart';
 import 'package:provider/provider.dart';
 
 //Local Imports
+import 'package:playverse/widgets/common/neo_pop_widget.dart';
 import 'package:playverse/themes/app_font.dart';
 import 'package:playverse/screens/auth/login_screen.dart';
 import 'package:playverse/app.dart';
@@ -27,6 +24,7 @@ class SignUpScreen extends StatefulWidget {
 class SignUpScreenState extends State<SignUpScreen> {
   late UserAuthProvider authProvider;
   final _formKey = GlobalKey<FormState>();
+  bool showPassword = false;
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController nameController = TextEditingController();
@@ -262,7 +260,7 @@ class SignUpScreenState extends State<SignUpScreen> {
                                 }
                               },
                               controller: passwordController,
-                              obscureText: true,
+                              obscureText: showPassword,
                               validator: (value) {
                                 if (value!.isEmpty) {
                                   return "Enter your PassKey";
@@ -270,19 +268,32 @@ class SignUpScreenState extends State<SignUpScreen> {
                                 return passwordError;
                               },
                               keyboardType: TextInputType.name,
-                              decoration: const InputDecoration(
-                                  border: OutlineInputBorder(
+                              decoration: InputDecoration(
+                                  suffixIcon: IconButton(
+                                    icon: Icon(
+                                      showPassword
+                                          ? Icons.visibility
+                                          : Icons.visibility_off,
+                                      color: Colors.white,
+                                    ),
+                                    onPressed: () {
+                                      setState(() {
+                                        showPassword = !showPassword;
+                                      });
+                                    },
+                                  ),
+                                  border: const OutlineInputBorder(
                                     borderSide: BorderSide(
                                       color: Colors.white,
                                     ),
                                   ),
                                   hintText: 'Enter your Passkey',
-                                  enabledBorder: OutlineInputBorder(
+                                  enabledBorder: const OutlineInputBorder(
                                     borderSide: BorderSide(
                                       color: Colors.white,
                                     ),
                                   ),
-                                  hintStyle: TextStyle(
+                                  hintStyle: const TextStyle(
                                     color: Colors.white,
                                   )),
                             ),
@@ -303,7 +314,7 @@ class SignUpScreenState extends State<SignUpScreen> {
                                   setState(() => passwordError = null);
                                 }
                               },
-                              obscureText: true,
+                              obscureText: showPassword,
                               controller: rePasswordController,
                               keyboardType: TextInputType.name,
                               validator: (value) {
@@ -312,19 +323,32 @@ class SignUpScreenState extends State<SignUpScreen> {
                                 }
                                 return emailError;
                               },
-                              decoration: const InputDecoration(
-                                  border: OutlineInputBorder(
+                              decoration: InputDecoration(
+                                  suffixIcon: IconButton(
+                                    icon: Icon(
+                                      showPassword
+                                          ? Icons.visibility
+                                          : Icons.visibility_off,
+                                      color: Colors.white,
+                                    ),
+                                    onPressed: () {
+                                      setState(() {
+                                        showPassword = !showPassword;
+                                      });
+                                    },
+                                  ),
+                                  border: const OutlineInputBorder(
                                     borderSide: BorderSide(
                                       color: Colors.white,
                                     ),
                                   ),
                                   hintText: 'Re-Enter your PassKey',
-                                  enabledBorder: OutlineInputBorder(
+                                  enabledBorder: const OutlineInputBorder(
                                     borderSide: BorderSide(
                                       color: Colors.white,
                                     ),
                                   ),
-                                  hintStyle: TextStyle(
+                                  hintStyle: const TextStyle(
                                     color: Colors.white,
                                   )),
                             ),
@@ -367,48 +391,14 @@ class SignUpScreenState extends State<SignUpScreen> {
                     const SizedBox(
                       height: 16,
                     ),
-                    SizedBox(
-                      width: screenWidth / 1.5,
-                      child: NeoPopButton(
-                        color: GeneralColors.neopopButtonMainColor,
-                        bottomShadowColor: GeneralColors.neopopShadowColor,
-                        onTapUp: () => {
-                          HapticFeedback.vibrate(),
-                          if (_formKey.currentState!.validate()) {register()}
-                          // Navigator.pushAndRemoveUntil(
-                          //   context,
-                          //   MaterialPageRoute(
-                          //     builder: (context) => const App(),
-                          //     settings: const RouteSettings(name: '/app'),
-                          //   ),
-                          //   (route) => false,
-                          // ),
-                        },
-                        child: NeoPopShimmer(
-                          shimmerColor: Colors.white,
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 20, vertical: 15),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                SvgPicture.asset(
-                                    AuthScreenImages.registerImage),
-                                const Text(
-                                  "Sign Up to PlayVerse",
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
+                    NeoPopButtonWidget(
+                      text: "SignUp To PlayVerse",
+                      navigation: () => {
+                        if (_formKey.currentState!.validate()) {register()}
+                      },
+                      textImage: AuthScreenImages.registerImage,
                     ),
-                    const SizedBox(height: 20),
+                    const SizedBox(height: 10),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[

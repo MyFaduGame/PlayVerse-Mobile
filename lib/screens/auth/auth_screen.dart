@@ -1,14 +1,13 @@
 //Third Party Imports
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:neopop/neopop.dart';
 
 //Local Imports
 import 'package:playverse/screens/auth/signup_screen.dart';
 import 'package:playverse/themes/app_color_theme.dart';
 import 'package:playverse/screens/auth/login_screen.dart';
 import 'package:playverse/themes/app_images.dart';
+import 'package:playverse/widgets/common/neo_pop_widget.dart';
 
 class AuthScreen extends StatefulWidget {
   const AuthScreen({super.key});
@@ -89,84 +88,34 @@ class _AuthScreenState extends State<AuthScreen> {
                     SizedBox(
                       height: screenHeight / 5,
                     ),
-                    SizedBox(
-                      width: screenWidth / 1.5,
-                      child: NeoPopButton(
-                        color: GeneralColors.neopopButtonMainColor,
-                        bottomShadowColor: GeneralColors.neopopShadowColor,
-                        onTapUp: () => {
-                          HapticFeedback.vibrate(),
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const LoginScreen(),
-                            ),
-                          )
-                        },
-                        child: NeoPopShimmer(
-                          shimmerColor: Colors.white,
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 20, vertical: 15),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                SvgPicture.asset(AuthScreenImages.loginIcon),
-                                const Text(
-                                  "Login To PlayVerse",
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                )
-                              ],
-                            ),
+                    NeoPopButtonWidget(
+                      text: "Login to PlayVerse",
+                      navigation: () => {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const LoginScreen(),
                           ),
-                        ),
-                      ),
+                        )
+                      },
+                      textImage: AuthScreenImages.loginIcon,
                     ),
                     const SizedBox(
                       height: 64,
                     ),
-                    SizedBox(
-                      width: screenWidth / 1.5,
-                      child: NeoPopButton(
-                        color: GeneralColors.neopopButtonMainColor,
-                        bottomShadowColor: GeneralColors.neopopShadowColor,
-                        onTapUp: () => {
-                          HapticFeedback.vibrate(),
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const SignUpScreen(),
-                            ),
-                          ),
-                        },
-                        child: NeoPopShimmer(
-                          shimmerColor: Colors.white,
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 20, vertical: 15),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                SvgPicture.asset(
-                                    AuthScreenImages.registerImage),
-                                const Text(
-                                  "New to PlayVerse",
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                )
-                              ],
-                            ),
+                    NeoPopButtonWidget(
+                      text: "SignUp To PlayVerse",
+                      navigation: () => {
+                        HapticFeedback.vibrate(),
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const SignUpScreen(),
                           ),
                         ),
-                      ),
-                    ),
+                      },
+                      textImage: AuthScreenImages.registerImage,
+                    )
                   ],
                 ),
               ),

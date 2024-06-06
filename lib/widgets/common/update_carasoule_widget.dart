@@ -1,13 +1,12 @@
 //Third Party Imports
 import 'dart:developer';
-
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:playverse/app.dart';
-import 'package:playverse/themes/app_color_theme.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 //Local Imports
+import 'package:playverse/themes/app_color_theme.dart';
+import 'package:playverse/app.dart';
 import 'package:playverse/themes/app_font.dart';
 import 'package:playverse/themes/app_images.dart';
 
@@ -36,6 +35,7 @@ class _UpdateCarsouleWidgetState extends State<UpdateCarsouleWidget> {
     return CarouselSlider(
       items: [
         Container(
+          width: screenWidth,
           color: const Color(0XFF8000FF),
           child: Stack(
             alignment: AlignmentDirectional.bottomEnd,

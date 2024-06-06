@@ -1,13 +1,12 @@
 //Third Party Imports
+import "dart:developer";
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:neopop/widgets/buttons/neopop_button/neopop_button.dart';
-import 'package:neopop/widgets/shimmer/neopop_shimmer.dart';
 import 'package:provider/provider.dart';
 
 //Local Imports
+import 'package:playverse/widgets/common/neo_pop_widget.dart';
 import 'package:playverse/screens/auth/forget_password_screen.dart';
 import 'package:playverse/screens/auth/signup_screen.dart';
 import 'package:playverse/themes/app_font.dart';
@@ -28,6 +27,7 @@ class LoginScreen extends StatefulWidget {
 class LoginScreenState extends State<LoginScreen> {
   late UserAuthProvider provider;
   final _formKey = GlobalKey<FormState>();
+  bool showPassword = false;
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   String? emailError, passwordError;
@@ -172,6 +172,7 @@ class LoginScreenState extends State<LoginScreen> {
                             ),
                             const SizedBox(height: 8),
                             TextFormField(
+                              obscureText: showPassword,
                               style: const TextStyle(color: Colors.white),
                               onChanged: (value) {
                                 if (passwordError != null) {
@@ -179,27 +180,39 @@ class LoginScreenState extends State<LoginScreen> {
                                 }
                               },
                               controller: passwordController,
-                              obscureText: true,
                               validator: (value) {
                                 if (value!.isEmpty) {
                                   return "Enter your PassKey";
                                 }
                                 return passwordError;
                               },
-                              keyboardType: TextInputType.name,
-                              decoration: const InputDecoration(
-                                border: OutlineInputBorder(
+                              keyboardType: TextInputType.visiblePassword,
+                              decoration: InputDecoration(
+                                suffixIcon: IconButton(
+                                  icon: Icon(
+                                    showPassword
+                                        ? Icons.visibility
+                                        : Icons.visibility_off,
+                                    color: Colors.white,
+                                  ),
+                                  onPressed: () {
+                                    setState(() {
+                                      showPassword = !showPassword;
+                                    });
+                                  },
+                                ),
+                                border: const OutlineInputBorder(
                                   borderSide: BorderSide(
                                     color: Colors.white,
                                   ),
                                 ),
                                 hintText: 'Enter your Passkey',
-                                enabledBorder: OutlineInputBorder(
+                                enabledBorder: const OutlineInputBorder(
                                   borderSide: BorderSide(
                                     color: Colors.white,
                                   ),
                                 ),
-                                hintStyle: TextStyle(
+                                hintStyle: const TextStyle(
                                   color: Colors.white,
                                 ),
                               ),
@@ -234,46 +247,14 @@ class LoginScreenState extends State<LoginScreen> {
                     const SizedBox(
                       height: 32,
                     ),
-                    SizedBox(
-                      width: screenWidth / 1.5,
-                      child: NeoPopButton(
-                        color: GeneralColors.neopopButtonMainColor,
-                        bottomShadowColor: GeneralColors.neopopShadowColor,
-                        onTapUp: () => {
-                          HapticFeedback.vibrate(),
-                          if (_formKey.currentState!.validate()) {login()}
-                          // Navigator.pushAndRemoveUntil(
-                          //   context,
-                          //   MaterialPageRoute(
-                          //     builder: (context) => const App(),
-                          //     settings: const RouteSettings(name: '/app'),
-                          //   ),
-                          //   (route) => false,
-                          // ),
-                        },
-                        child: NeoPopShimmer(
-                          shimmerColor: Colors.white,
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 20, vertical: 15),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                SvgPicture.asset(AuthScreenImages.loginIcon),
-                                const SizedBox(width: 5),
-                                const Text(
-                                  "Login to PlayVerse",
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
+                    NeoPopButtonWidget(
+                      text: "Login to PlayVerse",
+                      navigation: () => {
+                        HapticFeedback.vibrate(),
+                        log("comming here", name: "new sample"),
+                        if (_formKey.currentState!.validate()) {login()}
+                      },
+                      textImage: AuthScreenImages.loginIcon,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -327,9 +308,9 @@ class LoginScreenState extends State<LoginScreen> {
         );
       },
     ).then((value) => loaderCTX = null);
-
     signInWithEmailPassword(emailController.text, passwordController.text)
         .then((value) {
+      log("app is comming here", name: "new sample");
       if ([value.email, value.password].contains('success')) {
         provider
             .login(emailController.text,

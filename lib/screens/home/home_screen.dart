@@ -54,20 +54,23 @@ class _HomeScreenState extends State<HomeScreen> {
               index: 2,
             ),
             SizedBox(
-              height: 250,
+              height: 225,
               child: StreamsWidget(),
             ),
+            SizedBox(height: 16),
             HeaderWidget(title: "REEDEME", subTitle: "Store", index: 10),
             SizedBox(
               height: 400,
               child: StoreWidget(),
             ),
+            SizedBox(height: 16),
             HeaderWidget(
                 title: "Get Trained", subTitle: "Latest Courses", index: 8),
             SizedBox(
               height: 250,
               child: CourseWidget(),
             ),
+            SizedBox(height: 16),
             HeaderWidget(
               title: "Find Some",
               subTitle: "Articles",

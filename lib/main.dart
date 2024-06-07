@@ -120,14 +120,28 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => LocationProvider()),
       ],
       child: MaterialApp(
+        darkTheme: ThemeData.dark(),
         debugShowCheckedModeBanner: false,
         title: "PlayVerse",
         scaffoldMessengerKey: messengerKey,
         home: const SplashScreen(),
         theme: ThemeData(
           useMaterial3: false,
+          brightness: Brightness.dark,
         ),
       ),
     );
   }
+}
+
+class MyAppThemes {
+  static final lightTheme = ThemeData(
+    primaryColor: Colors.black,
+    brightness: Brightness.light,
+  );
+
+  static final darkTheme = ThemeData(
+    primaryColor: Colors.black,
+    brightness: Brightness.dark,
+  );
 }

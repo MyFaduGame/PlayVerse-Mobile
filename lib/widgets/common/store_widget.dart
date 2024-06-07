@@ -59,6 +59,9 @@ class _StoreWidgetState extends State<StoreWidget> {
   Widget build(BuildContext context) {
     // double screenWidth = MediaQuery.of(context).size.width;
     // double screenHeight = MediaQuery.of(context).size.height;
+    var size = MediaQuery.of(context).size;
+    final double itemHeight = (size.height - kToolbarHeight - 24) / 3;
+    final double itemWidth = size.width / 2;
     return isLoading
         ? const Center(
             child: CircularProgressIndicator(),
@@ -72,10 +75,10 @@ class _StoreWidgetState extends State<StoreWidget> {
                 child: GridView.builder(
                   scrollDirection: Axis.horizontal,
                   clipBehavior: Clip.none,
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
                     mainAxisSpacing: 8.0,
-                    childAspectRatio: 16 / 9,
+                    childAspectRatio: itemHeight / itemWidth,
                   ),
                   itemCount: value?.length,
                   itemBuilder: (BuildContext context, int index) {
@@ -91,10 +94,17 @@ class _StoreWidgetState extends State<StoreWidget> {
                       child: Container(
                         decoration: BoxDecoration(
                           gradient: const LinearGradient(
-                              begin: Alignment.topCenter,
-                              end: Alignment.bottomCenter,
-                              colors: [Color(0xFF7F00FF), Color(0xFF000000)]),
+                            begin: Alignment.topCenter,
+                            end: Alignment.bottomCenter,
+                            colors: [
+                              Color(0xFF000000),
+                              Color(0xFF7F00FF),
+                            ],
+                          ),
                           borderRadius: BorderRadius.circular(15),
+                          border: Border.all(
+                            color: Colors.white,
+                          ),
                         ),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -105,9 +115,9 @@ class _StoreWidgetState extends State<StoreWidget> {
                                   borderRadius: BorderRadius.circular(15),
                                   child: CachedNetworkImage(
                                     imageUrl: value?[index].images?[0] ?? "",
-                                    // fit: BoxFit.cover,
+                                    fit: BoxFit.fill,
                                     height: 100,
-                                    width: 100,
+                                    width: 1000,
                                     placeholder: (context, url) =>
                                         const CircularProgressIndicator(),
                                     errorWidget: (context, url, error) =>

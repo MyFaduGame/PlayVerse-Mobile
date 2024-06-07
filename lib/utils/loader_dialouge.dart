@@ -67,3 +67,22 @@ String getRandomDescription() {
   int index = random.nextInt(randomDescription.length);
   return randomDescription[index];
 }
+
+List<String> randomDescriptionForTournaments = [
+  'Register Now Limited Slots Available.',
+  'Secure Your Spot! Availability is Running Out!',
+  'Hurry! Join the Exclusive List Before It\'s Full!',
+  'Act Fast! Limited Opportunities to Sign Up!',
+  'Don\'t Miss Out! Limited Openings Remaining!',
+  'Grab Your Place! Slots Are Filling Quickly!',
+  'Enroll Today! Space is Limited!',
+  'Immediate Registration Required – Only a Few Spots Left!',
+  'Be Quick to Book Your Slot – They\'re Going Fast!',
+  'Sign Up Now – Space is at a Premium!',
+];
+
+String getRandomDescriptionForTournament() {
+  Random random = Random();
+  int index = random.nextInt(randomDescriptionForTournaments.length);
+  return randomDescription[index];
+}

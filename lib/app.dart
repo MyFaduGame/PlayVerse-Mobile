@@ -209,66 +209,68 @@ class _AppState extends State<App>
             ),
           ),
           extendBody: true,
-          bottomNavigationBar: AnimatedNotchBottomBar(
-            color: GeneralColors.bottomNavColor,
-            elevation: 1,
-            showShadow: false,
-            durationInMilliSeconds: 800,
-            notchColor: GeneralColors.bottomBarNotchColor,
-            notchBottomBarController: barController,
-            bottomBarItems: [
-              BottomBarItem(
-                inActiveItem: SvgPicture.asset(
-                  SvgIcons.homeIcon,
-                  color: const Color(0xFF929292),
-                ),
-                activeItem: SvgPicture.asset(
-                  SvgIcons.homeIcon,
-                  color: Colors.white,
-                ),
-                itemLabel: '',
-              ),
-              BottomBarItem(
-                inActiveItem: SvgPicture.asset(
-                  SvgIcons.tournamentIcon,
-                  color: const Color(0xFF929292),
-                ),
-                activeItem: SvgPicture.asset(
-                  SvgIcons.tournamentIcon,
-                  color: Colors.white,
-                ),
-                itemLabel: '',
-              ),
-              BottomBarItem(
-                inActiveItem: Image.asset(
-                  BottomAppBarImages.streamImage,
-                  color: const Color(0xFF929292),
-                ),
-                activeItem: Image.asset(
-                  BottomAppBarImages.streamSelectedImage,
-                  color: Colors.white,
-                ),
-                itemLabel: '',
-              ),
-              BottomBarItem(
-                inActiveItem: Image.asset(
-                  BottomAppBarImages.articleImage,
-                  color: const Color(0xFF929292),
-                ),
-                activeItem: Image.asset(
-                  BottomAppBarImages.articleImage,
-                  color: Colors.white,
-                ),
-                itemLabel: '',
-              ),
-            ],
-            onTap: (index) {
-              log(index.toString(), name: "index");
-              tabManager.onTabChanged(index);
-            },
-            kIconSize: 24.0,
-            kBottomRadius: 28.0,
-          ),
+          bottomNavigationBar: index <= 3
+              ? AnimatedNotchBottomBar(
+                  color: GeneralColors.bottomNavColor,
+                  elevation: 1,
+                  showShadow: false,
+                  durationInMilliSeconds: 800,
+                  notchColor: GeneralColors.bottomBarNotchColor,
+                  notchBottomBarController: barController,
+                  bottomBarItems: [
+                    BottomBarItem(
+                      inActiveItem: SvgPicture.asset(
+                        SvgIcons.homeIcon,
+                        color: const Color(0xFF929292),
+                      ),
+                      activeItem: SvgPicture.asset(
+                        SvgIcons.homeIcon,
+                        color: Colors.white,
+                      ),
+                      itemLabel: '',
+                    ),
+                    BottomBarItem(
+                      inActiveItem: SvgPicture.asset(
+                        SvgIcons.tournamentIcon,
+                        color: const Color(0xFF929292),
+                      ),
+                      activeItem: SvgPicture.asset(
+                        SvgIcons.tournamentIcon,
+                        color: Colors.white,
+                      ),
+                      itemLabel: '',
+                    ),
+                    BottomBarItem(
+                      inActiveItem: Image.asset(
+                        BottomAppBarImages.streamImage,
+                        color: const Color(0xFF929292),
+                      ),
+                      activeItem: Image.asset(
+                        BottomAppBarImages.streamSelectedImage,
+                        color: Colors.white,
+                      ),
+                      itemLabel: '',
+                    ),
+                    BottomBarItem(
+                      inActiveItem: Image.asset(
+                        BottomAppBarImages.articleImage,
+                        color: const Color(0xFF929292),
+                      ),
+                      activeItem: Image.asset(
+                        BottomAppBarImages.articleImage,
+                        color: Colors.white,
+                      ),
+                      itemLabel: '',
+                    ),
+                  ],
+                  onTap: (index) {
+                    log(index.toString(), name: "index");
+                    tabManager.onTabChanged(index);
+                  },
+                  kIconSize: 24.0,
+                  kBottomRadius: 28.0,
+                )
+              : null,
         ),
       ),
     );

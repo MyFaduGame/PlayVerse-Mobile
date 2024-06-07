@@ -3,6 +3,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
+import 'package:playverse/utils/loader_dialouge.dart';
 import 'package:provider/provider.dart';
 
 //Local Imports
@@ -59,8 +60,11 @@ class _TournamentScreenState extends State<TournamentScreen> {
 
   @override
   Widget build(BuildContext context) {
-    double screenWidth = MediaQuery.of(context).size.width;
-    double screenHeight = MediaQuery.of(context).size.height;
+    // double screenWidth = MediaQuery.of(context).size.width;
+    // double screenHeight = MediaQuery.of(context).size.height;
+    var size = MediaQuery.of(context).size;
+    final double itemHeight = (size.height - kToolbarHeight - 24) / 2;
+    final double itemWidth = size.width / 2;
     return isLoading
         ? const Center(
             child: CircularProgressIndicator(),
@@ -79,7 +83,7 @@ class _TournamentScreenState extends State<TournamentScreen> {
                     clipBehavior: Clip.none,
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
-                      childAspectRatio: screenWidth / screenHeight * 1.2,
+                      childAspectRatio: itemWidth / itemHeight,
                       crossAxisSpacing: 15.0,
                       mainAxisSpacing: 15.0,
                     ),
@@ -145,7 +149,7 @@ class _TournamentScreenState extends State<TournamentScreen> {
                                           ),
                                         ),
                                         Text(
-                                          "Register Now Limited Slots Available",
+                                          getRandomDescriptionForTournament(),
                                           maxLines: 2,
                                           overflow: TextOverflow.ellipsis,
                                           style: poppinsFonts.copyWith(
@@ -257,6 +261,7 @@ class _TournamentScreenState extends State<TournamentScreen> {
                                   top: 90,
                                   left: 10,
                                   child: Container(
+                                    width: 100,
                                     decoration: BoxDecoration(
                                       color: Colors.black,
                                       borderRadius: BorderRadius.circular(15),
@@ -265,6 +270,8 @@ class _TournamentScreenState extends State<TournamentScreen> {
                                       ),
                                     ),
                                     child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
                                       children: <Widget>[
                                         ClipRRect(
                                           borderRadius:

@@ -61,6 +61,9 @@ class MyTournementsScreenState extends State<MyTournementsScreen> {
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
+    var size = MediaQuery.of(context).size;
+    final double itemHeight = (size.height - kToolbarHeight - 24) / 2.2;
+    final double itemWidth = size.width / 2;
     return isLoading
         ? const Center(
             child: CircularProgressIndicator(),
@@ -78,8 +81,8 @@ class MyTournementsScreenState extends State<MyTournementsScreen> {
                   child: GridView.builder(
                     clipBehavior: Clip.none,
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 1,
-                      childAspectRatio: screenWidth / screenHeight * 3,
+                      crossAxisCount: 2,
+                      childAspectRatio: itemWidth / itemHeight,
                       crossAxisSpacing: 15.0,
                       mainAxisSpacing: 15.0,
                     ),
@@ -142,15 +145,6 @@ class MyTournementsScreenState extends State<MyTournementsScreen> {
                                             color: Colors.white,
                                             fontWeight: FontWeight.bold,
                                             fontSize: 20,
-                                          ),
-                                        ),
-                                        Text(
-                                          "Register Now Limited Slots Available",
-                                          maxLines: 2,
-                                          overflow: TextOverflow.ellipsis,
-                                          style: poppinsFonts.copyWith(
-                                            color: Colors.white,
-                                            fontSize: 15,
                                           ),
                                         ),
                                       ],

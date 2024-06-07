@@ -103,6 +103,9 @@ class CourseWidgetState extends State<CourseWidget> {
                                 end: Alignment.bottomCenter,
                                 colors: [Color(0xFF7F00FF), Color(0xFF000000)]),
                             borderRadius: BorderRadius.circular(15),
+                            border: Border.all(
+                              color: Colors.white,
+                            ),
                           ),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -111,30 +114,31 @@ class CourseWidgetState extends State<CourseWidget> {
                                 borderRadius: BorderRadius.circular(15),
                                 child: CachedNetworkImage(
                                   imageUrl: value?[index].thumbnail ?? "",
-                                  fit: BoxFit.cover,
+                                  fit: BoxFit.fill,
                                   height: 100,
-                                  width: 100,
-                                  // width: double.infinity,
+                                  width: 150,
                                   placeholder: (context, url) =>
-                                      const CircularProgressIndicator(),
+                                      const CircularProgressIndicator(
+                                    strokeAlign: BorderSide.strokeAlignCenter,
+                                  ),
                                   errorWidget: (context, url, error) =>
-                                      const Icon(Icons.error),
+                                      const Icon(
+                                    Icons.error,
+                                    color: Colors.white,
+                                  ),
                                 ),
                               ),
-                              Column(
-                                children: [
-                                  FittedBox(
-                                    child: Text(
-                                      "${value?[index].name}",
-                                      style: openSansFonts.copyWith(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 20,
-                                      ),
-                                    ),
-                                  ),
-                                ],
+                              Text(
+                                "${value?[index].name}",
+                                style: openSansFonts.copyWith(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20,
+                                ),
                               ),
+                              value?[index].gameType == 'Mobile'
+                                  ? const Icon(Icons.phone_android_sharp)
+                                  : const Icon(Icons.computer),
                               SpacingUtils().horizontalSpacing(5),
                               Container(
                                 width: 100,
@@ -148,35 +152,16 @@ class CourseWidgetState extends State<CourseWidget> {
                                 ),
                                 child: Center(
                                   child: Text(
-                                    "Get Info",
+                                    "Request Info",
                                     style: poppinsFonts.copyWith(
                                       color: Colors.white,
-                                      fontSize: 20,
+                                      fontSize: 15,
                                       fontWeight: FontWeight.bold,
                                     ),
                                     textAlign: TextAlign.center,
                                   ),
                                 ),
                               ),
-                              // FittedBox(
-                              //   child: Text(
-                              //     "${value?[index].name}",
-                              //     style: openSansFonts.copyWith(
-                              //       color: Colors.black,
-                              //       fontWeight: FontWeight.bold,
-                              //     ),
-                              //   ),
-                              // ),
-                              // FittedBox(
-                              //   child: Text(
-                              //     "${value?[index].genre}",
-                              //   ),
-                              // ),
-                              // FittedBox(
-                              //   child: Text(
-                              //     "${value?[index].gameType} Game",
-                              //   ),
-                              // ),
                             ],
                           ),
                         ),

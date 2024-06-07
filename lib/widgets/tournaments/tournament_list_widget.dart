@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 
 //Local Imports
 import 'package:playverse/themes/app_images.dart';
+import 'package:playverse/utils/loader_dialouge.dart';
 import 'package:playverse/themes/app_color_theme.dart';
 import 'package:playverse/utils/helper_utils.dart';
 import 'package:playverse/models/tournaments_model.dart';
@@ -59,8 +60,11 @@ class _TournamentListWidgetState extends State<TournamentListWidget> {
 
   @override
   Widget build(BuildContext context) {
-    double screenWidth = MediaQuery.of(context).size.width;
-    double screenHeight = MediaQuery.of(context).size.height;
+    // double screenWidth = MediaQuery.of(context).size.width;
+    // double screenHeight = MediaQuery.of(context).size.height;
+    var size = MediaQuery.of(context).size;
+    final double itemHeight = (size.height - kToolbarHeight - 24) / 3;
+    final double itemWidth = size.width / 2;
     return isLoading
         ? const Center(
             child: CircularProgressIndicator(),
@@ -76,7 +80,7 @@ class _TournamentListWidgetState extends State<TournamentListWidget> {
                   clipBehavior: Clip.none,
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
-                    childAspectRatio: screenWidth / screenHeight * 3,
+                    childAspectRatio: itemHeight / itemWidth,
                     crossAxisSpacing: 15.0,
                     mainAxisSpacing: 15.0,
                   ),
@@ -142,7 +146,7 @@ class _TournamentListWidgetState extends State<TournamentListWidget> {
                                         ),
                                       ),
                                       Text(
-                                        "Register Now Limited Slots Available",
+                                        getRandomDescriptionForTournament(),
                                         maxLines: 2,
                                         overflow: TextOverflow.ellipsis,
                                         style: poppinsFonts.copyWith(

@@ -1,7 +1,9 @@
+//Third Party Imports
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:intl/intl.dart';
+
+//Local Imports
 import 'package:playverse/models/user_profile_model.dart';
 import 'package:playverse/screens/gems/gems_screen.dart';
 import 'package:playverse/screens/profile/edit_profile.dart';
@@ -22,7 +24,7 @@ class AboutWidget extends StatefulWidget {
 class _AboutWidgetState extends State<AboutWidget> {
   @override
   Widget build(BuildContext context) {
-    double screenWidth = MediaQuery.of(context).size.width;
+    // double screenWidth = MediaQuery.of(context).size.width;
     return Column(
       children: <Widget>[
         Row(

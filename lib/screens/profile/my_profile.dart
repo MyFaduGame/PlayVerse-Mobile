@@ -1,23 +1,16 @@
 //Third Party Imports
 import 'dart:developer';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:playverse/utils/toast_bar.dart';
-import 'package:playverse/widgets/profile/about_widget.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:provider/provider.dart';
 
 //Local Imports
+import 'package:playverse/widgets/profile/about_widget.dart';
 import 'package:playverse/widgets/friends/friends_widget.dart';
 import 'package:playverse/widgets/tournaments/tournament_profile_widget.dart';
-import 'package:playverse/screens/profile/edit_profile.dart';
 import 'package:playverse/widgets/profile/games_profile_widget.dart';
-import 'package:playverse/screens/gems/gems_screen.dart';
 import 'package:playverse/utils/box_indicator.dart';
 import 'package:playverse/themes/app_font.dart';
 import 'package:playverse/themes/app_images.dart';

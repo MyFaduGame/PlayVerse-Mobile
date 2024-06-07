@@ -2,6 +2,7 @@
 import 'dart:math';
 
 //Local Imports
+import 'package:flutter/widgets.dart';
 import 'package:playverse/themes/app_images.dart';
 
 List<String> imageList = [
@@ -85,4 +86,23 @@ String getRandomDescriptionForTournament() {
   Random random = Random();
   int index = random.nextInt(randomDescriptionForTournaments.length);
   return randomDescription[index];
+}
+
+int getRandomReadMinutes() {
+  Random random = Random();
+  int index = random.nextInt(10);
+  return index;
+}
+
+List<Color> randomColorList = [
+  const Color(0xFF3DB79A),
+  const Color(0xFF851BC3),
+  const Color(0xFF953B08),
+  const Color(0xFF690E0E),
+];
+
+Color getRandomColor() {
+  Random random = Random();
+  int index = random.nextInt(randomColorList.length);
+  return randomColorList[index];
 }

@@ -33,7 +33,7 @@ class _NavigationBarWidgetState extends State<NavigationBarWidget> {
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
-    double screenHeight = MediaQuery.of(context).size.height;
+    // double screenHeight = MediaQuery.of(context).size.height;
     return SafeArea(
       child: SingleChildScrollView(
         child: SizedBox(
@@ -471,46 +471,54 @@ class _NavigationBarWidgetState extends State<NavigationBarWidget> {
                 ],
               ),
               const Padding(padding: EdgeInsets.only(bottom: 10)),
-              GestureDetector(
-                onTap: () {
-                  logout(context);
-                },
-                child: Container(
-                  width: 100,
-                  height: 50,
-                  decoration: BoxDecoration(
-                    color: GeneralColors.gradientBackgrounColor0,
-                    borderRadius: BorderRadius.circular(30),
-                  ),
-                  child: Center(
-                    child: Text(
-                      "Log Out",
-                      style: dmSansFonts.copyWith(
-                          color: Colors.white, fontSize: 10),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      logout(context);
+                    },
+                    child: Container(
+                      width: 100,
+                      height: 50,
+                      decoration: BoxDecoration(
+                        color: GeneralColors.gradientBackgrounColor0,
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                      child: Center(
+                        child: Text(
+                          "Log Out",
+                          style: dmSansFonts.copyWith(
+                            color: Colors.white,
+                            fontSize: 15,
+                          ),
+                        ),
+                      ),
                     ),
                   ),
-                ),
-              ),
-              const Padding(padding: EdgeInsets.only(bottom: 10)),
-              GestureDetector(
-                onTap: () {
-                  logout(context);
-                },
-                child: Container(
-                  width: 100,
-                  height: 50,
-                  decoration: BoxDecoration(
-                    color: GeneralColors.gradientBackgrounColor0,
-                    borderRadius: BorderRadius.circular(30),
-                  ),
-                  child: Center(
-                    child: Text(
-                      "Deactivate",
-                      style: dmSansFonts.copyWith(
-                          color: Colors.white, fontSize: 10),
+                  GestureDetector(
+                    onTap: () {
+                      logout(context);
+                    },
+                    child: Container(
+                      width: 100,
+                      height: 50,
+                      decoration: BoxDecoration(
+                        color: GeneralColors.gradientBackgrounColor0,
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                      child: Center(
+                        child: Text(
+                          "Deactivate",
+                          style: dmSansFonts.copyWith(
+                            color: Colors.white,
+                            fontSize: 15,
+                          ),
+                        ),
+                      ),
                     ),
                   ),
-                ),
+                ],
               ),
             ],
           ),

@@ -45,7 +45,7 @@ class _HomeScreenState extends State<HomeScreen> {
             SizedBox(height: 16),
             HeaderWidget(title: "Search by", subTitle: "Games", index: 4),
             SizedBox(
-              height: 150,
+              height: 100,
               child: GamesIconWidget(),
             ),
             HeaderWidget(
@@ -67,7 +67,7 @@ class _HomeScreenState extends State<HomeScreen> {
             HeaderWidget(
                 title: "Get Trained", subTitle: "Latest Courses", index: 8),
             SizedBox(
-              height: 250,
+              height: 200,
               child: CourseWidget(),
             ),
             SizedBox(height: 16),

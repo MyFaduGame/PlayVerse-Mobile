@@ -73,7 +73,8 @@ class _GamesIconWidgetState extends State<GamesIconWidget> {
                         context,
                         MaterialPageRoute(
                           builder: ((context) => GamesTournamentScreen(
-                              gameUUID: value?[index].gameId ?? "GameId")),
+                                gameUUID: value?[index].gameId ?? "GameId",
+                              )),
                         ),
                       ),
                       child: Column(
@@ -101,7 +102,7 @@ class _GamesIconWidgetState extends State<GamesIconWidget> {
                             value?[index].name ?? "",
                             style: poppinsFonts.copyWith(
                               color: Colors.white,
-                              fontSize: 15,
+                              fontSize: 10,
                             ),
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,

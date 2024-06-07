@@ -78,6 +78,7 @@ class _StoreWidgetState extends State<StoreWidget> {
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
                     mainAxisSpacing: 8.0,
+                    crossAxisSpacing: 4.0,
                     childAspectRatio: itemHeight / itemWidth,
                   ),
                   itemCount: value?.length,

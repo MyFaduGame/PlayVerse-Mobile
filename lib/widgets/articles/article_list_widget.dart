@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:playverse/utils/loader_dialouge.dart';
 import 'package:provider/provider.dart';
 
 //Local Imports
@@ -58,6 +59,9 @@ class _ArticleWidgetState extends State<ArticleWidget> {
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     // double screenHeight = MediaQuery.of(context).size.height;
+    var size = MediaQuery.of(context).size;
+    final double itemHeight = (size.height - kToolbarHeight - 24) / 2.25;
+    final double itemWidth = size.width / 2;
     return isLoading
         ? const Center(
             child: CircularProgressIndicator(),
@@ -71,10 +75,10 @@ class _ArticleWidgetState extends State<ArticleWidget> {
                 child: GridView.builder(
                   scrollDirection: Axis.horizontal,
                   clipBehavior: Clip.none,
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 1,
                     mainAxisSpacing: 8.0,
-                    childAspectRatio: 10 / 16,
+                    childAspectRatio: itemWidth / itemHeight,
                   ),
                   itemCount: value?.length,
                   itemBuilder: (BuildContext context, int index) {
@@ -112,9 +116,6 @@ class _ArticleWidgetState extends State<ArticleWidget> {
                                         const Icon(Icons.error),
                                   ),
                                 ),
-                                // const SizedBox(
-                                //   width: 20,
-                                // )
                               ],
                             ),
                             Container(
@@ -140,20 +141,36 @@ class _ArticleWidgetState extends State<ArticleWidget> {
                                               "Article Title",
                                           maxLines: 1,
                                           overflow: TextOverflow.ellipsis,
-                                          style: gamePausedFonts.copyWith(
-                                            fontSize: 20,
+                                          style: poppinsFonts.copyWith(
+                                            fontSize: 15,
                                             color: Colors.white,
                                           ),
                                         ),
-                                        Text(
-                                          "${value?[index].articleDate?.day}/${value?[index].articleDate?.month}/${value?[index].articleDate?.year}",
-                                          maxLines: 1,
-                                          overflow: TextOverflow.ellipsis,
-                                          style: openSansFonts.copyWith(
-                                            fontSize: 15,
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.bold,
-                                          ),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceEvenly,
+                                          children: [
+                                            Text(
+                                              "${value?[index].articleDate?.day}/${value?[index].articleDate?.month}/${value?[index].articleDate?.year}",
+                                              maxLines: 1,
+                                              overflow: TextOverflow.ellipsis,
+                                              style: openSansFonts.copyWith(
+                                                fontSize: 15,
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                            Text(
+                                              "${getRandomReadMinutes()} min",
+                                              maxLines: 1,
+                                              overflow: TextOverflow.ellipsis,
+                                              style: openSansFonts.copyWith(
+                                                fontSize: 15,
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                          ],
                                         ),
                                       ],
                                     ),

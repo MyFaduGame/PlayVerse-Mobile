@@ -2,10 +2,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:playverse/themes/app_color_theme.dart';
 import 'package:provider/provider.dart';
 
 //Local Imports
+import 'package:playverse/themes/app_color_theme.dart';
 import 'package:playverse/models/user_profile_model.dart';
 import 'package:playverse/provider/user_profile_provider.dart';
 import 'package:playverse/provider/course_provider.dart';
@@ -160,25 +160,6 @@ class CourseScreenState extends State<CourseScreen> {
                                   textAlign: TextAlign.center,
                                 ),
                               ),
-                              // FittedBox(
-                              //   child: Text(
-                              //     "${value?[index].name}",
-                              //     style: openSansFonts.copyWith(
-                              //       color: Colors.black,
-                              //       fontWeight: FontWeight.bold,
-                              //     ),
-                              //   ),
-                              // ),
-                              // FittedBox(
-                              //   child: Text(
-                              //     "${value?[index].genre}",
-                              //   ),
-                              // ),
-                              // FittedBox(
-                              //   child: Text(
-                              //     "${value?[index].gameType} Game",
-                              //   ),
-                              // ),
                             ],
                           ),
                         ),

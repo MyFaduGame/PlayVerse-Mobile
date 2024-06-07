@@ -121,7 +121,7 @@ class CourseWidgetState extends State<CourseWidget> {
                                       const CircularProgressIndicator(
                                     strokeAlign: BorderSide.strokeAlignCenter,
                                   ),
-                                  errorWidget: (context, url, error) =>
+                                errorWidget: (context, url, error) =>
                                       const Icon(
                                     Icons.error,
                                     color: Colors.white,
@@ -136,31 +136,36 @@ class CourseWidgetState extends State<CourseWidget> {
                                   fontSize: 20,
                                 ),
                               ),
-                              value?[index].gameType == 'Mobile'
-                                  ? const Icon(Icons.phone_android_sharp)
-                                  : const Icon(Icons.computer),
-                              SpacingUtils().horizontalSpacing(5),
-                              Container(
-                                width: 100,
-                                height: 40,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(
-                                    15,
-                                  ),
-                                  color: TournamentWidgetColors
-                                      .tournamentDetailCircleColor,
-                                ),
-                                child: Center(
-                                  child: Text(
-                                    "Request Info",
-                                    style: poppinsFonts.copyWith(
-                                      color: Colors.white,
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.bold,
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  value?[index].gameType == 'Mobile'
+                                      ? const Icon(Icons.phone_android_sharp)
+                                      : const Icon(Icons.computer),
+                                  Container(
+                                    width: 100,
+                                    height: 40,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(
+                                        15,
+                                      ),
+                                      color: TournamentWidgetColors
+                                          .tournamentDetailCircleColor,
                                     ),
-                                    textAlign: TextAlign.center,
+                                    child: Center(
+                                      child: Text(
+                                        "Request Info",
+                                        style: poppinsFonts.copyWith(
+                                          color: Colors.white,
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    ),
                                   ),
-                                ),
+                                ],
                               ),
                             ],
                           ),

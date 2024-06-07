@@ -1,6 +1,7 @@
 //Third Party Imports
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -98,17 +99,21 @@ class _CustomAppBarState extends State<CustomAppBar> {
               ],
             ),
           ),
-          const SizedBox(width: 5),
-          GestureDetector(
-            onTap: _handleMenuButtonPressed,
-            child: SvgPicture.asset(
-              SvgIcons.menuIcon,
-              height: 25,
-              width: 25,
-              theme: const SvgTheme(
-                currentColor: Colors.white,
+          // const SizedBox(width: 5),
+          SizedBox(
+            width: 50,
+            height: 30,
+            child: GestureDetector(
+              onTap: _handleMenuButtonPressed,
+              child: SvgPicture.asset(
+                SvgIcons.menuIcon,
+                height: 25,
+                width: 25,
+                theme: const SvgTheme(
+                  currentColor: Colors.white,
+                ),
+                // color: Colors.white,
               ),
-              // color: Colors.white,
             ),
           ),
         ],

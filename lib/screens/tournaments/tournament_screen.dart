@@ -63,7 +63,7 @@ class _TournamentScreenState extends State<TournamentScreen> {
     // double screenWidth = MediaQuery.of(context).size.width;
     // double screenHeight = MediaQuery.of(context).size.height;
     var size = MediaQuery.of(context).size;
-    final double itemHeight = (size.height - kToolbarHeight - 24) / 2;
+    final double itemHeight = (size.height - kToolbarHeight - 24) / 2.25;
     final double itemWidth = size.width / 2;
     return isLoading
         ? const Center(
@@ -121,7 +121,7 @@ class _TournamentScreenState extends State<TournamentScreen> {
                                         imageUrl: value?[index].thumbnail ?? "",
                                         fit: BoxFit.cover,
                                         height: 100,
-                                        width: double.infinity,
+                                        width: 1000,
                                         placeholder: (context, url) =>
                                             const CircularProgressIndicator(),
                                         errorWidget: (context, url, error) =>
@@ -147,6 +147,8 @@ class _TournamentScreenState extends State<TournamentScreen> {
                                             fontWeight: FontWeight.bold,
                                             fontSize: 20,
                                           ),
+                                          maxLines: 1,
+                                          overflow: TextOverflow.ellipsis,
                                         ),
                                         Text(
                                           getRandomDescriptionForTournament(),

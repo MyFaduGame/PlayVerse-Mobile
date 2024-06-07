@@ -60,6 +60,9 @@ class _GamesScreenState extends State<GamesScreen> {
   @override
   Widget build(BuildContext context) {
     // double screenWidth = MediaQuery.of(context).size.width;
+    var size = MediaQuery.of(context).size;
+    final double itemHeight = (size.height - kToolbarHeight - 24) / 2;
+    final double itemWidth = size.width / 2;
     return isLoading
         ? const Center(child: CircularProgressIndicator())
         : Selector<GamesListProvider, List<Games>?>(
@@ -69,67 +72,93 @@ class _GamesScreenState extends State<GamesScreen> {
                 onNotification: (notification) =>
                     Utils.scrollNotifier(notification, paginationGames),
                 child: GridView.builder(
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 3,
                     crossAxisSpacing: 2.0,
                     mainAxisSpacing: 2.0,
-                    childAspectRatio: 9 / 16,
+                    childAspectRatio: itemWidth / itemHeight,
                   ),
                   clipBehavior: Clip.none,
-                  // physics: const NeverScrollableScrollPhysics(),
                   itemCount: value?.length,
                   itemBuilder: (context, index) {
                     return GestureDetector(
                       onTap: () => {
-                        addGameInfo(
-                          context,
-                          value?[index] ?? Games(),
-                        ),
+                        value?[index].added == true
+                            ? deleteGames(
+                                context,
+                                value?[index].gameId ?? "Game Id",
+                              )
+                            : addGame(
+                                context, value?[index].gameId ?? "GameId"),
                       },
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 5, vertical: 10),
-                        child: Column(
-                          children: [
-                            Container(
-                              decoration: BoxDecoration(
+                      child: SizedBox(
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 5,
+                            vertical: 10,
+                          ),
+                          child: Column(
+                            children: [
+                              Container(
+                                decoration: BoxDecoration(
                                   border: Border.all(
-                                      width: 5,
-                                      color: value?[index].added ?? true
-                                          ? GeneralColors.neopopButtonMainColor
-                                          : Colors.transparent)),
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(15),
-                                child: CachedNetworkImage(
-                                  imageUrl: value?[index].logo ?? "",
-                                  fit: BoxFit.cover,
-                                  height: 150,
-                                  width: 100,
-                                  placeholder: (context, url) =>
-                                      const CircularProgressIndicator(),
-                                  errorWidget: (context, url, error) =>
-                                      const Icon(Icons.error),
+                                    width: 5,
+                                    color: value?[index].added ?? true
+                                        ? GeneralColors.neopopButtonMainColor
+                                        : Colors.transparent,
+                                  ),
+                                  borderRadius: BorderRadius.circular(15),
                                 ),
-                              ),
-                            ),
-                            Container(
-                              color: value?[index].added ?? false
-                                  ? GeneralColors.neopopShadowColor
-                                  : Colors.transparent,
-                              width: 150,
-                              height: 20,
-                              child: FittedBox(
-                                child: Text(
-                                  "${value?[index].name}",
-                                  style: openSansFonts.copyWith(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 20,
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(15),
+                                  child: CachedNetworkImage(
+                                    imageUrl: value?[index].logo ?? "",
+                                    fit: BoxFit.fill,
+                                    height: 150,
+                                    placeholder: (context, url) =>
+                                        const CircularProgressIndicator(),
+                                    errorWidget: (context, url, error) =>
+                                        const Icon(Icons.error),
                                   ),
                                 ),
                               ),
-                            ),
-                          ],
+                              Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(15),
+                                  color: value?[index].added ?? false
+                                      ? GeneralColors.neopopShadowColor
+                                      : Colors.transparent,
+                                ),
+                                width: 150,
+                                height: 20,
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    FittedBox(
+                                      child: Text(
+                                        "${value?[index].name}",
+                                        style: openSansFonts.copyWith(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 15,
+                                        ),
+                                      ),
+                                    ),
+                                    value?[index].gameType == 'Mobile'
+                                        ? const Icon(
+                                            Icons.phone_android_sharp,
+                                            size: 15,
+                                          )
+                                        : const Icon(
+                                            Icons.computer,
+                                            size: 15,
+                                          ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     );
@@ -425,10 +454,7 @@ class _GamesScreenState extends State<GamesScreen> {
       builder: (context) {
         TextEditingController textEditingController = TextEditingController();
         return AlertDialog(
-          backgroundColor: Colors.deepPurpleAccent[400],
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-          shadowColor: Colors.pink,
+          backgroundColor: const Color(0xFF1E1E1E),
           title: const Text('What\'s your in Game Name?'),
           content: TextField(
             controller: textEditingController,
@@ -443,7 +469,7 @@ class _GamesScreenState extends State<GamesScreen> {
               },
               child: Text(
                 'Decline!',
-                style: gamePausedFonts.copyWith(
+                style: poppinsFonts.copyWith(
                   color: Colors.white,
                   fontSize: 20,
                 ),
@@ -467,6 +493,7 @@ class _GamesScreenState extends State<GamesScreen> {
                 } else {
                   provider.addGames(gamesId, textEditingController.text).then(
                     (value) {
+                      provider.gameList.clear();
                       loading = true;
                       loader = false;
                       paginateUpcoming = true;
@@ -479,7 +506,7 @@ class _GamesScreenState extends State<GamesScreen> {
               },
               child: Text(
                 'Add it!',
-                style: gamePausedFonts.copyWith(
+                style: poppinsFonts.copyWith(
                   color: Colors.white,
                   fontSize: 20,
                 ),
@@ -491,33 +518,48 @@ class _GamesScreenState extends State<GamesScreen> {
     );
   }
 
-  Future<void> deleteGames(BuildContext context, String gamesId) async {
+  Future<void> deleteGames(BuildContext context, String gameId) async {
     showDialog(
       context: context,
       builder: (context) {
+        TextEditingController textEditingController = TextEditingController();
         return AlertDialog(
-          backgroundColor: const Color(0XFF252849),
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-          shadowColor: Colors.pink,
-          title: const Text('Really Want to Remove?'),
+          backgroundColor: const Color(0xFF1E1E1E),
+          title: const Text('Update your in GameName?'),
+          content: TextField(
+            controller: textEditingController,
+            decoration: const InputDecoration(
+              hintText: 'Enter your in Game Name Here!',
+            ),
+          ),
           actions: <Widget>[
             TextButton(
               onPressed: () {
-                Navigator.of(context).pop();
+                provider.deleteGames(gameId).then((value) => {
+                      provider.gameList.clear(),
+                      loading = true,
+                      loader = false,
+                      paginateUpcoming = true,
+                      offsetUpcoming = 1,
+                      paginationGames(),
+                      Navigator.of(context).pop(),
+                    });
               },
               child: Text(
-                'Decline!',
+                'Remove!',
                 style: poppinsFonts.copyWith(
-                  color: Colors.black,
+                  color: Colors.white,
                   fontSize: 20,
                 ),
               ),
             ),
             TextButton(
               onPressed: () {
-                provider.deleteGames(gamesId).then(
+                provider
+                    .addGames(gameId, textEditingController.text, true)
+                    .then(
                   (value) {
+                    provider.gameList.clear();
                     loading = true;
                     loader = false;
                     paginateUpcoming = true;
@@ -528,7 +570,7 @@ class _GamesScreenState extends State<GamesScreen> {
                 );
               },
               child: Text(
-                'Remove!',
+                'Update!',
                 style: poppinsFonts.copyWith(
                   color: Colors.white,
                   fontSize: 20,

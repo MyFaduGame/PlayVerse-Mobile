@@ -1,9 +1,14 @@
 //Third Party Imports
 import 'dart:developer';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:playverse/utils/toast_bar.dart';
+import 'package:playverse/widgets/profile/about_widget.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:provider/provider.dart';
 
@@ -64,7 +69,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
     double screenWidth = MediaQuery.of(context).size.width;
     // double screenHeight = MediaQuery.of(context).size.height;
     return DefaultTabController(
-      length: 3,
+      length: 4,
       child: Padding(
         padding: const EdgeInsets.all(5.0),
         child: NestedScrollView(
@@ -137,26 +142,54 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                             child: Column(
                               mainAxisSize: MainAxisSize.min,
                               children: [
-                                Container(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(55),
-                                  ),
-                                  height: 20,
-                                  width: screenWidth - 200,
-                                  child: LinearProgressIndicator(
-                                    value: ((userModel?.expirence?.toDouble() ??
-                                            10 * 100) /
-                                        100),
-                                    borderRadius: BorderRadius.circular(55),
-                                    backgroundColor: Colors.grey[300],
-                                    color: Colors.green,
-                                  ),
+                                Stack(
+                                  children: [
+                                    Container(
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(55),
+                                      ),
+                                      height: 20,
+                                      width: screenWidth - 200,
+                                      child: LinearProgressIndicator(
+                                        value: ((userModel?.expirence
+                                                    ?.toDouble() ??
+                                                10 * 100) /
+                                            100),
+                                        borderRadius: BorderRadius.circular(55),
+                                        backgroundColor:
+                                            const Color(0xFF231750),
+                                        color: Colors.green,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: screenWidth - 200,
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(
+                                            "${((userModel?.expirence?.toDouble() ?? 10 * 100) / 100).toString()} Level",
+                                            style: poppinsFonts.copyWith(
+                                              color: Colors.white,
+                                              fontSize: 15,
+                                            ),
+                                          ),
+                                          Text(
+                                            "${((userModel?.expirence?.toDouble() ?? 10 * 100)).toString()}%",
+                                            style: poppinsFonts.copyWith(
+                                              color: Colors.white,
+                                              fontSize: 15,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    )
+                                  ],
                                 ),
-                                const SizedBox(height: 10),
                                 Text(
-                                  "Progress",
+                                  "Experience Point:${((userModel?.expirence?.toDouble() ?? 10 * 100) / 100)}",
                                   style: poppinsFonts.copyWith(
-                                    fontSize: 20,
+                                    fontSize: 15,
                                     color: Colors.white,
                                   ),
                                 ),
@@ -174,17 +207,27 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                             Text(
                               "${userModel?.firstName ?? ""} ${userModel?.lastName ?? ""}",
                               style: poppinsFonts.copyWith(
-                                  color: Colors.white,
-                                  fontSize: 25,
-                                  fontWeight: FontWeight.bold),
+                                color: Colors.white,
+                                fontSize: 25,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
-                            Text(
-                              "#${userModel?.userName ?? ''}",
-                              style: poppinsFonts.copyWith(
-                                  color: Colors.white54,
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold),
-                            ),
+                            // Text(
+                            //   "#${userModel?.userName ?? ''}",
+                            //   style: poppinsFonts.copyWith(
+                            //     color: Colors.white54,
+                            //     fontSize: 15,
+                            //     fontWeight: FontWeight.bold,
+                            //   ),
+                            // ),
+                            // Text(
+                            //   "Nationality: ${userModel?.country ?? ''}",
+                            //   style: poppinsFonts.copyWith(
+                            //     color: Colors.white54,
+                            //     fontSize: 15,
+                            //     fontWeight: FontWeight.bold,
+                            //   ),
+                            // ),
                           ],
                         ),
                         Column(
@@ -266,90 +309,6 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                       ],
                     ),
                     const SizedBox(height: 16),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: <Widget>[
-                        GestureDetector(
-                          onTap: () => Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: ((context) => const EditProfileScreen()),
-                            ),
-                          ),
-                          child: Column(
-                            children: [
-                              Text(
-                                'Edit',
-                                style: poppinsFonts.copyWith(
-                                  color: Colors.white,
-                                  fontSize: 20,
-                                ),
-                              ),
-                              const Icon(
-                                FontAwesomeIcons.pen,
-                                color: Colors.white,
-                              ),
-                            ],
-                          ),
-                        ),
-                        Container(
-                          height: 30,
-                          width: 1,
-                          color: Colors.white,
-                        ),
-                        Column(
-                          children: <Widget>[
-                            Text(
-                              'Experience',
-                              style: poppinsFonts.copyWith(
-                                color: Colors.white,
-                                fontSize: 15,
-                              ),
-                            ),
-                            Text(
-                              userModel?.expirence.toString() ?? "",
-                              style: poppinsFonts.copyWith(
-                                color: Colors.white,
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ],
-                        ),
-                        Container(
-                          height: 30,
-                          width: 1,
-                          color: Colors.white,
-                        ),
-                        GestureDetector(
-                          onTap: () => Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: ((context) => const GemsScreen()),
-                            ),
-                          ),
-                          child: Column(
-                            children: <Widget>[
-                              Text(
-                                'Gems',
-                                style: poppinsFonts.copyWith(
-                                  color: Colors.white,
-                                  fontSize: 15,
-                                ),
-                              ),
-                              Text(
-                                userModel?.gems.toString() ?? "",
-                                style: poppinsFonts.copyWith(
-                                  color: Colors.white,
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
                   ],
                 ),
               ),
@@ -379,10 +338,13 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                           text: 'Games',
                         ),
                         Tab(
-                          text: 'History',
+                          text: 'About',
                         ),
                         Tab(
                           text: 'Friends',
+                        ),
+                        Tab(
+                          text: 'History',
                         ),
                       ],
                     ),
@@ -391,11 +353,12 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
               ),
             ];
           },
-          body: const TabBarView(
+          body: TabBarView(
             children: <Widget>[
-              GamesProfileWidget(),
-              TournamentProfileWidget(),
-              FriendsWidget(),
+              const GamesProfileWidget(),
+              AboutWidget(userModel: userModel ?? UserProfile()),
+              const FriendsWidget(),
+              const TournamentProfileWidget(),
             ],
           ),
         ),

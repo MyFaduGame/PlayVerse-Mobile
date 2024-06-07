@@ -1,6 +1,7 @@
 //Third Party Imports
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
 //Local Imports
@@ -56,9 +57,10 @@ class _StoreScreenState extends State<StoreScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // double screenWidth = MediaQuery.of(context).size.width;
-    // double screenHeight = MediaQuery.of(context).size.height;
     // Cart is Pending.
+    var size = MediaQuery.of(context).size;
+    final double itemHeight = (size.height - kToolbarHeight - 24) / 3;
+    final double itemWidth = size.width / 2;
     return isLoading
         ? const Center(
             child: CircularProgressIndicator(),
@@ -71,11 +73,11 @@ class _StoreScreenState extends State<StoreScreen> {
                     Utils.scrollNotifier(notification, paginationArticles),
                 child: GridView.builder(
                   clipBehavior: Clip.none,
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
                     mainAxisSpacing: 8.0,
                     crossAxisSpacing: 8.0,
-                    childAspectRatio: 9 / 10,
+                    childAspectRatio: itemWidth / itemHeight,
                   ),
                   itemCount: value?.length,
                   itemBuilder: (BuildContext context, int index) {
@@ -91,9 +93,13 @@ class _StoreScreenState extends State<StoreScreen> {
                       child: Container(
                         decoration: BoxDecoration(
                           gradient: const LinearGradient(
-                              begin: Alignment.topCenter,
-                              end: Alignment.bottomCenter,
-                              colors: [Color(0xFF7F00FF), Color(0xFF000000)]),
+                            begin: Alignment.topCenter,
+                            end: Alignment.bottomCenter,
+                            colors: [
+                              Color(0xFF000000),
+                              Color(0xFF7F00FF),
+                            ],
+                          ),
                           borderRadius: BorderRadius.circular(15),
                         ),
                         child: Column(
@@ -105,7 +111,7 @@ class _StoreScreenState extends State<StoreScreen> {
                                 imageUrl: value?[index].images?[0] ?? "",
                                 fit: BoxFit.cover,
                                 height: 100,
-                                width: 150,
+                                width: 1000,
                                 placeholder: (context, url) =>
                                     const CircularProgressIndicator(),
                                 errorWidget: (context, url, error) =>
@@ -116,6 +122,26 @@ class _StoreScreenState extends State<StoreScreen> {
                               value?[index].name ?? "",
                               style: poppinsFonts.copyWith(
                                 color: Colors.white,
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                              ),
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                            Text(
+                              value?[index].brand ?? "",
+                              style: poppinsFonts.copyWith(
+                                color: const Color(0xFFBF99FF),
+                                fontSize: 15,
+                                fontWeight: FontWeight.bold,
+                              ),
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                            Text(
+                              value?[index].categoryName ?? "",
+                              style: poppinsFonts.copyWith(
+                                color: const Color(0xFFBF99FF),
                                 fontSize: 15,
                                 fontWeight: FontWeight.bold,
                               ),
@@ -138,6 +164,28 @@ class _StoreScreenState extends State<StoreScreen> {
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
+                                Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(
+                                      10,
+                                    ),
+                                    color: Colors.pink[200],
+                                  ),
+                                  child: IconButton(
+                                    onPressed: () => Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => StoreDetailScreen(
+                                          productDetail: value![index],
+                                        ),
+                                      ),
+                                    ),
+                                    color: Colors.white,
+                                    icon: const Icon(
+                                      FontAwesomeIcons.arrowRightLong,
+                                    ),
+                                  ),
+                                )
                               ],
                             )
                           ],

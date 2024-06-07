@@ -3,12 +3,13 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:neopop/widgets/buttons/neopop_button/neopop_button.dart';
 import 'package:neopop/widgets/shimmer/neopop_shimmer.dart';
+import 'package:playverse/utils/loader_dialouge.dart';
 import 'package:provider/provider.dart';
 
 //Local Imports
+import 'package:playverse/widgets/common/header_widget.dart';
 import 'package:playverse/themes/app_color_theme.dart';
 import 'package:playverse/app.dart';
 import 'package:playverse/provider/friends_provider.dart';
@@ -127,39 +128,10 @@ class _GamesProfileWidgetState extends State<GamesProfileWidget> {
       physics: const NeverScrollableScrollPhysics(),
       child: Column(
         children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  "Your Games",
-                  style: poppinsFonts.copyWith(
-                    color: Colors.white,
-                    fontSize: 20,
-                  ),
-                ),
-                IconButton(
-                  onPressed: () =>
-                      {HapticFeedback.vibrate(), tabManager.onTabChanged(4)},
-                  // onPressed: () => Navigator.push(
-                  //       context,
-                  //       MaterialPageRoute(
-                  //         builder: ((context) => widget.screenName),
-                  //       ),
-                  //     ),
-                  icon: const Icon(
-                    FontAwesomeIcons.arrowRight,
-                    color: Colors.white,
-                    size: 30,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(height: 16),
+          const HeaderWidget(title: "Your", subTitle: "Games", index: 4),
+          const SizedBox(height: 8),
           SizedBox(
-            height: 150,
+            height: 200,
             width: screenWidth,
             child: isLoadingGames
                 ? const Center(
@@ -176,10 +148,7 @@ class _GamesProfileWidgetState extends State<GamesProfileWidget> {
                                   color: GeneralColors.neopopButtonMainColor,
                                   bottomShadowColor:
                                       GeneralColors.neopopShadowColor,
-                                  onTapUp: () => {
-                                    HapticFeedback.vibrate(),
-                                    tabManager.onTabChanged(4),
-                                  },
+                                  onTapUp: () => {tabManager.onTabChanged(4)},
                                   child: const NeoPopShimmer(
                                     shimmerColor: Colors.white,
                                     child: Padding(
@@ -209,38 +178,89 @@ class _GamesProfileWidgetState extends State<GamesProfileWidget> {
                                 itemBuilder: (context, index) {
                                   return Padding(
                                     padding: const EdgeInsets.all(10.0),
-                                    child: Container(
-                                      height: 100,
-                                      width: 100,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(15),
-                                      ),
-                                      child: ClipRRect(
-                                        borderRadius: BorderRadius.circular(15),
-                                        child: value?[index].logo == 'NULL' ||
-                                                value?[index].logo == null
-                                            ? SvgPicture.asset(
-                                                SvgIcons.achievementIcon,
-                                                colorFilter:
-                                                    const ColorFilter.mode(
-                                                  Colors.red,
-                                                  BlendMode.color,
-                                                ),
-                                                height: 50,
-                                              )
-                                            : CachedNetworkImage(
-                                                imageUrl:
-                                                    value?[index].logo ?? "",
-                                                fit: BoxFit.fill,
-                                                height: 50,
-                                                width: 50,
-                                                placeholder: (context, url) =>
-                                                    const CircularProgressIndicator(),
-                                                errorWidget:
-                                                    (context, url, error) =>
+                                    child: Stack(
+                                      children: [
+                                        Container(
+                                          height: 200,
+                                          width: 150,
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(15),
+                                          ),
+                                          child: ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(15),
+                                            child: value?[index].logo ==
+                                                        'NULL' ||
+                                                    value?[index].logo == null
+                                                ? SvgPicture.asset(
+                                                    SvgIcons.achievementIcon,
+                                                    colorFilter:
+                                                        const ColorFilter.mode(
+                                                      Colors.red,
+                                                      BlendMode.color,
+                                                    ),
+                                                    height: 50,
+                                                  )
+                                                : CachedNetworkImage(
+                                                    imageUrl:
+                                                        value?[index].logo ??
+                                                            "",
+                                                    fit: BoxFit.fill,
+                                                    height: 50,
+                                                    width: 50,
+                                                    placeholder: (context,
+                                                            url) =>
+                                                        const CircularProgressIndicator(),
+                                                    errorWidget: (context, url,
+                                                            error) =>
                                                         const Icon(Icons.error),
-                                              ),
-                                      ),
+                                                  ),
+                                          ),
+                                        ),
+                                        Container(
+                                          height: 200,
+                                          width: 150,
+                                          decoration: BoxDecoration(
+                                            gradient: LinearGradient(
+                                              begin: Alignment.topCenter,
+                                              end: Alignment.bottomCenter,
+                                              colors: [
+                                                Colors.transparent,
+                                                getRandomColor()
+                                              ],
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(15),
+                                          ),
+                                        ),
+                                        Positioned(
+                                          top: 120,
+                                          child: SizedBox(
+                                            width: 150,
+                                            child: Column(
+                                              children: [
+                                                Text(
+                                                  value?[index].name ??
+                                                      "Game Name",
+                                                  style: poppinsFonts.copyWith(
+                                                    color: Colors.white,
+                                                    fontSize: 20,
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
+                                                ),
+                                                Text(
+                                                  "@${value?[index].inGameName}",
+                                                  style: poppinsFonts.copyWith(
+                                                    color: Colors.black,
+                                                    fontSize: 15,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        )
+                                      ],
                                     ),
                                   );
                                 },
@@ -250,14 +270,8 @@ class _GamesProfileWidgetState extends State<GamesProfileWidget> {
                   ),
           ),
           const SizedBox(height: 16),
-          Text(
-            "Achievements",
-            style: poppinsFonts.copyWith(
-              color: Colors.white,
-              fontSize: 20,
-            ),
-          ),
-          const SizedBox(height: 16),
+          const HeaderWidget(title: "Your", subTitle: "Achievements", index: 4),
+          const SizedBox(height: 8),
           SizedBox(
             height: 100,
             width: screenWidth,

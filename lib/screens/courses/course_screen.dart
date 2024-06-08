@@ -70,7 +70,9 @@ class CourseScreenState extends State<CourseScreen> {
   @override
   Widget build(BuildContext context) {
     userModel = context.select((UserProfileProvider value) => value.userModel);
-
+    var size = MediaQuery.of(context).size;
+    final double itemHeight = (size.height - kToolbarHeight - 24) / 3;
+    final double itemWidth = size.width / 2;
     return isLoading
         ? const Center(child: CircularProgressIndicator())
         : Selector<GamesListProvider, List<Games>?>(
@@ -80,18 +82,17 @@ class CourseScreenState extends State<CourseScreen> {
                 onNotification: (notification) =>
                     Utils.scrollNotifier(notification, paginationGames),
                 child: GridView.builder(
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
-                    crossAxisSpacing: 2.0,
-                    mainAxisSpacing: 2.0,
-                    childAspectRatio: 9 / 16,
+                    crossAxisSpacing: 4.0,
+                    mainAxisSpacing: 8.0,
+                    childAspectRatio: itemWidth / itemHeight,
                   ),
                   clipBehavior: Clip.none,
                   itemCount: value?.length,
                   itemBuilder: (context, index) {
                     return GestureDetector(
                       onTap: () => {
-                        HapticFeedback.vibrate(),
                         courseProvider.register(
                           userModel?.email ?? "",
                           "I want to buy this course!",
@@ -102,9 +103,13 @@ class CourseScreenState extends State<CourseScreen> {
                       child: Container(
                         decoration: BoxDecoration(
                           gradient: const LinearGradient(
-                              begin: Alignment.topCenter,
-                              end: Alignment.bottomCenter,
-                              colors: [Color(0xFF7F00FF), Color(0xFF000000)]),
+                            begin: Alignment.topCenter,
+                            end: Alignment.bottomCenter,
+                            colors: [
+                              Color(0xFF7F00FF),
+                              Color(0xFF000000),
+                            ],
+                          ),
                           borderRadius: BorderRadius.circular(15),
                         ),
                         child: Padding(
@@ -140,25 +145,36 @@ class CourseScreenState extends State<CourseScreen> {
                                 ],
                               ),
                               SpacingUtils().horizontalSpacing(5),
-                              Container(
-                                width: 100,
-                                height: 40,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(
-                                    15,
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  value?[index].gameType == 'Mobile'
+                                      ? const Icon(Icons.phone_android_sharp)
+                                      : const Icon(Icons.computer),
+                                  Container(
+                                    width: 100,
+                                    height: 40,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(
+                                        15,
+                                      ),
+                                      color: TournamentWidgetColors
+                                          .tournamentDetailCircleColor,
+                                    ),
+                                    child: Center(
+                                      child: Text(
+                                        "Request Info",
+                                        style: poppinsFonts.copyWith(
+                                          color: Colors.white,
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    ),
                                   ),
-                                  color: TournamentWidgetColors
-                                      .tournamentDetailCircleColor,
-                                ),
-                                child: Text(
-                                  "Get Info",
-                                  style: poppinsFonts.copyWith(
-                                    color: Colors.white,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                  textAlign: TextAlign.center,
-                                ),
+                                ],
                               ),
                             ],
                           ),

@@ -268,7 +268,6 @@ class _StoreDetailScreenState extends State<StoreDetailScreen> {
                           color: GeneralColors.neopopButtonMainColor,
                           bottomShadowColor: GeneralColors.neopopShadowColor,
                           onTapUp: () => {
-                            HapticFeedback.vibrate(),
                             showCustomToast(
                               "Products Will be Availabe after 1-August-2024",
                             ),

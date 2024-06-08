@@ -825,7 +825,6 @@ class EditProfileScreenState extends State<EditProfileScreen> {
                             color: GeneralColors.neopopButtonMainColor,
                             bottomShadowColor: GeneralColors.neopopShadowColor,
                             onTapUp: () => {
-                              HapticFeedback.vibrate(),
                               if (base64String != "")
                                 {data['profile_image'] = base64String},
                               if (firstNameController.text.isNotEmpty)

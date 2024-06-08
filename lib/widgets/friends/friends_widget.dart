@@ -73,7 +73,6 @@ class _FriendsWidgetState extends State<FriendsWidget> {
                     color: GeneralColors.neopopButtonMainColor,
                     bottomShadowColor: GeneralColors.neopopShadowColor,
                     onTapUp: () => {
-                      HapticFeedback.vibrate(),
                       tabManager.onTabChanged(9),
                     },
                     child: const NeoPopShimmer(

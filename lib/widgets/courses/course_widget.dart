@@ -88,7 +88,6 @@ class CourseWidgetState extends State<CourseWidget> {
                       padding: const EdgeInsets.only(left: 8.0),
                       child: GestureDetector(
                         onTap: () => {
-                          HapticFeedback.vibrate(),
                           courseProvider.register(
                             userModel?.email ?? "",
                             "I want to buy this course!",

@@ -225,7 +225,6 @@ class _LeaderBoardScreenState extends State<LeaderBoardScreen> {
                                 bottomShadowColor:
                                     GeneralColors.neopopShadowColor,
                                 onTapUp: () => {
-                                  HapticFeedback.vibrate(),
                                    Navigator.push(
                         context,
                         MaterialPageRoute(

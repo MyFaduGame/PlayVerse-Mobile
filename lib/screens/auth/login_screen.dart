@@ -250,8 +250,6 @@ class LoginScreenState extends State<LoginScreen> {
                     NeoPopButtonWidget(
                       text: "Login to PlayVerse",
                       navigation: () => {
-                        HapticFeedback.vibrate(),
-                        log("comming here", name: "new sample"),
                         if (_formKey.currentState!.validate()) {login()}
                       },
                       textImage: AuthScreenImages.loginIcon,

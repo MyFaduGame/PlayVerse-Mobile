@@ -133,7 +133,6 @@ class _CartScreenState extends State<CartScreen> {
                                     bottomShadowColor:
                                         GeneralColors.neopopShadowColor,
                                     onTapUp: () => {
-                                      HapticFeedback.vibrate(),
                                     },
                                     child: const NeoPopShimmer(
                                       shimmerColor: Colors.white,

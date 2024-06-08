@@ -75,7 +75,6 @@ class _FriendRequestScreenState extends State<FriendRequestScreen> {
                           color: GeneralColors.neopopButtonMainColor,
                           bottomShadowColor: GeneralColors.neopopShadowColor,
                           onTapUp: () => {
-                            HapticFeedback.vibrate(),
                           },
                           child: const NeoPopShimmer(
                             shimmerColor: Colors.white,

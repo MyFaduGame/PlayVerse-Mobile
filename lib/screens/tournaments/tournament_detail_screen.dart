@@ -213,7 +213,6 @@ class TournamentDetailScreenState extends State<TournamentDetailScreen> {
                                           bottomShadowColor:
                                               GeneralColors.neopopShadowColor,
                                           onTapUp: () => {
-                                            HapticFeedback.vibrate(),
                                             Navigator.push(
                                               context,
                                               MaterialPageRoute(
@@ -262,7 +261,6 @@ class TournamentDetailScreenState extends State<TournamentDetailScreen> {
                                           bottomShadowColor:
                                               GeneralColors.neopopShadowColor,
                                           onTapUp: () => {
-                                            HapticFeedback.vibrate(),
                                             checkRegistration(
                                                 widget.tournamentDetail
                                                         .tournamentId ??

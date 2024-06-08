@@ -291,7 +291,6 @@ class _GamesProfileWidgetState extends State<GamesProfileWidget> {
                                   bottomShadowColor:
                                       GeneralColors.neopopShadowColor,
                                   onTapUp: () => {
-                                    HapticFeedback.vibrate(),
                                     tabManager.onTabChanged(7),
                                   },
                                   child: const NeoPopShimmer(
@@ -395,7 +394,6 @@ class _GamesProfileWidgetState extends State<GamesProfileWidget> {
                                   bottomShadowColor:
                                       GeneralColors.neopopShadowColor,
                                   onTapUp: () => {
-                                    HapticFeedback.vibrate(),
                                     tabManager.onTabChanged(9),
                                   },
                                   child: const NeoPopShimmer(

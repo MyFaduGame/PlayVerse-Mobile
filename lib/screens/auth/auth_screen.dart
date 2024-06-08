@@ -106,7 +106,6 @@ class _AuthScreenState extends State<AuthScreen> {
                     NeoPopButtonWidget(
                       text: "SignUp To PlayVerse",
                       navigation: () => {
-                        HapticFeedback.vibrate(),
                         Navigator.push(
                           context,
                           MaterialPageRoute(

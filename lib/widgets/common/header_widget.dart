@@ -1,10 +1,9 @@
 //Third Party Imports
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:playverse/app.dart';
 
 //Local Imports
+import 'package:playverse/app.dart';
 import 'package:playverse/themes/app_font.dart';
 
 class HeaderWidget extends StatefulWidget {
@@ -54,8 +53,7 @@ class _HeaderWidgetState extends State<HeaderWidget> {
           ],
         ),
         IconButton(
-          onPressed: () =>
-              {HapticFeedback.vibrate(), tabManager.onTabChanged(widget.index)},
+          onPressed: () => {tabManager.onTabChanged(widget.index)},
           // onPressed: () => Navigator.push(
           //       context,
           //       MaterialPageRoute(

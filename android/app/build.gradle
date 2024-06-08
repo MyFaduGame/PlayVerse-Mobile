@@ -27,7 +27,7 @@ def keystoreProperties = new Properties()
        keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
    }
 android {
-    namespace "com.example.playverse"
+    namespace "com.app.playverse"
     compileSdk flutter.compileSdkVersion
     ndkVersion flutter.ndkVersion
 

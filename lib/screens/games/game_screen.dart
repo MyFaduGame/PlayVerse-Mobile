@@ -359,7 +359,6 @@ class _GamesScreenState extends State<GamesScreen> {
                               bottomShadowColor:
                                   GeneralColors.neopopShadowColor,
                               onTapUp: () => {
-                                HapticFeedback.vibrate(),
                                 addGame(context, gameData.gameId ?? "Game ID",
                                     true),
                               },
@@ -388,7 +387,6 @@ class _GamesScreenState extends State<GamesScreen> {
                               bottomShadowColor:
                                   GeneralColors.neopopShadowColor,
                               onTapUp: () => {
-                                HapticFeedback.vibrate(),
                                 deleteGames(
                                     context, gameData.gameId ?? "Game ID"),
                               },
@@ -418,7 +416,6 @@ class _GamesScreenState extends State<GamesScreen> {
                           color: GeneralColors.neopopButtonMainColor,
                           bottomShadowColor: GeneralColors.neopopShadowColor,
                           onTapUp: () => {
-                            HapticFeedback.vibrate(),
                             addGame(context, gameData.gameId ?? "Game ID"),
                           },
                           child: const NeoPopShimmer(

@@ -2,6 +2,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:intl/intl.dart';
 import 'package:neopop/widgets/buttons/neopop_button/neopop_button.dart';
 import 'package:neopop/widgets/shimmer/neopop_shimmer.dart';
 import 'package:provider/provider.dart';
@@ -119,15 +120,24 @@ class TournamentDetailScreenState extends State<TournamentDetailScreen> {
                   children: <Widget>[
                     Column(
                       children: <Widget>[
-                        CachedNetworkImage(
-                          imageUrl: widget.tournamentDetail.thumbnail ?? "",
-                          fit: BoxFit.cover,
-                          height: 200,
-                          width: double.infinity,
-                          placeholder: (context, url) =>
-                              const CircularProgressIndicator(),
-                          errorWidget: (context, url, error) =>
-                              const Icon(Icons.error),
+                        Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(15),
+                            border: Border.all(color: Colors.white, width: 5),
+                          ),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(15),
+                            child: CachedNetworkImage(
+                              imageUrl: widget.tournamentDetail.thumbnail ?? "",
+                              fit: BoxFit.cover,
+                              height: 200,
+                              width: double.infinity,
+                              placeholder: (context, url) =>
+                                  const CircularProgressIndicator(),
+                              errorWidget: (context, url, error) =>
+                                  const Icon(Icons.error),
+                            ),
+                          ),
                         ),
                         const SizedBox(
                           height: 16,
@@ -140,7 +150,7 @@ class TournamentDetailScreenState extends State<TournamentDetailScreen> {
                               child: CachedNetworkImage(
                                 imageUrl: widget.tournamentDetail.logo ?? "",
                                 fit: BoxFit.fill,
-                                height: 170,
+                                height: 125,
                                 width: 125,
                                 placeholder: (context, url) =>
                                     const CircularProgressIndicator(),
@@ -325,7 +335,7 @@ class TournamentDetailScreenState extends State<TournamentDetailScreen> {
                                   Text(
                                     "Total Players",
                                     style: poppinsFonts.copyWith(
-                                      color: Colors.white,
+                                      color: const Color(0xFFBF99FF),
                                       fontSize: 15,
                                     ),
                                   ),
@@ -360,7 +370,7 @@ class TournamentDetailScreenState extends State<TournamentDetailScreen> {
                                   Text(
                                     "Players Left",
                                     style: poppinsFonts.copyWith(
-                                      color: Colors.white,
+                                      color: const Color(0xFFBF99FF),
                                       fontSize: 15,
                                     ),
                                   ),
@@ -390,7 +400,7 @@ class TournamentDetailScreenState extends State<TournamentDetailScreen> {
                                   Text(
                                     "First Prize",
                                     style: poppinsFonts.copyWith(
-                                      color: Colors.white,
+                                      color: const Color(0xFFBF99FF),
                                       fontSize: 15,
                                     ),
                                   ),
@@ -398,6 +408,143 @@ class TournamentDetailScreenState extends State<TournamentDetailScreen> {
                               ),
                             ),
                           ],
+                        ),
+                        const SizedBox(height: 16),
+                        Container(
+                          decoration: const BoxDecoration(
+                            gradient: LinearGradient(
+                              colors: [
+                                Colors.blue,
+                                Colors.white,
+                              ],
+                              begin: Alignment.center,
+                              tileMode: TileMode.mirror,
+                            ),
+                          ),
+                          width: double.infinity,
+                          height: 2,
+                        ),
+                        const SizedBox(height: 8),
+                        Table(
+                          children: <TableRow>[
+                            TableRow(
+                              children: <TableCell>[
+                                TableCell(
+                                  child: Text(
+                                    "Match Date:",
+                                    style: poppinsFonts.copyWith(
+                                      color: const Color(0xFFBF99FF),
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+                                TableCell(
+                                  child: Text(
+                                    DateFormat('dd-MMMM-yyyy').format(
+                                      tournamentDetail?.tournamentDate ??
+                                          DateTime.now(),
+                                    ),
+                                    style: poppinsFonts.copyWith(
+                                      fontSize: 20,
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.normal,
+                                    ),
+                                  ),
+                                )
+                              ],
+                            ),
+                            TableRow(
+                              children: <TableCell>[
+                                TableCell(
+                                  child: Text(
+                                    "Entry Close:",
+                                    style: poppinsFonts.copyWith(
+                                      color: const Color(0xFFBF99FF),
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+                                TableCell(
+                                  child: Text(
+                                    DateFormat('dd-MMMM-yyyy').format(
+                                      tournamentDetail?.registrationClose ??
+                                          DateTime.now(),
+                                    ),
+                                    style: poppinsFonts.copyWith(
+                                      fontSize: 20,
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.normal,
+                                    ),
+                                  ),
+                                )
+                              ],
+                            ),
+                            TableRow(
+                              children: <TableCell>[
+                                TableCell(
+                                  child: Text(
+                                    "Invitation:",
+                                    style: poppinsFonts.copyWith(
+                                      color: const Color(0xFFBF99FF),
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+                                TableCell(
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      Clipboard.setData(
+                                        ClipboardData(
+                                            text: tournamentDetail
+                                                    ?.invitationCode ??
+                                                "N/A"),
+                                      ).then(
+                                        (value) => showCustomToast(
+                                            "Copied to ClipBoard"),
+                                      );
+                                    },
+                                    child: Row(
+                                      children: [
+                                        Text(
+                                          tournamentDetail?.invitationCode ??
+                                              "N/A",
+                                          style: poppinsFonts.copyWith(
+                                            fontSize: 20,
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.normal,
+                                          ),
+                                        ),
+                                        const SizedBox(width: 10),
+                                        const Icon(
+                                          Icons.copy,
+                                          color: Colors.white,
+                                          size: 20,
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                )
+                              ],
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 8),
+                        Container(
+                          decoration: const BoxDecoration(
+                            gradient: LinearGradient(
+                              colors: [
+                                Colors.blue,
+                                Colors.white,
+                              ],
+                              begin: Alignment.center,
+                              tileMode: TileMode.mirror,
+                            ),
+                          ),
+                          width: double.infinity,
+                          height: 2,
                         ),
                         const SizedBox(height: 16),
                         Text(

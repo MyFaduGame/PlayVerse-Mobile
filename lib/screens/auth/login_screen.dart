@@ -2,7 +2,6 @@
 import "dart:developer";
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 //Local Imports
@@ -27,7 +26,7 @@ class LoginScreen extends StatefulWidget {
 class LoginScreenState extends State<LoginScreen> {
   late UserAuthProvider provider;
   final _formKey = GlobalKey<FormState>();
-  bool showPassword = false;
+  bool showPassword = true;
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   String? emailError, passwordError;

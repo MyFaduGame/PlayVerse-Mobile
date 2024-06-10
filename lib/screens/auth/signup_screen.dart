@@ -24,7 +24,7 @@ class SignUpScreen extends StatefulWidget {
 class SignUpScreenState extends State<SignUpScreen> {
   late UserAuthProvider authProvider;
   final _formKey = GlobalKey<FormState>();
-  bool showPassword = false;
+  bool showPassword = true;
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController nameController = TextEditingController();
@@ -298,7 +298,6 @@ class SignUpScreenState extends State<SignUpScreen> {
                                   )),
                             ),
                             const SizedBox(height: 20),
-
                             const Text(
                               'Re-Enter Password',
                               style: TextStyle(

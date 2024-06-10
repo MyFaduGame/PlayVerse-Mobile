@@ -306,9 +306,6 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                 ),
               ),
               SliverAppBar(
-                clipBehavior: Clip.none,
-                automaticallyImplyLeading: false,
-                excludeHeaderSemantics: true,
                 pinned: true,
                 toolbarHeight: 0,
                 backgroundColor: Colors.transparent,
@@ -316,6 +313,8 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                   preferredSize: const Size.fromHeight(0),
                   child: Center(
                     child: TabBar(
+                      dividerColor: Colors.transparent,
+                      tabAlignment: TabAlignment.start,
                       indicator: BoxIndicator(),
                       isScrollable: true,
                       unselectedLabelStyle: poppinsFonts.copyWith(

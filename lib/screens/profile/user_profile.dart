@@ -1,16 +1,20 @@
 //Third Party Imports
 import 'dart:developer';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:playverse/utils/box_indicator.dart';
-import 'package:playverse/widgets/friends/friends_widget.dart';
-import 'package:playverse/widgets/profile/games_profile_widget.dart';
-import 'package:playverse/widgets/tournaments/tournament_profile_widget.dart';
+import 'package:playverse/utils/toast_bar.dart';
+import 'package:slider_button/slider_button.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:provider/provider.dart';
 
 //Local Imports
+import 'package:playverse/provider/friends_provider.dart';
+import 'package:playverse/utils/box_indicator.dart';
+import 'package:playverse/widgets/friends/friends_widget.dart';
+import 'package:playverse/widgets/tournaments/tournament_profile_widget.dart';
+import 'package:playverse/widgets/profile/games_profile_widget.dart';
 import 'package:playverse/widgets/common/back_app_bar_widget.dart';
 import 'package:playverse/themes/app_color_theme.dart';
 import 'package:playverse/screens/profile/edit_profile.dart';
@@ -29,6 +33,7 @@ class UserProfileScreen extends StatefulWidget {
 
 class _UserProfileScreenState extends State<UserProfileScreen> {
   late UserProfileProvider provider;
+  late FriendListProvider friendProvider;
   UserProfileVisit? userModel;
   bool isLoading = true;
 
@@ -36,6 +41,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
   void initState() {
     super.initState();
     provider = Provider.of<UserProfileProvider>(context, listen: false);
+    friendProvider = Provider.of<FriendListProvider>(context, listen: false);
     provider.getUserProfileVisitProvider(widget.userId).then((value) {
       setState(() {
         isLoading = false;
@@ -207,26 +213,59 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                                       child: Column(
                                         mainAxisSize: MainAxisSize.min,
                                         children: [
-                                          Container(
-                                            decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(55),
-                                            ),
-                                            height: 20,
-                                            width: screenWidth - 200,
-                                            child: LinearProgressIndicator(
-                                              value: 0.4,
-                                              borderRadius:
-                                                  BorderRadius.circular(55),
-                                              backgroundColor: Colors.grey[300],
-                                              color: Colors.green,
-                                            ),
+                                          Stack(
+                                            children: [
+                                              Container(
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(55),
+                                                ),
+                                                height: 20,
+                                                width: screenWidth - 200,
+                                                child: LinearProgressIndicator(
+                                                  value: ((userModel?.expirence
+                                                              ?.toDouble() ??
+                                                          10 * 100) /
+                                                      100),
+                                                  borderRadius:
+                                                      BorderRadius.circular(55),
+                                                  backgroundColor:
+                                                      const Color(0xFF231750),
+                                                  color: Colors.green,
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                width: screenWidth - 200,
+                                                child: Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: [
+                                                    Text(
+                                                      "${((userModel?.expirence?.toDouble() ?? 10 * 100) / 100).toString()} Level",
+                                                      style:
+                                                          poppinsFonts.copyWith(
+                                                        color: Colors.white,
+                                                        fontSize: 15,
+                                                      ),
+                                                    ),
+                                                    Text(
+                                                      "${((userModel?.expirence?.toDouble() ?? 10 * 100)).toString()}%",
+                                                      style:
+                                                          poppinsFonts.copyWith(
+                                                        color: Colors.white,
+                                                        fontSize: 15,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              )
+                                            ],
                                           ),
-                                          const SizedBox(height: 10),
                                           Text(
-                                            "Progress",
+                                            "Experience Point:${((userModel?.expirence?.toDouble() ?? 10 * 100) / 100)}",
                                             style: poppinsFonts.copyWith(
-                                              fontSize: 20,
+                                              fontSize: 15,
                                               color: Colors.white,
                                             ),
                                           ),
@@ -403,6 +442,38 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                                   ),
                                 ],
                               ),
+                              SliderButton(
+                                height: 50,
+                                width: screenWidth / 1.75,
+                                buttonSize: 40,
+                                backgroundColor: TournamentWidgetColors
+                                    .tournamentDetailCircleColor,
+                                shimmer: false,
+                                action: () async {
+                                  friendProvider
+                                      .addFriends(userModel?.userId ?? "UserId")
+                                      .then(
+                                        (value) => {},
+                                      );
+                                  return true;
+                                },
+                                label: Text(
+                                  "Add Friend!",
+                                  style: poppinsFonts.copyWith(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 20,
+                                  ),
+                                ),
+                                icon: Icon(
+                                  CupertinoIcons.arrow_right,
+                                  color: TournamentWidgetColors
+                                      .tournamentDetailCircleColor,
+                                  size: 30.0,
+                                  semanticLabel:
+                                      'Text to announce in accessibility modes',
+                                ),
+                              ),
                               Text(
                                 "Your Informations",
                                 style: poppinsFonts.copyWith(
@@ -425,6 +496,8 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                             preferredSize: const Size.fromHeight(0),
                             child: Center(
                               child: TabBar(
+                                dividerColor: Colors.transparent,
+                                tabAlignment: TabAlignment.start,
                                 indicator: BoxIndicator(),
                                 isScrollable: true,
                                 unselectedLabelStyle: poppinsFonts.copyWith(

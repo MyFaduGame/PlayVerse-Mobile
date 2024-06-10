@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter/services.dart';
 import 'package:neopop/widgets/buttons/neopop_button/neopop_button.dart';
 import 'package:neopop/widgets/shimmer/neopop_shimmer.dart';
 
@@ -74,8 +73,7 @@ class _FriendRequestScreenState extends State<FriendRequestScreen> {
                         child: NeoPopButton(
                           color: GeneralColors.neopopButtonMainColor,
                           bottomShadowColor: GeneralColors.neopopShadowColor,
-                          onTapUp: () => {
-                          },
+                          onTapUp: () => {},
                           child: const NeoPopShimmer(
                             shimmerColor: Colors.white,
                             child: Padding(
@@ -138,41 +136,28 @@ class _FriendRequestScreenState extends State<FriendRequestScreen> {
                                   ),
                                 ),
                               ),
-                              SizedBox(
-                                height: 80,
-                                child: Column(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: <Widget>[
-                                    Container(
-                                      width: 30,
-                                      height: 30,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(
-                                          50,
-                                        ),
-                                        color: Colors.pink[200],
-                                      ),
-                                      child: IconButton(
-                                        onPressed: () => Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: ((context) =>
-                                                UserProfileScreen(
-                                                  userId:
-                                                      value?[index].userId ??
-                                                          "User Id",
-                                                )),
-                                          ),
-                                        ),
-                                        color: Colors.white,
-                                        icon: const Icon(
-                                          FontAwesomeIcons.info,
-                                          size: 15,
-                                        ),
-                                      ),
+                              Container(
+                                width: 50,
+                                height: 50,
+                                decoration: BoxDecoration(
+                                  color: const Color(0xFF6E17FF),
+                                  borderRadius: BorderRadius.circular(5),
+                                ),
+                                child: IconButton(
+                                  onPressed: () => Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: ((context) => UserProfileScreen(
+                                            userId: value?[index].userId ??
+                                                "User Id",
+                                          )),
                                     ),
-                                  ],
+                                  ),
+                                  color: Colors.white,
+                                  icon: const Icon(
+                                    FontAwesomeIcons.userSecret,
+                                    size: 30,
+                                  ),
                                 ),
                               )
                             ],

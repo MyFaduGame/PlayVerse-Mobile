@@ -1,15 +1,14 @@
 //Third Party Imports
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:neopop/widgets/buttons/neopop_button/neopop_button.dart';
 import 'package:neopop/widgets/shimmer/neopop_shimmer.dart';
-import 'package:playverse/utils/loader_dialouge.dart';
 import 'package:provider/provider.dart';
 
 //Local Imports
 import 'package:playverse/widgets/common/header_widget.dart';
+import 'package:playverse/utils/loader_dialouge.dart';
 import 'package:playverse/themes/app_color_theme.dart';
 import 'package:playverse/app.dart';
 import 'package:playverse/provider/friends_provider.dart';

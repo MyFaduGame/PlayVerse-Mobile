@@ -9,6 +9,7 @@ import 'package:playverse/widgets/common/header_widget.dart';
 import 'package:playverse/widgets/courses/course_widget.dart';
 import 'package:playverse/widgets/games/games_icon_widget.dart';
 import 'package:playverse/widgets/streams/streams_widget.dart';
+import 'package:playverse/widgets/tournaments/leaderboard_widget.dart';
 import 'package:playverse/widgets/tournaments/tournament_list_widget.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -47,6 +48,13 @@ class _HomeScreenState extends State<HomeScreen> {
             SizedBox(
               height: 100,
               child: GamesIconWidget(),
+            ),
+            HeaderWidget(title: "Checkout", subTitle: "Leaderboards", index: 1),
+            SizedBox(
+              height: 300,
+              child: LeaderBoardWidget(
+                type: "Solo",
+              ),
             ),
             HeaderWidget(
               title: "Dont Left",

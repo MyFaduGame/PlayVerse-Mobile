@@ -20,7 +20,7 @@ class _FriendScreenState extends State<FriendScreen> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 3,
+      length: 4,
       child: NestedScrollView(
         clipBehavior: Clip.none,
         headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
@@ -43,6 +43,8 @@ class _FriendScreenState extends State<FriendScreen> {
                 preferredSize: const Size.fromHeight(120),
                 child: Center(
                   child: TabBar(
+                    dividerColor: Colors.transparent,
+                    tabAlignment: TabAlignment.start,
                     indicator: BoxIndicator(),
                     isScrollable: true,
                     unselectedLabelStyle: poppinsFonts.copyWith(
@@ -55,13 +57,16 @@ class _FriendScreenState extends State<FriendScreen> {
                     ),
                     tabs: const [
                       Tab(
-                        text: 'Friends',
+                        text: 'My Friends',
                       ),
                       Tab(
-                        text: 'Requests',
+                        text: 'Sent Request',
                       ),
                       Tab(
-                        text: 'AddNew',
+                        text: 'InComming',
+                      ),
+                      Tab(
+                        text: 'Add New',
                       ),
                     ],
                   ),
@@ -73,6 +78,7 @@ class _FriendScreenState extends State<FriendScreen> {
         body: const TabBarView(
           children: <Widget>[
             FriendsWidget(),
+            FriendRequestScreen(),
             FriendRequestScreen(),
             FriendsRecommendWidget(),
           ],

@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter/services.dart';
 import 'package:neopop/widgets/buttons/neopop_button/neopop_button.dart';
 import 'package:neopop/widgets/shimmer/neopop_shimmer.dart';
 
@@ -71,8 +70,7 @@ class _FriendsRecommendWidgetState extends State<FriendsRecommendWidget> {
                   child: NeoPopButton(
                     color: GeneralColors.neopopButtonMainColor,
                     bottomShadowColor: GeneralColors.neopopShadowColor,
-                    onTapUp: () => {
-                    },
+                    onTapUp: () => {},
                     child: const NeoPopShimmer(
                       shimmerColor: Colors.white,
                       child: Padding(
@@ -102,13 +100,12 @@ class _FriendsRecommendWidgetState extends State<FriendsRecommendWidget> {
                   itemBuilder: (context, index) {
                     return Container(
                       margin: const EdgeInsets.all(5),
-                      padding: const EdgeInsets.symmetric(horizontal: 10),
                       decoration: BoxDecoration(
                         color: Colors.black38,
                         borderRadius: BorderRadius.circular(15),
                       ),
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
                           ClipRRect(
                             borderRadius: BorderRadius.circular(50),
@@ -116,99 +113,66 @@ class _FriendsRecommendWidgetState extends State<FriendsRecommendWidget> {
                                 ? "${value?[index].gender}" == 'Male'
                                     ? SvgPicture.asset(
                                         ProfileImages.boyProfile,
-                                        height: 100,
+                                        height: 80,
                                       )
                                     : SvgPicture.asset(
                                         ProfileImages.girlProfile,
-                                        height: 100,
+                                        height: 80,
                                       )
                                 : Image.network(
                                     value?[index].profileImage ??
                                         "https://images.unsplash.com/photo-1621155346337-1d19476ba7d6?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fGltYWdlfGVufDB8fDB8fHww",
-                                    height: 100,
+                                    height: 80,
                                   ),
-                          ),
-                          Column(
-                            children: [
-                              FittedBox(
-                                child: Text(
-                                  "${value?[index].userName}",
-                                  style: europhiaFonts.copyWith(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 30,
-                                  ),
-                                ),
-                              ),
-                              FittedBox(
-                                child: Text(
-                                  "${value?[index].firstName ?? ""} ${value?[index].lastName ?? ""}",
-                                  style: openSansFonts.copyWith(
-                                    color: Colors.white,
-                                    fontSize: 20,
-                                  ),
-                                ),
-                              ),
-                            ],
                           ),
                           SizedBox(
-                            height: 80,
+                            width: 100,
                             child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: <Widget>[
-                                Container(
-                                  width: 30,
-                                  height: 30,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(
-                                      50,
-                                    ),
-                                    color: Colors.pink[200],
-                                  ),
-                                  child: IconButton(
-                                    onPressed: () => Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: ((context) =>
-                                            UserProfileScreen(
-                                              userId: value?[index].userId ??
-                                                  "User Id",
-                                            )),
-                                      ),
-                                    ),
-                                    color: Colors.white,
-                                    icon: const Icon(
-                                      FontAwesomeIcons.info,
-                                      size: 15,
+                              children: [
+                                FittedBox(
+                                  child: Text(
+                                    "${value?[index].userName}",
+                                    style: poppinsFonts.copyWith(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 20,
                                     ),
                                   ),
                                 ),
-                                Container(
-                                  width: 30,
-                                  height: 30,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(
-                                      10,
-                                    ),
-                                    color: Colors.pink[200],
-                                  ),
-                                  child: IconButton(
-                                    onPressed: () {
-                                      provider
-                                          .addFriends(
-                                              value?[index].userId ?? "UserId")
-                                          .then(
-                                            (value) => {},
-                                          );
-                                    },
-                                    color: Colors.white,
-                                    icon: const Icon(
-                                      FontAwesomeIcons.plus,
-                                      size: 15,
+                                FittedBox(
+                                  child: Text(
+                                    "${value?[index].firstName ?? ""} ${value?[index].lastName ?? ""}",
+                                    style: openSansFonts.copyWith(
+                                      color: Colors.white,
+                                      fontSize: 15,
                                     ),
                                   ),
-                                )
+                                ),
                               ],
+                            ),
+                          ),
+                          Container(
+                            width: 50,
+                            height: 50,
+                            decoration: BoxDecoration(
+                              color: const Color(0xFF6E17FF),
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                            child: IconButton(
+                              onPressed: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: ((context) => UserProfileScreen(
+                                        userId:
+                                            value?[index].userId ?? "User Id",
+                                      )),
+                                ),
+                              ),
+                              color: Colors.white,
+                              icon: const Icon(
+                                FontAwesomeIcons.userSecret,
+                                size: 30,
+                              ),
                             ),
                           )
                         ],

@@ -1,7 +1,6 @@
 //Third Party Imports
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:neopop/widgets/buttons/neopop_button/neopop_button.dart';
 import 'package:neopop/widgets/shimmer/neopop_shimmer.dart';
@@ -61,7 +60,7 @@ class _GamesScreenState extends State<GamesScreen> {
   Widget build(BuildContext context) {
     // double screenWidth = MediaQuery.of(context).size.width;
     var size = MediaQuery.of(context).size;
-    final double itemHeight = (size.height - kToolbarHeight - 24) / 2;
+    final double itemHeight = (size.height - kToolbarHeight - 24) / 2.5;
     final double itemWidth = size.width / 2;
     return isLoading
         ? const Center(child: CircularProgressIndicator())
@@ -114,7 +113,7 @@ class _GamesScreenState extends State<GamesScreen> {
                                   child: CachedNetworkImage(
                                     imageUrl: value?[index].logo ?? "",
                                     fit: BoxFit.fill,
-                                    height: 150,
+                                    height: 100,
                                     placeholder: (context, url) =>
                                         const CircularProgressIndicator(),
                                     errorWidget: (context, url, error) =>
@@ -124,18 +123,19 @@ class _GamesScreenState extends State<GamesScreen> {
                               ),
                               Container(
                                 decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(15),
+                                  borderRadius: BorderRadius.circular(5),
                                   color: value?[index].added ?? false
                                       ? GeneralColors.neopopShadowColor
                                       : Colors.transparent,
                                 ),
                                 width: 150,
-                                height: 20,
+                                height: 50,
                                 child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceEvenly,
                                   children: [
-                                    FittedBox(
+                                    Container(
+                                      width: 80,
                                       child: Text(
                                         "${value?[index].name}",
                                         style: openSansFonts.copyWith(
@@ -143,16 +143,18 @@ class _GamesScreenState extends State<GamesScreen> {
                                           fontWeight: FontWeight.bold,
                                           fontSize: 15,
                                         ),
+                                        maxLines: 2,
+                                        overflow: TextOverflow.ellipsis,
                                       ),
                                     ),
                                     value?[index].gameType == 'Mobile'
                                         ? const Icon(
                                             Icons.phone_android_sharp,
-                                            size: 15,
+                                            size: 20,
                                           )
                                         : const Icon(
                                             Icons.computer,
-                                            size: 15,
+                                            size: 20,
                                           ),
                                   ],
                                 ),

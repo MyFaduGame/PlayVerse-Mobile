@@ -1,4 +1,6 @@
 //Third Party Imports
+import 'dart:math';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -82,26 +84,17 @@ class _StreamsScreenState extends State<StreamsScreen> {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: <Widget>[
-                          Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(15),
-                              border: Border.all(
-                                color: Colors.white,
-                                width: 2,
-                              ),
-                            ),
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(15),
-                              child: CachedNetworkImage(
-                                imageUrl: value[index].thumbnail ?? "",
-                                fit: BoxFit.fill,
-                                height: 200,
-                                width: screenWidth - 20,
-                                placeholder: (context, url) =>
-                                    const CircularProgressIndicator(),
-                                errorWidget: (context, url, error) =>
-                                    const Icon(Icons.error),
-                              ),
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(15),
+                            child: CachedNetworkImage(
+                              imageUrl: value[index].thumbnail ?? "",
+                              fit: BoxFit.fill,
+                              height: 200,
+                              width: screenWidth - 20,
+                              placeholder: (context, url) =>
+                                  const CircularProgressIndicator(),
+                              errorWidget: (context, url, error) =>
+                                  const Icon(Icons.error),
                             ),
                           ),
                           Padding(
@@ -156,17 +149,41 @@ class _StreamsScreenState extends State<StreamsScreen> {
                                   ],
                                 ),
                                 const SizedBox(width: 25),
-                                Text(
-                                  DateFormat('dd/MM/yy').format(
-                                      value[index].tournamentDate ??
-                                          DateTime.now()),
-                                  style: openSansFonts.copyWith(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 15,
-                                    color: Colors.white,
-                                  ),
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
+                                Column(
+                                  children: [
+                                    Container(
+                                      height: 30,
+                                      decoration: BoxDecoration(
+                                        color: Colors.black,
+                                        borderRadius: BorderRadius.circular(15),
+                                        border: Border.all(
+                                          color: Colors.grey.shade500,
+                                        ),
+                                      ),
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(3.0),
+                                        child: Text(
+                                          "${Random().nextInt(10) + 10}k Views",
+                                          style: poppinsFonts.copyWith(
+                                            color: Colors.white,
+                                            fontSize: 15,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    Text(
+                                      DateFormat('dd/MM/yy').format(
+                                          value[index].tournamentDate ??
+                                              DateTime.now()),
+                                      style: openSansFonts.copyWith(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 15,
+                                        color: Colors.white,
+                                      ),
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ],
                                 ),
                               ],
                             ),

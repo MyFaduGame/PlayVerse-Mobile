@@ -1,6 +1,5 @@
 //Third Party Imports
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:neopop/widgets/buttons/neopop_button/neopop_button.dart';
@@ -69,25 +68,18 @@ class _FriendsWidgetState extends State<FriendsWidget> {
             ? Center(
                 child: SizedBox(
                   width: screenWidth / 1.5,
-                  child: NeoPopButton(
-                    color: GeneralColors.neopopButtonMainColor,
-                    bottomShadowColor: GeneralColors.neopopShadowColor,
-                    onTapUp: () => {
-                      tabManager.onTabChanged(9),
-                    },
-                    child: const NeoPopShimmer(
-                      shimmerColor: Colors.white,
-                      child: Padding(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-                        child: Text(
-                          "Get Socialized!",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                          ),
+                  child: const NeoPopShimmer(
+                    shimmerColor: Colors.white,
+                    child: Padding(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+                      child: Text(
+                        "Get Socialized!",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
                     ),

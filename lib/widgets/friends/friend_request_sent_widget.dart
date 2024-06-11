@@ -2,7 +2,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:playverse/utils/toast_bar.dart';
 import 'package:provider/provider.dart';
 import 'package:neopop/widgets/buttons/neopop_button/neopop_button.dart';
 import 'package:neopop/widgets/shimmer/neopop_shimmer.dart';
@@ -15,16 +14,16 @@ import 'package:playverse/themes/app_font.dart';
 import 'package:playverse/models/friends_model.dart';
 import 'package:playverse/provider/friends_provider.dart';
 
-class FriendRequestScreen extends StatefulWidget {
-  const FriendRequestScreen({super.key});
+class SentFriendRequests extends StatefulWidget {
+  const SentFriendRequests({super.key});
 
   @override
-  State<FriendRequestScreen> createState() => _FriendRequestScreenState();
+  State<SentFriendRequests> createState() => _SentFriendRequestsState();
 }
 
-class _FriendRequestScreenState extends State<FriendRequestScreen> {
+class _SentFriendRequestsState extends State<SentFriendRequests> {
   late FriendListProvider provider;
-  List<FriendRequest>? friendRequests;
+  List<SentFriendRequest>? friendRequests;
   bool isLoading = true;
 
   bool loading = true, loader = false, paginateUpcoming = true;
@@ -36,7 +35,7 @@ class _FriendRequestScreenState extends State<FriendRequestScreen> {
       loader = true;
       isLoading = false;
     });
-    await provider.getFriendRequests(offsetUpcoming).then((value) {
+    await provider.getSentFriendRequests(offsetUpcoming).then((value) {
       if (value < 10) paginateUpcoming = false;
       loader = false;
       offsetUpcoming += 10;
@@ -47,7 +46,7 @@ class _FriendRequestScreenState extends State<FriendRequestScreen> {
 
   @override
   void dispose() {
-    provider.friendRequests.clear();
+    provider.sentFriendRequests.clear();
     super.dispose();
   }
 
@@ -64,25 +63,30 @@ class _FriendRequestScreenState extends State<FriendRequestScreen> {
     // double screenHeight = MediaQuery.of(context).size.height;
     return isLoading
         ? const Center(child: CircularProgressIndicator())
-        : Selector<FriendListProvider, List<FriendRequest>?>(
-            selector: (p0, p1) => p1.friendRequests,
+        : Selector<FriendListProvider, List<SentFriendRequest>?>(
+            selector: (p0, p1) => p1.sentFriendRequests,
             builder: (context, value, child) {
               return value?.isEmpty ?? true
                   ? Center(
                       child: SizedBox(
                         width: screenWidth / 1.5,
-                        child: const NeoPopShimmer(
-                          shimmerColor: Colors.white,
-                          child: Padding(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 20, vertical: 15),
-                            child: Text(
-                              "All Set!",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
+                        child: NeoPopButton(
+                          color: GeneralColors.neopopButtonMainColor,
+                          bottomShadowColor: GeneralColors.neopopShadowColor,
+                          onTapUp: () => {},
+                          child: const NeoPopShimmer(
+                            shimmerColor: Colors.white,
+                            child: Padding(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 20, vertical: 15),
+                              child: Text(
+                                "All Set!",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
                             ),
                           ),
@@ -140,10 +144,15 @@ class _FriendRequestScreenState extends State<FriendRequestScreen> {
                                   borderRadius: BorderRadius.circular(5),
                                 ),
                                 child: IconButton(
-                                  onPressed: () => {
-                                    acceptRequest(context,
-                                        value?[index].friendsId ?? "FriendID")
-                                  },
+                                  onPressed: () => Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: ((context) => UserProfileScreen(
+                                            userId: value?[index].userId ??
+                                                "User Id",
+                                          )),
+                                    ),
+                                  ),
                                   color: Colors.white,
                                   icon: const Icon(
                                     FontAwesomeIcons.userSecret,
@@ -158,49 +167,5 @@ class _FriendRequestScreenState extends State<FriendRequestScreen> {
                     );
             },
           );
-  }
-
-  Future<void> acceptRequest(BuildContext context, String friendId) async {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          backgroundColor: const Color(0xFF1E1E1E),
-          title: const Text('Accept Incomming Request?'),
-          actions: <Widget>[
-            TextButton(
-              onPressed: () {
-                provider.acceptFriendRequest(friendId, false).then((value) => {
-                      showCustomToast('Declined!'),
-                      Navigator.of(context).pop(),
-                    });
-              },
-              child: Text(
-                'Decline!',
-                style: poppinsFonts.copyWith(
-                  color: Colors.white,
-                  fontSize: 20,
-                ),
-              ),
-            ),
-            TextButton(
-              onPressed: () {
-                provider.acceptFriendRequest(friendId, true).then((value) => {
-                      showCustomToast('Accepted!'),
-                      Navigator.of(context).pop(),
-                    });
-              },
-              child: Text(
-                'Accept!',
-                style: poppinsFonts.copyWith(
-                  color: Colors.white,
-                  fontSize: 20,
-                ),
-              ),
-            ),
-          ],
-        );
-      },
-    );
   }
 }

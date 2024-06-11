@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 //Local Imports
 import 'package:playverse/themes/app_font.dart';
 import 'package:playverse/utils/box_indicator.dart';
+import 'package:playverse/widgets/friends/friend_request_sent_widget.dart';
 import 'package:playverse/widgets/friends/friends_recommend_widget.dart';
 import 'package:playverse/widgets/friends/friends_requests_widget.dart';
 import 'package:playverse/widgets/friends/friends_status_widget.dart';
@@ -78,7 +79,7 @@ class _FriendScreenState extends State<FriendScreen> {
         body: const TabBarView(
           children: <Widget>[
             FriendsWidget(),
-            FriendRequestScreen(),
+            SentFriendRequests(),
             FriendRequestScreen(),
             FriendsRecommendWidget(),
           ],

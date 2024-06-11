@@ -30,10 +30,24 @@ class FriendsRepo extends BaseRepository {
     return json.decode(response.body);
   }
 
+  Future acceptRequest(String friendID,bool accept) async {
+    final params = "?friend_id=$friendID&accepted=$accept";
+    final response = await getHttp(api: FriendsUrl.acceptRequests + params,token: true);
+    log(response.body, name: 'response acceptRequest');
+    return json.decode(response.body);
+  }
+
   Future getFriendRequests(int offset) async {
     final params = '?offset=$offset&limit=10';
     final response = await getHttp(api: FriendsUrl.friendRequests + params,token: true);
     log(response.body, name: 'response getFriendRequests');
+    return json.decode(response.body);
+  }
+
+  Future getSentFriendRequests(int offset) async {
+    final params = '?offset=$offset&limit=10';
+    final response = await getHttp(api: FriendsUrl.sentRequests + params,token: true);
+    log(response.body, name: 'response getSentFriendRequests');
     return json.decode(response.body);
   }
 

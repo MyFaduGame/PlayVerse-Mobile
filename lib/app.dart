@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:playverse/screens/tournaments/winning_screen.dart';
 import 'package:provider/provider.dart';
 
 //Local Imports
@@ -82,6 +83,7 @@ class _AppState extends State<App>
       const CourseScreen(), //8
       const FriendScreen(), //9
       const StoreScreen(), //10
+      const WinnerScreen(type: 'Solo'), // 11
     ];
   }
 

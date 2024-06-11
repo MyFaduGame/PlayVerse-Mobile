@@ -1,6 +1,5 @@
 //Third Party Imports
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 //Local Imports
 import 'package:playverse/screens/auth/signup_screen.dart';

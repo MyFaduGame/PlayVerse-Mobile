@@ -49,7 +49,8 @@ class _HomeScreenState extends State<HomeScreen> {
               height: 100,
               child: GamesIconWidget(),
             ),
-            HeaderWidget(title: "Checkout", subTitle: "Leaderboards", index: 1),
+            HeaderWidget(
+                title: "Checkout", subTitle: "Leaderboards", index: 11),
             SizedBox(
               height: 300,
               child: LeaderBoardWidget(

@@ -134,7 +134,7 @@ class _GamesScreenState extends State<GamesScreen> {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceEvenly,
                                   children: [
-                                    Container(
+                                    SizedBox(
                                       width: 80,
                                       child: Text(
                                         "${value?[index].name}",

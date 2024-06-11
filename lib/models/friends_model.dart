@@ -87,6 +87,37 @@ class FriendRequest {
         userId: json["user_id"],
         userFriendId: json["user_friend_id"],
         accepted: json["accepted"],
+        userName: json["friend_user_name"],
+        profileImage: json["friend_profile_image"],
+        gender: json["friend_gender"],
+      );
+}
+
+class SentFriendRequest {
+  final String? friendsId;
+  final String? userId;
+  final String? userFriendId;
+  final bool? accepted;
+  final String? userName;
+  final String? profileImage;
+  final String? gender;
+
+  SentFriendRequest({
+    this.friendsId,
+    this.userId,
+    this.userFriendId,
+    this.accepted,
+    this.userName,
+    this.profileImage,
+    this.gender,
+  });
+
+  factory SentFriendRequest.fromJson(Map<String, dynamic> json) =>
+      SentFriendRequest(
+        friendsId: json["friends_id"],
+        userId: json["user_id"],
+        userFriendId: json["user_friend_id"],
+        accepted: json["accepted"],
         userName: json["user_name"],
         profileImage: json["profile_image"],
         gender: json["gender"],

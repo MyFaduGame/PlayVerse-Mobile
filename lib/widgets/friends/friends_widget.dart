@@ -2,13 +2,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:neopop/widgets/buttons/neopop_button/neopop_button.dart';
 import 'package:neopop/widgets/shimmer/neopop_shimmer.dart';
 import 'package:provider/provider.dart';
 
 //Local Imports
-import 'package:playverse/themes/app_color_theme.dart';
-import 'package:playverse/app.dart';
 import 'package:playverse/screens/profile/user_profile.dart';
 import 'package:playverse/models/friends_model.dart';
 import 'package:playverse/provider/friends_provider.dart';
@@ -127,10 +124,10 @@ class _FriendsWidgetState extends State<FriendsWidget> {
                               FittedBox(
                                 child: Text(
                                   "${value?[index].userName}",
-                                  style: europhiaFonts.copyWith(
+                                  style: poppinsFonts.copyWith(
                                     color: Colors.white,
                                     fontWeight: FontWeight.bold,
-                                    fontSize: 30,
+                                    fontSize: 20,
                                   ),
                                 ),
                               ),
@@ -147,62 +144,31 @@ class _FriendsWidgetState extends State<FriendsWidget> {
                           ),
                           SizedBox(
                             height: 80,
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                Container(
-                                  width: 30,
-                                  height: 30,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(
-                                      50,
-                                    ),
-                                    color: Colors.pink[200],
-                                  ),
-                                  child: IconButton(
-                                    onPressed: () => Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: ((context) =>
-                                            UserProfileScreen(
-                                              userId: value?[index].friendId ??
-                                                  "User Id",
-                                            )),
-                                      ),
-                                    ),
-                                    color: Colors.white,
-                                    icon: const Icon(
-                                      FontAwesomeIcons.info,
-                                      size: 15,
-                                    ),
+                            child: Container(
+                              width: 30,
+                              height: 30,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(
+                                  50,
+                                ),
+                                color: Colors.pink[200],
+                              ),
+                              child: IconButton(
+                                onPressed: () => Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: ((context) => UserProfileScreen(
+                                          userId: value?[index].friendId ??
+                                              "User Id",
+                                        )),
                                   ),
                                 ),
-                                // Container(
-                                //   width: 30,
-                                //   height: 30,
-                                //   decoration: BoxDecoration(
-                                //     borderRadius: BorderRadius.circular(
-                                //       10,
-                                //     ),
-                                //     color: Colors.pink[200],
-                                //   ),
-                                //   child: IconButton(
-                                //     onPressed: () {
-                                //       provider
-                                //           .addFriends(
-                                //               value?[index].userId ?? "UserId")
-                                //           .then(
-                                //             (value) => {},
-                                //           );
-                                //     },
-                                //     color: Colors.white,
-                                //     icon: const Icon(
-                                //       FontAwesomeIcons.minus,
-                                //       size: 15,
-                                //     ),
-                                //   ),
-                                // )
-                              ],
+                                color: Colors.white,
+                                icon: const Icon(
+                                  FontAwesomeIcons.info,
+                                  size: 15,
+                                ),
+                              ),
                             ),
                           )
                         ],

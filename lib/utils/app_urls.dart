@@ -21,6 +21,8 @@ class FriendsUrl {
   static String ownFriends = 'user/list_friends';
   static String addFriends = "user/create_friend";
   static String friendRequests = "user/friends";
+  static String sentRequests = "user/sent";
+  static String acceptRequests = "user/friend_request";
 }
 
 class UserStatusUrl {

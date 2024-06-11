@@ -4,7 +4,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:playverse/utils/toast_bar.dart';
 import 'package:slider_button/slider_button.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:provider/provider.dart';

@@ -8,11 +8,11 @@ import 'package:playverse/repository/friends_repo.dart';
 import 'package:playverse/utils/toast_bar.dart';
 
 class FriendListProvider extends ChangeNotifier {
-  
   final repo = FriendsRepo();
   List<Friend> ownFriend = [];
   List<Friend> recommendFriend = [];
   List<FriendRequest> friendRequests = [];
+  List<SentFriendRequest> sentFriendRequests = [];
   bool isLoading = false;
 
   Future<dynamic> getFriendsProvider(int offset) async {
@@ -20,7 +20,7 @@ class FriendListProvider extends ChangeNotifier {
       isLoading = true;
       Map<String, dynamic> responseData = await repo.friendsRecomendApi(offset);
       if (responseData['status_code'] == 200) {
-        if(responseData['data']==null){
+        if (responseData['data'] == null) {
           return recommendFriend;
         }
         List<Friend> tempList = List<Friend>.from(
@@ -42,7 +42,7 @@ class FriendListProvider extends ChangeNotifier {
       isLoading = true;
       Map<String, dynamic> responseData = await repo.ownFriendsApi(offset);
       if (responseData['status_code'] == 200) {
-        if(responseData['data']==null){
+        if (responseData['data'] == null) {
           return ownFriend;
         }
         List<Friend> tempList = List<Friend>.from(
@@ -82,7 +82,7 @@ class FriendListProvider extends ChangeNotifier {
       isLoading = true;
       Map<String, dynamic> responseData = await repo.getFriendRequests(offset);
       if (responseData['status_code'] == 200) {
-        if(responseData['data']==null){
+        if (responseData['data'] == null) {
           return friendRequests;
         }
         List<FriendRequest> tempList = List<FriendRequest>.from(
@@ -98,4 +98,48 @@ class FriendListProvider extends ChangeNotifier {
       log("$e", name: "Error Fetching Recommanded Friend");
     }
   }
+
+  Future<dynamic> getSentFriendRequests(int offset) async {
+    try {
+      isLoading = true;
+      Map<String, dynamic> responseData =
+          await repo.getSentFriendRequests(offset);
+      if (responseData['status_code'] == 200) {
+        if (responseData['data'] == null) {
+          return sentFriendRequests;
+        }
+        List<SentFriendRequest> tempList = List<SentFriendRequest>.from(
+            responseData["data"]!.map((x) => SentFriendRequest.fromJson(x)));
+        offset == 1
+            ? sentFriendRequests = tempList
+            : sentFriendRequests += tempList;
+        isLoading = false;
+        notifyListeners();
+        return tempList.length;
+      } else {
+        log(responseData.toString(), name: 'Sent Friend Log');
+      }
+    } catch (e) {
+      log("$e", name: "Error Fetching Sent Friend");
+    }
+  }
+
+  Future<dynamic> acceptFriendRequest(String friendID,bool accept) async {
+    try {
+      isLoading = true;
+      final responseData = await repo.acceptRequest(friendID,accept);
+      if (responseData['status_code'] == 200) {
+        showCustomToast(responseData['message']);
+        return true;
+      } else if (responseData['status_code'] == 400) {
+        showCustomToast(responseData['message']);
+        return false;
+      } else {
+        log(responseData.toString(), name: 'Friends adding Log');
+      }
+    } catch (e) {
+      log("$e", name: "Error while adding friend");
+    }
+  }
+
 }

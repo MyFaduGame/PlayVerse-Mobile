@@ -14,15 +14,15 @@ import 'package:playverse/models/tournaments_model.dart';
 import 'package:playverse/provider/tournaments_provider.dart';
 import 'package:playverse/themes/app_font.dart';
 
-class LeaderBoardWidget extends StatefulWidget {
+class WinnerScreen extends StatefulWidget {
   final String type;
-  const LeaderBoardWidget({super.key, required this.type});
+  const WinnerScreen({super.key, required this.type});
 
   @override
-  State<LeaderBoardWidget> createState() => _LeaderBoardWidgetState();
+  State<WinnerScreen> createState() => _WinnerScreenState();
 }
 
-class _LeaderBoardWidgetState extends State<LeaderBoardWidget> {
+class _WinnerScreenState extends State<WinnerScreen> {
   late TournamentsProvider provider;
   List<Tournaments>? tournamentList;
   bool isLoading = true;
@@ -31,7 +31,8 @@ class _LeaderBoardWidgetState extends State<LeaderBoardWidget> {
 
   Future<void> paginationTournaments() async {
     if (!paginateUpcoming) return;
-    setState(() {
+    setState(() { 
+      
       loader = true;
       isLoading = false;
     });
@@ -62,8 +63,8 @@ class _LeaderBoardWidgetState extends State<LeaderBoardWidget> {
     // double screenWidth = MediaQuery.of(context).size.width;
     // double screenHeight = MediaQuery.of(context).size.height;
     var size = MediaQuery.of(context).size;
-    final double itemHeight = (size.height - kToolbarHeight - 24) / 3;
-    final double itemWidth = size.width / 2;
+    final double itemHeight = (size.height - kToolbarHeight - 24) / 4;
+    final double itemWidth = size.width;
     return isLoading
         ? const Center(
             child: CircularProgressIndicator(),
@@ -75,10 +76,9 @@ class _LeaderBoardWidgetState extends State<LeaderBoardWidget> {
                 onNotification: (notification) =>
                     Utils.scrollNotifier(notification, paginationTournaments),
                 child: GridView.builder(
-                  scrollDirection: Axis.horizontal,
                   clipBehavior: Clip.none,
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 1,
+                    crossAxisCount: 2,
                     childAspectRatio: itemHeight / itemWidth,
                     crossAxisSpacing: 15.0,
                     mainAxisSpacing: 15.0,
@@ -112,73 +112,67 @@ class _LeaderBoardWidgetState extends State<LeaderBoardWidget> {
                               ),
                             ),
                             Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Container(
-                                      width: 100,
-                                      decoration: BoxDecoration(
-                                        color: Colors.black,
-                                        borderRadius: BorderRadius.circular(15),
-                                        border: Border.all(
-                                          color: Colors.grey.shade500,
-                                        ),
-                                      ),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceEvenly,
-                                        children: <Widget>[
-                                          ClipRRect(
-                                            borderRadius:
-                                                BorderRadius.circular(15),
-                                            child: CachedNetworkImage(
-                                              imageUrl:
-                                                  value?[index].logo ?? "",
-                                              fit: BoxFit.cover,
-                                              height: 30,
-                                              width: 30,
-                                              placeholder: (context, url) =>
-                                                  const CircularProgressIndicator(),
-                                              errorWidget:
-                                                  (context, url, error) =>
-                                                      const Icon(Icons.error),
-                                            ),
-                                          ),
-                                          Text(
-                                            value?[index].gameName ?? "",
-                                            style: poppinsFonts.copyWith(
-                                              color: Colors.white,
-                                              fontSize: 10,
-                                            ),
-                                          )
-                                        ],
-                                      ),
+                                Container(
+                                  height: 30,
+                                  width: 150,
+                                  decoration: BoxDecoration(
+                                    color: Colors.black,
+                                    borderRadius: BorderRadius.circular(15),
+                                    border: Border.all(
+                                      color: Colors.grey.shade500,
                                     ),
-                                    const SizedBox(width: 5),
-                                    Container(
-                                      height: 30,
-                                      decoration: BoxDecoration(
-                                        color: Colors.black,
-                                        borderRadius: BorderRadius.circular(15),
-                                        border: Border.all(
-                                          color: Colors.grey.shade500,
-                                        ),
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(3.0),
+                                    child: Text(
+                                      "${Random().nextInt(10) + 10}k Views",
+                                      style: poppinsFonts.copyWith(
+                                        color: Colors.white,
+                                        fontSize: 15,
                                       ),
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(3.0),
-                                        child: Text(
-                                          "${Random().nextInt(10) + 10}k Views",
-                                          style: poppinsFonts.copyWith(
-                                            color: Colors.white,
-                                            fontSize: 15,
-                                          ),
-                                        ),
-                                      ),
+                                      textAlign: TextAlign.center,
                                     ),
-                                  ],
+                                  ),
+                                ),
+                                const SizedBox(height: 8),
+                                Container(
+                                  alignment: Alignment.centerLeft,
+                                  width: 150,
+                                  decoration: BoxDecoration(
+                                    color: Colors.black,
+                                    borderRadius: BorderRadius.circular(15),
+                                    border: Border.all(
+                                      color: Colors.grey.shade500,
+                                    ),
+                                  ),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    children: <Widget>[
+                                      ClipRRect(
+                                        borderRadius: BorderRadius.circular(15),
+                                        child: CachedNetworkImage(
+                                          imageUrl: value?[index].logo ?? "",
+                                          fit: BoxFit.cover,
+                                          height: 30,
+                                          width: 30,
+                                          placeholder: (context, url) =>
+                                              const CircularProgressIndicator(),
+                                          errorWidget: (context, url, error) =>
+                                              const Icon(Icons.error),
+                                        ),
+                                      ),
+                                      Text(
+                                        value?[index].gameName ?? "",
+                                        style: poppinsFonts.copyWith(
+                                          color: Colors.white,
+                                          fontSize: 10,
+                                        ),
+                                      )
+                                    ],
+                                  ),
                                 ),
                                 const SizedBox(height: 10),
                                 Text(
@@ -188,6 +182,8 @@ class _LeaderBoardWidgetState extends State<LeaderBoardWidget> {
                                     fontWeight: FontWeight.bold,
                                     fontSize: 20,
                                   ),
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
                                 ),
                               ],
                             ),
@@ -215,11 +211,11 @@ class _LeaderBoardWidgetState extends State<LeaderBoardWidget> {
                                 return false;
                               },
                               label: Text(
-                                "Slide to watch stream!",
+                                "Watch Stream!",
                                 style: poppinsFonts.copyWith(
                                   color: Colors.white,
                                   fontWeight: FontWeight.w500,
-                                  fontSize: 10,
+                                  fontSize: 13,
                                 ),
                               ),
                               icon: Icon(

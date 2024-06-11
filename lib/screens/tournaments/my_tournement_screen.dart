@@ -62,7 +62,7 @@ class MyTournementsScreenState extends State<MyTournementsScreen> {
     // double screenWidth = MediaQuery.of(context).size.width;
     // double screenHeight = MediaQuery.of(context).size.height;
     var size = MediaQuery.of(context).size;
-    final double itemHeight = (size.height - kToolbarHeight - 24) / 2.2;
+    final double itemHeight = (size.height - kToolbarHeight - 24) / 2.5;
     final double itemWidth = size.width / 2;
     return isLoading
         ? const Center(
@@ -146,6 +146,8 @@ class MyTournementsScreenState extends State<MyTournementsScreen> {
                                             fontWeight: FontWeight.bold,
                                             fontSize: 20,
                                           ),
+                                          maxLines: 1,
+                                          overflow: TextOverflow.ellipsis,
                                         ),
                                       ],
                                     ),

@@ -24,39 +24,40 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return const SingleChildScrollView(
       child: Padding(
-        padding: EdgeInsets.fromLTRB(10, 0, 10, 120),
+        padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
         child: Column(
           children: <Widget>[
-            SizedBox(
-              height: 120,
-            ),
-            SizedBox(
-              height: 200,
-              child: UpdateCarsouleWidget(),
-            ),
             SizedBox(height: 16),
             HeaderWidget(
                 title: "Trending", subTitle: "Upcomming Matches", index: 1),
             SizedBox(
-              height: 600,
+              height: 280,
               child: TournamentListWidget(
                 type: "Solo",
               ),
             ),
-            SizedBox(height: 16),
+            SizedBox(height: 8),
             HeaderWidget(title: "Search by", subTitle: "Games", index: 4),
             SizedBox(
               height: 100,
               child: GamesIconWidget(),
             ),
-            HeaderWidget(
-                title: "Checkout", subTitle: "Leaderboards", index: 11),
+            SizedBox(height: 8),
+            HeaderWidget(title: "Checkout", subTitle: "Updates", index: 1),
             SizedBox(
-              height: 300,
-              child: LeaderBoardWidget(
-                type: "Solo",
-              ),
+              height: 200,
+              child: UpdateCarsouleWidget(),
             ),
+            // SizedBox(height: 8),
+            // HeaderWidget(
+            //     title: "Checkout", subTitle: "Leaderboards", index: 11),
+            // SizedBox(
+            //   height: 300,
+            //   child: LeaderBoardWidget(
+            //     type: "Solo",
+            //   ),
+            // ),
+            SizedBox(height: 8),
             HeaderWidget(
               title: "Dont Left",
               subTitle: "Streams",

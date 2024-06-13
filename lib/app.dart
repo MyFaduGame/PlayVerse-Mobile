@@ -1,16 +1,17 @@
 //Third Party Imports
 // ignore_for_file: deprecated_member_use
 import 'dart:developer';
-import 'package:animated_notch_bottom_bar/animated_notch_bottom_bar/animated_notch_bottom_bar.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:playverse/screens/tournaments/winning_screen.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
 //Local Imports
+import 'package:playverse/screens/tournaments/winning_screen.dart';
 import 'package:playverse/screens/store/store_screen.dart';
 import 'package:playverse/screens/profile/friend_screen.dart';
 import 'package:playverse/screens/achievements/achievements_screen.dart';
@@ -30,7 +31,6 @@ import 'package:playverse/models/user_status_model.dart';
 import 'package:playverse/provider/user_status_provider.dart';
 import 'package:playverse/utils/loader_dialouge.dart';
 import 'package:playverse/utils/tab_manager.dart';
-import 'package:playverse/widgets/common/app_bar_widget.dart';
 import 'package:playverse/widgets/common/navigation_drawer.dart';
 
 final messengerKey = GlobalKey<ScaffoldMessengerState>();
@@ -47,6 +47,7 @@ class _AppState extends State<App>
     with WidgetsBindingObserver
     implements TabState {
   final AdvancedDrawerController controller = AdvancedDrawerController();
+  int bottomIndex = 0;
   String? id;
   late UserStatusProvider provider;
   late UserProfileProvider profileProvider;
@@ -123,9 +124,6 @@ class _AppState extends State<App>
 
   @override
   Widget build(BuildContext context) {
-    final NotchBottomBarController barController =
-        NotchBottomBarController(index: barIndex);
-
     setState(() {
       myIndex = index;
     });
@@ -145,13 +143,65 @@ class _AppState extends State<App>
         index: index,
         controller: controller,
         childBody: Scaffold(
-          extendBodyBehindAppBar: true,
-          appBar: PreferredSize(
-            preferredSize: const Size.fromHeight(120),
-            child: CustomAppBar(
-              userProfile: userModel ?? UserProfile(),
-              controller: controller,
+          appBar: AppBar(
+            backgroundColor: Colors.black.withOpacity(0.5),
+            leadingWidth: 60,
+            leading: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: GestureDetector(
+                onTap: () => tabManager.onTabChanged(5),
+                child: Container(
+                  width: 30.0,
+                  height: 30.0,
+                  clipBehavior: Clip.antiAlias,
+                  decoration: const BoxDecoration(
+                    color: Colors.black26,
+                    shape: BoxShape.circle,
+                  ),
+                  child: userModel?.profileImage == "" ||
+                          userModel?.profileImage == null
+                      ? userModel?.gender == 'Male'
+                          ? SvgPicture.asset(
+                              ProfileImages.boyProfile,
+                              width: 30,
+                              height: 30,
+                              fit: BoxFit.cover,
+                            )
+                          : SvgPicture.asset(
+                              ProfileImages.girlProfile,
+                              width: 30,
+                              height: 30,
+                              fit: BoxFit.cover,
+                            )
+                      : CachedNetworkImage(
+                          imageUrl: userModel?.profileImage ?? "",
+                          fit: BoxFit.cover,
+                          height: 30,
+                          width: 30,
+                          placeholder: (context, url) =>
+                              const CircularProgressIndicator(),
+                          errorWidget: (context, url, error) =>
+                              const Icon(Icons.error),
+                        ),
+                ),
+              ),
             ),
+            actions: [
+              IconButton(
+                onPressed: () => {},
+                icon: const Icon(
+                  FontAwesomeIcons.bell,
+                  size: 20,
+                ),
+              ),
+              IconButton(
+                onPressed: _handleMenuButtonPressed,
+                icon: const Icon(
+                  Icons.menu,
+                  size: 25,
+                ),
+              )
+            ],
           ),
           body: Container(
             height: screenHeight,
@@ -211,68 +261,106 @@ class _AppState extends State<App>
             ),
           ),
           extendBody: true,
-          bottomNavigationBar: index <= 3
-              ? AnimatedNotchBottomBar(
-                  color: GeneralColors.bottomNavColor,
-                  elevation: 1,
-                  showShadow: false,
-                  durationInMilliSeconds: 800,
-                  notchColor: GeneralColors.bottomBarNotchColor,
-                  notchBottomBarController: barController,
-                  bottomBarItems: [
-                    BottomBarItem(
-                      inActiveItem: SvgPicture.asset(
-                        SvgIcons.homeIcon,
-                        color: const Color(0xFF929292),
-                      ),
-                      activeItem: SvgPicture.asset(
-                        SvgIcons.homeIcon,
-                        color: Colors.white,
-                      ),
-                      itemLabel: '',
-                    ),
-                    BottomBarItem(
-                      inActiveItem: SvgPicture.asset(
-                        SvgIcons.tournamentIcon,
-                        color: const Color(0xFF929292),
-                      ),
-                      activeItem: SvgPicture.asset(
-                        SvgIcons.tournamentIcon,
-                        color: Colors.white,
-                      ),
-                      itemLabel: '',
-                    ),
-                    BottomBarItem(
-                      inActiveItem: Image.asset(
-                        BottomAppBarImages.streamImage,
-                        color: const Color(0xFF929292),
-                      ),
-                      activeItem: Image.asset(
-                        BottomAppBarImages.streamSelectedImage,
-                        color: Colors.white,
-                      ),
-                      itemLabel: '',
-                    ),
-                    BottomBarItem(
-                      inActiveItem: Image.asset(
-                        BottomAppBarImages.articleImage,
-                        color: const Color(0xFF929292),
-                      ),
-                      activeItem: Image.asset(
-                        BottomAppBarImages.articleImage,
-                        color: Colors.white,
-                      ),
-                      itemLabel: '',
-                    ),
-                  ],
-                  onTap: (index) {
-                    log(index.toString(), name: "index");
-                    tabManager.onTabChanged(index);
-                  },
-                  kIconSize: 24.0,
-                  kBottomRadius: 28.0,
-                )
-              : null,
+          bottomNavigationBar: BottomNavigationBar(
+            showSelectedLabels: false,
+            showUnselectedLabels: false,
+            iconSize: 25,
+            selectedItemColor: Colors.white,
+            unselectedItemColor: Colors.grey,
+            currentIndex: bottomIndex,
+            onTap: (value) => {
+              setState(() {
+                if (value == 0) {
+                  onTabChanged(0);
+                  bottomIndex = value;
+                } // Home Page
+                if (value == 1) {
+                  onTabChanged(1);
+                  bottomIndex = value;
+                } // Tournaments Page
+                if (value == 2) {
+                  onTabChanged(2);
+                  bottomIndex = value;
+                } // Streams Page
+                if (value == 3) {
+                  onTabChanged(9);
+                  bottomIndex = value;
+                } // Friends Page
+                if (value == 4) {
+                  onTabChanged(10);
+                  bottomIndex = value;
+                } // Store Page
+              })
+            },
+            type: BottomNavigationBarType.fixed,
+            items: [
+              const BottomNavigationBarItem(
+                icon: Icon(
+                  FontAwesomeIcons.house,
+                ),
+                label: "",
+                activeIcon: Icon(
+                  FontAwesomeIcons.houseUser,
+                ),
+              ),
+              BottomNavigationBarItem(
+                icon: Image.asset(
+                  BottomAppBarImages.tournamentImageUnFill,
+                  color: Colors.grey,
+                  height: 25,
+                  width: 25,
+                ),
+                label: "",
+                activeIcon: Image.asset(
+                  BottomAppBarImages.tournamentImageFill,
+                  color: Colors.white,
+                  height: 25,
+                  width: 25,
+                ),
+              ),
+              BottomNavigationBarItem(
+                icon: Image.asset(
+                  BottomAppBarImages.streamUnFill,
+                  color: Colors.grey,
+                  height: 25,
+                  width: 25,
+                ),
+                label: "",
+                activeIcon: Image.asset(
+                  BottomAppBarImages.streamFill,
+                  color: Colors.white,
+                  height: 25,
+                  width: 25,
+                ),
+              ),
+              BottomNavigationBarItem(
+                icon: Image.asset(
+                  BottomAppBarImages.friendsUnFill,
+                  color: Colors.grey,
+                  height: 25,
+                  width: 25,
+                ),
+                label: "",
+                activeIcon: Image.asset(
+                  BottomAppBarImages.friendsFill,
+                  color: Colors.white,
+                  height: 25,
+                  width: 25,
+                ),
+              ),
+              const BottomNavigationBarItem(
+                icon: Icon(
+                  FontAwesomeIcons.bagShopping,
+                  color: Colors.grey,
+                ),
+                label: "",
+                activeIcon: Icon(
+                  FontAwesomeIcons.bagShopping,
+                  color: Colors.white,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -313,5 +401,9 @@ class _AppState extends State<App>
         loaderCTX = null;
       }
     });
+  }
+
+  void _handleMenuButtonPressed() {
+    controller.showDrawer();
   }
 }

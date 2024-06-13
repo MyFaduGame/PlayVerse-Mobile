@@ -34,223 +34,113 @@ class _UpdateCarsouleWidgetState extends State<UpdateCarsouleWidget> {
     // double screenHeight = MediaQuery.of(context).size.height;
     return CarouselSlider(
       items: [
-        Container(
-          width: screenWidth,
-          color: const Color(0XFF8000FF),
+        SizedBox(
+          width: double.infinity,
           child: Stack(
-            alignment: AlignmentDirectional.bottomEnd,
-            children: [
-              Image.asset(CarasouleSliderImages.giveAwayImage1),
-              Image.asset(CarasouleSliderImages.giveAwayImage2),
-              Positioned(
-                left: 20,
-                bottom: 0,
-                child: SizedBox(
+            alignment: Alignment.bottomCenter,
+            children: <Widget>[
+              ClipRRect(
+                borderRadius: BorderRadius.circular(5),
+                child: Image.asset(
+                  UdpateImages.upgradePreminumImage,
+                  fit: BoxFit.cover,
                   width: screenWidth,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Each Week We Host Super Cool\nGiveaways For Your Loyal Gamer\'s',
-                        style: poppinsFonts.copyWith(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      const SizedBox(height: 10),
-                      TextButton(
-                        onPressed: () {},
-                        style: TextButton.styleFrom(
-                          backgroundColor: const Color(0XFFBDFF00),
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 20, vertical: 10),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(5),
-                          ),
-                        ),
-                        child: const Text(
-                          '+ Join Giveaway',
-                          style: TextStyle(
-                              color: Color(0XFF8000FF),
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18),
-                        ),
-                      ),
-                    ],
+                ),
+              ),
+              Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15),
+                  color: Colors.black,
+                ),
+                margin: const EdgeInsets.only(bottom: 5),
+                child: TextButton(
+                  onPressed: () => {tabManager.onTabChanged(10)},
+                  child: Text(
+                    "Get Preminum",
+                    style: poppinsFonts.copyWith(
+                      color: Colors.white,
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
-              ),
+              )
             ],
           ),
         ),
-        Container(
+        SizedBox(
           width: double.infinity,
-          padding: const EdgeInsets.all(16),
-          decoration: BoxDecoration(
-            gradient: const LinearGradient(
-              colors: [Colors.red, Colors.orange],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            ),
-            borderRadius: BorderRadius.circular(8),
-            boxShadow: const [
-              BoxShadow(
-                color: Colors.black12,
-                blurRadius: 10,
-              ),
-            ],
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              const Text(
-                'Subscribe to',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
+          child: Stack(
+            alignment: Alignment.bottomCenter,
+            children: <Widget>[
+              ClipRRect(
+                borderRadius: BorderRadius.circular(5),
+                child: Image.asset(
+                  UdpateImages.merchandizeImage,
+                  fit: BoxFit.cover,
+                  width: screenWidth,
                 ),
               ),
-              const Text(
-                'GameNoShame',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
+              Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15),
+                  color: Colors.black,
                 ),
-              ),
-              const SizedBox(height: 10),
-              ElevatedButton.icon(
-                onPressed: () =>
-                    _openUrl("https://www.youtube.com/@gamenoshame/"),
-                icon: const Icon(Icons.play_arrow),
-                label: const Text('Subscribe'),
-                style: ElevatedButton.styleFrom(
-                  foregroundColor: Colors.white,
-                  backgroundColor: Colors.redAccent,
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                margin: const EdgeInsets.only(bottom: 5),
+                child: TextButton(
+                  onPressed: () => {tabManager.onTabChanged(10)},
+                  child: Text(
+                    "Buy Merchandize",
+                    style: poppinsFonts.copyWith(
+                      color: Colors.white,
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 ),
-              ),
+              )
             ],
           ),
         ),
-        Container(
-          padding: const EdgeInsets.all(16),
+        SizedBox(
           width: double.infinity,
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [
-                GeneralColors.sideEclipseColor,
-                Colors.blueAccent,
-              ],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            ),
-            borderRadius: BorderRadius.circular(8),
-            boxShadow: const [
-              BoxShadow(
-                color: Colors.black12,
-                blurRadius: 10,
-              ),
-            ],
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              const Text(
-                'Enjoy Our',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
+          child: Stack(
+            alignment: Alignment.bottomCenter,
+            children: <Widget>[
+              ClipRRect(
+                borderRadius: BorderRadius.circular(5),
+                child: Image.asset(
+                  UdpateImages.tournamentImage,
+                  fit: BoxFit.cover,
+                  width: screenWidth,
                 ),
               ),
-              const Text(
-                'Gaming Streams',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
+              Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15),
+                  color: Colors.black,
                 ),
-              ),
-              const SizedBox(height: 10),
-              ElevatedButton.icon(
-                onPressed: () => tabManager.onTabChanged(2),
-                icon: const Icon(Icons.live_tv),
-                label: const Text('Watch Now'),
-                style: ElevatedButton.styleFrom(
-                  foregroundColor: Colors.white,
-                  backgroundColor: Colors.blueAccent,
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                margin: const EdgeInsets.only(bottom: 5),
+                child: TextButton(
+                  onPressed: () => {tabManager.onTabChanged(10)},
+                  child: Text(
+                    "Early Tournaments",
+                    style: poppinsFonts.copyWith(
+                      color: Colors.white,
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 ),
-              ),
-            ],
-          ),
-        ),
-        Container(
-          padding: const EdgeInsets.all(16),
-          width: double.infinity,
-          decoration: BoxDecoration(
-            gradient: const LinearGradient(
-              colors: [
-                Colors.purple,
-                Colors.blueAccent,
-              ],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            ),
-            borderRadius: BorderRadius.circular(8),
-            boxShadow: const [
-              BoxShadow(
-                color: Colors.black12,
-                blurRadius: 10,
-              ),
-            ],
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              const Text(
-                'Purchase Our',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              const Text(
-                'Merchendize',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              const SizedBox(height: 10),
-              ElevatedButton.icon(
-                onPressed: () => tabManager.onTabChanged(10),
-                icon: const Icon(Icons.trolley),
-                label: const Text('Purchase'),
-                style: ElevatedButton.styleFrom(
-                  foregroundColor: Colors.white,
-                  backgroundColor: Colors.blueAccent,
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                ),
-              ),
+              )
             ],
           ),
         ),
       ],
       options: CarouselOptions(
-        height: 400,
+        height: 800,
         aspectRatio: 16 / 9,
-        viewportFraction: 0.8,
+        viewportFraction: 1,
         initialPage: 0,
         enableInfiniteScroll: true,
         clipBehavior: Clip.none,

@@ -6,6 +6,13 @@ class AppFileScreenImages {
   static String xoImage = "assets/images/images/XO button.png";
 }
 
+class UdpateImages {
+  static String merchandizeImage = "assets/images/images/buy_merchendize.jpg";
+  static String upgradePreminumImage = "assets/images/images/upgrade.jpg";
+  static String tournamentImage = "assets/images/images/tournament.jpg";
+  // static String leaderboarIamge = "";
+}
+
 class BottomAppBarImages {
   static String articleImage = "assets/images/images/article.png";
   static String articleSelectedImage =
@@ -15,6 +22,14 @@ class BottomAppBarImages {
   static String coinImage = "assets/images/images/Gem.png";
   static String gameWall = "assets/images/images/games.jpg";
   static String cartImage = "assets/images/images/cart.png";
+  static String tournamentImageUnFill =
+      "assets/images/images/tournament_unfill.png";
+  static String tournamentImageFill =
+      "assets/images/images/tournament_fill.png";
+  static String streamFill = "assets/images/images/stream_fill.png";
+  static String streamUnFill = "assets/images/images/stream_unfill.png";
+  static String friendsFill = "assets/images/images/friends_fill.png";
+  static String friendsUnFill = "assets/images/images/friends_unfill.png";
 }
 
 class CarasouleSliderImages {

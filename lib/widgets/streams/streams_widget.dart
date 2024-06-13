@@ -87,9 +87,6 @@ class _StreamsWidgetState extends State<StreamsWidget> {
                       child: Container(
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(15),
-                          border: Border.all(
-                            color: Colors.white,
-                          ),
                         ),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -116,7 +113,7 @@ class _StreamsWidgetState extends State<StreamsWidget> {
                                   Container(
                                     decoration: BoxDecoration(
                                       border: Border.all(
-                                        color: Colors.purple,
+                                        color: Colors.white,
                                         width: 2,
                                       ),
                                       borderRadius: BorderRadius.circular(55),
@@ -163,27 +160,17 @@ class _StreamsWidgetState extends State<StreamsWidget> {
                                   const SizedBox(width: 15),
                                   Column(
                                     children: [
-                                      Container(
-                                        height: 30,
-                                        decoration: BoxDecoration(
-                                          color: Colors.black,
-                                          borderRadius:
-                                              BorderRadius.circular(15),
-                                          border: Border.all(
-                                            color: Colors.grey.shade500,
-                                          ),
-                                        ),
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(3.0),
-                                          child: Text(
-                                            "${Random().nextInt(10) + 10}k Views",
-                                            style: poppinsFonts.copyWith(
-                                              color: Colors.white,
-                                              fontSize: 15,
-                                            ),
+                                      Padding(
+                                        padding: const EdgeInsets.all(3.0),
+                                        child: Text(
+                                          "${Random().nextInt(10) + 10}k Views",
+                                          style: poppinsFonts.copyWith(
+                                            color: Colors.white,
+                                            fontSize: 15,
                                           ),
                                         ),
                                       ),
+                                      const SizedBox(height: 5),
                                       Text(
                                         DateFormat('dd/MM/yy').format(
                                             value[index].tournamentDate ??

@@ -152,11 +152,11 @@ class _FriendsRecommendWidgetState extends State<FriendsRecommendWidget> {
                             ),
                           ),
                           Container(
-                            width: 50,
-                            height: 50,
+                            width: 40,
+                            height: 45,
                             decoration: BoxDecoration(
                               color: const Color(0xFF6E17FF),
-                              borderRadius: BorderRadius.circular(5),
+                              borderRadius: BorderRadius.circular(15),
                             ),
                             child: IconButton(
                               onPressed: () => Navigator.push(
@@ -170,11 +170,11 @@ class _FriendsRecommendWidgetState extends State<FriendsRecommendWidget> {
                               ),
                               color: Colors.white,
                               icon: const Icon(
-                                FontAwesomeIcons.userSecret,
-                                size: 30,
+                                FontAwesomeIcons.plus,
+                                size: 15,
                               ),
                             ),
-                          )
+                          ),
                         ],
                       ),
                     );

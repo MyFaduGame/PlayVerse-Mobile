@@ -29,7 +29,7 @@ class _FriendScreenState extends State<FriendScreen> {
             const SliverToBoxAdapter(
               child: Column(
                 children: [
-                  SizedBox(height: 120),
+                  SizedBox(height: 16),
                   SizedBox(height: 100, child: FriendsStatusWidget()),
                 ],
               ),
@@ -38,7 +38,7 @@ class _FriendScreenState extends State<FriendScreen> {
               clipBehavior: Clip.none,
               automaticallyImplyLeading: false,
               pinned: true,
-              toolbarHeight: 0,
+              toolbarHeight: 80,
               backgroundColor: Colors.transparent,
               flexibleSpace: PreferredSize(
                 preferredSize: const Size.fromHeight(120),
@@ -58,16 +58,16 @@ class _FriendScreenState extends State<FriendScreen> {
                     ),
                     tabs: const [
                       Tab(
-                        text: 'My Friends',
+                        text: ' My Friends ',
                       ),
                       Tab(
-                        text: 'Sent Request',
+                        text: ' Sent Request ',
                       ),
                       Tab(
-                        text: 'InComming',
+                        text: ' InComming ',
                       ),
                       Tab(
-                        text: 'Add New',
+                        text: ' Add New ',
                       ),
                     ],
                   ),

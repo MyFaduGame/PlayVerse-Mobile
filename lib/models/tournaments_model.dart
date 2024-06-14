@@ -51,7 +51,7 @@ class TournamentDetail {
   final int? registrationFee;
   final int? maxPlayers;
   final int? playerLeft;
-  final dynamic registrationOpens;
+  final DateTime? registrationOpens;
   final DateTime? registrationClose;
   final DateTime? tournamentDate;
   final String? thumbnail;
@@ -139,27 +139,28 @@ class ExtraPrize {
 }
 
 class TournamentWinner {
-    final int? winRank;
-    final int? totalScore;
-    final String? title;
-    final String? tournamentId;
-    final String? thumbnail;
-    final dynamic profileImage;
-    final String? userId;
-    final String? userName;
+  final int? winRank;
+  final int? totalScore;
+  final String? title;
+  final String? tournamentId;
+  final String? thumbnail;
+  final dynamic profileImage;
+  final String? userId;
+  final String? userName;
 
-    TournamentWinner({
-        this.winRank,
-        this.totalScore,
-        this.title,
-        this.tournamentId,
-        this.thumbnail,
-        this.profileImage,
-        this.userId,
-        this.userName,
-    });
+  TournamentWinner({
+    this.winRank,
+    this.totalScore,
+    this.title,
+    this.tournamentId,
+    this.thumbnail,
+    this.profileImage,
+    this.userId,
+    this.userName,
+  });
 
-    factory TournamentWinner.fromJson(Map<String, dynamic> json) => TournamentWinner(
+  factory TournamentWinner.fromJson(Map<String, dynamic> json) =>
+      TournamentWinner(
         winRank: json["win_rank"],
         totalScore: json["total_score"],
         title: json["title"],
@@ -168,9 +169,9 @@ class TournamentWinner {
         profileImage: json["profile_image"],
         userId: json["user_id"],
         userName: json["user_name"],
-    );
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "win_rank": winRank,
         "total_score": totalScore,
         "title": title,
@@ -179,5 +180,5 @@ class TournamentWinner {
         "profile_image": profileImage,
         "user_id": userId,
         "user_name": userName,
-    };
+      };
 }

@@ -2,14 +2,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:playverse/utils/toast_bar.dart';
 import 'package:provider/provider.dart';
-import 'package:neopop/widgets/buttons/neopop_button/neopop_button.dart';
 import 'package:neopop/widgets/shimmer/neopop_shimmer.dart';
 
 //Local Imports
-import 'package:playverse/screens/profile/user_profile.dart';
-import 'package:playverse/themes/app_color_theme.dart';
+import 'package:playverse/utils/toast_bar.dart';
 import 'package:playverse/themes/app_images.dart';
 import 'package:playverse/themes/app_font.dart';
 import 'package:playverse/models/friends_model.dart';
@@ -133,11 +130,11 @@ class _FriendRequestScreenState extends State<FriendRequestScreen> {
                                 ),
                               ),
                               Container(
-                                width: 50,
-                                height: 50,
+                                width: 40,
+                                height: 45,
                                 decoration: BoxDecoration(
                                   color: const Color(0xFF6E17FF),
-                                  borderRadius: BorderRadius.circular(5),
+                                  borderRadius: BorderRadius.circular(15),
                                 ),
                                 child: IconButton(
                                   onPressed: () => {
@@ -146,11 +143,11 @@ class _FriendRequestScreenState extends State<FriendRequestScreen> {
                                   },
                                   color: Colors.white,
                                   icon: const Icon(
-                                    FontAwesomeIcons.userSecret,
-                                    size: 30,
+                                    FontAwesomeIcons.plus,
+                                    size: 15,
                                   ),
                                 ),
-                              )
+                              ),
                             ],
                           ),
                         );

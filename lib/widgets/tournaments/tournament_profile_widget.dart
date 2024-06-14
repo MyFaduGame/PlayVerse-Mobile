@@ -2,13 +2,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:intl/intl.dart';
-import 'package:playverse/themes/app_images.dart';
-import 'package:playverse/utils/loader_dialouge.dart';
 import 'package:provider/provider.dart';
 
 //Local Imports
-import 'package:playverse/themes/app_color_theme.dart';
+import 'package:playverse/themes/app_images.dart';
 import 'package:playverse/utils/helper_utils.dart';
 import 'package:playverse/models/tournaments_model.dart';
 import 'package:playverse/provider/tournaments_provider.dart';
@@ -80,99 +77,93 @@ class TournamentProfileWidgetState extends State<TournamentProfileWidget> {
                 return NotificationListener(
                   onNotification: (notification) =>
                       Utils.scrollNotifier(notification, paginationTournaments),
-                  child: GridView.builder(
+                  child: ListView.builder(
                     padding: EdgeInsets.zero,
                     clipBehavior: Clip.none,
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      childAspectRatio: itemWidth / itemHeight,
-                      crossAxisSpacing: 15.0,
-                      mainAxisSpacing: 15.0,
-                    ),
                     itemCount: value?.length ?? 0,
                     itemBuilder: (context, index) {
-                      return GestureDetector(
-                        onTap: () => Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: ((context) => TournamentDetailScreen(
-                                  tournamentDetail:
-                                      value?[index] ?? TournamentDetail(),
-                                )),
-                          ),
-                        ),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(15),
-                            border: Border.all(
-                              color: Colors.grey.shade500,
+                      return Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: GestureDetector(
+                          onTap: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: ((context) => TournamentDetailScreen(
+                                    tournamentDetail:
+                                        value?[index] ?? TournamentDetail(),
+                                  )),
                             ),
                           ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Stack(
-                              children: [
-                                Column(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: <Widget>[
+                              ClipRRect(
+                                borderRadius: BorderRadius.circular(5),
+                                child: CachedNetworkImage(
+                                  imageUrl: value?[index].thumbnail ?? "",
+                                  fit: BoxFit.cover,
+                                  height: 100,
+                                  width: itemWidth - 20,
+                                  placeholder: (context, url) =>
+                                      const CircularProgressIndicator(),
+                                  errorWidget: (context, url, error) =>
+                                      const Icon(Icons.error),
+                                ),
+                              ),
+                              SizedBox(
+                                width: itemWidth - 10,
+                                height: 100,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceEvenly,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: <Widget>[
-                                    ClipRRect(
-                                      borderRadius: BorderRadius.circular(15),
-                                      child: CachedNetworkImage(
-                                        imageUrl: value?[index].thumbnail ?? "",
-                                        fit: BoxFit.cover,
-                                        height: 100,
-                                        width: 1000,
-                                        placeholder: (context, url) =>
-                                            const CircularProgressIndicator(),
-                                        errorWidget: (context, url, error) =>
-                                            const Icon(Icons.error),
+                                    Text(
+                                      "Ends In ${(value?[index].registrationClose ?? DateTime.now()).difference(DateTime.now()).inDays.toString()} Days",
+                                      style: poppinsFonts.copyWith(
+                                          color: Colors.grey, fontSize: 15),
+                                      textAlign: TextAlign.left,
+                                    ),
+                                    Text(
+                                      value?[index].title ?? "Tournament",
+                                      style: poppinsFonts.copyWith(
+                                        color: Colors.white,
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold,
                                       ),
-                                    ),
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          DateFormat('dd-MMMM-yyyy').format(
-                                              value?[index].tournamentDate ??
-                                                  DateTime.now()),
-                                          style: poppinsFonts.copyWith(
-                                            color: Colors.white,
-                                          ),
-                                        ),
-                                        Text(
-                                          value?[index].title ?? "",
-                                          style: poppinsFonts.copyWith(
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 20,
-                                          ),
-                                          maxLines: 1,
-                                          overflow: TextOverflow.ellipsis,
-                                        ),
-                                        Text(
-                                          getRandomDescriptionForTournament(),
-                                          maxLines: 2,
-                                          overflow: TextOverflow.ellipsis,
-                                          style: poppinsFonts.copyWith(
-                                            color: Colors.white,
-                                            fontSize: 15,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    const Divider(
-                                      color: Colors.white70,
-                                      height: 2,
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
                                     ),
                                     Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceEvenly,
-                                      children: <Widget>[
+                                      children: [
+                                        Container(
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(55),
+                                            border: Border.all(
+                                                color: Colors.white, width: 2),
+                                          ),
+                                          child: ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(55),
+                                            child: CachedNetworkImage(
+                                              imageUrl:
+                                                  value?[index].logo ?? "",
+                                              fit: BoxFit.cover,
+                                              height: 25,
+                                              width: 25,
+                                              placeholder: (context, url) =>
+                                                  const CircularProgressIndicator(),
+                                              errorWidget:
+                                                  (context, url, error) =>
+                                                      const Icon(Icons.error),
+                                            ),
+                                          ),
+                                        ),
                                         Column(
-                                          children: <Widget>[
+                                          children: [
                                             Text(
                                               "Win Prize",
                                               style: poppinsFonts.copyWith(
@@ -243,68 +234,12 @@ class TournamentProfileWidgetState extends State<TournamentProfileWidget> {
                                             ),
                                           ],
                                         ),
-                                        Container(
-                                          width: 40,
-                                          height: 40,
-                                          decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(50),
-                                            color: TournamentWidgetColors
-                                                .tournamentDetailCircleColor,
-                                          ),
-                                          child: const Icon(
-                                            FontAwesomeIcons.arrowRight,
-                                            color: Colors.white,
-                                          ),
-                                        ),
                                       ],
-                                    )
+                                    ),
                                   ],
                                 ),
-                                Positioned(
-                                  top: 90,
-                                  left: 10,
-                                  child: Container(
-                                    width: 100,
-                                    decoration: BoxDecoration(
-                                      color: Colors.black,
-                                      borderRadius: BorderRadius.circular(15),
-                                      border: Border.all(
-                                        color: Colors.grey.shade500,
-                                      ),
-                                    ),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceEvenly,
-                                      children: <Widget>[
-                                        ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(15),
-                                          child: CachedNetworkImage(
-                                            imageUrl: value?[index].logo ?? "",
-                                            fit: BoxFit.cover,
-                                            height: 30,
-                                            width: 30,
-                                            placeholder: (context, url) =>
-                                                const CircularProgressIndicator(),
-                                            errorWidget:
-                                                (context, url, error) =>
-                                                    const Icon(Icons.error),
-                                          ),
-                                        ),
-                                        Text(
-                                          value?[index].gameName ?? "",
-                                          style: poppinsFonts.copyWith(
-                                            color: Colors.white,
-                                            fontSize: 10,
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
+                              )
+                            ],
                           ),
                         ),
                       );

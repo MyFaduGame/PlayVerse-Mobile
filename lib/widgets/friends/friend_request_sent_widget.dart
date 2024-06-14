@@ -137,26 +137,27 @@ class _SentFriendRequestsState extends State<SentFriendRequests> {
                                 ),
                               ),
                               Container(
-                                width: 50,
-                                height: 50,
+                                width: 40,
+                                height: 45,
                                 decoration: BoxDecoration(
                                   color: const Color(0xFF6E17FF),
-                                  borderRadius: BorderRadius.circular(5),
+                                  borderRadius: BorderRadius.circular(15),
                                 ),
                                 child: IconButton(
                                   onPressed: () => Navigator.push(
                                     context,
                                     MaterialPageRoute(
                                       builder: ((context) => UserProfileScreen(
-                                            userId: value?[index].userId ??
-                                                "User Id",
+                                            userId:
+                                                value?[index].userFriendId ??
+                                                    "User Id",
                                           )),
                                     ),
                                   ),
                                   color: Colors.white,
                                   icon: const Icon(
-                                    FontAwesomeIcons.userSecret,
-                                    size: 30,
+                                    FontAwesomeIcons.info,
+                                    size: 15,
                                   ),
                                 ),
                               )

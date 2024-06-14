@@ -142,32 +142,27 @@ class _FriendsWidgetState extends State<FriendsWidget> {
                               ),
                             ],
                           ),
-                          SizedBox(
-                            height: 80,
-                            child: Container(
-                              width: 30,
-                              height: 30,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(
-                                  50,
+                          Container(
+                            width: 40,
+                            height: 45,
+                            decoration: BoxDecoration(
+                              color: const Color(0xFF6E17FF),
+                              borderRadius: BorderRadius.circular(15),
+                            ),
+                            child: IconButton(
+                              onPressed: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: ((context) => UserProfileScreen(
+                                        userId:
+                                            value?[index].friendId ?? "User Id",
+                                      )),
                                 ),
-                                color: Colors.pink[200],
                               ),
-                              child: IconButton(
-                                onPressed: () => Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: ((context) => UserProfileScreen(
-                                          userId: value?[index].friendId ??
-                                              "User Id",
-                                        )),
-                                  ),
-                                ),
-                                color: Colors.white,
-                                icon: const Icon(
-                                  FontAwesomeIcons.info,
-                                  size: 15,
-                                ),
+                              color: Colors.white,
+                              icon: const Icon(
+                                FontAwesomeIcons.info,
+                                size: 15,
                               ),
                             ),
                           )

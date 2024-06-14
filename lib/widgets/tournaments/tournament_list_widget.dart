@@ -1,14 +1,10 @@
 //Thrid Party Imports
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 //Local Imports
 import 'package:playverse/themes/app_images.dart';
-import 'package:playverse/utils/loader_dialouge.dart';
-import 'package:playverse/themes/app_color_theme.dart';
 import 'package:playverse/utils/helper_utils.dart';
 import 'package:playverse/models/tournaments_model.dart';
 import 'package:playverse/provider/tournaments_provider.dart';
@@ -142,7 +138,7 @@ class _TournamentListWidgetState extends State<TournamentListWidget> {
                                 Column(
                                   children: <Widget>[
                                     Text(
-                                        "${DateTime.now().difference(value?[index].tournamentDate ?? DateTime.now()).inDays.toString()} Days Remaning"),
+                                        "${(value?[index].tournamentDate ?? DateTime.now()).difference(DateTime.now()).inDays.toString()} Days Remaning"),
                                     Text(
                                       value?[index].title ?? "Tournament",
                                       style: poppinsFonts.copyWith(

@@ -3,7 +3,11 @@ import 'dart:developer';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:playverse/widgets/friends/friends_recommend_widget.dart';
+import 'package:playverse/widgets/friends/friends_requests_widget.dart';
 import 'package:slider_button/slider_button.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:provider/provider.dart';
@@ -71,10 +75,30 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
-      extendBodyBehindAppBar: true,
-      appBar: const PreferredSize(
-        preferredSize: Size.fromHeight(120),
-        child: BackAppBar(),
+      appBar: AppBar(
+        backgroundColor: Colors.black.withOpacity(0.5),
+        leadingWidth: 60,
+        leading: IconButton(
+          onPressed: () => {Navigator.pop(context)},
+          icon: const Icon(Icons.arrow_back),
+        ),
+        centerTitle: true,
+        title: Text(
+          "${userModel?.firstName ?? "FirstName"}'s Profile",
+          style: poppinsFonts.copyWith(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        actions: [
+          IconButton(
+            onPressed: () => {},
+            icon: const Icon(
+              FontAwesomeIcons.bell,
+              size: 20,
+            ),
+          ),
+        ],
       ),
       body: Container(
         height: screenHeight,
@@ -141,7 +165,6 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: <Widget>[
-                              const SizedBox(height: 100),
                               SizedBox(
                                 height: 300,
                                 child: Stack(
@@ -382,65 +405,58 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                                 ],
                               ),
                               const SizedBox(height: 16),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: <Widget>[
-                                  GestureDetector(
-                                    onTap: () => Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: ((context) =>
-                                            const EditProfileScreen()),
-                                      ),
-                                    ),
-                                    child: Column(
-                                      children: [
-                                        Text(
-                                          //add or remove friend button
-                                          'Nationality',
-                                          style: poppinsFonts.copyWith(
-                                            color: Colors.white,
-                                            fontSize: 15,
-                                          ),
-                                        ),
-                                        Text(
-                                          userModel?.country ?? "",
-                                          style: poppinsFonts.copyWith(
-                                            color: Colors.white,
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  Container(
-                                    height: 30,
-                                    width: 1,
-                                    color: Colors.white,
-                                  ),
-                                  Column(
+                              Container(
+                                color: Colors.grey,
+                                width: double.infinity,
+                                height: 1,
+                              ),
+                              const SizedBox(height: 8),
+                              SizedBox(
+                                height: 80,
+                                child: SingleChildScrollView(
+                                  scrollDirection: Axis.horizontal,
+                                  child: Row(
+                                    // mainAxisAlignment:
+                                    //     MainAxisAlignment.spaceEvenly,
                                     children: <Widget>[
-                                      Text(
-                                        'Experience',
-                                        style: poppinsFonts.copyWith(
-                                          color: Colors.white,
-                                          fontSize: 15,
+                                      SizedBox(
+                                        width: 150,
+                                        height: 80,
+                                        child: Column(
+                                          children: <Widget>[
+                                            Text(
+                                              userModel?.country ?? "Country",
+                                              style: poppinsFonts.copyWith(
+                                                color: Colors.white,
+                                                fontSize: 20,
+                                              ),
+                                            ),
+                                            Text(
+                                              "Nationality",
+                                              style: poppinsFonts.copyWith(
+                                                color: const Color(0xFFBF99FF),
+                                                fontSize: 20,
+                                              ),
+                                            ),
+                                          ],
                                         ),
                                       ),
-                                      Text(
-                                        userModel?.expirence.toString() ?? "",
-                                        style: poppinsFonts.copyWith(
-                                          color: Colors.white,
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold,
-                                        ),
+                                      Container(
+                                        color: Colors.grey,
+                                        height: 50,
+                                        width: 1,
                                       ),
                                     ],
                                   ),
-                                ],
+                                ),
                               ),
+                              const SizedBox(height: 8),
+                              Container(
+                                color: Colors.grey,
+                                width: double.infinity,
+                                height: 1,
+                              ),
+                              const SizedBox(height: 16),
                               SliderButton(
                                 height: 50,
                                 width: screenWidth / 1.75,
@@ -473,14 +489,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                                       'Text to announce in accessibility modes',
                                 ),
                               ),
-                              Text(
-                                "Your Informations",
-                                style: poppinsFonts.copyWith(
-                                  color: Colors.white,
-                                  fontSize: 20,
-                                ),
-                                textAlign: TextAlign.center,
-                              )
+                              const SizedBox(height: 16),
                             ],
                           ),
                         ),
@@ -489,7 +498,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                           automaticallyImplyLeading: false,
                           excludeHeaderSemantics: true,
                           pinned: true,
-                          toolbarHeight: 0,
+                          toolbarHeight: 50,
                           backgroundColor: Colors.transparent,
                           flexibleSpace: PreferredSize(
                             preferredSize: const Size.fromHeight(0),
@@ -509,13 +518,13 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                                 ),
                                 tabs: const [
                                   Tab(
-                                    text: 'Games',
+                                    text: ' More Friends ',
                                   ),
                                   Tab(
-                                    text: 'History',
+                                    text: ' Sent Requests ',
                                   ),
                                   Tab(
-                                    text: 'Friends',
+                                    text: ' Requests ',
                                   ),
                                 ],
                               ),
@@ -526,8 +535,8 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                     },
                     body: const TabBarView(
                       children: <Widget>[
-                        GamesProfileWidget(),
-                        SizedBox(child: TournamentProfileWidget()),
+                        FriendsRecommendWidget(),
+                        FriendRequestScreen(),
                         FriendsWidget(),
                       ],
                     ),

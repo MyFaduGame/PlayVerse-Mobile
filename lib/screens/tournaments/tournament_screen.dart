@@ -2,12 +2,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:intl/intl.dart';
-import 'package:playverse/utils/loader_dialouge.dart';
+import 'package:playverse/themes/app_color_theme.dart';
 import 'package:provider/provider.dart';
 
 //Local Imports
-import 'package:playverse/themes/app_color_theme.dart';
 import 'package:playverse/themes/app_font.dart';
 import 'package:playverse/themes/app_images.dart';
 import 'package:playverse/utils/helper_utils.dart';
@@ -79,104 +77,272 @@ class _TournamentScreenState extends State<TournamentScreen> {
                 return NotificationListener(
                   onNotification: (notification) =>
                       Utils.scrollNotifier(notification, paginationTournaments),
-                  child: GridView.builder(
+                  child: ListView.builder(
                     clipBehavior: Clip.none,
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: ((value?.length ?? 0) % 4 == 0 ||
-                              (value?.length ?? 0) % 4 == 1)
-                          ? 1
-                          : 2,
-                      childAspectRatio: itemWidth / itemHeight,
-                      crossAxisSpacing: 15.0,
-                      mainAxisSpacing: 15.0,
-                    ),
                     itemCount: value?.length ?? 0,
                     itemBuilder: (context, index) {
-                      if ((index % 4 == 0 || index % 4 == 1)) {
-                        return GestureDetector(
-                          onTap: () => Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: ((context) => TournamentDetailScreen(
-                                    tournamentDetail:
-                                        value?[index] ?? TournamentDetail(),
-                                  )),
-                            ),
-                          ),
-                          child: Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(15),
-                              border: Border.all(
-                                color: Colors.grey.shade500,
+                      if ((index % 5 == 0 || index % 5 == 1)) {
+                        return Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: GestureDetector(
+                            onTap: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: ((context) => TournamentDetailScreen(
+                                      tournamentDetail:
+                                          value?[index] ?? TournamentDetail(),
+                                    )),
                               ),
                             ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Stack(
-                                children: [
-                                  Column(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: <Widget>[
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(5),
+                                  child: CachedNetworkImage(
+                                    imageUrl: value?[index].thumbnail ?? "",
+                                    fit: BoxFit.cover,
+                                    height: 100,
+                                    width: itemWidth - 20,
+                                    placeholder: (context, url) =>
+                                        const CircularProgressIndicator(),
+                                    errorWidget: (context, url, error) =>
+                                        const Icon(Icons.error),
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: itemWidth - 10,
+                                  height: 100,
+                                  child: Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
                                     children: <Widget>[
-                                      ClipRRect(
-                                        borderRadius: BorderRadius.circular(15),
-                                        child: CachedNetworkImage(
-                                          imageUrl:
-                                              value?[index].thumbnail ?? "",
-                                          fit: BoxFit.cover,
-                                          height: 100,
-                                          width: 1000,
-                                          placeholder: (context, url) =>
-                                              const CircularProgressIndicator(),
-                                          errorWidget: (context, url, error) =>
-                                              const Icon(Icons.error),
+                                      Text(
+                                        "Ends In ${(value?[index].registrationClose ?? DateTime.now()).difference(DateTime.now()).inDays.toString()} Days",
+                                        style: poppinsFonts.copyWith(
+                                            color: Colors.grey, fontSize: 15),
+                                        textAlign: TextAlign.left,
+                                      ),
+                                      Text(
+                                        value?[index].title ?? "Tournament",
+                                        style: poppinsFonts.copyWith(
+                                          color: Colors.white,
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold,
                                         ),
-                                      ),
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            DateFormat('dd-MMMM-yyyy').format(
-                                                value?[index].tournamentDate ??
-                                                    DateTime.now()),
-                                            style: poppinsFonts.copyWith(
-                                              color: Colors.white,
-                                            ),
-                                          ),
-                                          Text(
-                                            value?[index].title ?? "",
-                                            style: poppinsFonts.copyWith(
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 20,
-                                            ),
-                                            maxLines: 1,
-                                            overflow: TextOverflow.ellipsis,
-                                          ),
-                                          Text(
-                                            getRandomDescriptionForTournament(),
-                                            maxLines: 2,
-                                            overflow: TextOverflow.ellipsis,
-                                            style: poppinsFonts.copyWith(
-                                              color: Colors.white,
-                                              fontSize: 15,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      const Divider(
-                                        color: Colors.white70,
-                                        height: 2,
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
                                       ),
                                       Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceEvenly,
-                                        children: <Widget>[
+                                        children: [
+                                          Container(
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(55),
+                                              border: Border.all(
+                                                  color: Colors.white,
+                                                  width: 2),
+                                            ),
+                                            child: ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(55),
+                                              child: CachedNetworkImage(
+                                                imageUrl:
+                                                    value?[index].logo ?? "",
+                                                fit: BoxFit.cover,
+                                                height: 25,
+                                                width: 25,
+                                                placeholder: (context, url) =>
+                                                    const CircularProgressIndicator(),
+                                                errorWidget:
+                                                    (context, url, error) =>
+                                                        const Icon(Icons.error),
+                                              ),
+                                            ),
+                                          ),
+                                          Column(
+                                            children: [
+                                              Text(
+                                                "Win Prize",
+                                                style: poppinsFonts.copyWith(
+                                                  color: Colors.grey.shade100,
+                                                  fontSize: 10,
+                                                ),
+                                              ),
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: <Widget>[
+                                                  Image.asset(
+                                                    TournamentWidgetImages
+                                                        .winTrophyImage,
+                                                    height: 15,
+                                                    width: 15,
+                                                  ),
+                                                  Text(
+                                                    value?[index]
+                                                            .prizePool
+                                                            ?.the1St
+                                                            .toString() ??
+                                                        "",
+                                                    style:
+                                                        poppinsFonts.copyWith(
+                                                      color: Colors.white38,
+                                                      fontSize: 10,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
                                           Column(
                                             children: <Widget>[
+                                              Text(
+                                                "Player Slots",
+                                                style: poppinsFonts.copyWith(
+                                                  color: Colors.grey.shade100,
+                                                  fontSize: 10,
+                                                ),
+                                              ),
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: <Widget>[
+                                                  const Icon(
+                                                    FontAwesomeIcons.userGroup,
+                                                    color: Colors.white,
+                                                    size: 10,
+                                                  ),
+                                                  const SizedBox(
+                                                    width: 5,
+                                                  ),
+                                                  Text(
+                                                    value?[index]
+                                                            .prizePool
+                                                            ?.the1St
+                                                            .toString() ??
+                                                        "",
+                                                    style:
+                                                        poppinsFonts.copyWith(
+                                                      color: Colors.white38,
+                                                      fontSize: 10,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                        );
+                      } else {
+                        return Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: GestureDetector(
+                            onTap: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: ((context) => TournamentDetailScreen(
+                                      tournamentDetail:
+                                          value?[index] ?? TournamentDetail(),
+                                    )),
+                              ),
+                            ),
+                            child: Stack(
+                              children: [
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(15),
+                                  child: CachedNetworkImage(
+                                    imageUrl: value?[index].thumbnail ?? "",
+                                    fit: BoxFit.cover,
+                                    height: 200,
+                                    width: double.infinity,
+                                    placeholder: (context, url) =>
+                                        const CircularProgressIndicator(),
+                                    errorWidget: (context, url, error) =>
+                                        const Icon(Icons.error),
+                                  ),
+                                ),
+                                Container(
+                                  width: double.infinity,
+                                  height: 200,
+                                  decoration: BoxDecoration(
+                                    gradient: const LinearGradient(
+                                      begin: Alignment.topCenter,
+                                      end: Alignment.bottomCenter,
+                                      colors: [
+                                        Colors.transparent,
+                                        Colors.black87,
+                                      ],
+                                    ),
+                                    borderRadius: BorderRadius.circular(15),
+                                  ),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: <Widget>[
+                                      Text(
+                                        "Ends In ${(value?[index].registrationClose ?? DateTime.now()).difference(DateTime.now()).inDays.toString()} Days",
+                                        style: poppinsFonts.copyWith(
+                                          color: Colors.white,
+                                          fontSize: 15,
+                                        ),
+                                        textAlign: TextAlign.left,
+                                      ),
+                                      Text(
+                                        value?[index].title ?? "Tournament",
+                                        style: poppinsFonts.copyWith(
+                                          color: Colors.white,
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceEvenly,
+                                        children: [
+                                          Container(
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(55),
+                                              border: Border.all(
+                                                  color: Colors.white,
+                                                  width: 2),
+                                            ),
+                                            child: ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(55),
+                                              child: CachedNetworkImage(
+                                                imageUrl:
+                                                    value?[index].logo ?? "",
+                                                fit: BoxFit.cover,
+                                                height: 25,
+                                                width: 25,
+                                                placeholder: (context, url) =>
+                                                    const CircularProgressIndicator(),
+                                                errorWidget:
+                                                    (context, url, error) =>
+                                                        const Icon(Icons.error),
+                                              ),
+                                            ),
+                                          ),
+                                          Column(
+                                            children: [
                                               Text(
                                                 "Win Prize",
                                                 style: poppinsFonts.copyWith(
@@ -264,85 +430,13 @@ class _TournamentScreenState extends State<TournamentScreen> {
                                             ),
                                           ),
                                         ],
-                                      )
+                                      ),
+                                      const SizedBox(height: 16),
                                     ],
                                   ),
-                                  Positioned(
-                                    top: 90,
-                                    left: 10,
-                                    child: Container(
-                                      width: 100,
-                                      decoration: BoxDecoration(
-                                        color: Colors.black,
-                                        borderRadius: BorderRadius.circular(15),
-                                        border: Border.all(
-                                          color: Colors.grey.shade500,
-                                        ),
-                                      ),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceEvenly,
-                                        children: <Widget>[
-                                          ClipRRect(
-                                            borderRadius:
-                                                BorderRadius.circular(15),
-                                            child: CachedNetworkImage(
-                                              imageUrl:
-                                                  value?[index].logo ?? "",
-                                              fit: BoxFit.cover,
-                                              height: 30,
-                                              width: 30,
-                                              placeholder: (context, url) =>
-                                                  const CircularProgressIndicator(),
-                                              errorWidget:
-                                                  (context, url, error) =>
-                                                      const Icon(Icons.error),
-                                            ),
-                                          ),
-                                          Text(
-                                            value?[index].gameName ?? "",
-                                            style: poppinsFonts.copyWith(
-                                              color: Colors.white,
-                                              fontSize: 10,
-                                            ),
-                                          )
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        );
-                      } else {
-                        return GestureDetector(
-                          onTap: () => Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: ((context) => TournamentDetailScreen(
-                                    tournamentDetail:
-                                        value?[index] ?? TournamentDetail(),
-                                  )),
-                            ),
-                          ),
-                          child: Column(
-                            children: <Widget>[
-                              ClipRRect(
-                                borderRadius: BorderRadius.circular(5),
-                                child: CachedNetworkImage(
-                                  imageUrl: value?[index].thumbnail ?? "",
-                                  fit: BoxFit.cover,
-                                  height: 200,
-                                  width: double.infinity,
-                                  placeholder: (context, url) =>
-                                      const CircularProgressIndicator(),
-                                  errorWidget: (context, url, error) =>
-                                      const Icon(Icons.error),
                                 ),
-                              ),
-                              const SizedBox(height: 16),
-                            ],
+                              ],
+                            ),
                           ),
                         );
                       }
@@ -352,5 +446,13 @@ class _TournamentScreenState extends State<TournamentScreen> {
               },
             ),
           );
+  }
+
+  int getCrossAxisCount(int length) {
+    if ((length % 4 == 0 || length % 4 == 1)) {
+      return 1;
+    } else {
+      return 2;
+    }
   }
 }

@@ -1,6 +1,5 @@
 //Third Party Imports
 import 'dart:math';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -151,26 +150,17 @@ class _StreamsScreenState extends State<StreamsScreen> {
                                 const SizedBox(width: 25),
                                 Column(
                                   children: [
-                                    Container(
-                                      height: 30,
-                                      decoration: BoxDecoration(
-                                        color: Colors.black,
-                                        borderRadius: BorderRadius.circular(15),
-                                        border: Border.all(
-                                          color: Colors.grey.shade500,
-                                        ),
-                                      ),
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(3.0),
-                                        child: Text(
-                                          "${Random().nextInt(10) + 10}k Views",
-                                          style: poppinsFonts.copyWith(
-                                            color: Colors.white,
-                                            fontSize: 15,
-                                          ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(3.0),
+                                      child: Text(
+                                        "${Random().nextInt(10) + 10}k Views",
+                                        style: poppinsFonts.copyWith(
+                                          color: Colors.white,
+                                          fontSize: 15,
                                         ),
                                       ),
                                     ),
+                                    const SizedBox(height: 5),
                                     Text(
                                       DateFormat('dd/MM/yy').format(
                                           value[index].tournamentDate ??

@@ -23,14 +23,11 @@ class HeaderWidget extends StatefulWidget {
 class _HeaderWidgetState extends State<HeaderWidget> {
   @override
   Widget build(BuildContext context) {
-    // double screenWidth = MediaQuery.of(context).size.width;
-    // double screenHeight = MediaQuery.of(context).size.height;
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          // mainAxisAlignment:
           children: <Widget>[
             Text(
               widget.title,
@@ -54,12 +51,6 @@ class _HeaderWidgetState extends State<HeaderWidget> {
         ),
         IconButton(
           onPressed: () => {tabManager.onTabChanged(widget.index)},
-          // onPressed: () => Navigator.push(
-          //       context,
-          //       MaterialPageRoute(
-          //         builder: ((context) => widget.screenName),
-          //       ),
-          //     ),
           icon: const Icon(
             FontAwesomeIcons.arrowRight,
             color: Colors.white,
@@ -67,6 +58,53 @@ class _HeaderWidgetState extends State<HeaderWidget> {
           ),
         ),
       ],
+    );
+  }
+}
+
+class NoramlHeaderWidget extends StatefulWidget {
+  final String title;
+  final String subTitle;
+  const NoramlHeaderWidget({
+    super.key,
+    required this.title,
+    required this.subTitle,
+  });
+
+  @override
+  State<NoramlHeaderWidget> createState() => _NoramlHeaderWidgetState();
+}
+
+class _NoramlHeaderWidgetState extends State<NoramlHeaderWidget> {
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Text(
+                widget.title,
+                style: poppinsFonts.copyWith(
+                  color: Colors.grey.shade100,
+                  fontSize: 15,
+                ),
+              ),
+              Text(
+                widget.subTitle,
+                style: poppinsFonts.copyWith(
+                  color: Colors.grey.shade100,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }

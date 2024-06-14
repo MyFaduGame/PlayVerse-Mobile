@@ -64,7 +64,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
     return DefaultTabController(
       length: 4,
       child: Padding(
-        padding: const EdgeInsets.all(5.0),
+        padding: const EdgeInsets.symmetric(horizontal: 5.0),
         child: NestedScrollView(
           headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
             return <Widget>[
@@ -72,7 +72,6 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
-                    // const SizedBox(height: 80),
                     SizedBox(
                       height: 300,
                       child: Stack(
@@ -205,22 +204,6 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
-                            // Text(
-                            //   "#${userModel?.userName ?? ''}",
-                            //   style: poppinsFonts.copyWith(
-                            //     color: Colors.white54,
-                            //     fontSize: 15,
-                            //     fontWeight: FontWeight.bold,
-                            //   ),
-                            // ),
-                            // Text(
-                            //   "Nationality: ${userModel?.country ?? ''}",
-                            //   style: poppinsFonts.copyWith(
-                            //     color: Colors.white54,
-                            //     fontSize: 15,
-                            //     fontWeight: FontWeight.bold,
-                            //   ),
-                            // ),
                           ],
                         ),
                         Column(
@@ -307,7 +290,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
               ),
               SliverAppBar(
                 pinned: true,
-                toolbarHeight: 0,
+                toolbarHeight: 50,
                 backgroundColor: Colors.transparent,
                 flexibleSpace: PreferredSize(
                   preferredSize: const Size.fromHeight(0),
@@ -327,16 +310,16 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                       ),
                       tabs: const [
                         Tab(
-                          text: 'Games',
+                          text: ' Games ',
                         ),
                         Tab(
-                          text: 'About',
+                          text: ' About ',
                         ),
                         Tab(
-                          text: 'Friends',
+                          text: ' Friends ',
                         ),
                         Tab(
-                          text: 'History',
+                          text: ' History ',
                         ),
                       ],
                     ),

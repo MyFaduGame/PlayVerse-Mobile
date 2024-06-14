@@ -244,7 +244,7 @@ class TournamentDetailScreenState extends State<TournamentDetailScreen> {
                                         textAlign: TextAlign.center,
                                         widget.tournamentDetail
                                                 .isRegistrationOpen ??
-                                            "genre",
+                                            "Open",
                                         style: poppinsFonts.copyWith(
                                           color: Colors.blue.shade100,
                                           fontSize: 15,
@@ -365,6 +365,49 @@ class TournamentDetailScreenState extends State<TournamentDetailScreen> {
                             )
                           ],
                         ),
+                        const SizedBox(height: 16),
+                        // Stack(
+                        //   children: [
+                        //     Container(
+                        //       decoration: BoxDecoration(
+                        //         borderRadius: BorderRadius.circular(55),
+                        //       ),
+                        //       height: 20,
+                        //       width: screenWidth,
+                        //       child: LinearProgressIndicator(
+                        //         value: (((tournamentDetail?.playerLeft ?? 0) *
+                        //                 100) /
+                        //             100),
+                        //         borderRadius: BorderRadius.circular(55),
+                        //         backgroundColor: Colors.teal.shade400,
+                        //         color: Colors.green,
+                        //       ),
+                        //     ),
+                        //     SizedBox(
+                        //       width: screenWidth,
+                        //       child: Row(
+                        //         mainAxisAlignment:
+                        //             MainAxisAlignment.spaceBetween,
+                        //         children: [
+                        //           Text(
+                        //             "${(((tournamentDetail?.playerLeft ?? 0) * 100) / 100).toString()} % fill",
+                        //             style: poppinsFonts.copyWith(
+                        //               color: Colors.white,
+                        //               fontSize: 15,
+                        //             ),
+                        //           ),
+                        //           Text(
+                        //             "${(((tournamentDetail?.playerLeft ?? 0) * 100)).toString()}%",
+                        //             style: poppinsFonts.copyWith(
+                        //               color: Colors.white,
+                        //               fontSize: 15,
+                        //             ),
+                        //           ),
+                        //         ],
+                        //       ),
+                        //     )
+                        //   ],
+                        // ),
                         const SizedBox(height: 16),
                         Container(
                           color: Colors.grey,

@@ -6,7 +6,6 @@ import 'package:playverse/repository/base_repo.dart';
 import 'package:playverse/utils/app_urls.dart';
 
 class GamesRepo extends BaseRepository {
-  
   Future gamesListApi(int offset) async {
     String params = "?limit=12&offset=$offset";
     final response =
@@ -15,15 +14,23 @@ class GamesRepo extends BaseRepository {
     return json.decode(response.body);
   }
 
-  Future addGames(Map<String, dynamic> data,[bool? update]) async {
+  Future getSpecificGame(String gameId) async {
+    String params = "?game_id=$gameId";
+    final response =
+        await getHttp(api: GamesUrls.gamesList + params, token: true);
+    log(response.body, name: 'response getSpecificGame');
+    return json.decode(response.body);
+  }
+
+  Future addGames(Map<String, dynamic> data, [bool? update]) async {
     String params = '';
-    if (update==true) {
+    if (update == true) {
       params = "?update=$update";
     } else {
       params = "";
     }
-    final response =
-        await postHttp(api: GamesUrls.addGames + params, data: data, token: true);
+    final response = await postHttp(
+        api: GamesUrls.addGames + params, data: data, token: true);
     log(response.body, name: 'response addGames');
     return json.decode(response.body);
   }
@@ -43,5 +50,4 @@ class GamesRepo extends BaseRepository {
     log(response.body, name: 'response deleteGames');
     return json.decode(response.body);
   }
-
 }

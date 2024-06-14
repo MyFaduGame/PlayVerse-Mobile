@@ -61,7 +61,7 @@ class TournamentProfileWidgetState extends State<TournamentProfileWidget> {
     // double screenWidth = MediaQuery.of(context).size.width;
     // double screenHeight = MediaQuery.of(context).size.height;
     var size = MediaQuery.of(context).size;
-    final double itemHeight = (size.height - kToolbarHeight - 24) / 2.25;
+    // final double itemHeight = (size.height - kToolbarHeight - 24) / 2.25;
     final double itemWidth = size.width / 2;
     return isLoading
         ? const Center(

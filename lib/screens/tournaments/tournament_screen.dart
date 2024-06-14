@@ -2,10 +2,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:playverse/themes/app_color_theme.dart';
 import 'package:provider/provider.dart';
 
 //Local Imports
+import 'package:playverse/themes/app_color_theme.dart';
 import 'package:playverse/themes/app_font.dart';
 import 'package:playverse/themes/app_images.dart';
 import 'package:playverse/utils/helper_utils.dart';
@@ -61,7 +61,7 @@ class _TournamentScreenState extends State<TournamentScreen> {
     // double screenWidth = MediaQuery.of(context).size.width;
     // double screenHeight = MediaQuery.of(context).size.height;
     var size = MediaQuery.of(context).size;
-    final double itemHeight = (size.height - kToolbarHeight - 24) / 2.25;
+    // final double itemHeight = (size.height - kToolbarHeight - 24) / 2.25;
     final double itemWidth = size.width / 2;
     return isLoading
         ? const Center(

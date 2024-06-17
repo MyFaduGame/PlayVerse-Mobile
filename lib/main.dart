@@ -88,6 +88,7 @@ Future<void> main() async {
   log("FCMToken $fcmToken");
   SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
 

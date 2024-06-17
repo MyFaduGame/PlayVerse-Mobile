@@ -188,47 +188,6 @@ class TournamentDetailScreenState extends State<TournamentDetailScreen> {
                                   ),
                                 ),
                                 const SizedBox(height: 16),
-                                // Row(
-                                //   mainAxisAlignment:
-                                //       MainAxisAlignment.spaceBetween,
-                                //   children: <Widget>[
-                                //     Container(
-                                //       width: 80,
-                                //       height: 25,
-                                //       decoration: BoxDecoration(
-                                //           color: const Color(0xFF007BFF),
-                                //           borderRadius:
-                                //               BorderRadius.circular(15)),
-                                //       child: Text(
-                                //         textAlign: TextAlign.center,
-                                //         widget.tournamentDetail.gener ??
-                                //             "genre",
-                                //         style: poppinsFonts.copyWith(
-                                //           color: Colors.white,
-                                //           fontSize: 15,
-                                //         ),
-                                //       ),
-                                //     ),
-                                //     const SizedBox(width: 16),
-                                //     Container(
-                                //       width: 80,
-                                //       height: 25,
-                                //       decoration: BoxDecoration(
-                                //           color: const Color(0xFF231750),
-                                //           borderRadius:
-                                //               BorderRadius.circular(15)),
-                                //       child: Text(
-                                //         textAlign: TextAlign.center,
-                                //         "${widget.tournamentDetail.registrationFee.toString()} Gems",
-                                //         style: poppinsFonts.copyWith(
-                                //           color: const Color(0xFFBF99FF),
-                                //           fontSize: 15,
-                                //         ),
-                                //       ),
-                                //     ),
-                                //   ],
-                                // ),
-                                // const SizedBox(height: 16),
                                 Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
@@ -251,163 +210,12 @@ class TournamentDetailScreenState extends State<TournamentDetailScreen> {
                                         ),
                                       ),
                                     ),
-                                    // const SizedBox(width: 16),
-                                    // Container(
-                                    //   width: 80,
-                                    //   height: 25,
-                                    //   decoration: BoxDecoration(
-                                    //       color: const Color(0xFF8A2BE2),
-                                    //       borderRadius:
-                                    //           BorderRadius.circular(15)),
-                                    //   child: Text(
-                                    //     textAlign: TextAlign.center,
-                                    //     "${widget.tournamentDetail.registrationFee.toString()} Gems",
-                                    //     style: poppinsFonts.copyWith(
-                                    //       color: Colors.white,
-                                    //       fontSize: 15,
-                                    //     ),
-                                    //   ),
-                                    // ),
                                   ],
                                 ),
-                                // const SizedBox(height: 16),
-                                // widget.tournamentDetail.tournamentDate!
-                                //         .isBefore(DateTime.now())
-                                //     ? SizedBox(
-                                //         width: screenWidth / 2,
-                                //         child: NeoPopButton(
-                                //           color: GeneralColors
-                                //               .neopopButtonMainColor,
-                                //           bottomShadowColor:
-                                //               GeneralColors.neopopShadowColor,
-                                //           onTapUp: () => {
-                                //             Navigator.push(
-                                //               context,
-                                //               MaterialPageRoute(
-                                //                 builder: ((context) =>
-                                //                     LeaderBoardScreen(
-                                //                         tournamentID: widget
-                                //                                 .tournamentDetail
-                                //                                 .tournamentId ??
-                                //                             "")),
-                                //               ),
-                                //             ),
-                                //           },
-                                //           child: const NeoPopShimmer(
-                                //             shimmerColor: Colors.white,
-                                //             child: Padding(
-                                //               padding: EdgeInsets.symmetric(
-                                //                   horizontal: 20, vertical: 15),
-                                //               child: Row(
-                                //                 mainAxisAlignment:
-                                //                     MainAxisAlignment.center,
-                                //                 children: [
-                                //                   Text(
-                                //                     "Show Leadberboard!",
-                                //                     style: TextStyle(
-                                //                       color: Colors.white,
-                                //                       fontSize: 15,
-                                //                       fontWeight:
-                                //                           FontWeight.bold,
-                                //                     ),
-                                //                   ),
-                                //                 ],
-                                //               ),
-                                //             ),
-                                //           ),
-                                //         ),
-                                //       )
-                                //     : SizedBox(
-                                //         width: screenWidth / 2,
-                                //         child: NeoPopButton(
-                                //           color: widget.tournamentDetail
-                                //                       .registrationId ==
-                                //                   null
-                                //               ? GeneralColors
-                                //                   .neopopButtonMainColor
-                                //               : Colors.grey,
-                                //           bottomShadowColor:
-                                //               GeneralColors.neopopShadowColor,
-                                //           onTapUp: () => {
-                                //             checkRegistration(
-                                //                 widget.tournamentDetail
-                                //                         .tournamentId ??
-                                //                     "",
-                                //                 widget.tournamentDetail
-                                //                         .registrationId ??
-                                //                     "null")
-                                //           },
-                                //           child: const NeoPopShimmer(
-                                //             shimmerColor: Colors.white,
-                                //             child: Padding(
-                                //               padding: EdgeInsets.symmetric(
-                                //                   horizontal: 20, vertical: 15),
-                                //               child: Row(
-                                //                 mainAxisAlignment:
-                                //                     MainAxisAlignment.center,
-                                //                 children: [
-                                //                   Text(
-                                //                     "Join Tournament!",
-                                //                     style: TextStyle(
-                                //                       color: Colors.white,
-                                //                       fontSize: 15,
-                                //                       fontWeight:
-                                //                           FontWeight.bold,
-                                //                     ),
-                                //                   ),
-                                //                 ],
-                                //               ),
-                                //             ),
-                                //           ),
-                                //         ),
-                                //       ),
                               ],
                             )
                           ],
                         ),
-                        const SizedBox(height: 16),
-                        // Stack(
-                        //   children: [
-                        //     Container(
-                        //       decoration: BoxDecoration(
-                        //         borderRadius: BorderRadius.circular(55),
-                        //       ),
-                        //       height: 20,
-                        //       width: screenWidth,
-                        //       child: LinearProgressIndicator(
-                        //         value: (((tournamentDetail?.playerLeft ?? 0) *
-                        //                 100) /
-                        //             100),
-                        //         borderRadius: BorderRadius.circular(55),
-                        //         backgroundColor: Colors.teal.shade400,
-                        //         color: Colors.green,
-                        //       ),
-                        //     ),
-                        //     SizedBox(
-                        //       width: screenWidth,
-                        //       child: Row(
-                        //         mainAxisAlignment:
-                        //             MainAxisAlignment.spaceBetween,
-                        //         children: [
-                        //           Text(
-                        //             "${(((tournamentDetail?.playerLeft ?? 0) * 100) / 100).toString()} % fill",
-                        //             style: poppinsFonts.copyWith(
-                        //               color: Colors.white,
-                        //               fontSize: 15,
-                        //             ),
-                        //           ),
-                        //           Text(
-                        //             "${(((tournamentDetail?.playerLeft ?? 0) * 100)).toString()}%",
-                        //             style: poppinsFonts.copyWith(
-                        //               color: Colors.white,
-                        //               fontSize: 15,
-                        //             ),
-                        //           ),
-                        //         ],
-                        //       ),
-                        //     )
-                        //   ],
-                        // ),
                         const SizedBox(height: 16),
                         Container(
                           color: Colors.grey,
@@ -485,6 +293,7 @@ class TournamentDetailScreenState extends State<TournamentDetailScreen> {
                                         const Icon(
                                           FontAwesomeIcons.userGear,
                                           size: 20,
+                                          color: Color(0xFFBF99FF),
                                         ),
                                         Text(
                                           widget.tournamentDetail.maxPlayers
@@ -524,6 +333,7 @@ class TournamentDetailScreenState extends State<TournamentDetailScreen> {
                                         const Icon(
                                           FontAwesomeIcons.ticket,
                                           size: 20,
+                                          color: Colors.redAccent,
                                         ),
                                         Text(
                                           widget.tournamentDetail
@@ -565,7 +375,10 @@ class TournamentDetailScreenState extends State<TournamentDetailScreen> {
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceEvenly,
                                       children: [
-                                        const Icon(FontAwesomeIcons.gem),
+                                        Icon(
+                                          FontAwesomeIcons.gem,
+                                          color: Colors.teal.shade400,
+                                        ),
                                         Text(
                                           widget.tournamentDetail.prizePool
                                                   ?.the1St ??
@@ -788,11 +601,10 @@ class TournamentDetailScreenState extends State<TournamentDetailScreen> {
                         ),
                       ],
                     ),
-                    // HeaderWidget(
-                    //   title: "Tournament of",
-                    //   subTitle: "${widget.tournamentDetail.gameName}",
-                    //   index: 1,
-                    // ),
+                    NoramlHeaderWidget(
+                        title: "More Tournaments of",
+                        subTitle:
+                            widget.tournamentDetail.gameName ?? "GameName"),
                     const HeaderWidget(
                       title: "Trending",
                       subTitle: "Upcomming Matches",
@@ -868,9 +680,5 @@ class TournamentDetailScreenState extends State<TournamentDetailScreen> {
         },
       );
     }
-  }
-
-  void _handleMenuButtonPressed() {
-    controller.showDrawer();
   }
 }

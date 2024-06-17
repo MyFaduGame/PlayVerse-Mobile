@@ -44,6 +44,7 @@ class _TournamentListWidgetState extends State<TournamentListWidget> {
   @override
   void dispose() {
     provider.tournamentList.clear();
+    provider.dispose();
     super.dispose();
   }
 

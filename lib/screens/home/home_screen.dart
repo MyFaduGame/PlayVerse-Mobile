@@ -9,7 +9,7 @@ import 'package:playverse/widgets/common/header_widget.dart';
 import 'package:playverse/widgets/courses/course_widget.dart';
 import 'package:playverse/widgets/games/games_icon_widget.dart';
 import 'package:playverse/widgets/streams/streams_widget.dart';
-import 'package:playverse/widgets/tournaments/leaderboard_widget.dart';
+// import 'package:playverse/widgets/tournaments/leaderboard_widget.dart';
 import 'package:playverse/widgets/tournaments/tournament_list_widget.dart';
 
 class HomeScreen extends StatefulWidget {

@@ -2,6 +2,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:playverse/widgets/common/header_widget.dart';
 import 'package:provider/provider.dart';
 
 //Local Imports
@@ -16,8 +17,10 @@ import 'package:playverse/models/tournaments_model.dart';
 import 'package:playverse/provider/tournaments_provider.dart';
 
 class GamesTournamentScreen extends StatefulWidget {
+  final Games gameData;
   final String gameUUID;
-  const GamesTournamentScreen({super.key, required this.gameUUID});
+  const GamesTournamentScreen(
+      {super.key, required this.gameUUID, required this.gameData});
 
   @override
   State<GamesTournamentScreen> createState() => GamesTournamentScreenState();
@@ -105,16 +108,19 @@ class GamesTournamentScreenState extends State<GamesTournamentScreen> {
             ),
           ),
           IconButton(
-            onPressed: () => {},
-            icon: gameData?.added ?? true
-                ? const Icon(
-                    FontAwesomeIcons.heart,
-                    size: 20,
-                  )
-                : const Icon(
-                    FontAwesomeIcons.solidHeart,
-                    size: 20,
-                  ),
+            onPressed: () => {
+              widget.gameData.added == true
+                  ? deleteGames(
+                      context,
+                      widget.gameData.gameId ?? "Game Id",
+                    )
+                  : addGame(context, widget.gameData.gameId ?? "GameId"),
+            },
+            icon: const Icon(
+              FontAwesomeIcons.solidHeart,
+              size: 20,
+            ),
+            color: widget.gameData.added ?? false ? Colors.red : Colors.white,
           ),
         ],
       ),
@@ -188,6 +194,9 @@ class GamesTournamentScreenState extends State<GamesTournamentScreen> {
                           const Icon(Icons.error),
                     ),
                   ),
+                  NoramlHeaderWidget(
+                      title: "Here Some",
+                      subTitle: "${widget.gameData.name} Tournaments"),
                   SizedBox(
                     height: screenHeight - 400,
                     child: isLoading
@@ -464,6 +473,128 @@ class GamesTournamentScreenState extends State<GamesTournamentScreen> {
           ],
         ),
       ),
+    );
+  }
+
+  Future<void> addGame(BuildContext context, String gamesId,
+      [bool? update]) async {
+    showDialog(
+      context: context,
+      builder: (context) {
+        TextEditingController textEditingController = TextEditingController();
+        return AlertDialog(
+          backgroundColor: const Color(0xFF1E1E1E),
+          title: const Text('What\'s your in Game Name?'),
+          content: TextField(
+            controller: textEditingController,
+            decoration: const InputDecoration(
+              hintText: 'Enter your in Game Name Here!',
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text(
+                'Decline!',
+                style: poppinsFonts.copyWith(
+                  color: Colors.white,
+                  fontSize: 20,
+                ),
+              ),
+            ),
+            TextButton(
+              onPressed: () {
+                if (update == true) {
+                  gameProvider
+                      .addGames(gamesId, textEditingController.text, update)
+                      .then(
+                    (value) {
+                      loading = true;
+                      Navigator.of(context).pop();
+                    },
+                  );
+                } else {
+                  gameProvider
+                      .addGames(gamesId, textEditingController.text)
+                      .then(
+                    (value) {
+                      gameProvider.gameList.clear();
+                      loading = true;
+                      Navigator.of(context).pop();
+                    },
+                  );
+                }
+              },
+              child: Text(
+                'Add it!',
+                style: poppinsFonts.copyWith(
+                  color: Colors.white,
+                  fontSize: 20,
+                ),
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  Future<void> deleteGames(BuildContext context, String gameId) async {
+    showDialog(
+      context: context,
+      builder: (context) {
+        TextEditingController textEditingController = TextEditingController();
+        return AlertDialog(
+          backgroundColor: const Color(0xFF1E1E1E),
+          title: const Text('Update your in GameName?'),
+          content: TextField(
+            controller: textEditingController,
+            decoration: const InputDecoration(
+              hintText: 'Enter your in Game Name Here!',
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                gameProvider.deleteGames(gameId).then((value) => {
+                      gameProvider.gameList.clear(),
+                      loading = true,
+                      Navigator.of(context).pop(),
+                    });
+              },
+              child: Text(
+                'Remove!',
+                style: poppinsFonts.copyWith(
+                  color: Colors.white,
+                  fontSize: 20,
+                ),
+              ),
+            ),
+            TextButton(
+              onPressed: () {
+                gameProvider
+                    .addGames(gameId, textEditingController.text, true)
+                    .then(
+                  (value) {
+                    gameProvider.gameList.clear();
+                    loading = true;
+                    Navigator.of(context).pop();
+                  },
+                );
+              },
+              child: Text(
+                'Update!',
+                style: poppinsFonts.copyWith(
+                  color: Colors.white,
+                  fontSize: 20,
+                ),
+              ),
+            ),
+          ],
+        );
+      },
     );
   }
 }

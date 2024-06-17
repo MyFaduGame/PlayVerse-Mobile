@@ -8,6 +8,7 @@ import 'package:provider/provider.dart';
 
 //Local Imports
 import 'package:playverse/themes/app_color_theme.dart';
+import 'package:playverse/utils/loader_dialouge.dart';
 import 'package:playverse/themes/app_font.dart';
 import 'package:playverse/utils/helper_utils.dart';
 import 'package:playverse/models/games_model.dart';
@@ -82,13 +83,13 @@ class _GamesScreenState extends State<GamesScreen> {
                   itemBuilder: (context, index) {
                     return GestureDetector(
                       onTap: () => {
-                        value?[index].added == true
-                            ? deleteGames(
-                                context,
-                                value?[index].gameId ?? "Game Id",
-                              )
-                            : addGame(
-                                context, value?[index].gameId ?? "GameId"),
+                        // value?[index].added == true
+                        //     ? deleteGames(
+                        //         context,
+                        //         value?[index].gameId ?? "Game Id",
+                        //       )
+                        //     : addGame(
+                        //         context, value?[index].gameId ?? "GameId"),
                       },
                       child: SizedBox(
                         child: Padding(
@@ -98,35 +99,65 @@ class _GamesScreenState extends State<GamesScreen> {
                           ),
                           child: Column(
                             children: [
-                              Container(
-                                decoration: BoxDecoration(
-                                  border: Border.all(
-                                    width: 5,
-                                    color: value?[index].added ?? true
-                                        ? GeneralColors.neopopButtonMainColor
-                                        : Colors.transparent,
+                              Stack(
+                                children: [
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                        width: 5,
+                                        // color: value?[index].added ?? true
+                                        //     ? GeneralColors.neopopButtonMainColor
+                                        //     : Colors.transparent,
+                                      ),
+                                      borderRadius: BorderRadius.circular(15),
+                                    ),
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(15),
+                                      child: CachedNetworkImage(
+                                        imageUrl: value?[index].logo ?? "",
+                                        fit: BoxFit.fill,
+                                        height: 100,
+                                        placeholder: (context, url) =>
+                                            const CircularProgressIndicator(),
+                                        errorWidget: (context, url, error) =>
+                                            const Icon(Icons.error),
+                                      ),
+                                    ),
                                   ),
-                                  borderRadius: BorderRadius.circular(15),
-                                ),
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(15),
-                                  child: CachedNetworkImage(
-                                    imageUrl: value?[index].logo ?? "",
-                                    fit: BoxFit.fill,
-                                    height: 100,
-                                    placeholder: (context, url) =>
-                                        const CircularProgressIndicator(),
-                                    errorWidget: (context, url, error) =>
-                                        const Icon(Icons.error),
+                                  Container(
+                                    height: 110,
+                                    width: double.infinity,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(15),
+                                      gradient: value?[index].added ?? false
+                                          ? LinearGradient(
+                                              begin: Alignment.topCenter,
+                                              end: Alignment.bottomCenter,
+                                              colors: [
+                                                Colors.transparent,
+                                                getRandomColor()
+                                              ],
+                                            )
+                                          : null,
+                                    ),
                                   ),
-                                ),
+                                  Positioned(
+                                    right: 1,
+                                    child: Icon(
+                                      FontAwesomeIcons.solidHeart,
+                                      color: value?[index].added ?? false
+                                          ? Colors.red
+                                          : Colors.blue,
+                                    ),
+                                  )
+                                ],
                               ),
                               Container(
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(5),
-                                  color: value?[index].added ?? false
-                                      ? GeneralColors.neopopShadowColor
-                                      : Colors.transparent,
+                                  // color: value?[index].added ?? false
+                                  //     ? GeneralColors.neopopShadowColor
+                                  //     : Colors.transparent,
                                 ),
                                 width: 150,
                                 height: 50,
@@ -137,7 +168,9 @@ class _GamesScreenState extends State<GamesScreen> {
                                     SizedBox(
                                       width: 80,
                                       child: Text(
-                                        "${value?[index].name}",
+                                        value?[index].added ?? false
+                                            ? "${value?[index].inGameName}"
+                                            : value?[index].name ?? "",
                                         style: openSansFonts.copyWith(
                                           color: Colors.white,
                                           fontWeight: FontWeight.bold,

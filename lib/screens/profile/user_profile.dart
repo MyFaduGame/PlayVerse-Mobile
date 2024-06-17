@@ -3,24 +3,19 @@ import 'dart:developer';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:playverse/widgets/friends/friends_recommend_widget.dart';
-import 'package:playverse/widgets/friends/friends_requests_widget.dart';
 import 'package:slider_button/slider_button.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:provider/provider.dart';
 
 //Local Imports
+import 'package:playverse/widgets/friends/friends_recommend_widget.dart';
+import 'package:playverse/widgets/friends/friends_requests_widget.dart';
 import 'package:playverse/provider/friends_provider.dart';
 import 'package:playverse/utils/box_indicator.dart';
 import 'package:playverse/widgets/friends/friends_widget.dart';
-import 'package:playverse/widgets/tournaments/tournament_profile_widget.dart';
-import 'package:playverse/widgets/profile/games_profile_widget.dart';
-import 'package:playverse/widgets/common/back_app_bar_widget.dart';
 import 'package:playverse/themes/app_color_theme.dart';
-import 'package:playverse/screens/profile/edit_profile.dart';
 import 'package:playverse/themes/app_font.dart';
 import 'package:playverse/themes/app_images.dart';
 import 'package:playverse/models/user_profile_model.dart';
@@ -410,19 +405,19 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                                 width: double.infinity,
                                 height: 1,
                               ),
-                              const SizedBox(height: 8),
+                              // const SizedBox(height: 8),
                               SizedBox(
                                 height: 80,
                                 child: SingleChildScrollView(
                                   scrollDirection: Axis.horizontal,
                                   child: Row(
-                                    // mainAxisAlignment:
-                                    //     MainAxisAlignment.spaceEvenly,
+                                    mainAxisAlignment: MainAxisAlignment.start,
                                     children: <Widget>[
                                       SizedBox(
                                         width: 150,
-                                        height: 80,
                                         child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceAround,
                                           children: <Widget>[
                                             Text(
                                               userModel?.country ?? "Country",
@@ -434,8 +429,8 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                                             Text(
                                               "Nationality",
                                               style: poppinsFonts.copyWith(
-                                                color: const Color(0xFFBF99FF),
-                                                fontSize: 20,
+                                                color: Colors.white,
+                                                fontSize: 15,
                                               ),
                                             ),
                                           ],
@@ -446,11 +441,124 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                                         height: 50,
                                         width: 1,
                                       ),
+                                      SizedBox(
+                                        width: 150,
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceAround,
+                                          children: <Widget>[
+                                            Text(
+                                              userModel?.state ?? "State",
+                                              style: poppinsFonts.copyWith(
+                                                color: Colors.white,
+                                                fontSize: 20,
+                                              ),
+                                            ),
+                                            Text(
+                                              "Resident",
+                                              style: poppinsFonts.copyWith(
+                                                color: Colors.white,
+                                                fontSize: 15,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      Container(
+                                        color: Colors.grey,
+                                        height: 50,
+                                        width: 1,
+                                      ),
+                                      SizedBox(
+                                        width: 150,
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceAround,
+                                          children: <Widget>[
+                                            Text(
+                                              userModel?.expirence.toString() ??
+                                                  "Experience",
+                                              style: poppinsFonts.copyWith(
+                                                color: Colors.white,
+                                                fontSize: 20,
+                                              ),
+                                            ),
+                                            Text(
+                                              "Gaming Exp.",
+                                              style: poppinsFonts.copyWith(
+                                                color: Colors.white,
+                                                fontSize: 15,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      Container(
+                                        color: Colors.grey,
+                                        height: 50,
+                                        width: 1,
+                                      ),
+                                      SizedBox(
+                                        width: 150,
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceAround,
+                                          children: <Widget>[
+                                            Text(
+                                              userModel?.gender ?? "Gender",
+                                              style: poppinsFonts.copyWith(
+                                                color: Colors.white,
+                                                fontSize: 20,
+                                              ),
+                                            ),
+                                            Text(
+                                              "Gender",
+                                              style: poppinsFonts.copyWith(
+                                                color: Colors.white,
+                                                fontSize: 15,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
                                     ],
                                   ),
+                                  // child: Row(
+                                  //   // mainAxisAlignment:
+                                  //   //     MainAxisAlignment.spaceEvenly,
+                                  //   children: <Widget>[
+                                  //     SizedBox(
+                                  //       width: 150,
+                                  //       height: 80,
+                                  //       child: Column(
+                                  //         children: <Widget>[
+                                  //           Text(
+                                  //             userModel?.country ?? "Country",
+                                  //             style: poppinsFonts.copyWith(
+                                  //               color: Colors.white,
+                                  //               fontSize: 20,
+                                  //             ),
+                                  //           ),
+                                  //           Text(
+                                  //             "Nationality",
+                                  //             style: poppinsFonts.copyWith(
+                                  //               color: const Color(0xFFBF99FF),
+                                  //               fontSize: 20,
+                                  //             ),
+                                  //           ),
+                                  //         ],
+                                  //       ),
+                                  //     ),
+                                  //     Container(
+                                  //       color: Colors.grey,
+                                  //       height: 50,
+                                  //       width: 1,
+                                  //     ),
+                                  //   ],
+                                  // ),
                                 ),
                               ),
-                              const SizedBox(height: 8),
+                              // const SizedBox(height: 8),
                               Container(
                                 color: Colors.grey,
                                 width: double.infinity,

@@ -1,6 +1,7 @@
 //Third Party Imports
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:neopop/widgets/buttons/neopop_button/neopop_button.dart';
 import 'package:neopop/widgets/shimmer/neopop_shimmer.dart';
 import 'package:provider/provider.dart';
@@ -49,9 +50,42 @@ class _CartScreenState extends State<CartScreen> {
     double screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       extendBodyBehindAppBar: true,
-      appBar: const PreferredSize(
-        preferredSize: Size.fromHeight(120),
-        child: BackAppBar(),
+      appBar: AppBar(
+        backgroundColor: Colors.black.withOpacity(0.5),
+        leadingWidth: 60,
+        leading: IconButton(
+          onPressed: () => {Navigator.pop(context)},
+          icon: const Icon(Icons.arrow_back),
+        ),
+        title: Text(
+          "My Cart",
+          style: poppinsFonts.copyWith(
+            color: Colors.white,
+            fontSize: 20,
+          ),
+        ),
+        centerTitle: true,
+        actions: [
+          IconButton(
+            onPressed: () => {},
+            icon: const Icon(
+              FontAwesomeIcons.bell,
+              size: 20,
+            ),
+          ),
+          IconButton(
+            onPressed: () => {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const CartScreen()),
+              ),
+            },
+            icon: const Icon(
+              FontAwesomeIcons.cartPlus,
+              size: 20,
+            ),
+          ),
+        ],
       ),
       body: Container(
         height: screenHeight,
@@ -131,8 +165,7 @@ class _CartScreenState extends State<CartScreen> {
                                     color: GeneralColors.neopopButtonMainColor,
                                     bottomShadowColor:
                                         GeneralColors.neopopShadowColor,
-                                    onTapUp: () => {
-                                    },
+                                    onTapUp: () => {},
                                     child: const NeoPopShimmer(
                                       shimmerColor: Colors.white,
                                       child: Padding(

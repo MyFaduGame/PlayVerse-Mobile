@@ -1,11 +1,8 @@
 //Third Party Imports
-import 'dart:developer';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 //Local Imports
-import 'package:playverse/themes/app_color_theme.dart';
 import 'package:playverse/app.dart';
 import 'package:playverse/themes/app_font.dart';
 import 'package:playverse/themes/app_images.dart';
@@ -18,15 +15,6 @@ class UpdateCarsouleWidget extends StatefulWidget {
 }
 
 class _UpdateCarsouleWidgetState extends State<UpdateCarsouleWidget> {
-  Future<void> _openUrl(urlLink) async {
-    Uri userUrl = Uri.parse(urlLink);
-
-    try {
-      launchUrl(userUrl);
-    } on Exception catch (e) {
-      log(e.toString(), name: 'Url Exception');
-    }
-  }
 
   @override
   Widget build(BuildContext context) {

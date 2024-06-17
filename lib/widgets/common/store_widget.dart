@@ -1,6 +1,6 @@
 //Third Party Imports
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -93,72 +93,31 @@ class _StoreWidgetState extends State<StoreWidget> {
                         ),
                       ),
                       child: Container(
+                        padding: const EdgeInsets.all(5),
                         decoration: BoxDecoration(
-                          gradient: const LinearGradient(
-                            begin: Alignment.topCenter,
-                            end: Alignment.bottomCenter,
-                            colors: [
-                              Color(0xFF000000),
-                              Color(0xFF7F00FF),
-                            ],
-                          ),
+                          color: const Color(0xFFBF99FF),
                           borderRadius: BorderRadius.circular(15),
-                          border: Border.all(
-                            color: Colors.white,
-                          ),
                         ),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: <Widget>[
-                            CarouselSlider(
-                              items: [
-                                ClipRRect(
-                                  borderRadius: BorderRadius.circular(15),
-                                  child: CachedNetworkImage(
-                                    imageUrl: value?[index].images?[0] ?? "",
-                                    fit: BoxFit.fill,
-                                    height: 100,
-                                    width: 1000,
-                                    placeholder: (context, url) =>
-                                        const CircularProgressIndicator(),
-                                    errorWidget: (context, url, error) =>
-                                        const Icon(Icons.error),
-                                  ),
-                                ),
-                                ClipRRect(
-                                  borderRadius: BorderRadius.circular(15),
-                                  child: CachedNetworkImage(
-                                    imageUrl: value?[index].images?[1] ?? "",
-                                    // fit: BoxFit.cover,
-                                    height: 100,
-                                    width: 100,
-                                    placeholder: (context, url) =>
-                                        const CircularProgressIndicator(),
-                                    errorWidget: (context, url, error) =>
-                                        const Icon(Icons.error),
-                                  ),
-                                ),
-                              ],
-                              options: CarouselOptions(
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(15),
+                              child: CachedNetworkImage(
+                                imageUrl: value?[index].images?[0] ?? "",
+                                fit: BoxFit.fill,
                                 height: 100,
-                                aspectRatio: 16 / 9,
-                                viewportFraction: 1,
-                                initialPage: 0,
-                                enableInfiniteScroll: true,
-                                clipBehavior: Clip.none,
-                                autoPlay: false,
-                                autoPlayInterval: const Duration(seconds: 2),
-                                // autoPlayAnimationDuration:
-                                // const Duration(milliseconds: 800),
-                                autoPlayCurve: Curves.easeIn.flipped,
-                                enlargeCenterPage: true,
-                                scrollDirection: Axis.horizontal,
+                                width: 1000,
+                                placeholder: (context, url) =>
+                                    const CircularProgressIndicator(),
+                                errorWidget: (context, url, error) =>
+                                    const Icon(Icons.error),
                               ),
                             ),
                             Text(
                               value?[index].name ?? "",
                               style: poppinsFonts.copyWith(
-                                color: Colors.white,
+                                color: Colors.black,
                                 fontSize: 15,
                                 fontWeight: FontWeight.bold,
                               ),
@@ -181,8 +140,27 @@ class _StoreWidgetState extends State<StoreWidget> {
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
+                                IconButton(
+                                  onPressed: () => Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) {
+                                        return StoreDetailScreen(
+                                            productDetail:
+                                                value?[index] ?? Products());
+                                      },
+                                    ),
+                                  ),
+                                  icon: const Icon(
+                                    CupertinoIcons.arrow_right,
+                                    color: Colors.white,
+                                    size: 30.0,
+                                    semanticLabel:
+                                        'Text to announce in accessibility modes',
+                                  ),
+                                )
                               ],
-                            )
+                            ),
                           ],
                         ),
                       ),

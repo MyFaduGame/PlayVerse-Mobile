@@ -46,93 +46,122 @@ class _NavigationBarWidgetState extends State<NavigationBarWidget> {
                   widget.controller.hideDrawer();
                   tabManager.onTabChanged(5);
                 },
-                child: Column(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    Container(
-                      width: 128.0,
-                      height: 128.0,
-                      margin: const EdgeInsets.only(
-                        top: 24.0,
-                        bottom: 10.0,
-                      ),
-                      clipBehavior: Clip.antiAlias,
-                      decoration: const BoxDecoration(
-                        color: Colors.white24,
-                        shape: BoxShape.circle,
-                      ),
-                      child: widget.userProfile.profileImage == "" ||
-                              widget.userProfile.profileImage == null
-                          ? widget.userProfile.gender == 'Male'
-                              ? SvgPicture.asset(
-                                  ProfileImages.boyProfile,
-                                  width: 125,
-                                  height: 125,
-                                  fit: BoxFit.cover,
-                                )
-                              : SvgPicture.asset(
-                                  ProfileImages.girlProfile,
-                                  width: 125,
-                                  height: 125,
-                                  fit: BoxFit.cover,
-                                )
-                          : CachedNetworkImage(
-                              imageUrl: widget.userProfile.profileImage ?? "",
-                              fit: BoxFit.cover,
-                              height: 125,
-                              width: 125,
-                              placeholder: (context, url) =>
-                                  const CircularProgressIndicator(),
-                              errorWidget: (context, url, error) =>
-                                  const Icon(Icons.error),
-                            ),
-                    ),
-                    Text(
-                      widget.userProfile.userName ?? "",
-                      style: dmSansFonts,
-                    ),
-                    const SizedBox(height: 16),
-                    GestureDetector(
-                      onTap: () {
-                        widget.controller.hideDrawer();
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: ((context) => const GemsScreen()),
+                    Column(
+                      children: [
+                        Container(
+                          width: 100.0,
+                          height: 100.0,
+                          clipBehavior: Clip.antiAlias,
+                          decoration: const BoxDecoration(
+                            color: Colors.white24,
+                            shape: BoxShape.circle,
                           ),
-                        );
-                      },
-                      child: Container(
-                        width: 100,
-                        height: screenWidth / 10,
-                        decoration: BoxDecoration(
-                            color: const Color(0xFF231750),
-                            borderRadius: BorderRadius.circular(15)),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Image.asset(
-                              BottomAppBarImages.coinImage,
-                              height: screenWidth / 15,
-                              width: screenWidth / 15,
+                          child: widget.userProfile.profileImage == "" ||
+                                  widget.userProfile.profileImage == null
+                              ? widget.userProfile.gender == 'Male'
+                                  ? SvgPicture.asset(
+                                      ProfileImages.boyProfile,
+                                      width: 100,
+                                      height: 100,
+                                      fit: BoxFit.cover,
+                                    )
+                                  : SvgPicture.asset(
+                                      ProfileImages.girlProfile,
+                                      width: 100,
+                                      height: 100,
+                                      fit: BoxFit.cover,
+                                    )
+                              : CachedNetworkImage(
+                                  imageUrl:
+                                      widget.userProfile.profileImage ?? "",
+                                  fit: BoxFit.cover,
+                                  height: 100,
+                                  width: 100,
+                                  placeholder: (context, url) =>
+                                      const CircularProgressIndicator(),
+                                  errorWidget: (context, url, error) =>
+                                      const Icon(Icons.error),
+                                ),
+                        ),
+                        Text(
+                          widget.userProfile.userName ?? "",
+                          style: poppinsFonts.copyWith(
+                            color: Colors.white,
+                            fontSize: 15,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Column(
+                      children: [
+                        GestureDetector(
+                          onTap: () {
+                            widget.controller.hideDrawer();
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: ((context) => const GemsScreen()),
+                              ),
+                            );
+                          },
+                          child: Container(
+                            width: 100,
+                            height: screenWidth / 10,
+                            decoration: BoxDecoration(
+                                color: const Color(0xFF231750),
+                                borderRadius: BorderRadius.circular(15)),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Image.asset(
+                                  BottomAppBarImages.coinImage,
+                                  height: screenWidth / 15,
+                                  width: screenWidth / 15,
+                                ),
+                                Text(
+                                  textAlign: TextAlign.center,
+                                  widget.userProfile.gems.toString(),
+                                  style: poppinsFonts.copyWith(
+                                    color: const Color(0xFFBF99FF),
+                                    fontSize: screenWidth / 25,
+                                  ),
+                                ),
+                              ],
                             ),
-                            Text(
-                              textAlign: TextAlign.center,
-                              widget.userProfile.gems.toString(),
-                              style: poppinsFonts.copyWith(
-                                color: const Color(0xFFBF99FF),
-                                fontSize: screenWidth / 25,
+                          ),
+                        ),
+                        const SizedBox(height: 8),
+                        GestureDetector(
+                          onTap: () {
+                            widget.controller.hideDrawer();
+                            tabManager.onTabChanged(9);
+                          },
+                          child: Container(
+                            width: 100,
+                            height: screenWidth / 10,
+                            decoration: BoxDecoration(
+                                color: const Color(0xFF231750),
+                                borderRadius: BorderRadius.circular(15)),
+                            child: Center(
+                              child: Text(
+                                "Friends",
+                                style: poppinsFonts.copyWith(
+                                  color: const Color(0xFFBF99FF),
+                                  fontSize: screenWidth / 25,
+                                ),
                               ),
                             ),
-                          ],
+                          ),
                         ),
-                      ),
+                      ],
                     ),
                   ],
                 ),
               ),
-              const Padding(
-                padding: EdgeInsets.fromLTRB(0, 0, 0, 10),
-              ),
+              const SizedBox(height: 32),
               Column(
                 children: [
                   widget.index == 0
@@ -151,7 +180,7 @@ class _NavigationBarWidgetState extends State<NavigationBarWidget> {
                               tabManager.onTabChanged(0);
                             },
                             child: Text(
-                              "Games",
+                              "Home",
                               style: dmSansFonts.copyWith(
                                 fontSize: screenWidth / 20,
                                 color: GeneralColors.generalTextColor,
@@ -165,81 +194,7 @@ class _NavigationBarWidgetState extends State<NavigationBarWidget> {
                             tabManager.onTabChanged(0);
                           },
                           child: Text(
-                            "Games",
-                            style: dmSansFonts.copyWith(
-                              fontSize: screenWidth / 20,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
-                  widget.index == 2
-                      ? Container(
-                          width: 250,
-                          decoration: BoxDecoration(
-                            color: Colors.black,
-                            borderRadius: BorderRadius.circular(15),
-                            border: Border.all(
-                              color: Colors.purple,
-                            ),
-                          ),
-                          child: TextButton(
-                            onPressed: () {
-                              widget.controller.hideDrawer();
-                              tabManager.onTabChanged(2);
-                            },
-                            child: Text(
-                              "Streams",
-                              style: dmSansFonts.copyWith(
-                                fontSize: screenWidth / 20,
-                                color: GeneralColors.generalTextColor,
-                              ),
-                            ),
-                          ),
-                        )
-                      : TextButton(
-                          onPressed: () {
-                            widget.controller.hideDrawer();
-                            tabManager.onTabChanged(2);
-                          },
-                          child: Text(
-                            "Streams",
-                            style: dmSansFonts.copyWith(
-                              fontSize: screenWidth / 20,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
-                  widget.index == 10
-                      ? Container(
-                          width: 250,
-                          decoration: BoxDecoration(
-                            color: Colors.black,
-                            borderRadius: BorderRadius.circular(15),
-                            border: Border.all(
-                              color: Colors.purple,
-                            ),
-                          ),
-                          child: TextButton(
-                            onPressed: () {
-                              widget.controller.hideDrawer();
-                              tabManager.onTabChanged(10);
-                            },
-                            child: Text(
-                              "Store",
-                              style: dmSansFonts.copyWith(
-                                fontSize: screenWidth / 20,
-                                color: GeneralColors.generalTextColor,
-                              ),
-                            ),
-                          ),
-                        )
-                      : TextButton(
-                          onPressed: () {
-                            widget.controller.hideDrawer();
-                            tabManager.onTabChanged(10);
-                          },
-                          child: Text(
-                            "Store",
+                            "Home",
                             style: dmSansFonts.copyWith(
                               fontSize: screenWidth / 20,
                               color: Colors.white,
@@ -283,7 +238,7 @@ class _NavigationBarWidgetState extends State<NavigationBarWidget> {
                             ),
                           ),
                         ),
-                  widget.index == 3
+                  widget.index == 2
                       ? Container(
                           width: 250,
                           decoration: BoxDecoration(
@@ -296,10 +251,10 @@ class _NavigationBarWidgetState extends State<NavigationBarWidget> {
                           child: TextButton(
                             onPressed: () {
                               widget.controller.hideDrawer();
-                              tabManager.onTabChanged(3);
+                              tabManager.onTabChanged(2);
                             },
                             child: Text(
-                              "Articles",
+                              "Streams",
                               style: dmSansFonts.copyWith(
                                 fontSize: screenWidth / 20,
                                 color: GeneralColors.generalTextColor,
@@ -310,10 +265,10 @@ class _NavigationBarWidgetState extends State<NavigationBarWidget> {
                       : TextButton(
                           onPressed: () {
                             widget.controller.hideDrawer();
-                            tabManager.onTabChanged(3);
+                            tabManager.onTabChanged(2);
                           },
                           child: Text(
-                            "Articles",
+                            "Streams",
                             style: dmSansFonts.copyWith(
                               fontSize: screenWidth / 20,
                               color: Colors.white,
@@ -394,7 +349,7 @@ class _NavigationBarWidgetState extends State<NavigationBarWidget> {
                             ),
                           ),
                         ),
-                  widget.index == 9
+                  widget.index == 10
                       ? Container(
                           width: 250,
                           decoration: BoxDecoration(
@@ -407,10 +362,10 @@ class _NavigationBarWidgetState extends State<NavigationBarWidget> {
                           child: TextButton(
                             onPressed: () {
                               widget.controller.hideDrawer();
-                              tabManager.onTabChanged(9);
+                              tabManager.onTabChanged(10);
                             },
                             child: Text(
-                              "Friends",
+                              "Store",
                               style: dmSansFonts.copyWith(
                                 fontSize: screenWidth / 20,
                                 color: GeneralColors.generalTextColor,
@@ -421,10 +376,47 @@ class _NavigationBarWidgetState extends State<NavigationBarWidget> {
                       : TextButton(
                           onPressed: () {
                             widget.controller.hideDrawer();
-                            tabManager.onTabChanged(9);
+                            tabManager.onTabChanged(10);
                           },
                           child: Text(
-                            "Friends",
+                            "Store",
+                            style: dmSansFonts.copyWith(
+                              fontSize: screenWidth / 20,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                  widget.index == 3
+                      ? Container(
+                          width: 250,
+                          decoration: BoxDecoration(
+                            color: Colors.black,
+                            borderRadius: BorderRadius.circular(15),
+                            border: Border.all(
+                              color: Colors.purple,
+                            ),
+                          ),
+                          child: TextButton(
+                            onPressed: () {
+                              widget.controller.hideDrawer();
+                              tabManager.onTabChanged(3);
+                            },
+                            child: Text(
+                              "Articles",
+                              style: dmSansFonts.copyWith(
+                                fontSize: screenWidth / 20,
+                                color: GeneralColors.generalTextColor,
+                              ),
+                            ),
+                          ),
+                        )
+                      : TextButton(
+                          onPressed: () {
+                            widget.controller.hideDrawer();
+                            tabManager.onTabChanged(3);
+                          },
+                          child: Text(
+                            "Articles",
                             style: dmSansFonts.copyWith(
                               fontSize: screenWidth / 20,
                               color: Colors.white,
@@ -470,7 +462,7 @@ class _NavigationBarWidgetState extends State<NavigationBarWidget> {
                         ),
                 ],
               ),
-              const Padding(padding: EdgeInsets.only(bottom: 10)),
+              const SizedBox(height: 32),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [

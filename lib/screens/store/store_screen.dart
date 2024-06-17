@@ -91,15 +91,9 @@ class _StoreScreenState extends State<StoreScreen> {
                         ),
                       ),
                       child: Container(
+                        padding: const EdgeInsets.all(5),
                         decoration: BoxDecoration(
-                          gradient: const LinearGradient(
-                            begin: Alignment.topCenter,
-                            end: Alignment.bottomCenter,
-                            colors: [
-                              Color(0xFF000000),
-                              Color(0xFF7F00FF),
-                            ],
-                          ),
+                          color: const Color(0xFF7F00FF),
                           borderRadius: BorderRadius.circular(15),
                         ),
                         child: Column(
@@ -118,51 +112,50 @@ class _StoreScreenState extends State<StoreScreen> {
                                     const Icon(Icons.error),
                               ),
                             ),
-                            Text(
-                              value?[index].name ?? "",
-                              style: poppinsFonts.copyWith(
-                                color: Colors.white,
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
+                            SizedBox(
+                              height: 50,
+                              child: Text(
+                                value?[index].name ?? "",
+                                style: poppinsFonts.copyWith(
+                                  color: Colors.white,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
                               ),
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                            Text(
-                              value?[index].brand ?? "",
-                              style: poppinsFonts.copyWith(
-                                color: const Color(0xFFBF99FF),
-                                fontSize: 15,
-                                fontWeight: FontWeight.bold,
-                              ),
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                            Text(
-                              value?[index].categoryName ?? "",
-                              style: poppinsFonts.copyWith(
-                                color: const Color(0xFFBF99FF),
-                                fontSize: 15,
-                                fontWeight: FontWeight.bold,
-                              ),
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
                             ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: <Widget>[
-                                Image.asset(
-                                  BottomAppBarImages.coinImage,
-                                  height: 25,
-                                  width: 25,
-                                ),
-                                Text(
-                                  value?[index].price ?? "",
-                                  style: poppinsFonts.copyWith(
-                                    color: Colors.white,
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.bold,
-                                  ),
+                                Column(
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Image.asset(
+                                          BottomAppBarImages.coinImage,
+                                          height: 25,
+                                          width: 25,
+                                        ),
+                                        Text(
+                                          value?[index].price ?? "",
+                                          style: poppinsFonts.copyWith(
+                                            color: Colors.white,
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    Text(
+                                      value?[index].categoryName ?? "Category",
+                                      style: poppinsFonts.copyWith(
+                                        color: Colors.white,
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    )
+                                  ],
                                 ),
                                 Container(
                                   decoration: BoxDecoration(

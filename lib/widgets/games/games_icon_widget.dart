@@ -73,6 +73,7 @@ class _GamesIconWidgetState extends State<GamesIconWidget> {
                         context,
                         MaterialPageRoute(
                           builder: ((context) => GamesTournamentScreen(
+                                gameData: value?[index] ?? Games(),
                                 gameUUID: value?[index].gameId ?? "GameId",
                               )),
                         ),

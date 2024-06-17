@@ -11,6 +11,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
 //Local Imports
+import 'package:playverse/themes/app_font.dart';
 import 'package:playverse/screens/tournaments/winning_screen.dart';
 import 'package:playverse/screens/store/store_screen.dart';
 import 'package:playverse/screens/profile/friend_screen.dart';
@@ -130,6 +131,7 @@ class _AppState extends State<App>
     userModel = context.select((UserProfileProvider value) => value.userModel);
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
+    // TextEditingController serachText = TextEditingController();
     return WillPopScope(
       onWillPop: () async {
         if (index != 0) {
@@ -187,6 +189,25 @@ class _AppState extends State<App>
               ),
             ),
             actions: [
+              index == 10
+                  ? Container(
+                      height: 35,
+                      width: screenWidth / 3,
+                      decoration: BoxDecoration(
+                        color: const Color(0xFFBF99FF),
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      child: TextField(
+                        decoration: InputDecoration(
+                          hintText: 'Find...!',
+                          hintStyle: poppinsFonts.copyWith(color: Colors.white),
+                          prefixIcon:
+                              const Icon(Icons.search, color: Colors.white),
+                          border: InputBorder.none,
+                        ),
+                      ),
+                    )
+                  : Container(),
               IconButton(
                 onPressed: () => {},
                 icon: const Icon(
@@ -260,7 +281,7 @@ class _AppState extends State<App>
               ],
             ),
           ),
-          extendBody: true,
+          // extendBody: true,
           bottomNavigationBar: BottomNavigationBar(
             showSelectedLabels: false,
             showUnselectedLabels: false,

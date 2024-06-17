@@ -6,10 +6,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:neopop/widgets/buttons/neopop_button/neopop_button.dart';
 import 'package:neopop/widgets/shimmer/neopop_shimmer.dart';
-import 'package:playverse/screens/streams/stream_watch_screen.dart';
 import 'package:provider/provider.dart';
 
 //Local Imports
+import 'package:playverse/screens/streams/stream_watch_screen.dart';
 import 'package:playverse/themes/app_font.dart';
 import 'package:playverse/themes/app_images.dart';
 import 'package:playverse/provider/tournaments_provider.dart';

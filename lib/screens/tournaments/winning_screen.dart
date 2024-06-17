@@ -31,8 +31,7 @@ class _WinnerScreenState extends State<WinnerScreen> {
 
   Future<void> paginationTournaments() async {
     if (!paginateUpcoming) return;
-    setState(() { 
-      
+    setState(() {
       loader = true;
       isLoading = false;
     });

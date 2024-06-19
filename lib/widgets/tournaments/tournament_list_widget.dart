@@ -43,8 +43,8 @@ class _TournamentListWidgetState extends State<TournamentListWidget> {
 
   @override
   void dispose() {
-    provider.tournamentList.clear();
-    provider.dispose();
+    // provider.tournamentList.clear();
+    // provider.dispose();
     super.dispose();
   }
 
@@ -88,8 +88,7 @@ class _TournamentListWidgetState extends State<TournamentListWidget> {
                         context,
                         MaterialPageRoute(
                           builder: ((context) => TournamentDetailScreen(
-                                tournamentDetail:
-                                    value?[index] ?? TournamentDetail(),
+                                tournamentID: value?[index].tournamentId ?? "",
                               )),
                         ),
                       ),

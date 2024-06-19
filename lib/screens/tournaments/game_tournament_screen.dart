@@ -2,10 +2,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:playverse/widgets/common/header_widget.dart';
 import 'package:provider/provider.dart';
 
 //Local Imports
+import 'package:playverse/widgets/common/header_widget.dart';
 import 'package:playverse/models/games_model.dart';
 import 'package:playverse/provider/games_provider.dart';
 import 'package:playverse/themes/app_color_theme.dart';
@@ -249,9 +249,10 @@ class GamesTournamentScreenState extends State<GamesTournamentScreen> {
                                                   MaterialPageRoute(
                                                     builder: ((context) =>
                                                         TournamentDetailScreen(
-                                                          tournamentDetail: value?[
-                                                                  index] ??
-                                                              TournamentDetail(),
+                                                          tournamentID: value?[
+                                                                      index]
+                                                                  .tournamentId ??
+                                                              "",
                                                         )),
                                                   ),
                                                 ),

@@ -69,7 +69,7 @@ class _TournamentScreenState extends State<TournamentScreen> {
           )
         : RefreshIndicator(
             onRefresh: () async {
-              paginationTournaments();
+              await paginationTournaments();
             },
             child: Selector<TournamentsProvider, List<TournamentDetail>?>(
               selector: (p0, p1) => p1.tournamentList,
@@ -89,8 +89,8 @@ class _TournamentScreenState extends State<TournamentScreen> {
                               context,
                               MaterialPageRoute(
                                 builder: ((context) => TournamentDetailScreen(
-                                      tournamentDetail:
-                                          value?[index] ?? TournamentDetail(),
+                                      tournamentID:
+                                          value?[index].tournamentId ?? "",
                                     )),
                               ),
                             ),
@@ -255,9 +255,8 @@ class _TournamentScreenState extends State<TournamentScreen> {
                               context,
                               MaterialPageRoute(
                                 builder: ((context) => TournamentDetailScreen(
-                                      tournamentDetail:
-                                          value?[index] ?? TournamentDetail(),
-                                    )),
+                                    tournamentID:
+                                        value?[index].tournamentId ?? "")),
                               ),
                             ),
                             child: Stack(

@@ -89,8 +89,8 @@ class TournamentProfileWidgetState extends State<TournamentProfileWidget> {
                             context,
                             MaterialPageRoute(
                               builder: ((context) => TournamentDetailScreen(
-                                    tournamentDetail:
-                                        value?[index] ?? TournamentDetail(),
+                                    tournamentID:
+                                        value?[index].tournamentId ?? "",
                                   )),
                             ),
                           ),

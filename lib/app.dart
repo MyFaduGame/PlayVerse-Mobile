@@ -189,18 +189,18 @@ class _AppState extends State<App>
             actions: [
               index == 10
                   ? Container(
-                      height: 35,
-                      width: screenWidth / 3,
+                      height: 20,
+                      width: screenWidth / 1.8,
                       decoration: BoxDecoration(
-                        color: const Color(0xFFBF99FF),
+                        color: Colors.blueGrey.shade200,
                         borderRadius: BorderRadius.circular(15),
                       ),
                       child: TextField(
                         decoration: InputDecoration(
                           hintText: 'Find...!',
-                          hintStyle: poppinsFonts.copyWith(color: Colors.white),
+                          hintStyle: poppinsFonts.copyWith(color: Colors.black),
                           prefixIcon:
-                              const Icon(Icons.search, color: Colors.white),
+                              const Icon(Icons.search, color: Colors.black),
                           border: InputBorder.none,
                         ),
                       ),

@@ -75,113 +75,119 @@ class _StoreScreenState extends State<StoreScreen> {
                   clipBehavior: Clip.none,
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
-                    mainAxisSpacing: 8.0,
-                    crossAxisSpacing: 8.0,
+                    // mainAxisSpacing: 8.0,
+                    // crossAxisSpacing: 8.0,
                     childAspectRatio: itemWidth / itemHeight,
                   ),
                   itemCount: value?.length,
                   itemBuilder: (BuildContext context, int index) {
-                    return GestureDetector(
-                      onTap: () => Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => StoreDetailScreen(
-                            productDetail: value![index],
+                    return Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: GestureDetector(
+                        onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => StoreDetailScreen(
+                              productDetail: value![index],
+                            ),
                           ),
                         ),
-                      ),
-                      child: Container(
-                        padding: const EdgeInsets.all(5),
-                        decoration: BoxDecoration(
-                          color: const Color(0xFF7F00FF),
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: <Widget>[
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(15),
-                              child: CachedNetworkImage(
-                                imageUrl: value?[index].images?[0] ?? "",
-                                fit: BoxFit.cover,
-                                height: 100,
-                                width: 1000,
-                                // placeholder: (context, url) =>
-                                //     const CircularProgressIndicator(),
-                                errorWidget: (context, url, error) =>
-                                    const Icon(Icons.error),
-                              ),
-                            ),
-                            SizedBox(
-                              height: 50,
-                              child: Text(
-                                value?[index].name ?? "",
-                                style: poppinsFonts.copyWith(
-                                  color: Colors.white,
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
+                        child: Container(
+                          padding: const EdgeInsets.all(8.0),
+                          decoration: BoxDecoration(
+                            color: Colors.grey.shade800,
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: <Widget>[
+                              ClipRRect(
+                                borderRadius: BorderRadius.circular(15),
+                                child: CachedNetworkImage(
+                                  imageUrl: value?[index].images?[0] ?? "",
+                                  fit: BoxFit.cover,
+                                  height: 100,
+                                  width: 1000,
+                                  // placeholder: (context, url) =>
+                                  //     const CircularProgressIndicator(),
+                                  errorWidget: (context, url, error) =>
+                                      const Icon(Icons.error),
                                 ),
-                                maxLines: 2,
-                                overflow: TextOverflow.ellipsis,
                               ),
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: <Widget>[
-                                Column(
-                                  children: [
-                                    Row(
-                                      children: [
-                                        Image.asset(
-                                          BottomAppBarImages.coinImage,
-                                          height: 25,
-                                          width: 25,
+                              SizedBox(
+                                height: 50,
+                                child: Text(
+                                  value?[index].name ?? "",
+                                  style: poppinsFonts.copyWith(
+                                    color: Colors.white,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              ),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: <Widget>[
+                                  Column(
+                                    children: [
+                                      Row(
+                                        children: [
+                                          Image.asset(
+                                            BottomAppBarImages.coinImage,
+                                            height: 25,
+                                            width: 25,
+                                          ),
+                                          Text(
+                                            value?[index].price ?? "",
+                                            style: poppinsFonts.copyWith(
+                                              color: Colors.white,
+                                              fontSize: 15,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      Text(
+                                        value?[index].categoryName ??
+                                            "Category",
+                                        style: poppinsFonts.copyWith(
+                                          color: Colors.white,
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.bold,
                                         ),
-                                        Text(
-                                          value?[index].price ?? "",
-                                          style: poppinsFonts.copyWith(
-                                            color: Colors.white,
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.bold,
+                                      )
+                                    ],
+                                  ),
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(
+                                        10,
+                                      ),
+                                      color: Colors.pink[200],
+                                    ),
+                                    child: IconButton(
+                                      onPressed: () => Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              StoreDetailScreen(
+                                            productDetail: value![index],
                                           ),
                                         ),
-                                      ],
-                                    ),
-                                    Text(
-                                      value?[index].categoryName ?? "Category",
-                                      style: poppinsFonts.copyWith(
-                                        color: Colors.white,
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.bold,
                                       ),
-                                    )
-                                  ],
-                                ),
-                                Container(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(
-                                      10,
-                                    ),
-                                    color: Colors.pink[200],
-                                  ),
-                                  child: IconButton(
-                                    onPressed: () => Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => StoreDetailScreen(
-                                          productDetail: value![index],
-                                        ),
+                                      color: Colors.white,
+                                      icon: const Icon(
+                                        FontAwesomeIcons.arrowRightLong,
                                       ),
                                     ),
-                                    color: Colors.white,
-                                    icon: const Icon(
-                                      FontAwesomeIcons.arrowRightLong,
-                                    ),
-                                  ),
-                                )
-                              ],
-                            )
-                          ],
+                                  )
+                                ],
+                              )
+                            ],
+                          ),
                         ),
                       ),
                     );

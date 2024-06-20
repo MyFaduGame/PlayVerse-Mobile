@@ -188,26 +188,19 @@ class TournamentDetailScreenState extends State<TournamentDetailScreen> {
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceEvenly,
                                       children: [
-                                        ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(55),
-                                          child: CachedNetworkImage(
-                                            imageUrl:
-                                                tournamentDetail?.logo ?? "",
-                                            fit: BoxFit.fill,
-                                            height: 20,
-                                            width: 20,
-                                            placeholder: (context, url) =>
-                                                const CircularProgressIndicator(),
-                                            errorWidget:
-                                                (context, url, error) =>
-                                                    const Icon(Icons.error),
-                                          ),
+                                        const Icon(
+                                          FontAwesomeIcons.ticket,
+                                          size: 20,
+                                          color: Colors.redAccent,
                                         ),
                                         Text(
-                                          tournamentDetail?.gameName
-                                                  .toString() ??
-                                              "",
+                                          tournamentDetail?.registrationFee ==
+                                                  null
+                                              ? "Free"
+                                              : tournamentDetail
+                                                      ?.registrationFee
+                                                      .toString() ??
+                                                  "",
                                           style: poppinsFonts.copyWith(
                                             color: Colors.white,
                                             fontSize: 20,
@@ -216,7 +209,7 @@ class TournamentDetailScreenState extends State<TournamentDetailScreen> {
                                       ],
                                     ),
                                     Text(
-                                      "Game Name",
+                                      "Fees",
                                       style: poppinsFonts.copyWith(
                                         color: const Color(0xFFBF99FF),
                                         fontSize: 15,
@@ -282,9 +275,9 @@ class TournamentDetailScreenState extends State<TournamentDetailScreen> {
                                           MainAxisAlignment.spaceEvenly,
                                       children: [
                                         const Icon(
-                                          FontAwesomeIcons.userGear,
+                                          FontAwesomeIcons.userCheck,
                                           size: 20,
-                                          color: Color(0xFFBF99FF),
+                                          color: Colors.white,
                                         ),
                                         Text(
                                           tournamentDetail?.maxPlayers
@@ -322,19 +315,26 @@ class TournamentDetailScreenState extends State<TournamentDetailScreen> {
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceEvenly,
                                       children: [
-                                        const Icon(
-                                          FontAwesomeIcons.ticket,
-                                          size: 20,
-                                          color: Colors.redAccent,
+                                        ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(55),
+                                          child: CachedNetworkImage(
+                                            imageUrl:
+                                                tournamentDetail?.logo ?? "",
+                                            fit: BoxFit.fill,
+                                            height: 20,
+                                            width: 20,
+                                            placeholder: (context, url) =>
+                                                const CircularProgressIndicator(),
+                                            errorWidget:
+                                                (context, url, error) =>
+                                                    const Icon(Icons.error),
+                                          ),
                                         ),
                                         Text(
-                                          tournamentDetail?.registrationFee ==
-                                                  null
-                                              ? "Free"
-                                              : tournamentDetail
-                                                      ?.registrationFee
-                                                      .toString() ??
-                                                  "",
+                                          tournamentDetail?.gameName
+                                                  .toString() ??
+                                              "",
                                           style: poppinsFonts.copyWith(
                                             color: Colors.white,
                                             fontSize: 20,
@@ -343,7 +343,7 @@ class TournamentDetailScreenState extends State<TournamentDetailScreen> {
                                       ],
                                     ),
                                     Text(
-                                      "Fees",
+                                      "Game Name",
                                       style: poppinsFonts.copyWith(
                                         color: const Color(0xFFBF99FF),
                                         fontSize: 15,
@@ -625,7 +625,11 @@ class TournamentDetailScreenState extends State<TournamentDetailScreen> {
       extendBody: true,
       floatingActionButton: TextButton(
         onPressed: tournamentDetail?.registrationId == null
-            ? () => {}
+            ? () => {
+                  checkRegistration(
+                      tournamentDetail?.tournamentId ?? "Tournament Id",
+                      tournamentDetail?.registrationId)
+                }
             : () => {showCustomToast("Tournament Already Registered")},
         child: Container(
           padding: const EdgeInsets.all(8),
@@ -649,14 +653,14 @@ class TournamentDetailScreenState extends State<TournamentDetailScreen> {
           ),
         ),
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
 
-  void checkRegistration(String tournamentId, String registrationId) {
+  void checkRegistration(String tournamentId, [String? registrationId]) {
     provider = Provider.of<TournamentsProvider>(context, listen: false);
     bool isRegistered = false;
-    if (registrationId != "null") {
+    if (registrationId != null) {
       isRegistered = true;
     }
 

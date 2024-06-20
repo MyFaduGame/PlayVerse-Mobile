@@ -47,7 +47,7 @@ class _NavigationBarCustomState extends State<NavigationBarCustom>
         width: double.infinity,
         height: double.infinity,
         decoration: BoxDecoration(
-          color: Colors.grey.shade900,
+          color: Colors.grey.shade900.withOpacity(0.7),
           borderRadius: BorderRadius.circular(10),
         ),
       ),
@@ -59,11 +59,6 @@ class _NavigationBarCustomState extends State<NavigationBarCustom>
       animateChildDecoration: true,
       rtlOpening: true,
       disabledGestures: false,
-      childDecoration: const BoxDecoration(
-        borderRadius: BorderRadius.all(
-          Radius.circular(15),
-        ),
-      ),
       drawer: NavigationBarWidget(
         userProfile: widget.userProfile,
         index: widget.index,

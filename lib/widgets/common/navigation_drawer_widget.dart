@@ -33,136 +33,135 @@ class _NavigationBarWidgetState extends State<NavigationBarWidget> {
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
-    // double screenHeight = MediaQuery.of(context).size.height;
-    return SafeArea(
-      child: SingleChildScrollView(
-        child: SizedBox(
-          // height: screenHeight - 100,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              GestureDetector(
-                onTap: () {
-                  widget.controller.hideDrawer();
-                  tabManager.onTabChanged(5);
-                },
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+    double screenHeight = MediaQuery.of(context).size.height;
+    return SingleChildScrollView(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          GestureDetector(
+            onTap: () {
+              widget.controller.hideDrawer();
+              tabManager.onTabChanged(5);
+            },
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Column(
                   children: [
-                    Column(
-                      children: [
-                        Container(
-                          width: 100.0,
-                          height: 100.0,
-                          clipBehavior: Clip.antiAlias,
-                          decoration: const BoxDecoration(
-                            color: Colors.white24,
-                            shape: BoxShape.circle,
-                          ),
-                          child: widget.userProfile.profileImage == "" ||
-                                  widget.userProfile.profileImage == null
-                              ? widget.userProfile.gender == 'Male'
-                                  ? SvgPicture.asset(
-                                      ProfileImages.boyProfile,
-                                      width: 100,
-                                      height: 100,
-                                      fit: BoxFit.cover,
-                                    )
-                                  : SvgPicture.asset(
-                                      ProfileImages.girlProfile,
-                                      width: 100,
-                                      height: 100,
-                                      fit: BoxFit.cover,
-                                    )
-                              : CachedNetworkImage(
-                                  imageUrl:
-                                      widget.userProfile.profileImage ?? "",
-                                  fit: BoxFit.cover,
-                                  height: 100,
+                    Container(
+                      width: 100.0,
+                      height: 100.0,
+                      clipBehavior: Clip.antiAlias,
+                      decoration: const BoxDecoration(
+                        color: Colors.white24,
+                        shape: BoxShape.circle,
+                      ),
+                      child: widget.userProfile.profileImage == "" ||
+                              widget.userProfile.profileImage == null
+                          ? widget.userProfile.gender == 'Male'
+                              ? SvgPicture.asset(
+                                  ProfileImages.boyProfile,
                                   width: 100,
-                                  placeholder: (context, url) =>
-                                      const CircularProgressIndicator(),
-                                  errorWidget: (context, url, error) =>
-                                      const Icon(Icons.error),
-                                ),
-                        ),
-                        Text(
-                          widget.userProfile.userName ?? "",
-                          style: poppinsFonts.copyWith(
-                            color: Colors.white,
-                            fontSize: 15,
-                          ),
-                        ),
-                      ],
+                                  height: 100,
+                                  fit: BoxFit.cover,
+                                )
+                              : SvgPicture.asset(
+                                  ProfileImages.girlProfile,
+                                  width: 100,
+                                  height: 100,
+                                  fit: BoxFit.cover,
+                                )
+                          : CachedNetworkImage(
+                              imageUrl: widget.userProfile.profileImage ?? "",
+                              fit: BoxFit.cover,
+                              height: 100,
+                              width: 100,
+                              placeholder: (context, url) =>
+                                  const CircularProgressIndicator(),
+                              errorWidget: (context, url, error) =>
+                                  const Icon(Icons.error),
+                            ),
                     ),
-                    Column(
-                      children: [
-                        GestureDetector(
-                          onTap: () {
-                            widget.controller.hideDrawer();
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: ((context) => const GemsScreen()),
-                              ),
-                            );
-                          },
-                          child: Container(
-                            width: 100,
-                            height: screenWidth / 10,
-                            decoration: BoxDecoration(
-                                color: const Color(0xFF231750),
-                                borderRadius: BorderRadius.circular(15)),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                Image.asset(
-                                  BottomAppBarImages.coinImage,
-                                  height: screenWidth / 15,
-                                  width: screenWidth / 15,
-                                ),
-                                Text(
-                                  textAlign: TextAlign.center,
-                                  widget.userProfile.gems.toString(),
-                                  style: poppinsFonts.copyWith(
-                                    color: const Color(0xFFBF99FF),
-                                    fontSize: screenWidth / 25,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        const SizedBox(height: 8),
-                        GestureDetector(
-                          onTap: () {
-                            widget.controller.hideDrawer();
-                            tabManager.onTabChanged(9);
-                          },
-                          child: Container(
-                            width: 100,
-                            height: screenWidth / 10,
-                            decoration: BoxDecoration(
-                                color: const Color(0xFF231750),
-                                borderRadius: BorderRadius.circular(15)),
-                            child: Center(
-                              child: Text(
-                                "Friends",
-                                style: poppinsFonts.copyWith(
-                                  color: const Color(0xFFBF99FF),
-                                  fontSize: screenWidth / 25,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
+                    Text(
+                      widget.userProfile.userName ?? "",
+                      style: poppinsFonts.copyWith(
+                        color: Colors.white,
+                        fontSize: 15,
+                      ),
                     ),
                   ],
                 ),
-              ),
-              const SizedBox(height: 32),
-              Column(
+                Column(
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        widget.controller.hideDrawer();
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: ((context) => const GemsScreen()),
+                          ),
+                        );
+                      },
+                      child: Container(
+                        width: 100,
+                        height: screenWidth / 10,
+                        decoration: BoxDecoration(
+                            color: GeneralColors.gradientBackgrounColor0,
+                            borderRadius: BorderRadius.circular(15)),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Image.asset(
+                              BottomAppBarImages.coinImage,
+                              height: screenWidth / 15,
+                              width: screenWidth / 15,
+                            ),
+                            Text(
+                              textAlign: TextAlign.center,
+                              widget.userProfile.gems.toString(),
+                              style: poppinsFonts.copyWith(
+                                color: Colors.white,
+                                fontSize: screenWidth / 25,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    GestureDetector(
+                      onTap: () {
+                        widget.controller.hideDrawer();
+                        tabManager.onTabChanged(9);
+                      },
+                      child: Container(
+                        width: 100,
+                        height: screenWidth / 10,
+                        decoration: BoxDecoration(
+                            color: GeneralColors.gradientBackgrounColor0,
+                            borderRadius: BorderRadius.circular(15)),
+                        child: Center(
+                          child: Text(
+                            "Friends",
+                            style: poppinsFonts.copyWith(
+                              color: Colors.white,
+                              fontSize: screenWidth / 25,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 32),
+          SingleChildScrollView(
+            child: SizedBox(
+              height: screenHeight - 450,
+              child: Column(
                 children: [
                   widget.index == 0
                       ? Container(
@@ -170,9 +169,6 @@ class _NavigationBarWidgetState extends State<NavigationBarWidget> {
                           decoration: BoxDecoration(
                             color: Colors.black,
                             borderRadius: BorderRadius.circular(15),
-                            border: Border.all(
-                              color: Colors.purple,
-                            ),
                           ),
                           child: TextButton(
                             onPressed: () {
@@ -207,9 +203,6 @@ class _NavigationBarWidgetState extends State<NavigationBarWidget> {
                           decoration: BoxDecoration(
                             color: Colors.black,
                             borderRadius: BorderRadius.circular(15),
-                            border: Border.all(
-                              color: Colors.purple,
-                            ),
                           ),
                           child: TextButton(
                             onPressed: () {
@@ -244,9 +237,6 @@ class _NavigationBarWidgetState extends State<NavigationBarWidget> {
                           decoration: BoxDecoration(
                             color: Colors.black,
                             borderRadius: BorderRadius.circular(15),
-                            border: Border.all(
-                              color: Colors.purple,
-                            ),
                           ),
                           child: TextButton(
                             onPressed: () {
@@ -281,9 +271,6 @@ class _NavigationBarWidgetState extends State<NavigationBarWidget> {
                           decoration: BoxDecoration(
                             color: Colors.black,
                             borderRadius: BorderRadius.circular(15),
-                            border: Border.all(
-                              color: Colors.purple,
-                            ),
                           ),
                           child: TextButton(
                             onPressed: () {
@@ -318,9 +305,6 @@ class _NavigationBarWidgetState extends State<NavigationBarWidget> {
                           decoration: BoxDecoration(
                             color: Colors.black,
                             borderRadius: BorderRadius.circular(15),
-                            border: Border.all(
-                              color: Colors.purple,
-                            ),
                           ),
                           child: TextButton(
                             onPressed: () {
@@ -355,9 +339,6 @@ class _NavigationBarWidgetState extends State<NavigationBarWidget> {
                           decoration: BoxDecoration(
                             color: Colors.black,
                             borderRadius: BorderRadius.circular(15),
-                            border: Border.all(
-                              color: Colors.purple,
-                            ),
                           ),
                           child: TextButton(
                             onPressed: () {
@@ -392,9 +373,6 @@ class _NavigationBarWidgetState extends State<NavigationBarWidget> {
                           decoration: BoxDecoration(
                             color: Colors.black,
                             borderRadius: BorderRadius.circular(15),
-                            border: Border.all(
-                              color: Colors.purple,
-                            ),
                           ),
                           child: TextButton(
                             onPressed: () {
@@ -429,9 +407,6 @@ class _NavigationBarWidgetState extends State<NavigationBarWidget> {
                           decoration: BoxDecoration(
                             color: Colors.black,
                             borderRadius: BorderRadius.circular(15),
-                            border: Border.all(
-                              color: Colors.purple,
-                            ),
                           ),
                           child: TextButton(
                             onPressed: () {
@@ -462,59 +437,59 @@ class _NavigationBarWidgetState extends State<NavigationBarWidget> {
                         ),
                 ],
               ),
-              const SizedBox(height: 32),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  GestureDetector(
-                    onTap: () {
-                      logout(context);
-                    },
-                    child: Container(
-                      width: 100,
-                      height: 50,
-                      decoration: BoxDecoration(
-                        color: GeneralColors.gradientBackgrounColor0,
-                        borderRadius: BorderRadius.circular(30),
-                      ),
-                      child: Center(
-                        child: Text(
-                          "Log Out",
-                          style: dmSansFonts.copyWith(
-                            color: Colors.white,
-                            fontSize: 15,
-                          ),
-                        ),
+            ),
+          ),
+          const SizedBox(height: 32),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              GestureDetector(
+                onTap: () {
+                  logout(context);
+                },
+                child: Container(
+                  width: 100,
+                  height: 50,
+                  decoration: BoxDecoration(
+                    color: GeneralColors.gradientBackgrounColor0,
+                    borderRadius: BorderRadius.circular(30),
+                  ),
+                  child: Center(
+                    child: Text(
+                      "Log Out",
+                      style: dmSansFonts.copyWith(
+                        color: Colors.white,
+                        fontSize: 15,
                       ),
                     ),
                   ),
-                  GestureDetector(
-                    onTap: () {
-                      logout(context);
-                    },
-                    child: Container(
-                      width: 100,
-                      height: 50,
-                      decoration: BoxDecoration(
-                        color: GeneralColors.gradientBackgrounColor0,
-                        borderRadius: BorderRadius.circular(30),
-                      ),
-                      child: Center(
-                        child: Text(
-                          "Deactivate",
-                          style: dmSansFonts.copyWith(
-                            color: Colors.white,
-                            fontSize: 15,
-                          ),
-                        ),
+                ),
+              ),
+              GestureDetector(
+                onTap: () {
+                  logout(context);
+                },
+                child: Container(
+                  width: 100,
+                  height: 50,
+                  decoration: BoxDecoration(
+                    color: GeneralColors.gradientBackgrounColor0,
+                    borderRadius: BorderRadius.circular(30),
+                  ),
+                  child: Center(
+                    child: Text(
+                      "Deactivate",
+                      style: dmSansFonts.copyWith(
+                        color: Colors.white,
+                        fontSize: 15,
                       ),
                     ),
                   ),
-                ],
+                ),
               ),
             ],
           ),
-        ),
+        ],
       ),
     );
   }

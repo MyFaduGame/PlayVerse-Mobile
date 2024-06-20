@@ -5,7 +5,6 @@ import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
 
 //Local Imports
 import 'package:playverse/models/user_profile_model.dart';
-import 'package:playverse/themes/app_color_theme.dart';
 import 'package:playverse/widgets/common/navigation_drawer_widget.dart';
 
 class NavigationBarCustom extends StatefulWidget {
@@ -48,7 +47,7 @@ class _NavigationBarCustomState extends State<NavigationBarCustom>
         width: double.infinity,
         height: double.infinity,
         decoration: BoxDecoration(
-          color: GeneralColors.sideEclipseColor,
+          color: Colors.grey.shade900,
           borderRadius: BorderRadius.circular(10),
         ),
       ),

@@ -4,11 +4,12 @@ import 'package:flutter/material.dart';
 //Local Imports
 import 'package:playverse/widgets/common/store_widget.dart';
 import 'package:playverse/widgets/common/update_carasoule_widget.dart';
-import 'package:playverse/widgets/articles/article_list_widget.dart';
+// import 'package:playverse/widgets/articles/article_list_widget.dart';
 import 'package:playverse/widgets/common/header_widget.dart';
 import 'package:playverse/widgets/courses/course_widget.dart';
 import 'package:playverse/widgets/games/games_icon_widget.dart';
 import 'package:playverse/widgets/streams/streams_widget.dart';
+import 'package:playverse/widgets/tournaments/suggested_tournament_widget.dart';
 // import 'package:playverse/widgets/tournaments/leaderboard_widget.dart';
 import 'package:playverse/widgets/tournaments/tournament_list_widget.dart';
 
@@ -41,6 +42,15 @@ class _HomeScreenState extends State<HomeScreen> {
             SizedBox(
               height: 100,
               child: GamesIconWidget(),
+            ),
+            SizedBox(height: 8),
+            HeaderWidget(
+                title: "HandPick for You",
+                subTitle: "Suggested Matches",
+                index: 1),
+            SizedBox(
+              height: 300,
+              child: SuggestedTournamentWidget(),
             ),
             SizedBox(height: 8),
             HeaderWidget(title: "Checkout", subTitle: "Updates", index: 1),
@@ -81,15 +91,15 @@ class _HomeScreenState extends State<HomeScreen> {
               child: CourseWidget(),
             ),
             SizedBox(height: 16),
-            HeaderWidget(
-              title: "Find Some",
-              subTitle: "Articles",
-              index: 3,
-            ),
-            SizedBox(
-              height: 200,
-              child: ArticleWidget(),
-            ),
+            // HeaderWidget(
+            //   title: "Find Some",
+            //   subTitle: "Articles",
+            //   index: 3,
+            // ),
+            // SizedBox(
+            //   height: 200,
+            //   child: ArticleWidget(),
+            // ),
           ],
         ),
       ),

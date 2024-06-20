@@ -119,8 +119,8 @@ class _GamesScreenState extends State<GamesScreen> {
                                         imageUrl: value?[index].logo ?? "",
                                         fit: BoxFit.fill,
                                         height: 100,
-                                        placeholder: (context, url) =>
-                                            const CircularProgressIndicator(),
+                                        // placeholder: (context, url) =>
+                                        //     const CircularProgressIndicator(),
                                         errorWidget: (context, url, error) =>
                                             const Icon(Icons.error),
                                       ),
@@ -364,8 +364,8 @@ class _GamesScreenState extends State<GamesScreen> {
                     fit: BoxFit.cover,
                     height: 150,
                     width: 200,
-                    placeholder: (context, url) =>
-                        const CircularProgressIndicator(),
+                    // placeholder: (context, url) =>
+                    //     const CircularProgressIndicator(),
                     errorWidget: (context, url, error) =>
                         const Icon(Icons.error),
                   ),

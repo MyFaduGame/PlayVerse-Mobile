@@ -123,8 +123,8 @@ class _TournamentListWidgetState extends State<TournamentListWidget> {
                                           fit: BoxFit.cover,
                                           height: 40,
                                           width: 40,
-                                          placeholder: (context, url) =>
-                                              const CircularProgressIndicator(),
+                                          // placeholder: (context, url) =>
+                                          //     const CircularProgressIndicator(),
                                           errorWidget: (context, url, error) =>
                                               const Icon(Icons.error),
                                         ),

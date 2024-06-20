@@ -123,8 +123,8 @@ class CourseScreenState extends State<CourseScreen> {
                                   fit: BoxFit.cover,
                                   height: 150,
                                   width: double.infinity,
-                                  placeholder: (context, url) =>
-                                      const CircularProgressIndicator(),
+                                  // placeholder: (context, url) =>
+                                  //     const CircularProgressIndicator(),
                                   errorWidget: (context, url, error) =>
                                       const Icon(Icons.error),
                                 ),

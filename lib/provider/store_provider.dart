@@ -10,6 +10,7 @@ import 'package:playverse/utils/toast_bar.dart';
 class StoreProvider extends ChangeNotifier {
   final repo = StoreRepo();
   List<Products> productList = [];
+  List<Products> categroyProductList = [];
   List<Cart>? cartList;
   bool isLoading = false;
 
@@ -17,6 +18,25 @@ class StoreProvider extends ChangeNotifier {
     try {
       isLoading = true;
       Map<String, dynamic> responseData = await repo.getProducts(offset);
+      if (responseData['status_code'] == 200) {
+        List<Products> tempList = List<Products>.from(
+            responseData["data"]!.map((x) => Products.fromJson(x)));
+        productList = tempList;
+        isLoading = false;
+        notifyListeners();
+        return tempList.length;
+      } else {
+        log(responseData.toString(), name: 'Products Error Log');
+      }
+    } catch (e) {
+      log("$e", name: "Products List Error");
+    }
+  }
+
+  Future<dynamic> getCategoryProduct(int offset,String categroyID) async {
+    try {
+      isLoading = true;
+      Map<String, dynamic> responseData = await repo.getCategoryProduct(offset,categroyID);
       if (responseData['status_code'] == 200) {
         List<Products> tempList = List<Products>.from(
             responseData["data"]!.map((x) => Products.fromJson(x)));

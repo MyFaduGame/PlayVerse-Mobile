@@ -101,8 +101,8 @@ class TournamentDetailScreenState extends State<TournamentDetailScreen> {
                             fit: BoxFit.cover,
                             height: 200,
                             width: double.infinity,
-                            placeholder: (context, url) =>
-                                const CircularProgressIndicator(),
+                            // placeholder: (context, url) =>
+                            //     const CircularProgressIndicator(),
                             errorWidget: (context, url, error) =>
                                 const Icon(Icons.error),
                           ),
@@ -120,8 +120,8 @@ class TournamentDetailScreenState extends State<TournamentDetailScreen> {
                                 fit: BoxFit.fill,
                                 height: 100,
                                 width: 100,
-                                placeholder: (context, url) =>
-                                    const CircularProgressIndicator(),
+                                // placeholder: (context, url) =>
+                                //     const CircularProgressIndicator(),
                                 errorWidget: (context, url, error) =>
                                     const Icon(Icons.error),
                               ),
@@ -129,13 +129,18 @@ class TournamentDetailScreenState extends State<TournamentDetailScreen> {
                             Column(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: <Widget>[
-                                FittedBox(
+                                SizedBox(
+                                  width: 200,
                                   child: Text(
-                                    tournamentDetail?.title ?? "Game Name",
+                                    tournamentDetail?.title ??
+                                        "Tournament Title",
                                     style: poppinsFonts.copyWith(
                                       color: Colors.white,
                                       fontSize: 20,
                                     ),
+                                    textAlign: TextAlign.center,
+                                    maxLines: 2,
+                                    overflow: TextOverflow.ellipsis,
                                   ),
                                 ),
                                 const SizedBox(height: 16),
@@ -324,20 +329,25 @@ class TournamentDetailScreenState extends State<TournamentDetailScreen> {
                                             fit: BoxFit.fill,
                                             height: 20,
                                             width: 20,
-                                            placeholder: (context, url) =>
-                                                const CircularProgressIndicator(),
+                                            // placeholder: (context, url) =>
+                                            //     const CircularProgressIndicator(),
                                             errorWidget:
                                                 (context, url, error) =>
                                                     const Icon(Icons.error),
                                           ),
                                         ),
-                                        Text(
-                                          tournamentDetail?.gameName
-                                                  .toString() ??
-                                              "",
-                                          style: poppinsFonts.copyWith(
-                                            color: Colors.white,
-                                            fontSize: 20,
+                                        SizedBox(
+                                          width: 120,
+                                          child: Text(
+                                            tournamentDetail?.gameName
+                                                    .toString() ??
+                                                "",
+                                            style: poppinsFonts.copyWith(
+                                              color: Colors.white,
+                                              fontSize: 20,
+                                            ),
+                                            maxLines: 1,
+                                            overflow: TextOverflow.ellipsis,
                                           ),
                                         ),
                                       ],

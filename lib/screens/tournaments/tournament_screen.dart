@@ -81,7 +81,9 @@ class _TournamentScreenState extends State<TournamentScreen> {
                     clipBehavior: Clip.none,
                     itemCount: value?.length ?? 0,
                     itemBuilder: (context, index) {
-                      if ((index % 5 == 0 || index % 5 == 1)) {
+                      if ((index % 5 == 0 ||
+                          index % 5 == 1 ||
+                          index % 5 == 2)) {
                         return Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: GestureDetector(
@@ -104,8 +106,8 @@ class _TournamentScreenState extends State<TournamentScreen> {
                                     fit: BoxFit.cover,
                                     height: 100,
                                     width: itemWidth - 20,
-                                    placeholder: (context, url) =>
-                                        const CircularProgressIndicator(),
+                                    // placeholder: (context, url) =>
+                                    //     const CircularProgressIndicator(),
                                     errorWidget: (context, url, error) =>
                                         const Icon(Icons.error),
                                   ),
@@ -156,8 +158,8 @@ class _TournamentScreenState extends State<TournamentScreen> {
                                                 fit: BoxFit.cover,
                                                 height: 25,
                                                 width: 25,
-                                                placeholder: (context, url) =>
-                                                    const CircularProgressIndicator(),
+                                                // placeholder: (context, url) =>
+                                                //     const CircularProgressIndicator(),
                                                 errorWidget:
                                                     (context, url, error) =>
                                                         const Icon(Icons.error),
@@ -268,8 +270,8 @@ class _TournamentScreenState extends State<TournamentScreen> {
                                     fit: BoxFit.cover,
                                     height: 200,
                                     width: double.infinity,
-                                    placeholder: (context, url) =>
-                                        const CircularProgressIndicator(),
+                                    // placeholder: (context, url) =>
+                                    //     const CircularProgressIndicator(),
                                     errorWidget: (context, url, error) =>
                                         const Icon(Icons.error),
                                   ),
@@ -332,8 +334,8 @@ class _TournamentScreenState extends State<TournamentScreen> {
                                                 fit: BoxFit.cover,
                                                 height: 25,
                                                 width: 25,
-                                                placeholder: (context, url) =>
-                                                    const CircularProgressIndicator(),
+                                                // placeholder: (context, url) =>
+                                                //     const CircularProgressIndicator(),
                                                 errorWidget:
                                                     (context, url, error) =>
                                                         const Icon(Icons.error),

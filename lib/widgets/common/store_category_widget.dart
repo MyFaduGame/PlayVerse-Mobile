@@ -12,14 +12,14 @@ import 'package:playverse/utils/helper_utils.dart';
 import 'package:playverse/models/stores_model.dart';
 import 'package:playverse/provider/store_provider.dart';
 
-class StoreWidget extends StatefulWidget {
-  const StoreWidget({super.key});
+class StoreCategoryWidget extends StatefulWidget {
+  const StoreCategoryWidget({super.key});
 
   @override
-  State<StoreWidget> createState() => _StoreWidgetState();
+  State<StoreCategoryWidget> createState() => _StoreCategoryWidgetState();
 }
 
-class _StoreWidgetState extends State<StoreWidget> {
+class _StoreCategoryWidgetState extends State<StoreCategoryWidget> {
   late StoreProvider provider;
   List<Products>? articlesList;
   bool isLoading = true;
@@ -95,7 +95,7 @@ class _StoreWidgetState extends State<StoreWidget> {
                       child: Container(
                         padding: const EdgeInsets.all(5),
                         decoration: BoxDecoration(
-                          color: Colors.grey.shade900,
+                          color: const Color(0xFF7F00FF),
                           borderRadius: BorderRadius.circular(15),
                         ),
                         child: Column(
@@ -117,7 +117,7 @@ class _StoreWidgetState extends State<StoreWidget> {
                             Text(
                               value?[index].name ?? "",
                               style: poppinsFonts.copyWith(
-                                color: Colors.white,
+                                color: Colors.black,
                                 fontSize: 15,
                                 fontWeight: FontWeight.bold,
                               ),

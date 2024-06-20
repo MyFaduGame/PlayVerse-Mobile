@@ -130,8 +130,8 @@ class _LeaderBoardScreenState extends State<LeaderBoardScreen> {
                       fit: BoxFit.cover,
                       height: 170,
                       width: 100,
-                      placeholder: (context, url) =>
-                          const CircularProgressIndicator(),
+                      // placeholder: (context, url) =>
+                      //     const CircularProgressIndicator(),
                       errorWidget: (context, url, error) =>
                           const Icon(Icons.error),
                     ),
@@ -439,8 +439,8 @@ class _LeaderBoardScreenState extends State<LeaderBoardScreen> {
                               fit: BoxFit.cover,
                               height: 75,
                               width: 75,
-                              placeholder: (context, url) =>
-                                  const CircularProgressIndicator(),
+                              // placeholder: (context, url) =>
+                              //     const CircularProgressIndicator(),
                               errorWidget: (context, url, error) =>
                                   const Icon(Icons.error),
                             ),

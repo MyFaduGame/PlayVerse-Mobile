@@ -97,8 +97,8 @@ class _StreamsWidgetState extends State<StreamsWidget> {
                                 fit: BoxFit.fill,
                                 height: 150,
                                 width: 300,
-                                placeholder: (context, url) =>
-                                    const CircularProgressIndicator(),
+                                // placeholder: (context, url) =>
+                                //     const CircularProgressIndicator(),
                                 errorWidget: (context, url, error) =>
                                     const Icon(Icons.error),
                               ),
@@ -124,8 +124,8 @@ class _StreamsWidgetState extends State<StreamsWidget> {
                                         fit: BoxFit.cover,
                                         height: 35,
                                         width: 35,
-                                        placeholder: (context, url) =>
-                                            const CircularProgressIndicator(),
+                                        // placeholder: (context, url) =>
+                                        //     const CircularProgressIndicator(),
                                         errorWidget: (context, url, error) =>
                                             const Icon(Icons.error),
                                       ),

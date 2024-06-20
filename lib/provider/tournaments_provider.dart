@@ -11,6 +11,7 @@ class TournamentsProvider extends ChangeNotifier {
   final repo = TournamentsRepo();
   List<TournamentWinner>? tournamentWinner;
   List<TournamentDetail> tournamentList = [];
+  List<TournamentDetail> suggestedTournaments = [];
   List<TournamentDetail> userTournamentList = [];
   List<TournamentDetail> gamesTournamentList = [];
   TournamentDetail? tournamentDetail;
@@ -25,6 +26,28 @@ class TournamentsProvider extends ChangeNotifier {
         List<TournamentDetail> tempList = List<TournamentDetail>.from(
             responseData["data"]!.map((x) => TournamentDetail.fromJson(x)));
         offset == 1 ? tournamentList = tempList : tournamentList += tempList;
+        isLoading = false;
+        notifyListeners();
+        return tempList.length;
+      } else {
+        log(responseData.toString(), name: 'Tournaments Error Log');
+      }
+    } catch (e) {
+      log("$e", name: "Tournaments List Error");
+    }
+  }
+
+  Future<dynamic> getSuggestedTournaments(int offset) async {
+    try {
+      isLoading = true;
+      Map<String, dynamic> responseData =
+          await repo.getSugestedTournaments(offset);
+      if (responseData['status_code'] == 200) {
+        List<TournamentDetail> tempList = List<TournamentDetail>.from(
+            responseData["data"]!.map((x) => TournamentDetail.fromJson(x)));
+        offset == 1
+            ? suggestedTournaments = tempList
+            : suggestedTournaments += tempList;
         isLoading = false;
         notifyListeners();
         return tempList.length;

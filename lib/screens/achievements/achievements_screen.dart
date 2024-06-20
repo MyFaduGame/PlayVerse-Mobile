@@ -1,6 +1,7 @@
 //Third Party Imports
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 
@@ -119,8 +120,8 @@ class _AchievementsScreenState extends State<AchievementsScreen> {
                                           fit: BoxFit.fill,
                                           height: 100,
                                           // width: 1000,
-                                          placeholder: (context, url) =>
-                                              const CircularProgressIndicator(),
+                                          // placeholder: (context, url) =>
+                                          //     const CircularProgressIndicator(),
                                           errorWidget: (context, url, error) =>
                                               const Icon(Icons.error),
                                         ),
@@ -158,18 +159,19 @@ class _AchievementsScreenState extends State<AchievementsScreen> {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(15),
           ),
-          backgroundColor: Colors.black87,
+          backgroundColor: Colors.blueGrey.shade400,
           child: Padding(
               padding: const EdgeInsets.all(10.0),
               child: SizedBox(
                 height: screenHeight / 2,
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Text(
                       data.achievementsTitle ?? "",
                       style: poppinsFonts.copyWith(
                         fontSize: 24,
-                        color: Colors.blue[200],
+                        color: Colors.white,
                       ),
                     ),
                     SpacingUtils().horizontalSpacing(10),
@@ -178,7 +180,7 @@ class _AchievementsScreenState extends State<AchievementsScreen> {
                         color: Colors.blue[200],
                         borderRadius: BorderRadius.circular(30),
                       ),
-                      width: screenWidth / 2,
+                      // width: screenWidth / 1.,
                       height: 2,
                     ),
                     SpacingUtils().horizontalSpacing(10),
@@ -187,60 +189,63 @@ class _AchievementsScreenState extends State<AchievementsScreen> {
                           ? "https://img.freepik.com/premium-vector/business-people-with-star-logo-template-icon-illustration-brand-identity-isolated-flat-illustration-vector-graphic_7109-1981.jpg"
                           : data.achievementsLogo ?? "",
                       fit: BoxFit.cover,
-                      height: screenHeight / 4,
-                      // width: 1000,
-                      placeholder: (context, url) =>
-                          const CircularProgressIndicator(),
+                      height: screenHeight / 4.5,
                       errorWidget: (context, url, error) =>
                           const Icon(Icons.error),
                     ),
                     SpacingUtils().horizontalSpacing(16),
-                    FittedBox(
-                      child: Text(
-                        "ID: ${data.achievementsId?.split('-').first}",
-                        style: openSansFonts.copyWith(
-                          color: Colors.blue[100],
-                          fontSize: 20,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Text(
+                          "Reward: +${data.xpReward},",
+                          style: openSansFonts.copyWith(
+                            color: Colors.white,
+                            fontSize: 20,
+                          ),
                         ),
-                      ),
-                    ),
-                    FittedBox(
-                      child: Text(
-                        "Type: ${data.achievementsType}",
-                        style: openSansFonts.copyWith(
-                          color: Colors.blue[100],
-                          fontSize: 20,
+                        Text(
+                          "Added: ${data.added}",
+                          style: openSansFonts.copyWith(
+                            color: Colors.white,
+                            fontSize: 20,
+                          ),
                         ),
-                      ),
+                      ],
                     ),
-                    FittedBox(
-                      child: Text(
-                        "Reward: +${data.xpReward}",
-                        style: openSansFonts.copyWith(
-                          color: Colors.blue[100],
-                          fontSize: 20,
-                        ),
-                      ),
-                    ),
-                    FittedBox(
-                      child: Text(
-                        "Added: ${data.added}",
-                        style: openSansFonts.copyWith(
-                          color: Colors.blue[100],
-                          fontSize: 20,
-                        ),
-                      ),
-                    ),
-                    FittedBox(
+                    SizedBox(
+                      width: 200,
                       child: Text(
                         "${data.achievementDescription}",
                         style: openSansFonts.copyWith(
-                          color: Colors.blue[100],
+                          color: Colors.white,
                           fontSize: 20,
                         ),
-                        maxLines: 3,
+                        maxLines: 2,
                       ),
                     ),
+                    GestureDetector(
+                      onTap: () => {Navigator.pop(context)},
+                      child: Container(
+                        alignment: Alignment.center,
+                        height: 50,
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          color: const Color(0xFF0266DB),
+                          borderRadius: BorderRadius.circular(15),
+                        ),
+                        child: Text(
+                          "Okay!",
+                          style: poppinsFonts.copyWith(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          // textAlign: TextAlign.center,
+                          // maxLines: 1,
+                          // overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
+                    )
                   ],
                 ),
               )),

@@ -104,8 +104,8 @@ class TournamentProfileWidgetState extends State<TournamentProfileWidget> {
                                   fit: BoxFit.cover,
                                   height: 100,
                                   width: itemWidth - 20,
-                                  placeholder: (context, url) =>
-                                      const CircularProgressIndicator(),
+                                  // placeholder: (context, url) =>
+                                  //     const CircularProgressIndicator(),
                                   errorWidget: (context, url, error) =>
                                       const Icon(Icons.error),
                                 ),
@@ -154,8 +154,8 @@ class TournamentProfileWidgetState extends State<TournamentProfileWidget> {
                                               fit: BoxFit.cover,
                                               height: 25,
                                               width: 25,
-                                              placeholder: (context, url) =>
-                                                  const CircularProgressIndicator(),
+                                              // placeholder: (context, url) =>
+                                              //     const CircularProgressIndicator(),
                                               errorWidget:
                                                   (context, url, error) =>
                                                       const Icon(Icons.error),

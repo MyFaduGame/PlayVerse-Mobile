@@ -7,12 +7,19 @@ import 'package:playverse/repository/base_repo.dart';
 import 'package:playverse/utils/app_urls.dart';
 
 class TournamentsRepo extends BaseRepository {
-  
   Future getTournamentList(int offset, String type) async {
     final param = "?limit=10&offset=$offset&registration_type=$type";
     final response = await getHttp(
         api: TournamentsUrl.getTournamentsList + param, token: true);
     log(response.body, name: 'response getTournamentList');
+    return json.decode(response.body);
+  }
+
+  Future getSugestedTournaments(int offset) async {
+    final param = "?limit=10&offset=$offset";
+    final response = await getHttp(
+        api: TournamentsUrl.getSuggestedTournaments + param, token: true);
+    log(response.body, name: 'response getSugestedTournaments');
     return json.decode(response.body);
   }
 
@@ -40,7 +47,7 @@ class TournamentsRepo extends BaseRepository {
     return json.decode(response.body);
   }
 
-  Future soloTournamentRegistrtation(String tournamentId,String type) async {
+  Future soloTournamentRegistrtation(String tournamentId, String type) async {
     final params = "?tournament_id=$tournamentId&solo_team=$type";
     final response = await postHttp(
         data: {},
@@ -52,10 +59,9 @@ class TournamentsRepo extends BaseRepository {
 
   Future getUserTournaments(int offset) async {
     final param = "?limit=10&offset=$offset";
-    final response = await getHttp(
-        api: TournamentsUrl.userTournaments + param, token: true);
+    final response =
+        await getHttp(api: TournamentsUrl.userTournaments + param, token: true);
     log(response.body, name: 'response getUserTournaments');
     return json.decode(response.body);
   }
-
 }

@@ -90,8 +90,8 @@ class _StreamsScreenState extends State<StreamsScreen> {
                               fit: BoxFit.fill,
                               height: 200,
                               width: screenWidth - 20,
-                              placeholder: (context, url) =>
-                                  const CircularProgressIndicator(),
+                              // placeholder: (context, url) =>
+                              //     const CircularProgressIndicator(),
                               errorWidget: (context, url, error) =>
                                   const Icon(Icons.error),
                             ),
@@ -116,8 +116,8 @@ class _StreamsScreenState extends State<StreamsScreen> {
                                       fit: BoxFit.cover,
                                       height: 40,
                                       width: 40,
-                                      placeholder: (context, url) =>
-                                          const CircularProgressIndicator(),
+                                      // placeholder: (context, url) =>
+                                      //     const CircularProgressIndicator(),
                                       errorWidget: (context, url, error) =>
                                           const Icon(Icons.error),
                                     ),

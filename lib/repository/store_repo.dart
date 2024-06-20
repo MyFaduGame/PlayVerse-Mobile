@@ -14,6 +14,13 @@ class StoreRepo extends BaseRepository {
     return json.decode(response.body);
   }
 
+  Future getCategoryProduct(int offset,String categoryID) async {
+    final param = "?limit=10&offset=$offset&category_id=$categoryID";
+    final response = await getHttp(api: StoreUrl.getProducts + param);
+    log(response.body, name: 'response getCategoryProduct');
+    return json.decode(response.body);
+  }
+
   Future getCart() async {
     final response = await getHttp(api: StoreUrl.getCart, token: true);
     log(response.body, name: 'response getCart');

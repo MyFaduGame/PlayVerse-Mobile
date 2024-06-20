@@ -120,8 +120,8 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                                         fit: BoxFit.cover,
                                         height: 125,
                                         width: 125,
-                                        placeholder: (context, url) =>
-                                            const CircularProgressIndicator(),
+                                        // placeholder: (context, url) =>
+                                        //     const CircularProgressIndicator(),
                                         errorWidget: (context, url, error) =>
                                             const Icon(Icons.error),
                                       ),

@@ -97,8 +97,8 @@ class _ArticleScreenState extends State<ArticleScreen> {
                                           imageUrl: value?[index].image ?? "",
                                           fit: BoxFit.cover,
                                           // width: 1000,
-                                          placeholder: (context, url) =>
-                                              const CircularProgressIndicator(),
+                                          // placeholder: (context, url) =>
+                                          //     const CircularProgressIndicator(),
                                           errorWidget: (context, url, error) =>
                                               const Icon(Icons.error),
                                         ),

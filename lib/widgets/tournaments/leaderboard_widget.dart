@@ -105,8 +105,8 @@ class _LeaderBoardWidgetState extends State<LeaderBoardWidget> {
                                 fit: BoxFit.cover,
                                 height: 80,
                                 width: double.infinity,
-                                placeholder: (context, url) =>
-                                    const CircularProgressIndicator(),
+                                // placeholder: (context, url) =>
+                                //     const CircularProgressIndicator(),
                                 errorWidget: (context, url, error) =>
                                     const Icon(Icons.error),
                               ),
@@ -140,8 +140,8 @@ class _LeaderBoardWidgetState extends State<LeaderBoardWidget> {
                                               fit: BoxFit.cover,
                                               height: 30,
                                               width: 30,
-                                              placeholder: (context, url) =>
-                                                  const CircularProgressIndicator(),
+                                              // placeholder: (context, url) =>
+                                              //     const CircularProgressIndicator(),
                                               errorWidget:
                                                   (context, url, error) =>
                                                       const Icon(Icons.error),

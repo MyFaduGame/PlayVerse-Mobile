@@ -208,9 +208,9 @@ class _GamesProfileWidgetState extends State<GamesProfileWidget> {
                                                     fit: BoxFit.fill,
                                                     height: 50,
                                                     width: 50,
-                                                    placeholder: (context,
-                                                            url) =>
-                                                        const CircularProgressIndicator(),
+                                                    // placeholder: (context,
+                                                    //         url) =>
+                                                    //     const CircularProgressIndicator(),
                                                     errorWidget: (context, url,
                                                             error) =>
                                                         const Icon(Icons.error),
@@ -350,8 +350,8 @@ class _GamesProfileWidgetState extends State<GamesProfileWidget> {
                                                 fit: BoxFit.cover,
                                                 height: 50,
                                                 width: 50,
-                                                placeholder: (context, url) =>
-                                                    const CircularProgressIndicator(),
+                                                // placeholder: (context, url) =>
+                                                //     const CircularProgressIndicator(),
                                                 errorWidget:
                                                     (context, url, error) =>
                                                         const Icon(Icons.error),
@@ -455,8 +455,8 @@ class _GamesProfileWidgetState extends State<GamesProfileWidget> {
                                                   fit: BoxFit.cover,
                                                   height: 50,
                                                   width: 50,
-                                                  placeholder: (context, url) =>
-                                                      const CircularProgressIndicator(),
+                                                  // placeholder: (context, url) =>
+                                                  //     const CircularProgressIndicator(),
                                                   errorWidget: (context, url,
                                                           error) =>
                                                       const Icon(Icons.error),

@@ -35,7 +35,9 @@ class _NotificationScreenState extends State<NotificationScreen> {
         ),
         actions: [
           IconButton(
-            onPressed: () => {tabManager.onTabChanged(0)},
+            onPressed: () {
+              tabManager.onTabChanged(0);
+            },
             icon: const Icon(
               FontAwesomeIcons.house,
               size: 20,
@@ -43,6 +45,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
           ),
         ],
       ),
+      // body: ,
     );
   }
 }

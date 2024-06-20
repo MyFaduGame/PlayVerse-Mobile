@@ -92,8 +92,8 @@ class _GamesIconWidgetState extends State<GamesIconWidget> {
                                 fit: BoxFit.cover,
                                 height: 70,
                                 width: 70,
-                                placeholder: (context, url) =>
-                                    const CircularProgressIndicator(),
+                                // placeholder: (context, url) =>
+                                //     const CircularProgressIndicator(),
                                 errorWidget: (context, url, error) =>
                                     const Icon(Icons.error),
                               ),

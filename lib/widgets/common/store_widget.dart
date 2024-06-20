@@ -95,7 +95,7 @@ class _StoreWidgetState extends State<StoreWidget> {
                       child: Container(
                         padding: const EdgeInsets.all(5),
                         decoration: BoxDecoration(
-                          color: const Color(0xFFBF99FF),
+                          color: Colors.grey.shade900,
                           borderRadius: BorderRadius.circular(15),
                         ),
                         child: Column(
@@ -117,7 +117,7 @@ class _StoreWidgetState extends State<StoreWidget> {
                             Text(
                               value?[index].name ?? "",
                               style: poppinsFonts.copyWith(
-                                color: Colors.black,
+                                color: Colors.white,
                                 fontSize: 15,
                                 fontWeight: FontWeight.bold,
                               ),

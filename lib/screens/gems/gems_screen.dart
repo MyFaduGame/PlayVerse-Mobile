@@ -1,16 +1,15 @@
 //Third Party Imports
 import 'package:flutter/material.dart';
-import 'package:playverse/screens/gems/gems_buy_screen.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
 //Local Imports
+import 'package:playverse/screens/gems/gems_buy_screen.dart';
 import 'package:playverse/models/gems_model.dart';
 import 'package:playverse/provider/gems_provider.dart';
-import 'package:playverse/themes/app_color_theme.dart';
 import 'package:playverse/themes/app_font.dart';
 import 'package:playverse/themes/app_images.dart';
 import 'package:playverse/utils/helper_utils.dart';
-import 'package:playverse/widgets/common/back_app_bar_widget.dart';
 
 class GemsScreen extends StatefulWidget {
   const GemsScreen({super.key});
@@ -63,16 +62,38 @@ class _GemsScreenState extends State<GemsScreen> {
   @override
   Widget build(BuildContext context) {
     gemsData = context.select((GemsProvider value) => value.userGemsData);
-
-    double screenWidth = MediaQuery.of(context).size.width;
+    // double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
-
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(260),
+      backgroundColor: const Color(0xFF000019),
+      appBar: AppBar(
+        backgroundColor: Colors.grey.shade900,
+        leadingWidth: 60,
+        leading: IconButton(
+          onPressed: () => {Navigator.pop(context)},
+          icon: const Icon(Icons.arrow_back),
+        ),
+        centerTitle: true,
+        title: Text(
+          "Tournaments",
+          style: poppinsFonts.copyWith(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        actions: [
+          IconButton(
+            onPressed: () => {},
+            icon: const Icon(
+              FontAwesomeIcons.bell,
+              size: 20,
+            ),
+          ),
+        ],
+      ),
+      body: SingleChildScrollView(
         child: Column(
           children: [
-            const BackAppBar(),
             Container(
               margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
               height: 150,
@@ -188,124 +209,86 @@ class _GemsScreenState extends State<GemsScreen> {
                 ],
               ),
             ),
-          ],
-        ),
-      ),
-      extendBodyBehindAppBar: true,
-      body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [
-              GeneralColors.gradientBackgrounColor0,
-              GeneralColors.gradientBackgrounColor1
-            ],
-          ),
-        ),
-        child: Stack(
-          children: [
-            Positioned(
-              top: -80,
-              left: -80,
-              child: Container(
-                width: 200,
-                height: 200,
-                decoration: BoxDecoration(
-                  boxShadow: [
-                    BoxShadow(
-                      color: const Color(0xFF7F00FF).withOpacity(0.3),
-                      spreadRadius: screenWidth * 0.40,
-                      blurRadius: screenWidth * 0.300,
-                    ),
-                  ],
-                  borderRadius:
-                      const BorderRadius.all(Radius.elliptical(200, 200)),
-                ),
-              ),
-            ),
-            Positioned(
-              top: screenHeight - 100,
-              left: screenWidth - 100,
-              child: Container(
-                width: 200,
-                height: 200,
-                decoration: BoxDecoration(
-                  boxShadow: [
-                    BoxShadow(
-                      color: const Color(0xFF7F00FF).withOpacity(0.3),
-                      spreadRadius: screenWidth * 0.20,
-                      blurRadius: screenWidth * 0.145,
-                    ),
-                  ],
-                  borderRadius:
-                      const BorderRadius.all(Radius.elliptical(200, 200)),
-                ),
-              ),
-            ),
-            loading
-                ? const Center(
-                    child: CircularProgressIndicator(),
-                  )
-                : Selector<GemsProvider, List<Gems>>(
-                    selector: (p0, p1) => p1.userGems,
-                    builder: (context, value, child) {
-                      return NotificationListener(
-                        onNotification: (notification) =>
-                            Utils.scrollNotifier(notification, pagination),
-                        child: ListView.builder(
-                          itemCount: value.length,
-                          itemBuilder: (context, index) {
-                            return Container(
-                              margin: const EdgeInsets.only(bottom: 20),
-                              padding: const EdgeInsets.all(10),
-                              height: 80,
-                              width: double.infinity,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(15),
-                                color: const Color(0xFF141326),
-                              ),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: <Widget>[
-                                  FittedBox(
-                                    child: Text(
-                                      value[index].title ?? "",
-                                      style: poppinsFonts.copyWith(
-                                        color: Colors.white,
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                  ),
-                                  Row(
-                                    children: <Widget>[
-                                      Image.asset(
-                                        BottomAppBarImages.coinImage,
-                                        height: 30,
-                                        width: 30,
-                                      ),
-                                      Text(
-                                        value[index].gemAmount.toString(),
+            SizedBox(
+              height: screenHeight,
+              child: loading
+                  ? const Center(
+                      child: CircularProgressIndicator(),
+                    )
+                  : Selector<GemsProvider, List<Gems>>(
+                      selector: (p0, p1) => p1.userGems,
+                      builder: (context, value, child) {
+                        return NotificationListener(
+                          onNotification: (notification) =>
+                              Utils.scrollNotifier(notification, pagination),
+                          child: ListView.builder(
+                            itemCount: value.length,
+                            itemBuilder: (context, index) {
+                              return value.isEmpty
+                                  ? Center(
+                                      child: Text(
+                                        'No History',
                                         style: poppinsFonts.copyWith(
-                                          color: value[index].gemAmount! < 0
-                                              ? Colors.red
-                                              : Colors.green,
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.bold,
+                                          color: Colors.white,
+                                          fontSize: 20,
                                         ),
-                                      )
-                                    ],
-                                  )
-                                ],
-                              ),
-                            );
-                          },
-                        ),
-                      );
-                    },
-                  ),
+                                      ),
+                                    )
+                                  : Container(
+                                      margin: const EdgeInsets.only(bottom: 20),
+                                      padding: const EdgeInsets.all(10),
+                                      height: 80,
+                                      width: double.infinity,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(15),
+                                        color: const Color(0xFF141326),
+                                      ),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: <Widget>[
+                                          FittedBox(
+                                            child: Text(
+                                              value[index].title ?? "",
+                                              style: poppinsFonts.copyWith(
+                                                color: Colors.white,
+                                                fontSize: 20,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                          ),
+                                          Row(
+                                            children: <Widget>[
+                                              Image.asset(
+                                                BottomAppBarImages.coinImage,
+                                                height: 30,
+                                                width: 30,
+                                              ),
+                                              Text(
+                                                value[index]
+                                                    .gemAmount
+                                                    .toString(),
+                                                style: poppinsFonts.copyWith(
+                                                  color:
+                                                      value[index].gemAmount! <
+                                                              0
+                                                          ? Colors.red
+                                                          : Colors.green,
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              )
+                                            ],
+                                          )
+                                        ],
+                                      ),
+                                    );
+                            },
+                          ),
+                        );
+                      },
+                    ),
+            ),
           ],
         ),
       ),

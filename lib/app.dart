@@ -25,7 +25,6 @@ import 'package:playverse/screens/articles/articles_screen.dart';
 import 'package:playverse/screens/home/home_screen.dart';
 import 'package:playverse/screens/tournaments/tournament_screen.dart';
 import 'package:playverse/screens/streams/streams_screen.dart';
-import 'package:playverse/themes/app_color_theme.dart';
 import 'package:playverse/models/user_profile_model.dart';
 import 'package:playverse/provider/user_profile_provider.dart';
 import 'package:playverse/models/user_status_model.dart';
@@ -130,8 +129,6 @@ class _AppState extends State<App>
     });
     userModel = context.select((UserProfileProvider value) => value.userModel);
     double screenWidth = MediaQuery.of(context).size.width;
-    double screenHeight = MediaQuery.of(context).size.height;
-    // TextEditingController serachText = TextEditingController();
     return WillPopScope(
       onWillPop: () async {
         if (index != 0) {
@@ -145,8 +142,9 @@ class _AppState extends State<App>
         index: index,
         controller: controller,
         childBody: Scaffold(
+          backgroundColor: const Color(0xFF000019),
           appBar: AppBar(
-            backgroundColor: Colors.black.withOpacity(0.5),
+            backgroundColor: Colors.grey.shade900,
             leadingWidth: 60,
             leading: Padding(
               padding: const EdgeInsets.all(8.0),
@@ -180,8 +178,8 @@ class _AppState extends State<App>
                           fit: BoxFit.cover,
                           height: 30,
                           width: 30,
-                          placeholder: (context, url) =>
-                              const CircularProgressIndicator(),
+                          // placeholder: (context, url) =>
+                          //     const CircularProgressIndicator(),
                           errorWidget: (context, url, error) =>
                               const Icon(Icons.error),
                         ),
@@ -224,65 +222,9 @@ class _AppState extends State<App>
               )
             ],
           ),
-          body: Container(
-            height: screenHeight,
-            width: screenWidth,
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [
-                  GeneralColors.gradientBackgrounColor0,
-                  GeneralColors.gradientBackgrounColor1
-                ],
-              ),
-            ),
-            child: Stack(
-              children: [
-                Positioned(
-                  top: -80,
-                  left: -80,
-                  child: Container(
-                    width: 200,
-                    height: 200,
-                    decoration: BoxDecoration(
-                      boxShadow: [
-                        BoxShadow(
-                          color: const Color(0xFF7F00FF).withOpacity(0.3),
-                          spreadRadius: screenWidth * 0.40,
-                          blurRadius: screenWidth * 0.300,
-                        ),
-                      ],
-                      borderRadius:
-                          const BorderRadius.all(Radius.elliptical(200, 200)),
-                    ),
-                  ),
-                ),
-                Positioned(
-                  top: screenHeight - 100,
-                  left: screenWidth - 100,
-                  child: Container(
-                    width: 200,
-                    height: 200,
-                    decoration: BoxDecoration(
-                      boxShadow: [
-                        BoxShadow(
-                          color: const Color(0xFF7F00FF).withOpacity(0.3),
-                          spreadRadius: screenWidth * 0.20,
-                          blurRadius: screenWidth * 0.145,
-                        ),
-                      ],
-                      borderRadius:
-                          const BorderRadius.all(Radius.elliptical(200, 200)),
-                    ),
-                  ),
-                ),
-                screensList[index]
-              ],
-            ),
-          ),
-          // extendBody: true,
+          body: screensList[index],
           bottomNavigationBar: BottomNavigationBar(
+            backgroundColor: Colors.grey.shade900,
             showSelectedLabels: false,
             showUnselectedLabels: false,
             iconSize: 25,
@@ -394,6 +336,26 @@ class _AppState extends State<App>
     if (mounted) {
       setState(() {
         index = tabIndex;
+        if (index == 0) {
+          // onTabChanged(0);
+          bottomIndex = index;
+        } // Home Page
+        if (index == 1) {
+          // onTabChanged(1);
+          bottomIndex = index;
+        } // Tournaments Page
+        if (index == 2) {
+          // onTabChanged(2);
+          bottomIndex = index;
+        } // Streams Page
+        if (index == 3) {
+          // onTabChanged(9);
+          bottomIndex = index;
+        } // Friends Page
+        if (index == 4) {
+          // onTabChanged(10);
+          bottomIndex = index;
+        } // Store Page
         if (tabIndex >= 0 && tabIndex <= 3) {
           barIndex = tabIndex;
         } else {

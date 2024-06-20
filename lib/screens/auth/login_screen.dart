@@ -46,246 +46,191 @@ class LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    double screenWidth = MediaQuery.of(context).size.width;
+    // double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       extendBodyBehindAppBar: true,
-      body: Container(
-        width: double.infinity,
-        height: double.infinity,
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [
-              GeneralColors.gradientBackgrounColor0,
-              GeneralColors.gradientBackgrounColor1
-            ],
-          ),
-        ),
-        child: Stack(
-          children: [
-            Positioned(
-              top: -80,
-              left: -80,
-              child: Container(
-                width: 200,
+      backgroundColor: const Color(0xFF000019),
+      body: Center(
+        child: SingleChildScrollView(
+          child: Column(
+            children: <Widget>[
+              Image.asset(
+                AuthScreenImages.logoImage,
                 height: 200,
-                decoration: BoxDecoration(
-                  boxShadow: [
-                    BoxShadow(
-                      color: const Color(0xFF7F00FF).withOpacity(0.3),
-                      spreadRadius: screenWidth * 0.20,
-                      blurRadius: screenWidth * 0.145,
-                    ),
-                  ],
-                  borderRadius:
-                      const BorderRadius.all(Radius.elliptical(200, 200)),
-                ),
-              ),
-            ),
-            Positioned(
-              top: screenHeight - 100,
-              left: screenWidth - 100,
-              child: Container(
                 width: 200,
-                height: 200,
-                decoration: BoxDecoration(
-                  boxShadow: [
-                    BoxShadow(
-                      color: const Color(0xFF7F00FF).withOpacity(0.3),
-                      spreadRadius: screenWidth * 0.20,
-                      blurRadius: screenWidth * 0.145,
-                    ),
-                  ],
-                  borderRadius:
-                      const BorderRadius.all(Radius.elliptical(200, 200)),
-                ),
               ),
-            ),
-            Center(
-              child: SingleChildScrollView(
-                child: Column(
-                  children: <Widget>[
-                    Image.asset(
-                      AuthScreenImages.logoImage,
-                      height: 200,
-                      width: 200,
-                    ),
-                    SizedBox(
-                      height: screenHeight / 5,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(25, 0, 25, 0),
-                      child: Form(
-                        key: _formKey,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Text(
-                              'Email',
-                              style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white),
-                            ),
-                            const SizedBox(height: 8),
-                            TextFormField(
-                              style: const TextStyle(color: Colors.white),
-                              onChanged: (value) {
-                                if (emailError != null) {
-                                  setState(() => emailError = null);
-                                }
-                              },
-                              controller: emailController,
-                              keyboardType: TextInputType.emailAddress,
-                              validator: (value) {
-                                if (value!.isEmpty) {
-                                  return "Please Enter Your Email";
-                                }
-                                return emailError;
-                              },
-                              decoration: const InputDecoration(
-                                  border: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                  hintText: 'Enter your Email',
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                  hintStyle: TextStyle(
-                                    color: Colors.white,
-                                  )),
-                            ),
-                            const SizedBox(height: 20),
-                            const Text(
-                              'Password',
-                              style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white),
-                            ),
-                            const SizedBox(height: 8),
-                            TextFormField(
-                              obscureText: showPassword,
-                              style: const TextStyle(color: Colors.white),
-                              onChanged: (value) {
-                                if (passwordError != null) {
-                                  setState(() => passwordError = null);
-                                }
-                              },
-                              controller: passwordController,
-                              validator: (value) {
-                                if (value!.isEmpty) {
-                                  return "Enter your PassKey";
-                                }
-                                return passwordError;
-                              },
-                              keyboardType: TextInputType.visiblePassword,
-                              decoration: InputDecoration(
-                                suffixIcon: IconButton(
-                                  icon: Icon(
-                                    showPassword
-                                        ? Icons.visibility
-                                        : Icons.visibility_off,
-                                    color: Colors.white,
-                                  ),
-                                  onPressed: () {
-                                    setState(() {
-                                      showPassword = !showPassword;
-                                    });
-                                  },
-                                ),
-                                border: const OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Colors.white,
-                                  ),
-                                ),
-                                hintText: 'Enter your Passkey',
-                                enabledBorder: const OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Colors.white,
-                                  ),
-                                ),
-                                hintStyle: const TextStyle(
-                                  color: Colors.white,
-                                ),
+              SizedBox(
+                height: screenHeight / 5,
+              ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(25, 0, 25, 0),
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        'Email',
+                        style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white),
+                      ),
+                      const SizedBox(height: 8),
+                      TextFormField(
+                        style: const TextStyle(color: Colors.white),
+                        onChanged: (value) {
+                          if (emailError != null) {
+                            setState(() => emailError = null);
+                          }
+                        },
+                        controller: emailController,
+                        keyboardType: TextInputType.emailAddress,
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return "Please Enter Your Email";
+                          }
+                          return emailError;
+                        },
+                        decoration: const InputDecoration(
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Colors.white,
                               ),
                             ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                TextButton(
-                                  onPressed: () => {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) =>
-                                            const ForgetPasswordScreen(),
-                                      ),
-                                    )
-                                  },
-                                  child: Text(
-                                    'Forget Password?',
-                                    style: poppinsFonts.copyWith(
-                                      color: GeneralColors.colorStyle0,
-                                      decoration: TextDecoration.underline,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            )
-                          ],
+                            hintText: 'Enter your Email',
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Colors.white,
+                              ),
+                            ),
+                            hintStyle: TextStyle(
+                              color: Colors.white,
+                            )),
+                      ),
+                      const SizedBox(height: 20),
+                      const Text(
+                        'Password',
+                        style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white),
+                      ),
+                      const SizedBox(height: 8),
+                      TextFormField(
+                        obscureText: showPassword,
+                        style: const TextStyle(color: Colors.white),
+                        onChanged: (value) {
+                          if (passwordError != null) {
+                            setState(() => passwordError = null);
+                          }
+                        },
+                        controller: passwordController,
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return "Enter your PassKey";
+                          }
+                          return passwordError;
+                        },
+                        keyboardType: TextInputType.visiblePassword,
+                        decoration: InputDecoration(
+                          suffixIcon: IconButton(
+                            icon: Icon(
+                              showPassword
+                                  ? Icons.visibility
+                                  : Icons.visibility_off,
+                              color: Colors.white,
+                            ),
+                            onPressed: () {
+                              setState(() {
+                                showPassword = !showPassword;
+                              });
+                            },
+                          ),
+                          border: const OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Colors.white,
+                            ),
+                          ),
+                          hintText: 'Enter your Passkey',
+                          enabledBorder: const OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Colors.white,
+                            ),
+                          ),
+                          hintStyle: const TextStyle(
+                            color: Colors.white,
+                          ),
                         ),
                       ),
-                    ),
-                    const SizedBox(
-                      height: 32,
-                    ),
-                    NeoPopButtonWidget(
-                      text: "Login to PlayVerse",
-                      navigation: () => {
-                        if (_formKey.currentState!.validate()) {login()}
-                      },
-                      textImage: AuthScreenImages.loginIcon,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Text(
-                          "New to PlayVerse?",
-                          style: poppinsFonts.copyWith(
-                            color: GeneralColors.colorStyle0,
-                          ),
-                        ),
-                        TextButton(
-                          onPressed: () => {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const SignUpScreen(),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          TextButton(
+                            onPressed: () => {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      const ForgetPasswordScreen(),
+                                ),
+                              )
+                            },
+                            child: Text(
+                              'Forget Password?',
+                              style: poppinsFonts.copyWith(
+                                color: GeneralColors.colorStyle0,
+                                decoration: TextDecoration.underline,
                               ),
-                            )
-                          },
-                          child: Text(
-                            'Register',
-                            style: poppinsFonts.copyWith(
-                              color: Colors.white,
-                              decoration: TextDecoration.underline,
                             ),
                           ),
-                        )
-                      ],
-                    )
-                  ],
+                        ],
+                      )
+                    ],
+                  ),
                 ),
               ),
-            ),
-          ],
+              const SizedBox(
+                height: 32,
+              ),
+              NeoPopButtonWidget(
+                text: "Login to PlayVerse",
+                navigation: () => {
+                  if (_formKey.currentState!.validate()) {login()}
+                },
+                textImage: AuthScreenImages.loginIcon,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Text(
+                    "New to PlayVerse?",
+                    style: poppinsFonts.copyWith(
+                      color: GeneralColors.colorStyle0,
+                    ),
+                  ),
+                  TextButton(
+                    onPressed: () => {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const SignUpScreen(),
+                        ),
+                      )
+                    },
+                    child: Text(
+                      'Register',
+                      style: poppinsFonts.copyWith(
+                        color: Colors.white,
+                        decoration: TextDecoration.underline,
+                      ),
+                    ),
+                  )
+                ],
+              )
+            ],
+          ),
         ),
       ),
     );

@@ -7,6 +7,7 @@ import 'package:neopop/widgets/shimmer/neopop_shimmer.dart';
 import 'package:provider/provider.dart';
 
 //Local Imports
+import 'package:playverse/screens/tournaments/game_tournament_screen.dart';
 import 'package:playverse/themes/app_color_theme.dart';
 import 'package:playverse/utils/loader_dialouge.dart';
 import 'package:playverse/themes/app_font.dart';
@@ -59,7 +60,6 @@ class _GamesScreenState extends State<GamesScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // double screenWidth = MediaQuery.of(context).size.width;
     var size = MediaQuery.of(context).size;
     final double itemHeight = (size.height - kToolbarHeight - 24) / 2.5;
     final double itemWidth = size.width / 2;
@@ -83,13 +83,15 @@ class _GamesScreenState extends State<GamesScreen> {
                   itemBuilder: (context, index) {
                     return GestureDetector(
                       onTap: () => {
-                        // value?[index].added == true
-                        //     ? deleteGames(
-                        //         context,
-                        //         value?[index].gameId ?? "Game Id",
-                        //       )
-                        //     : addGame(
-                        //         context, value?[index].gameId ?? "GameId"),
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: ((context) => GamesTournamentScreen(
+                                  gameData: value?[index] ?? Games(),
+                                  gameUUID: value?[index].gameId ?? "GameId",
+                                )),
+                          ),
+                        ),
                       },
                       child: SizedBox(
                         child: Padding(
@@ -144,10 +146,12 @@ class _GamesScreenState extends State<GamesScreen> {
                                   Positioned(
                                     right: 1,
                                     child: Icon(
-                                      FontAwesomeIcons.solidHeart,
+                                      value?[index].added ?? false
+                                          ? FontAwesomeIcons.solidHeart
+                                          : FontAwesomeIcons.heart,
                                       color: value?[index].added ?? false
                                           ? Colors.red
-                                          : Colors.blue,
+                                          : Colors.blue.shade600,
                                     ),
                                   )
                                 ],

@@ -57,10 +57,7 @@ class _TournamentListWidgetState extends State<TournamentListWidget> {
 
   @override
   Widget build(BuildContext context) {
-    // double screenWidth = MediaQuery.of(context).size.width;
-    // double screenHeight = MediaQuery.of(context).size.height;
     var size = MediaQuery.of(context).size;
-    final double itemHeight = (size.height - kToolbarHeight - 24) / 2.2;
     final double itemWidth = size.width;
     return isLoading
         ? const Center(
@@ -72,242 +69,129 @@ class _TournamentListWidgetState extends State<TournamentListWidget> {
               return NotificationListener(
                 onNotification: (notification) =>
                     Utils.scrollNotifier(notification, paginationTournaments),
-                child: GridView.builder(
+                child: ListView.builder(
                   scrollDirection: Axis.horizontal,
                   clipBehavior: Clip.none,
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 1,
-                    childAspectRatio: itemWidth / itemHeight,
-                    crossAxisSpacing: 15.0,
-                    mainAxisSpacing: 15.0,
-                  ),
                   itemCount: value?.length ?? 0,
                   itemBuilder: (context, index) {
-                    return GestureDetector(
-                      onTap: () => Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: ((context) => TournamentDetailScreen(
-                                tournamentID: value?[index].tournamentId ?? "",
-                              )),
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      child: GestureDetector(
+                        onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: ((context) => TournamentDetailScreen(
+                                  tournamentID:
+                                      value?[index].tournamentId ?? "",
+                                )),
+                          ),
                         ),
-                      ),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                        child: Column(
-                          children: <Widget>[
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(15),
-                              child: CachedNetworkImage(
-                                imageUrl: value?[index].thumbnail ?? "",
-                                fit: BoxFit.cover,
-                                height: 200,
-                                width: double.infinity,
-                                placeholder: (context, url) =>
-                                    const CircularProgressIndicator(),
-                                errorWidget: (context, url, error) =>
-                                    const Icon(Icons.error),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                          child: Column(
+                            children: <Widget>[
+                              ClipRRect(
+                                borderRadius: BorderRadius.circular(15),
+                                child: CachedNetworkImage(
+                                  imageUrl: value?[index].thumbnail ?? "",
+                                  fit: BoxFit.cover,
+                                  height: 200,
+                                  width: itemWidth - 100,
+                                  errorWidget: (context, url, error) =>
+                                      const Icon(Icons.error),
+                                ),
                               ),
-                            ),
-                            const SizedBox(height: 16),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: <Widget>[
-                                Container(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(55),
-                                    border: Border.all(
-                                        color: Colors.white, width: 2),
-                                  ),
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(55),
-                                    child: CachedNetworkImage(
-                                      imageUrl: value?[index].logo ?? "",
-                                      fit: BoxFit.cover,
-                                      height: 40,
-                                      width: 40,
-                                      placeholder: (context, url) =>
-                                          const CircularProgressIndicator(),
-                                      errorWidget: (context, url, error) =>
-                                          const Icon(Icons.error),
-                                    ),
-                                  ),
-                                ),
-                                Column(
+                              const SizedBox(height: 16),
+                              SizedBox(
+                                width: itemWidth - 100,
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
                                   children: <Widget>[
-                                    Text(
-                                        "${(value?[index].tournamentDate ?? DateTime.now()).difference(DateTime.now()).inDays.toString()} Days Remaning"),
-                                    Text(
-                                      value?[index].title ?? "Tournament",
-                                      style: poppinsFonts.copyWith(
-                                        color: Colors.white,
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold,
+                                    Container(
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(55),
+                                        border: Border.all(
+                                            color: Colors.white, width: 2),
                                       ),
-                                    ),
-                                  ],
-                                ),
-                                Column(
-                                  children: <Widget>[
-                                    Text(
-                                      "Win Prize",
-                                      style: poppinsFonts.copyWith(
-                                        color: Colors.grey.shade100,
-                                        fontSize: 10,
-                                      ),
-                                    ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: <Widget>[
-                                        Image.asset(
-                                          TournamentWidgetImages.winTrophyImage,
-                                          height: 15,
-                                          width: 15,
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(55),
+                                        child: CachedNetworkImage(
+                                          imageUrl: value?[index].logo ?? "",
+                                          fit: BoxFit.cover,
+                                          height: 40,
+                                          width: 40,
+                                          placeholder: (context, url) =>
+                                              const CircularProgressIndicator(),
+                                          errorWidget: (context, url, error) =>
+                                              const Icon(Icons.error),
                                         ),
+                                      ),
+                                    ),
+                                    Column(
+                                      children: <Widget>[
                                         Text(
-                                          value?[index]
-                                                  .prizePool
-                                                  ?.the1St
-                                                  .toString() ??
-                                              "",
+                                            "${(value?[index].tournamentDate ?? DateTime.now()).difference(DateTime.now()).inDays.toString()} Days Remaning"),
+                                        SizedBox(
+                                          width: itemWidth - 250,
+                                          child: Text(
+                                            value?[index].title ?? "Tournament",
+                                            style: poppinsFonts.copyWith(
+                                              color: Colors.white,
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                            maxLines: 1,
+                                            overflow: TextOverflow.ellipsis,
+                                            textAlign: TextAlign.center,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    Column(
+                                      children: <Widget>[
+                                        Text(
+                                          "Win Prize",
                                           style: poppinsFonts.copyWith(
-                                            color: Colors.white38,
+                                            color: Colors.grey.shade100,
                                             fontSize: 10,
                                           ),
+                                        ),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: <Widget>[
+                                            Image.asset(
+                                              TournamentWidgetImages
+                                                  .winTrophyImage,
+                                              height: 15,
+                                              width: 15,
+                                            ),
+                                            Text(
+                                              value?[index]
+                                                      .prizePool
+                                                      ?.the1St
+                                                      .toString() ??
+                                                  "",
+                                              style: poppinsFonts.copyWith(
+                                                color: Colors.white38,
+                                                fontSize: 10,
+                                              ),
+                                            ),
+                                          ],
                                         ),
                                       ],
                                     ),
                                   ],
                                 ),
-                              ],
-                            )
-                          ],
+                              )
+                            ],
+                          ),
                         ),
                       ),
                     );
-                    // return GestureDetector(
-                    //
-                    //   child: Container(
-                    //     decoration: BoxDecoration(
-                    //       borderRadius: BorderRadius.circular(15),
-                    //       border: Border.all(
-                    //         color: Colors.grey.shade500,
-                    //       ),
-                    //     ),
-                    //     child: Padding(
-                    //       padding: const EdgeInsets.all(8.0),
-                    //       child: Stack(
-                    //         children: [
-                    //           Column(
-                    //             mainAxisAlignment:
-                    //                 MainAxisAlignment.spaceEvenly,
-                    //             crossAxisAlignment: CrossAxisAlignment.start,
-                    //             children: <Widget>[
-                    //               Column(
-                    //                 crossAxisAlignment:
-                    //                     CrossAxisAlignment.start,
-                    //                 children: [
-                    //                   Text(
-                    //                     DateFormat('dd-MMMM-yyyy').format(
-                    //                         value?[index].tournamentDate ??
-                    //                             DateTime.now()),
-                    //                     style: poppinsFonts.copyWith(
-                    //                       color: Colors.white,
-                    //                     ),
-                    //                   ),
-                    //                   Text(
-                    //                     value?[index].title ?? "",
-                    //                     style: poppinsFonts.copyWith(
-                    //                       color: Colors.white,
-                    //                       fontWeight: FontWeight.bold,
-                    //                       fontSize: 20,
-                    //                     ),
-                    //                   ),
-                    //                   Text(
-                    //                     getRandomDescriptionForTournament(),
-                    //                     maxLines: 2,
-                    //                     overflow: TextOverflow.ellipsis,
-                    //                     style: poppinsFonts.copyWith(
-                    //                       color: Colors.white,
-                    //                       fontSize: 15,
-                    //                     ),
-                    //                   ),
-                    //                 ],
-                    //               ),
-                    //               const Divider(
-                    //                 color: Colors.white70,
-                    //                 height: 2,
-                    //               ),
-                    //               Row(
-                    //                 mainAxisAlignment:
-                    //                     MainAxisAlignment.spaceEvenly,
-                    //                 children: <Widget>[
-                    //                   Container(
-                    //                     width: 40,
-                    //                     height: 40,
-                    //                     decoration: BoxDecoration(
-                    //                       borderRadius:
-                    //                           BorderRadius.circular(50),
-                    //                       color: TournamentWidgetColors
-                    //                           .tournamentDetailCircleColor,
-                    //                     ),
-                    //                     child: const Icon(
-                    //                       FontAwesomeIcons.arrowRight,
-                    //                       color: Colors.white,
-                    //                     ),
-                    //                   ),
-                    //                 ],
-                    //               )
-                    //             ],
-                    //           ),
-                    //           Positioned(
-                    //             top: 70,
-                    //             left: 10,
-                    //             child: Container(
-                    //               width: 100,
-                    //               decoration: BoxDecoration(
-                    //                 color: Colors.black,
-                    //                 borderRadius: BorderRadius.circular(15),
-                    //                 border: Border.all(
-                    //                   color: Colors.grey.shade500,
-                    //                 ),
-                    //               ),
-                    //               child: Row(
-                    //                 mainAxisAlignment:
-                    //                     MainAxisAlignment.spaceEvenly,
-                    //                 children: <Widget>[
-                    //                   ClipRRect(
-                    //                     borderRadius: BorderRadius.circular(15),
-                    //                     child: CachedNetworkImage(
-                    //                       imageUrl: value?[index].logo ?? "",
-                    //                       fit: BoxFit.cover,
-                    //                       height: 30,
-                    //                       width: 30,
-                    //                       placeholder: (context, url) =>
-                    //                           const CircularProgressIndicator(),
-                    //                       errorWidget: (context, url, error) =>
-                    //                           const Icon(Icons.error),
-                    //                     ),
-                    //                   ),
-                    //                   Text(
-                    //                     value?[index].gameName ?? "",
-                    //                     style: poppinsFonts.copyWith(
-                    //                       color: Colors.white,
-                    //                       fontSize: 10,
-                    //                     ),
-                    //                   )
-                    //                 ],
-                    //               ),
-                    //             ),
-                    //           ),
-                    //         ],
-                    //       ),
-                    //     ),
-                    //   ),
-                    // );
                   },
                 ),
               );

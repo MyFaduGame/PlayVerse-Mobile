@@ -8,20 +8,17 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:neopop/widgets/buttons/neopop_button/neopop_button.dart';
-import 'package:neopop/widgets/shimmer/neopop_shimmer.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
 //Local Imports
 import 'package:playverse/models/location_model.dart';
 import 'package:playverse/provider/location_provider.dart';
 import 'package:playverse/utils/loader_dialouge.dart';
-import 'package:playverse/widgets/common/back_app_bar_widget.dart';
 import 'package:playverse/utils/toast_bar.dart';
 import 'package:playverse/themes/app_images.dart';
 import 'package:playverse/models/user_profile_model.dart';
 import 'package:playverse/provider/user_profile_provider.dart';
-import 'package:playverse/themes/app_color_theme.dart';
 import 'package:playverse/themes/app_font.dart';
 
 class EditProfileScreen extends StatefulWidget {
@@ -43,13 +40,13 @@ class EditProfileScreenState extends State<EditProfileScreen> {
   bool isLoading = true;
 
   String? countryID;
-  // TextEditingController countryName = TextEditingController();
   String? countryName;
+  String? typeCountryName;
   String? stateID;
-  // TextEditingController stateName = TextEditingController();
+  String? typeStateName;
   String? stateName;
   String? cityID;
-  // TextEditingController cityName = TextEditingController();
+  String? typeCityName;
   String? cityName;
 
   TextEditingController firstNameController = TextEditingController();
@@ -68,6 +65,7 @@ class EditProfileScreenState extends State<EditProfileScreen> {
   bool hasFb = false;
   bool hasYoutube = false;
   String selectedGender = '';
+  String typeSelectedGender = '';
 
   Map<String, dynamic> data = {};
 
@@ -100,787 +98,847 @@ class EditProfileScreenState extends State<EditProfileScreen> {
         isLoading = false;
       });
     });
-    // countryName.text = userProfile?.country ?? "";
-    // cityName.text = userProfile?.city ?? "";
-    // stateName.text = userProfile?.state ?? "";
   }
 
   @override
   Widget build(BuildContext context) {
     userProfile =
         context.select((UserProfileProvider value) => value.userModel);
-    // selectedGender = userProfile?.gender ?? 'Male';
-    // countryName = userProfile?.country ?? "";
-    // cityName = userProfile?.city ?? "";
-    // stateName = userProfile?.state ?? "";
+    typeCountryName = userProfile?.country ?? "";
+    typeCityName = userProfile?.city ?? "";
+    typeStateName = userProfile?.state ?? "";
+    typeSelectedGender = userProfile?.gender ?? "";
     country = context.select((LocationProvider value) => value.countryData);
     state = context.select((LocationProvider value) => value.stateData);
     city = context.select((LocationProvider value) => value.cityData);
     double screenWidth = MediaQuery.of(context).size.width;
-    double screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
-      extendBodyBehindAppBar: true,
-      appBar: const PreferredSize(
-        preferredSize: Size.fromHeight(120),
-        child: BackAppBar(),
-      ),
-      body: Container(
-        height: screenHeight,
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [
-              GeneralColors.gradientBackgrounColor0,
-              GeneralColors.gradientBackgrounColor1
-            ],
+      backgroundColor: const Color(0xFF000019),
+      appBar: AppBar(
+        backgroundColor: Colors.grey.shade900,
+        leadingWidth: 60,
+        leading: IconButton(
+          onPressed: () => {Navigator.pop(context)},
+          icon: const Icon(Icons.arrow_back),
+        ),
+        centerTitle: true,
+        title: Text(
+          "Edit Profile",
+          style: poppinsFonts.copyWith(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
           ),
         ),
-        child: Stack(
-          children: [
-            Positioned(
-              top: -80,
-              left: -80,
-              child: Container(
-                width: 200,
-                height: 200,
-                decoration: BoxDecoration(
-                  boxShadow: [
-                    BoxShadow(
-                      color: const Color(0xFF7F00FF).withOpacity(0.3),
-                      spreadRadius: screenWidth * 0.40,
-                      blurRadius: screenWidth * 0.300,
-                    ),
-                  ],
-                  borderRadius:
-                      const BorderRadius.all(Radius.elliptical(200, 200)),
-                ),
-              ),
+        actions: [
+          IconButton(
+            onPressed: () => {},
+            icon: const Icon(
+              FontAwesomeIcons.bell,
+              size: 20,
             ),
-            Positioned(
-              top: screenHeight - 100,
-              left: screenWidth - 100,
+          ),
+        ],
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: <Widget>[
+            const SizedBox(height: 16),
+            GestureDetector(
+              onTap: () => pickFileAndSendBase64(),
               child: Container(
-                width: 200,
-                height: 200,
                 decoration: BoxDecoration(
-                  boxShadow: [
-                    BoxShadow(
-                      color: const Color(0xFF7F00FF).withOpacity(0.3),
-                      spreadRadius: screenWidth * 0.20,
-                      blurRadius: screenWidth * 0.145,
-                    ),
-                  ],
-                  borderRadius:
-                      const BorderRadius.all(Radius.elliptical(200, 200)),
-                ),
-              ),
-            ),
-            SingleChildScrollView(
-              child: Column(
-                children: <Widget>[
-                  const SizedBox(height: 100),
-                  GestureDetector(
-                    onTap: () => pickFileAndSendBase64(),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: Colors.white,
-                          width: 5,
-                        ),
-                        borderRadius: BorderRadius.circular(
-                          75,
-                        ),
-                      ),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(75),
-                        child: userProfile?.profileImage == null ||
-                                userProfile?.profileImage == ""
-                            ? userProfile?.gender == 'Male'
-                                ? SvgPicture.asset(
-                                    ProfileImages.boyProfile,
-                                    width: 125,
-                                    height: 125,
-                                    fit: BoxFit.cover,
-                                  )
-                                : SvgPicture.asset(
-                                    ProfileImages.girlProfile,
-                                    width: 125,
-                                    height: 125,
-                                    fit: BoxFit.cover,
-                                  )
-                            : CachedNetworkImage(
-                                imageUrl: userProfile?.profileImage == "" ||
-                                        userProfile?.profileImage == null
-                                    ? "https://img.freepik.com/premium-vector/business-people-with-star-logo-template-icon-illustration-brand-identity-isolated-flat-illustration-vector-graphic_7109-1981.jpg"
-                                    : userProfile?.profileImage ?? "",
-                                fit: BoxFit.cover,
-                                height: 150,
-                                width: 150,
-                                placeholder: (context, url) =>
-                                    const CircularProgressIndicator(),
-                                errorWidget: (context, url, error) =>
-                                    const Icon(Icons.error),
-                              ),
-                      ),
-                    ),
+                  border: Border.all(
+                    color: Colors.white,
+                    width: 5,
                   ),
-                  const SizedBox(height: 16),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                    child: Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  borderRadius: BorderRadius.circular(
+                    75,
+                  ),
+                ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(75),
+                  child: userProfile?.profileImage == null ||
+                          userProfile?.profileImage == ""
+                      ? userProfile?.gender == 'Male'
+                          ? SvgPicture.asset(
+                              ProfileImages.boyProfile,
+                              width: 125,
+                              height: 125,
+                              fit: BoxFit.cover,
+                            )
+                          : SvgPicture.asset(
+                              ProfileImages.girlProfile,
+                              width: 125,
+                              height: 125,
+                              fit: BoxFit.cover,
+                            )
+                      : CachedNetworkImage(
+                          imageUrl: userProfile?.profileImage == "" ||
+                                  userProfile?.profileImage == null
+                              ? "https://img.freepik.com/premium-vector/business-people-with-star-logo-template-icon-illustration-brand-identity-isolated-flat-illustration-vector-graphic_7109-1981.jpg"
+                              : userProfile?.profileImage ?? "",
+                          fit: BoxFit.cover,
+                          height: 150,
+                          width: 150,
+                          // placeholder: (context, url) =>
+                          //     const CircularProgressIndicator(),
+                          errorWidget: (context, url, error) =>
+                              const Icon(Icons.error),
+                        ),
+                ),
+              ),
+            ),
+            const SizedBox(height: 16),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              child: Column(
+                children: [
+                  Row(
+                    children: <Widget>[
+                      Text(
+                        'Personal Information',
+                        style: poppinsFonts.copyWith(
+                          color: Colors.grey,
+                          fontSize: 15,
+                        ),
+                      ),
+                      const SizedBox(width: 8),
+                      Expanded(
+                        child: Container(
+                          height: 1,
+                          color: Colors.grey,
+                        ),
+                      )
+                    ],
+                  ),
+                  const SizedBox(height: 8),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      SizedBox(
+                        width: screenWidth / 2.5,
+                        child: Column(
                           children: [
-                            SizedBox(
-                              width: screenWidth / 2.5,
-                              child: Column(
-                                children: [
-                                  Text(
-                                    "First Name",
-                                    style: poppinsFonts.copyWith(
-                                      color: Colors.white,
-                                      fontSize: 15,
-                                    ),
-                                  ),
-                                  const SizedBox(height: 8),
-                                  TextField(
-                                    style: poppinsFonts.copyWith(
-                                      color: Colors.white,
-                                    ),
-                                    controller: firstNameController,
-                                    decoration: InputDecoration(
-                                      enabledBorder: OutlineInputBorder(
-                                          borderSide: const BorderSide(
-                                              color: Colors.white, width: 1.0),
-                                          borderRadius:
-                                              BorderRadius.circular(15)),
-                                      focusedBorder: OutlineInputBorder(
-                                        borderSide: const BorderSide(
-                                            color: Colors.blue, width: 1.0),
-                                        borderRadius: BorderRadius.circular(15),
-                                      ),
-                                      hintText: userProfile?.firstName ?? "",
-                                      hintStyle: poppinsFonts.copyWith(
-                                        color: Colors.white,
-                                        fontSize: 20,
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            SizedBox(
-                              width: screenWidth / 2.5,
-                              child: Column(
-                                children: [
-                                  Text(
-                                    "Last Name",
-                                    style: poppinsFonts.copyWith(
-                                      color: Colors.white,
-                                      fontSize: 15,
-                                    ),
-                                  ),
-                                  const SizedBox(height: 8),
-                                  TextField(
-                                    style: poppinsFonts.copyWith(
-                                      color: Colors.white,
-                                    ),
-                                    controller: lastNameController,
-                                    decoration: InputDecoration(
-                                      enabledBorder: OutlineInputBorder(
-                                          borderSide: const BorderSide(
-                                              color: Colors.white, width: 1.0),
-                                          borderRadius:
-                                              BorderRadius.circular(15)),
-                                      focusedBorder: OutlineInputBorder(
-                                        borderSide: const BorderSide(
-                                            color: Colors.blue, width: 1.0),
-                                        borderRadius: BorderRadius.circular(15),
-                                      ),
-                                      hintText: userProfile?.lastName ?? "",
-                                      hintStyle: poppinsFonts.copyWith(
-                                        color: Colors.white,
-                                        fontSize: 20,
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 16),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            SizedBox(
-                              width: screenWidth / 2.5,
-                              child: Column(
-                                children: [
-                                  Text(
-                                    "Experience",
-                                    style: poppinsFonts.copyWith(
-                                      color: Colors.white,
-                                      fontSize: 15,
-                                    ),
-                                  ),
-                                  const SizedBox(height: 8),
-                                  TextField(
-                                    controller: experienceController,
-                                    keyboardType: TextInputType.number,
-                                    style: poppinsFonts.copyWith(
-                                      color: Colors.white,
-                                    ),
-                                    cursorColor: Colors.white,
-                                    decoration: InputDecoration(
-                                      enabledBorder: OutlineInputBorder(
-                                          borderSide: const BorderSide(
-                                              color: Colors.white, width: 1.0),
-                                          borderRadius:
-                                              BorderRadius.circular(15)),
-                                      focusedBorder: OutlineInputBorder(
-                                        borderSide: const BorderSide(
-                                            color: Colors.blue, width: 1.0),
-                                        borderRadius: BorderRadius.circular(15),
-                                      ),
-                                      // colo: Colors.white,
-                                      hintText:
-                                          userProfile?.expirence.toString() ??
-                                              "",
-                                      hintStyle: poppinsFonts.copyWith(
-                                        color: Colors.white,
-                                        fontSize: 20,
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            SizedBox(
-                              width: screenWidth / 2.5,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    "Country",
-                                    style: poppinsFonts.copyWith(
-                                      color: Colors.white,
-                                      fontSize: 15,
-                                    ),
-                                  ),
-                                  const SizedBox(height: 8),
-                                  GestureDetector(
-                                    onTap: () => {
-                                      showModalBottomSheet(
-                                        backgroundColor: Colors.black,
-                                        context: context,
-                                        builder: (BuildContext context) {
-                                          return ListView.builder(
-                                            itemCount: country?.length ?? 0,
-                                            itemBuilder: (context, index) {
-                                              return Center(
-                                                child: GestureDetector(
-                                                  onTap: () => {
-                                                    setState(() {
-                                                      countryID =
-                                                          country?[index]
-                                                              .countryId;
-                                                      countryName =
-                                                          country?[index]
-                                                                  .country ??
-                                                              "Country Name";
-                                                      locProvider
-                                                          .getState(countryID ??
-                                                              "31cdcc3f-48ae-4734-a2dd-7c86dd9e4c52")
-                                                          .then((value) {
-                                                        setState(() {
-                                                          isLoading = false;
-                                                        });
-                                                      }).then((value) => state =
-                                                              context.select(
-                                                                  (LocationProvider
-                                                                          value) =>
-                                                                      value
-                                                                          .stateData));
-                                                    }),
-                                                    Navigator.pop(context),
-                                                  },
-                                                  child: FittedBox(
-                                                    child: Text(
-                                                      country?[index].country ??
-                                                          "Country Name",
-                                                      style:
-                                                          poppinsFonts.copyWith(
-                                                        color: Colors.white,
-                                                        fontSize: 25,
-                                                      ),
-                                                      textAlign:
-                                                          TextAlign.center,
-                                                    ),
-                                                  ),
-                                                ),
-                                              );
-                                            },
-                                          );
-                                        },
-                                      ),
-                                    },
-                                    child: Container(
-                                      width: screenWidth / 2.5,
-                                      height: 70,
-                                      decoration: BoxDecoration(
-                                        border: Border.all(
-                                            color: Colors.white, width: 2),
-                                        borderRadius: BorderRadius.circular(15),
-                                      ),
-                                      child: Center(
-                                        child: Text(
-                                          countryName ?? "",
-                                          style: poppinsFonts.copyWith(
-                                            color: Colors.white,
-                                            fontSize: 25,
-                                          ),
-                                          textAlign: TextAlign.center,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 16),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            SizedBox(
-                              width: screenWidth / 2.5,
-                              child: Column(
-                                children: [
-                                  Text(
-                                    "State",
-                                    style: poppinsFonts.copyWith(
-                                      color: Colors.white,
-                                      fontSize: 15,
-                                    ),
-                                  ),
-                                  const SizedBox(height: 8),
-                                  GestureDetector(
-                                    onTap: () => {
-                                      showModalBottomSheet(
-                                        backgroundColor: Colors.black,
-                                        context: context,
-                                        builder: (BuildContext context) {
-                                          return ListView.builder(
-                                            itemCount: state?.length ?? 0,
-                                            itemBuilder: (context, index) {
-                                              return Center(
-                                                child: GestureDetector(
-                                                  onTap: () => {
-                                                    setState(() {
-                                                      stateID =
-                                                          state?[index].stateId;
-                                                      stateName =
-                                                          state?[index].state ??
-                                                              "State Name";
-                                                      locProvider
-                                                          .getCity(stateID ??
-                                                              "31cdcc3f-48ae-4734-a2dd-7c86dd9e4c53")
-                                                          .then((value) {
-                                                        setState(() {
-                                                          isLoading = false;
-                                                        });
-                                                      }).then((value) => city =
-                                                              context.select(
-                                                                  (LocationProvider
-                                                                          value) =>
-                                                                      value
-                                                                          .cityData));
-                                                    }),
-                                                    Navigator.pop(context)
-                                                  },
-                                                  child: FittedBox(
-                                                    child: Text(
-                                                      state?[index].state ??
-                                                          "State Name",
-                                                      style:
-                                                          poppinsFonts.copyWith(
-                                                        color: Colors.white,
-                                                        fontSize: 25,
-                                                      ),
-                                                      textAlign:
-                                                          TextAlign.center,
-                                                    ),
-                                                  ),
-                                                ),
-                                              );
-                                            },
-                                          );
-                                        },
-                                      ),
-                                    },
-                                    child: Container(
-                                      width: screenWidth / 2.5,
-                                      height: 70,
-                                      decoration: BoxDecoration(
-                                        border: Border.all(
-                                            color: Colors.white, width: 2),
-                                        borderRadius: BorderRadius.circular(15),
-                                      ),
-                                      child: Center(
-                                        child: Text(
-                                          stateName ?? "",
-                                          style: poppinsFonts.copyWith(
-                                            color: Colors.white,
-                                            fontSize: 25,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                            SizedBox(
-                              width: screenWidth / 2.5,
-                              child: Column(
-                                children: [
-                                  Text(
-                                    "City",
-                                    style: poppinsFonts.copyWith(
-                                      color: Colors.white,
-                                      fontSize: 15,
-                                    ),
-                                  ),
-                                  const SizedBox(height: 8),
-                                  GestureDetector(
-                                    onTap: () => {
-                                      showModalBottomSheet(
-                                        backgroundColor: Colors.black,
-                                        context: context,
-                                        builder: (BuildContext context) {
-                                          return ListView.builder(
-                                            itemCount: city?.length ?? 0,
-                                            itemBuilder: (context, index) {
-                                              return Center(
-                                                child: GestureDetector(
-                                                  onTap: () => {
-                                                    setState(() {
-                                                      cityID =
-                                                          city?[index].cityId;
-                                                      cityName =
-                                                          city?[index].city ??
-                                                              "city Name";
-                                                    }),
-                                                    Navigator.pop(context)
-                                                  },
-                                                  child: FittedBox(
-                                                    child: Text(
-                                                      city?[index].city ??
-                                                          "City Name",
-                                                      style:
-                                                          poppinsFonts.copyWith(
-                                                        color: Colors.white,
-                                                        fontSize: 25,
-                                                      ),
-                                                      textAlign:
-                                                          TextAlign.center,
-                                                    ),
-                                                  ),
-                                                ),
-                                              );
-                                            },
-                                          );
-                                        },
-                                      ),
-                                    },
-                                    child: Container(
-                                      width: screenWidth / 2.5,
-                                      height: 70,
-                                      decoration: BoxDecoration(
-                                        border: Border.all(
-                                            color: Colors.white, width: 2),
-                                        borderRadius: BorderRadius.circular(15),
-                                      ),
-                                      child: Center(
-                                        child: Text(
-                                          cityName ?? "",
-                                          style: poppinsFonts.copyWith(
-                                            color: Colors.white,
-                                            fontSize: 25,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 16),
-                        Text(
-                          "Instagram",
-                          style: poppinsFonts.copyWith(
-                            color: Colors.white,
-                            fontSize: 15,
-                          ),
-                        ),
-                        const SizedBox(height: 8),
-                        TextField(
-                          style: poppinsFonts.copyWith(
-                            color: Colors.white,
-                          ),
-                          controller: instaController,
-                          keyboardType: TextInputType.url,
-                          decoration: InputDecoration(
-                            enabledBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(
-                                    color: Colors.white, width: 1.0),
-                                borderRadius: BorderRadius.circular(15)),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: const BorderSide(
-                                  color: Colors.blue, width: 1.0),
-                              borderRadius: BorderRadius.circular(15),
-                            ),
-                            hintText: userProfile?.instaURL.toString() ?? "",
-                            hintStyle: poppinsFonts.copyWith(
-                              color: Colors.white,
-                              fontSize: 15,
-                            ),
-                          ),
-                        ),
-                        Text(
-                          "FaceBook",
-                          style: poppinsFonts.copyWith(
-                            color: Colors.white,
-                            fontSize: 15,
-                          ),
-                        ),
-                        const SizedBox(height: 8),
-                        TextField(
-                          style: poppinsFonts.copyWith(
-                            color: Colors.white,
-                          ),
-                          controller: fbController,
-                          keyboardType: TextInputType.url,
-                          decoration: InputDecoration(
-                            enabledBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(
-                                    color: Colors.white, width: 1.0),
-                                borderRadius: BorderRadius.circular(15)),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: const BorderSide(
-                                  color: Colors.blue, width: 1.0),
-                              borderRadius: BorderRadius.circular(15),
-                            ),
-                            hintText: userProfile?.fbURL.toString() ?? "",
-                            hintStyle: poppinsFonts.copyWith(
-                              color: Colors.white,
-                              fontSize: 15,
-                            ),
-                          ),
-                        ),
-                        Text(
-                          "Twitch",
-                          style: poppinsFonts.copyWith(
-                            color: Colors.white,
-                            fontSize: 15,
-                          ),
-                        ),
-                        const SizedBox(height: 8),
-                        TextField(
-                          style: poppinsFonts.copyWith(
-                            color: Colors.white,
-                          ),
-                          controller: twitchController,
-                          keyboardType: TextInputType.url,
-                          decoration: InputDecoration(
-                            enabledBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(
-                                    color: Colors.white, width: 1.0),
-                                borderRadius: BorderRadius.circular(15)),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: const BorderSide(
-                                  color: Colors.blue, width: 1.0),
-                              borderRadius: BorderRadius.circular(15),
-                            ),
-                            hintText: userProfile?.twURL.toString() ?? "",
-                            hintStyle: poppinsFonts.copyWith(
-                              color: Colors.white,
-                              fontSize: 15,
-                            ),
-                          ),
-                        ),
-                        Text(
-                          "YouTube",
-                          style: poppinsFonts.copyWith(
-                            color: Colors.white,
-                            fontSize: 15,
-                          ),
-                        ),
-                        const SizedBox(height: 8),
-                        TextField(
-                          style: poppinsFonts.copyWith(
-                            color: Colors.white,
-                          ),
-                          controller: ytController,
-                          keyboardType: TextInputType.url,
-                          decoration: InputDecoration(
-                            enabledBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(
-                                    color: Colors.white, width: 1.0),
-                                borderRadius: BorderRadius.circular(15)),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: const BorderSide(
-                                  color: Colors.blue, width: 1.0),
-                              borderRadius: BorderRadius.circular(15),
-                            ),
-                            hintText: userProfile?.ytURL.toString() ?? "",
-                            hintStyle: poppinsFonts.copyWith(
-                              color: Colors.white,
-                              fontSize: 15,
-                            ),
-                          ),
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Radio(
-                              value: 'Male',
-                              fillColor:
-                                  MaterialStateProperty.resolveWith<Color>(
-                                (Set<MaterialState> states) {
-                                  return Colors.white;
-                                },
-                              ),
-                              groupValue: selectedGender,
-                              onChanged: (value) {
-                                setState(() {
-                                  selectedGender = value as String;
-                                });
-                              },
-                            ),
                             Text(
-                              "Male",
+                              "First Name",
                               style: poppinsFonts.copyWith(
                                 color: Colors.white,
                                 fontSize: 15,
                               ),
                             ),
-                            Radio(
-                              value: 'Female',
-                              fillColor:
-                                  MaterialStateProperty.resolveWith<Color>(
-                                (Set<MaterialState> states) {
-                                  return Colors.white;
-                                },
-                              ),
-                              groupValue: selectedGender,
-                              onChanged: (value) {
-                                setState(() {
-                                  selectedGender = value as String;
-                                });
-                              },
-                            ),
-                            Text(
-                              "Female",
+                            const SizedBox(height: 8),
+                            TextField(
                               style: poppinsFonts.copyWith(
                                 color: Colors.white,
-                                fontSize: 15,
                               ),
-                            ),
-                            Radio(
-                              value: 'Other',
-                              fillColor:
-                                  MaterialStateProperty.resolveWith<Color>(
-                                (Set<MaterialState> states) {
-                                  return Colors.white;
-                                },
-                              ),
-                              groupValue: selectedGender,
-                              onChanged: (value) {
-                                setState(() {
-                                  selectedGender = value as String;
-                                });
-                              },
-                            ),
-                            Text(
-                              "Other",
-                              style: poppinsFonts.copyWith(
-                                color: Colors.white,
-                                fontSize: 15,
-                              ),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 16),
-                        SizedBox(
-                          width: screenWidth / 1.5,
-                          child: NeoPopButton(
-                            color: GeneralColors.neopopButtonMainColor,
-                            bottomShadowColor: GeneralColors.neopopShadowColor,
-                            onTapUp: () => {
-                              if (base64String != "")
-                                {data['profile_image'] = base64String},
-                              if (firstNameController.text.isNotEmpty)
-                                {data["first_name"] = firstNameController.text},
-                              if (lastNameController.text.isNotEmpty)
-                                {data["last_name"] = lastNameController.text},
-                              if (instaController.text.isNotEmpty)
-                                {data["insta_link"] = instaController.text},
-                              if (fbController.text.isNotEmpty)
-                                {data["fb_link"] = fbController.text},
-                              if (twitchController.text.isNotEmpty)
-                                {data["twitch_link"] = twitchController.text},
-                              if (ytController.text.isNotEmpty)
-                                {data["yt_link"] = ytController.text},
-                              if (selectedGender.isNotEmpty)
-                                {data["gender"] = selectedGender},
-                              if (experienceController.text.isNotEmpty)
-                                {data["expirence"] = experienceController.text},
-                              if (countryID != null)
-                                {data["country"] = countryID},
-                              if (stateID != null) {data["state"] = stateID},
-                              if (cityID != null) {data["city"] = cityID},
-                              if (selectedGender != '')
-                                {data["gender"] = selectedGender},
-                              updateProfile(data),
-                            },
-                            child: const NeoPopShimmer(
-                              shimmerColor: Colors.white,
-                              child: Padding(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 20, vertical: 15),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      "Update Profile",
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                  ],
+                              controller: firstNameController,
+                              decoration: InputDecoration(
+                                enabledBorder: OutlineInputBorder(
+                                    borderSide: const BorderSide(
+                                        color: Colors.white, width: 1.0),
+                                    borderRadius: BorderRadius.circular(15)),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                      color: Colors.blue, width: 1.0),
+                                  borderRadius: BorderRadius.circular(15),
+                                ),
+                                hintText: userProfile?.firstName ?? "",
+                                hintStyle: poppinsFonts.copyWith(
+                                  color: Colors.white,
+                                  fontSize: 20,
                                 ),
                               ),
                             ),
-                          ),
+                          ],
                         ),
-                      ],
+                      ),
+                      SizedBox(
+                        width: screenWidth / 2.5,
+                        child: Column(
+                          children: [
+                            Text(
+                              "Last Name",
+                              style: poppinsFonts.copyWith(
+                                color: Colors.white,
+                                fontSize: 15,
+                              ),
+                            ),
+                            const SizedBox(height: 8),
+                            TextField(
+                              style: poppinsFonts.copyWith(
+                                color: Colors.white,
+                              ),
+                              controller: lastNameController,
+                              decoration: InputDecoration(
+                                enabledBorder: OutlineInputBorder(
+                                    borderSide: const BorderSide(
+                                        color: Colors.white, width: 1.0),
+                                    borderRadius: BorderRadius.circular(15)),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                      color: Colors.blue, width: 1.0),
+                                  borderRadius: BorderRadius.circular(15),
+                                ),
+                                hintText: userProfile?.lastName ?? "",
+                                hintStyle: poppinsFonts.copyWith(
+                                  color: Colors.white,
+                                  fontSize: 20,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 16),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      SizedBox(
+                        width: screenWidth / 2.5,
+                        child: Column(
+                          children: [
+                            Text(
+                              "Experience",
+                              style: poppinsFonts.copyWith(
+                                color: Colors.white,
+                                fontSize: 15,
+                              ),
+                            ),
+                            const SizedBox(height: 8),
+                            TextField(
+                              controller: experienceController,
+                              keyboardType: TextInputType.number,
+                              style: poppinsFonts.copyWith(
+                                color: Colors.white,
+                              ),
+                              cursorColor: Colors.white,
+                              decoration: InputDecoration(
+                                enabledBorder: OutlineInputBorder(
+                                    borderSide: const BorderSide(
+                                        color: Colors.white, width: 1.0),
+                                    borderRadius: BorderRadius.circular(15)),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                      color: Colors.blue, width: 1.0),
+                                  borderRadius: BorderRadius.circular(15),
+                                ),
+                                // colo: Colors.white,
+                                hintText:
+                                    userProfile?.expirence.toString() ?? "",
+                                hintStyle: poppinsFonts.copyWith(
+                                  color: Colors.white,
+                                  fontSize: 20,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        width: screenWidth / 2.5,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Text(
+                              "Country",
+                              style: poppinsFonts.copyWith(
+                                color: Colors.white,
+                                fontSize: 15,
+                              ),
+                            ),
+                            const SizedBox(height: 8),
+                            GestureDetector(
+                              onTap: () => {
+                                showModalBottomSheet(
+                                  backgroundColor: const Color(0xFF000033),
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return ListView.builder(
+                                      itemCount: country?.length ?? 0,
+                                      itemBuilder: (context, index) {
+                                        return Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Center(
+                                            child: GestureDetector(
+                                              onTap: () => {
+                                                setState(() {
+                                                  countryID =
+                                                      country?[index].countryId;
+                                                  countryName =
+                                                      country?[index].country ??
+                                                          "Country Name";
+                                                  locProvider
+                                                      .getState(countryID ??
+                                                          "31cdcc3f-48ae-4734-a2dd-7c86dd9e4c52")
+                                                      .then((value) {
+                                                    setState(() {
+                                                      isLoading = false;
+                                                    });
+                                                  }).then((value) => state =
+                                                          context.select(
+                                                              (LocationProvider
+                                                                      value) =>
+                                                                  value
+                                                                      .stateData));
+                                                }),
+                                                Navigator.pop(context),
+                                              },
+                                              child: Text(
+                                                country?[index].country ??
+                                                    "Country Name",
+                                                style: poppinsFonts.copyWith(
+                                                  color: Colors.white,
+                                                  fontSize: 25,
+                                                ),
+                                                maxLines: 1,
+                                                overflow: TextOverflow.ellipsis,
+                                                textAlign: TextAlign.center,
+                                              ),
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                    );
+                                  },
+                                ),
+                              },
+                              child: Container(
+                                width: screenWidth / 2.5,
+                                height: 70,
+                                alignment: Alignment.centerLeft,
+                                padding: const EdgeInsets.all(8.0),
+                                decoration: BoxDecoration(
+                                  border:
+                                      Border.all(color: Colors.grey, width: 2),
+                                  borderRadius: BorderRadius.circular(15),
+                                ),
+                                child: Text(
+                                  countryName == null
+                                      ? typeCountryName ?? ""
+                                      : countryName ?? "",
+                                  style: poppinsFonts.copyWith(
+                                    color: Colors.white,
+                                    fontSize: 20,
+                                  ),
+                                  textAlign: TextAlign.left,
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 16),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      SizedBox(
+                        width: screenWidth / 2.5,
+                        child: Column(
+                          children: [
+                            Text(
+                              "State",
+                              style: poppinsFonts.copyWith(
+                                color: Colors.white,
+                                fontSize: 15,
+                              ),
+                            ),
+                            const SizedBox(height: 8),
+                            GestureDetector(
+                              onTap: () => {
+                                showModalBottomSheet(
+                                  backgroundColor: const Color(0xFF000033),
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return ListView.builder(
+                                      itemCount: state?.length ?? 0,
+                                      itemBuilder: (context, index) {
+                                        return Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Center(
+                                            child: GestureDetector(
+                                              onTap: () => {
+                                                setState(() {
+                                                  stateID =
+                                                      state?[index].stateId;
+                                                  stateName =
+                                                      state?[index].state ??
+                                                          "State Name";
+                                                  locProvider
+                                                      .getCity(stateID ??
+                                                          "31cdcc3f-48ae-4734-a2dd-7c86dd9e4c53")
+                                                      .then((value) {
+                                                    setState(() {
+                                                      isLoading = false;
+                                                    });
+                                                  }).then((value) => city =
+                                                          context.select(
+                                                              (LocationProvider
+                                                                      value) =>
+                                                                  value
+                                                                      .cityData));
+                                                }),
+                                                Navigator.pop(context)
+                                              },
+                                              child: Text(
+                                                state?[index].state ??
+                                                    "State Name",
+                                                style: poppinsFonts.copyWith(
+                                                  color: Colors.white,
+                                                  fontSize: 25,
+                                                ),
+                                                maxLines: 1,
+                                                overflow: TextOverflow.ellipsis,
+                                                textAlign: TextAlign.center,
+                                              ),
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                    );
+                                  },
+                                ),
+                              },
+                              child: Container(
+                                width: screenWidth / 2.5,
+                                height: 70,
+                                alignment: Alignment.centerLeft,
+                                padding: const EdgeInsets.all(8.0),
+                                decoration: BoxDecoration(
+                                  border:
+                                      Border.all(color: Colors.grey, width: 2),
+                                  borderRadius: BorderRadius.circular(15),
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    stateName == null
+                                        ? typeStateName ?? ""
+                                        : stateName ?? "",
+                                    style: poppinsFonts.copyWith(
+                                      color: Colors.white,
+                                      fontSize: 20,
+                                    ),
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        width: screenWidth / 2.5,
+                        child: Column(
+                          children: [
+                            Text(
+                              "City",
+                              style: poppinsFonts.copyWith(
+                                color: Colors.white,
+                                fontSize: 15,
+                              ),
+                            ),
+                            const SizedBox(height: 8),
+                            GestureDetector(
+                              onTap: () => {
+                                showModalBottomSheet(
+                                  backgroundColor: const Color(0xFF000033),
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return ListView.builder(
+                                      itemCount: city?.length ?? 0,
+                                      itemBuilder: (context, index) {
+                                        return Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Center(
+                                            child: GestureDetector(
+                                              onTap: () => {
+                                                setState(() {
+                                                  cityID = city?[index].cityId;
+                                                  cityName =
+                                                      city?[index].city ??
+                                                          "city Name";
+                                                }),
+                                                Navigator.pop(context)
+                                              },
+                                              child: FittedBox(
+                                                child: Text(
+                                                  city?[index].city ??
+                                                      "City Name",
+                                                  style: poppinsFonts.copyWith(
+                                                    color: Colors.white,
+                                                    fontSize: 25,
+                                                  ),
+                                                  textAlign: TextAlign.center,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                    );
+                                  },
+                                ),
+                              },
+                              child: Container(
+                                width: screenWidth / 2.5,
+                                height: 70,
+                                alignment: Alignment.centerLeft,
+                                padding: const EdgeInsets.all(8.0),
+                                decoration: BoxDecoration(
+                                  border:
+                                      Border.all(color: Colors.grey, width: 2),
+                                  borderRadius: BorderRadius.circular(15),
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    cityName == null
+                                        ? typeCityName ?? ""
+                                        : cityName ?? "",
+                                    style: poppinsFonts.copyWith(
+                                      color: Colors.white,
+                                      fontSize: 20,
+                                    ),
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 16),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Radio(
+                        value: 'Male',
+                        fillColor: MaterialStateProperty.resolveWith<Color>(
+                          (Set<MaterialState> states) {
+                            return Colors.white;
+                          },
+                        ),
+                        groupValue: selectedGender == ''
+                            ? typeSelectedGender
+                            : selectedGender,
+                        onChanged: (value) {
+                          setState(() {
+                            selectedGender = value as String;
+                          });
+                        },
+                      ),
+                      Text(
+                        "Male",
+                        style: poppinsFonts.copyWith(
+                          color: Colors.white,
+                          fontSize: 15,
+                        ),
+                      ),
+                      Radio(
+                        value: 'Female',
+                        fillColor: MaterialStateProperty.resolveWith<Color>(
+                          (Set<MaterialState> states) {
+                            return Colors.white;
+                          },
+                        ),
+                        groupValue: selectedGender == ''
+                            ? typeSelectedGender
+                            : selectedGender,
+                        onChanged: (value) {
+                          setState(() {
+                            selectedGender = value as String;
+                          });
+                        },
+                      ),
+                      Text(
+                        "Female",
+                        style: poppinsFonts.copyWith(
+                          color: Colors.white,
+                          fontSize: 15,
+                        ),
+                      ),
+                      Radio(
+                        value: 'Other',
+                        fillColor: MaterialStateProperty.resolveWith<Color>(
+                          (Set<MaterialState> states) {
+                            return Colors.white;
+                          },
+                        ),
+                        groupValue: selectedGender == ''
+                            ? typeSelectedGender
+                            : selectedGender,
+                        onChanged: (value) {
+                          setState(() {
+                            selectedGender = value as String;
+                          });
+                        },
+                      ),
+                      Text(
+                        "Other",
+                        style: poppinsFonts.copyWith(
+                          color: Colors.white,
+                          fontSize: 15,
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 8),
+                  Row(
+                    children: <Widget>[
+                      Text(
+                        'Social Edit',
+                        style: poppinsFonts.copyWith(
+                          color: Colors.grey,
+                          fontSize: 15,
+                        ),
+                      ),
+                      const SizedBox(width: 8),
+                      Expanded(
+                        child: Container(
+                          height: 1,
+                          color: Colors.grey,
+                        ),
+                      )
+                    ],
+                  ),
+                  const SizedBox(height: 16),
+                  Text(
+                    "Instagram",
+                    style: poppinsFonts.copyWith(
+                      color: Colors.white,
+                      fontSize: 15,
                     ),
-                  )
+                  ),
+                  const SizedBox(height: 8),
+                  TextField(
+                    style: poppinsFonts.copyWith(
+                      color: Colors.white,
+                    ),
+                    controller: instaController,
+                    keyboardType: TextInputType.url,
+                    decoration: InputDecoration(
+                      enabledBorder: OutlineInputBorder(
+                          borderSide:
+                              const BorderSide(color: Colors.white, width: 1.0),
+                          borderRadius: BorderRadius.circular(15)),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide:
+                            const BorderSide(color: Colors.blue, width: 1.0),
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      hintText: userProfile?.instaURL.toString() ?? "",
+                      hintStyle: poppinsFonts.copyWith(
+                        color: Colors.white,
+                        fontSize: 15,
+                      ),
+                    ),
+                  ),
+                  Text(
+                    "FaceBook",
+                    style: poppinsFonts.copyWith(
+                      color: Colors.white,
+                      fontSize: 15,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  TextField(
+                    style: poppinsFonts.copyWith(
+                      color: Colors.white,
+                    ),
+                    controller: fbController,
+                    keyboardType: TextInputType.url,
+                    decoration: InputDecoration(
+                      enabledBorder: OutlineInputBorder(
+                          borderSide:
+                              const BorderSide(color: Colors.white, width: 1.0),
+                          borderRadius: BorderRadius.circular(15)),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide:
+                            const BorderSide(color: Colors.blue, width: 1.0),
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      hintText: userProfile?.fbURL.toString() ?? "",
+                      hintStyle: poppinsFonts.copyWith(
+                        color: Colors.white,
+                        fontSize: 15,
+                      ),
+                    ),
+                  ),
+                  Text(
+                    "Twitch",
+                    style: poppinsFonts.copyWith(
+                      color: Colors.white,
+                      fontSize: 15,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  TextField(
+                    style: poppinsFonts.copyWith(
+                      color: Colors.white,
+                    ),
+                    controller: twitchController,
+                    keyboardType: TextInputType.url,
+                    decoration: InputDecoration(
+                      enabledBorder: OutlineInputBorder(
+                          borderSide:
+                              const BorderSide(color: Colors.white, width: 1.0),
+                          borderRadius: BorderRadius.circular(15)),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide:
+                            const BorderSide(color: Colors.blue, width: 1.0),
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      hintText: userProfile?.twURL.toString() ?? "",
+                      hintStyle: poppinsFonts.copyWith(
+                        color: Colors.white,
+                        fontSize: 15,
+                      ),
+                    ),
+                  ),
+                  Text(
+                    "YouTube",
+                    style: poppinsFonts.copyWith(
+                      color: Colors.white,
+                      fontSize: 15,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  TextField(
+                    style: poppinsFonts.copyWith(
+                      color: Colors.white,
+                    ),
+                    controller: ytController,
+                    keyboardType: TextInputType.url,
+                    decoration: InputDecoration(
+                      enabledBorder: OutlineInputBorder(
+                          borderSide:
+                              const BorderSide(color: Colors.white, width: 1.0),
+                          borderRadius: BorderRadius.circular(15)),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide:
+                            const BorderSide(color: Colors.blue, width: 1.0),
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      hintText: userProfile?.ytURL.toString() ?? "",
+                      hintStyle: poppinsFonts.copyWith(
+                        color: Colors.white,
+                        fontSize: 15,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 150),
+                  // SizedBox(
+                  //   width: screenWidth / 1.5,
+                  //   child: NeoPopButton(
+                  //     color: GeneralColors.neopopButtonMainColor,
+                  //     bottomShadowColor: GeneralColors.neopopShadowColor,
+                  //     onTapUp: () => {
+                  //       if (base64String != "")
+                  //         {data['profile_image'] = base64String},
+                  //       if (firstNameController.text.isNotEmpty)
+                  //         {data["first_name"] = firstNameController.text},
+                  //       if (lastNameController.text.isNotEmpty)
+                  //         {data["last_name"] = lastNameController.text},
+                  //       if (instaController.text.isNotEmpty)
+                  //         {data["insta_link"] = instaController.text},
+                  //       if (fbController.text.isNotEmpty)
+                  //         {data["fb_link"] = fbController.text},
+                  //       if (twitchController.text.isNotEmpty)
+                  //         {data["twitch_link"] = twitchController.text},
+                  //       if (ytController.text.isNotEmpty)
+                  //         {data["yt_link"] = ytController.text},
+                  //       if (selectedGender.isNotEmpty)
+                  //         {data["gender"] = selectedGender},
+                  //       if (experienceController.text.isNotEmpty)
+                  //         {data["expirence"] = experienceController.text},
+                  //       if (countryID != null) {data["country"] = countryID},
+                  //       if (stateID != null) {data["state"] = stateID},
+                  //       if (cityID != null) {data["city"] = cityID},
+                  //       if (selectedGender != '')
+                  //         {data["gender"] = selectedGender},
+                  //       updateProfile(data),
+                  //     },
+                  //     child: const NeoPopShimmer(
+                  //       shimmerColor: Colors.white,
+                  //       child: Padding(
+                  //         padding: EdgeInsets.symmetric(
+                  //             horizontal: 20, vertical: 15),
+                  //         child: Row(
+                  //           mainAxisAlignment: MainAxisAlignment.center,
+                  //           children: [
+                  //             Text(
+                  //               "Update Profile",
+                  //               style: TextStyle(
+                  //                 color: Colors.white,
+                  //                 fontSize: 15,
+                  //                 fontWeight: FontWeight.bold,
+                  //               ),
+                  //             ),
+                  //           ],
+                  //         ),
+                  //       ),
+                  //     ),
+                  //   ),
+                  // ),
                 ],
               ),
             )
           ],
         ),
       ),
+      floatingActionButton: TextButton(
+        onPressed: () => {
+          if (base64String != "") {data['profile_image'] = base64String},
+          if (firstNameController.text.isNotEmpty)
+            {data["first_name"] = firstNameController.text},
+          if (lastNameController.text.isNotEmpty)
+            {data["last_name"] = lastNameController.text},
+          if (instaController.text.isNotEmpty)
+            {data["insta_link"] = instaController.text},
+          if (fbController.text.isNotEmpty)
+            {data["fb_link"] = fbController.text},
+          if (twitchController.text.isNotEmpty)
+            {data["twitch_link"] = twitchController.text},
+          if (ytController.text.isNotEmpty)
+            {data["yt_link"] = ytController.text},
+          if (selectedGender.isNotEmpty) {data["gender"] = selectedGender},
+          if (experienceController.text.isNotEmpty)
+            {data["expirence"] = experienceController.text},
+          if (countryID != null) {data["country"] = countryID},
+          if (stateID != null) {data["state"] = stateID},
+          if (cityID != null) {data["city"] = cityID},
+          if (selectedGender != '') {data["gender"] = selectedGender},
+          updateProfile(data),
+        },
+        child: Container(
+          padding: const EdgeInsets.all(8),
+          decoration: BoxDecoration(
+            color: Colors.teal.shade400,
+            borderRadius: BorderRadius.circular(5),
+          ),
+          height: 50,
+          width: screenWidth - 50,
+          child: Center(
+            child: Text(
+              "Edit Profile",
+              style: poppinsFonts.copyWith(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+                fontSize: 20,
+              ),
+            ),
+          ),
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 

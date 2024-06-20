@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 //Local Imports
-import 'package:playverse/themes/app_color_theme.dart';
 import 'package:playverse/models/user_profile_model.dart';
 import 'package:playverse/provider/user_profile_provider.dart';
 import 'package:playverse/provider/course_provider.dart';
@@ -95,15 +94,10 @@ class CourseWidgetState extends State<CourseWidget> {
                           )
                         },
                         child: Container(
+                          padding: const EdgeInsets.all(8.0),
                           decoration: BoxDecoration(
-                            gradient: const LinearGradient(
-                                begin: Alignment.topCenter,
-                                end: Alignment.bottomCenter,
-                                colors: [Color(0xFF7F00FF), Color(0xFF000000)]),
+                            color: Colors.grey.shade900,
                             borderRadius: BorderRadius.circular(15),
-                            border: Border.all(
-                              color: Colors.white,
-                            ),
                           ),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -112,14 +106,14 @@ class CourseWidgetState extends State<CourseWidget> {
                                 borderRadius: BorderRadius.circular(15),
                                 child: CachedNetworkImage(
                                   imageUrl: value?[index].thumbnail ?? "",
-                                  fit: BoxFit.fill,
+                                  fit: BoxFit.cover,
                                   height: 100,
-                                  width: 150,
+                                  width: 200,
                                   placeholder: (context, url) =>
                                       const CircularProgressIndicator(
                                     strokeAlign: BorderSide.strokeAlignCenter,
                                   ),
-                                errorWidget: (context, url, error) =>
+                                  errorWidget: (context, url, error) =>
                                       const Icon(
                                     Icons.error,
                                     color: Colors.white,
@@ -127,43 +121,48 @@ class CourseWidgetState extends State<CourseWidget> {
                                 ),
                               ),
                               Text(
-                                "${value?[index].name}",
+                                "${value?[index].name} Course",
                                 style: openSansFonts.copyWith(
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 20,
                                 ),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
                               ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  value?[index].gameType == 'Mobile'
-                                      ? const Icon(Icons.phone_android_sharp)
-                                      : const Icon(Icons.computer),
-                                  Container(
-                                    width: 100,
-                                    height: 40,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(
-                                        15,
-                                      ),
-                                      color: TournamentWidgetColors
-                                          .tournamentDetailCircleColor,
-                                    ),
-                                    child: Center(
-                                      child: Text(
-                                        "Request Info",
-                                        style: poppinsFonts.copyWith(
-                                          color: Colors.white,
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.bold,
+                              SizedBox(
+                                width: 200,
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    value?[index].gameType == 'Mobile'
+                                        ? const Icon(Icons.phone_android_sharp)
+                                        : const Icon(Icons.computer),
+                                    const SizedBox(width: 8),
+                                    Container(
+                                      width: 150,
+                                      height: 40,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(
+                                          15,
                                         ),
-                                        textAlign: TextAlign.center,
+                                        color: Colors.grey,
+                                      ),
+                                      child: Center(
+                                        child: Text(
+                                          "Request Info",
+                                          style: poppinsFonts.copyWith(
+                                            color: Colors.black,
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
                             ],
                           ),

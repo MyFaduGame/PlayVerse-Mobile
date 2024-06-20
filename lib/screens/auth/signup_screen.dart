@@ -52,385 +52,330 @@ class SignUpScreenState extends State<SignUpScreen> {
 
   @override
   Widget build(BuildContext context) {
-    double screenWidth = MediaQuery.of(context).size.width;
-    double screenHeight = MediaQuery.of(context).size.height;
+    // double screenWidth = MediaQuery.of(context).size.width;
+    // double screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       extendBodyBehindAppBar: true,
-      body: Container(
-        width: double.infinity,
-        height: double.infinity,
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [
-              GeneralColors.gradientBackgrounColor0,
-              GeneralColors.gradientBackgrounColor1
-            ],
-          ),
-        ),
-        child: Stack(
-          children: [
-            Positioned(
-              top: -80,
-              left: -80,
-              child: Container(
-                width: 200,
-                height: 200,
-                decoration: BoxDecoration(
-                  boxShadow: [
-                    BoxShadow(
-                      color: const Color(0xFF7F00FF).withOpacity(0.3),
-                      spreadRadius: screenWidth * 0.20,
-                      blurRadius: screenWidth * 0.145,
-                    ),
-                  ],
-                  borderRadius:
-                      const BorderRadius.all(Radius.elliptical(200, 200)),
-                ),
+      backgroundColor: const Color(0xFF000019),
+      body: Center(
+        child: SingleChildScrollView(
+          child: Column(
+            children: <Widget>[
+              const SizedBox(
+                height: 32,
               ),
-            ),
-            Positioned(
-              top: screenHeight - 100,
-              left: screenWidth - 100,
-              child: Container(
-                width: 200,
-                height: 200,
-                decoration: BoxDecoration(
-                  boxShadow: [
-                    BoxShadow(
-                      color: const Color(0xFF7F00FF).withOpacity(0.3),
-                      spreadRadius: screenWidth * 0.20,
-                      blurRadius: screenWidth * 0.145,
-                    ),
-                  ],
-                  borderRadius:
-                      const BorderRadius.all(Radius.elliptical(200, 200)),
-                ),
-              ),
-            ),
-            Center(
-              child: SingleChildScrollView(
-                child: Column(
-                  children: <Widget>[
-                    const SizedBox(
-                      height: 32,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(25.0, 0, 25.0, 0),
-                      child: Form(
-                        key: _formKey,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            //Name
-                            const Text(
-                              'Name',
-                              style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white),
-                            ),
-                            const SizedBox(height: 8),
-                            TextFormField(
-                              style: const TextStyle(color: Colors.white),
-                              controller: nameController,
-                              keyboardType: TextInputType.name,
-                              validator: (value) {
-                                if (value!.isEmpty) {
-                                  return "Please Enter Your First Name";
-                                }
-                                return emailError;
-                              },
-                              decoration: const InputDecoration(
-                                  border: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                  hintText: 'Enter your First Name',
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                  hintStyle: TextStyle(
-                                    color: Colors.white,
-                                  )),
-                            ),
-                            const SizedBox(height: 20),
-
-                            //UserName
-                            const Text(
-                              'UserName',
-                              style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white),
-                            ),
-                            const SizedBox(height: 8),
-                            TextFormField(
-                              controller: userNameController,
-                              keyboardType: TextInputType.name,
-                              validator: (value) {
-                                if (value!.isEmpty) {
-                                  return "Please Enter Your UserName";
-                                }
-                                return emailError;
-                              },
-                              autocorrect: true,
-                              style: const TextStyle(color: Colors.white),
-                              decoration: const InputDecoration(
-                                focusColor: Colors.white,
-                                border: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Colors.white,
-                                  ),
-                                ),
-                                hintText: 'Choose Your UserName',
-                                hoverColor: Colors.white,
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Colors.white,
-                                  ),
-                                ),
-                                hintStyle: TextStyle(
-                                  color: Colors.white,
-                                ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(25.0, 0, 25.0, 0),
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      //Name
+                      const Text(
+                        'Name',
+                        style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white),
+                      ),
+                      const SizedBox(height: 8),
+                      TextFormField(
+                        style: const TextStyle(color: Colors.white),
+                        controller: nameController,
+                        keyboardType: TextInputType.name,
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return "Please Enter Your First Name";
+                          }
+                          return emailError;
+                        },
+                        decoration: const InputDecoration(
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Colors.white,
                               ),
                             ),
-                            const SizedBox(height: 20),
-
-                            //Email
-                            const Text(
-                              'Email',
-                              style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white),
+                            hintText: 'Enter your First Name',
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Colors.white,
+                              ),
                             ),
-                            const SizedBox(height: 8),
-                            TextFormField(
-                              style: const TextStyle(color: Colors.white),
-                              onChanged: (value) {
-                                if (emailError != null) {
-                                  setState(() => emailError = null);
-                                }
-                              },
-                              controller: emailController,
-                              keyboardType: TextInputType.emailAddress,
-                              validator: (value) {
-                                if (value!.isEmpty) {
-                                  return "Please Enter Your Email";
-                                }
-                                return emailError;
-                              },
-                              decoration: const InputDecoration(
-                                  border: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                  hintText: 'Enter your Email',
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                  hintStyle: TextStyle(
-                                    color: Colors.white,
-                                  )),
+                            hintStyle: TextStyle(
+                              color: Colors.white,
+                            )),
+                      ),
+                      const SizedBox(height: 20),
+            
+                      //UserName
+                      const Text(
+                        'UserName',
+                        style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white),
+                      ),
+                      const SizedBox(height: 8),
+                      TextFormField(
+                        controller: userNameController,
+                        keyboardType: TextInputType.name,
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return "Please Enter Your UserName";
+                          }
+                          return emailError;
+                        },
+                        autocorrect: true,
+                        style: const TextStyle(color: Colors.white),
+                        decoration: const InputDecoration(
+                          focusColor: Colors.white,
+                          border: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Colors.white,
                             ),
-                            const SizedBox(height: 20),
-
-                            //Password
-                            const Text(
-                              'Password',
-                              style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white),
+                          ),
+                          hintText: 'Choose Your UserName',
+                          hoverColor: Colors.white,
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Colors.white,
                             ),
-                            const SizedBox(height: 8),
-                            TextFormField(
-                              style: const TextStyle(color: Colors.white),
-                              onChanged: (value) {
-                                if (passwordError != null) {
-                                  setState(() => passwordError = null);
-                                }
-                              },
-                              controller: passwordController,
-                              obscureText: showPassword,
-                              validator: (value) {
-                                if (value!.isEmpty) {
-                                  return "Enter your PassKey";
-                                }
-                                return passwordError;
-                              },
-                              keyboardType: TextInputType.name,
-                              decoration: InputDecoration(
-                                  suffixIcon: IconButton(
-                                    icon: Icon(
-                                      showPassword
-                                          ? Icons.visibility
-                                          : Icons.visibility_off,
-                                      color: Colors.white,
-                                    ),
-                                    onPressed: () {
-                                      setState(() {
-                                        showPassword = !showPassword;
-                                      });
-                                    },
-                                  ),
-                                  border: const OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                  hintText: 'Enter your Passkey',
-                                  enabledBorder: const OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                  hintStyle: const TextStyle(
-                                    color: Colors.white,
-                                  )),
-                            ),
-                            const SizedBox(height: 20),
-                            const Text(
-                              'Re-Enter Password',
-                              style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white),
-                            ),
-                            const SizedBox(height: 8),
-                            TextFormField(
-                              style: const TextStyle(color: Colors.white),
-                              onChanged: (value) {
-                                if (passwordError != null) {
-                                  setState(() => passwordError = null);
-                                }
-                              },
-                              obscureText: showPassword,
-                              controller: rePasswordController,
-                              keyboardType: TextInputType.name,
-                              validator: (value) {
-                                if (value!.isEmpty) {
-                                  return "Please Re-Enter Your Pass Key";
-                                }
-                                return emailError;
-                              },
-                              decoration: InputDecoration(
-                                  suffixIcon: IconButton(
-                                    icon: Icon(
-                                      showPassword
-                                          ? Icons.visibility
-                                          : Icons.visibility_off,
-                                      color: Colors.white,
-                                    ),
-                                    onPressed: () {
-                                      setState(() {
-                                        showPassword = !showPassword;
-                                      });
-                                    },
-                                  ),
-                                  border: const OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                  hintText: 'Re-Enter your PassKey',
-                                  enabledBorder: const OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                  hintStyle: const TextStyle(
-                                    color: Colors.white,
-                                  )),
-                            ),
-                            const SizedBox(height: 20),
-
-                            //ReferCode
-                            const Text(
-                              'ReferCode',
-                              style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white),
-                            ),
-                            const SizedBox(height: 8),
-                            TextFormField(
-                              style: const TextStyle(color: Colors.white),
-                              controller: referCodeController,
-                              keyboardType: TextInputType.name,
-                              decoration: const InputDecoration(
-                                  border: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                  hintText: 'Enter your ReferCode',
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                  hintStyle: TextStyle(
-                                    color: Colors.white,
-                                  )),
-                            ),
-                            const SizedBox(height: 20),
-                          ],
+                          ),
+                          hintStyle: TextStyle(
+                            color: Colors.white,
+                          ),
                         ),
                       ),
-                    ),
-                    const SizedBox(
-                      height: 16,
-                    ),
-                    NeoPopButtonWidget(
-                      text: "SignUp To PlayVerse",
-                      navigation: () => {
-                        if (_formKey.currentState!.validate()) {register()}
-                      },
-                      textImage: AuthScreenImages.registerImage,
-                    ),
-                    const SizedBox(height: 10),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Text(
-                          "Already Have Account?",
-                          style: poppinsFonts.copyWith(
-                            color: GeneralColors.colorStyle0,
-                          ),
-                        ),
-                        TextButton(
-                          onPressed: () => {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const LoginScreen(),
+                      const SizedBox(height: 20),
+            
+                      //Email
+                      const Text(
+                        'Email',
+                        style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white),
+                      ),
+                      const SizedBox(height: 8),
+                      TextFormField(
+                        style: const TextStyle(color: Colors.white),
+                        onChanged: (value) {
+                          if (emailError != null) {
+                            setState(() => emailError = null);
+                          }
+                        },
+                        controller: emailController,
+                        keyboardType: TextInputType.emailAddress,
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return "Please Enter Your Email";
+                          }
+                          return emailError;
+                        },
+                        decoration: const InputDecoration(
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Colors.white,
                               ),
-                            )
-                          },
-                          child: Text(
-                            'Login',
-                            style: poppinsFonts.copyWith(
-                              color: Colors.white,
-                              decoration: TextDecoration.underline,
                             ),
-                          ),
-                        )
-                      ],
-                    ),
-                  ],
+                            hintText: 'Enter your Email',
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Colors.white,
+                              ),
+                            ),
+                            hintStyle: TextStyle(
+                              color: Colors.white,
+                            )),
+                      ),
+                      const SizedBox(height: 20),
+            
+                      //Password
+                      const Text(
+                        'Password',
+                        style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white),
+                      ),
+                      const SizedBox(height: 8),
+                      TextFormField(
+                        style: const TextStyle(color: Colors.white),
+                        onChanged: (value) {
+                          if (passwordError != null) {
+                            setState(() => passwordError = null);
+                          }
+                        },
+                        controller: passwordController,
+                        obscureText: showPassword,
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return "Enter your PassKey";
+                          }
+                          return passwordError;
+                        },
+                        keyboardType: TextInputType.name,
+                        decoration: InputDecoration(
+                            suffixIcon: IconButton(
+                              icon: Icon(
+                                showPassword
+                                    ? Icons.visibility
+                                    : Icons.visibility_off,
+                                color: Colors.white,
+                              ),
+                              onPressed: () {
+                                setState(() {
+                                  showPassword = !showPassword;
+                                });
+                              },
+                            ),
+                            border: const OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Colors.white,
+                              ),
+                            ),
+                            hintText: 'Enter your Passkey',
+                            enabledBorder: const OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Colors.white,
+                              ),
+                            ),
+                            hintStyle: const TextStyle(
+                              color: Colors.white,
+                            )),
+                      ),
+                      const SizedBox(height: 20),
+                      const Text(
+                        'Re-Enter Password',
+                        style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white),
+                      ),
+                      const SizedBox(height: 8),
+                      TextFormField(
+                        style: const TextStyle(color: Colors.white),
+                        onChanged: (value) {
+                          if (passwordError != null) {
+                            setState(() => passwordError = null);
+                          }
+                        },
+                        obscureText: showPassword,
+                        controller: rePasswordController,
+                        keyboardType: TextInputType.name,
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return "Please Re-Enter Your Pass Key";
+                          }
+                          return emailError;
+                        },
+                        decoration: InputDecoration(
+                            suffixIcon: IconButton(
+                              icon: Icon(
+                                showPassword
+                                    ? Icons.visibility
+                                    : Icons.visibility_off,
+                                color: Colors.white,
+                              ),
+                              onPressed: () {
+                                setState(() {
+                                  showPassword = !showPassword;
+                                });
+                              },
+                            ),
+                            border: const OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Colors.white,
+                              ),
+                            ),
+                            hintText: 'Re-Enter your PassKey',
+                            enabledBorder: const OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Colors.white,
+                              ),
+                            ),
+                            hintStyle: const TextStyle(
+                              color: Colors.white,
+                            )),
+                      ),
+                      const SizedBox(height: 20),
+            
+                      //ReferCode
+                      const Text(
+                        'ReferCode',
+                        style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white),
+                      ),
+                      const SizedBox(height: 8),
+                      TextFormField(
+                        style: const TextStyle(color: Colors.white),
+                        controller: referCodeController,
+                        keyboardType: TextInputType.name,
+                        decoration: const InputDecoration(
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Colors.white,
+                              ),
+                            ),
+                            hintText: 'Enter your ReferCode',
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Colors.white,
+                              ),
+                            ),
+                            hintStyle: TextStyle(
+                              color: Colors.white,
+                            )),
+                      ),
+                      const SizedBox(height: 20),
+                    ],
+                  ),
                 ),
               ),
-            ),
-          ],
+              const SizedBox(
+                height: 16,
+              ),
+              NeoPopButtonWidget(
+                text: "SignUp To PlayVerse",
+                navigation: () => {
+                  if (_formKey.currentState!.validate()) {register()}
+                },
+                textImage: AuthScreenImages.registerImage,
+              ),
+              const SizedBox(height: 10),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Text(
+                    "Already Have Account?",
+                    style: poppinsFonts.copyWith(
+                      color: GeneralColors.colorStyle0,
+                    ),
+                  ),
+                  TextButton(
+                    onPressed: () => {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const LoginScreen(),
+                        ),
+                      )
+                    },
+                    child: Text(
+                      'Login',
+                      style: poppinsFonts.copyWith(
+                        color: Colors.white,
+                        decoration: TextDecoration.underline,
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );

@@ -8,6 +8,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:playverse/screens/notification/notification_screen.dart';
 import 'package:provider/provider.dart';
 
 //Local Imports
@@ -207,7 +208,13 @@ class _AppState extends State<App>
                     )
                   : Container(),
               IconButton(
-                onPressed: () => {},
+                onPressed: () => {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const NotificationScreen()),
+                  ),
+                },
                 icon: const Icon(
                   FontAwesomeIcons.bell,
                   size: 20,

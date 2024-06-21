@@ -42,7 +42,7 @@ class _GamesIconWidgetState extends State<GamesIconWidget> {
 
   @override
   void dispose() {
-    provider.userGameList.clear();
+    // provider.userGameList.clear();
     super.dispose();
   }
 

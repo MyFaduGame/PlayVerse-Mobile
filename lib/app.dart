@@ -188,25 +188,25 @@ class _AppState extends State<App>
               ),
             ),
             actions: [
-              index == 10
-                  ? Container(
-                      height: 20,
-                      width: screenWidth / 1.8,
-                      decoration: BoxDecoration(
-                        color: Colors.blueGrey.shade200,
-                        borderRadius: BorderRadius.circular(15),
-                      ),
-                      child: TextField(
-                        decoration: InputDecoration(
-                          hintText: 'Find...!',
-                          hintStyle: poppinsFonts.copyWith(color: Colors.black),
-                          prefixIcon:
-                              const Icon(Icons.search, color: Colors.black),
-                          border: InputBorder.none,
-                        ),
-                      ),
-                    )
-                  : Container(),
+              // index == 10
+              //     ? Container(
+              //         height: 40,
+              //         width: screenWidth / 1.8,
+              //         decoration: BoxDecoration(
+              //           color: Colors.blueGrey,
+              //           borderRadius: BorderRadius.circular(15),
+              //         ),
+              //         child: TextField(
+              //           decoration: InputDecoration(
+              //             hintText: 'Find...!',
+              //             hintStyle: poppinsFonts.copyWith(color: Colors.black),
+              //             prefixIcon:
+              //                 const Icon(Icons.search, color: Colors.black),
+              //             border: InputBorder.none,
+              //           ),
+              //         ),
+              //       )
+              //     : Container(),
               IconButton(
                 onPressed: () => {
                   Navigator.push(

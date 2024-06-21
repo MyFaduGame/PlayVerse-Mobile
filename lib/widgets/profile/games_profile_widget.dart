@@ -103,7 +103,7 @@ class _GamesProfileWidgetState extends State<GamesProfileWidget> {
   @override
   void dispose() {
     provider.userAchievements.clear();
-    providerGames.userGameList.clear();
+    // providerGames.userGameList.clear();
     providerFriend.ownFriend.clear();
     super.dispose();
   }

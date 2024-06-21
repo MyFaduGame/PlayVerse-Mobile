@@ -47,7 +47,7 @@ class _GamesScreenState extends State<GamesScreen> {
 
   @override
   void dispose() {
-    provider.gameList.clear();
+    // provider.gameList.clear();
     super.dispose();
   }
 
